@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<SmtpInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <UserName>productitsupport@cosmostech.in</UserName>
+  <Password>123@cosmos</Password>
+  <SmtpServer>smtp.gmail.com</SmtpServer>
+  <Port>587</Port>
+  <TimeOut>100000</TimeOut>
+  <SSL>true</SSL>
+</SmtpInfo>
