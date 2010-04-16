@@ -23,10 +23,12 @@ namespace PMA.ProcessMemoryAnalyzer
         static void Main(string[] args)
         {
             Program p = new Program();
-            //p.SerializeObject();
+            p.SerializeObject();
             p.DeserilizeObjects();
 
-            new PMATaskHandler().RunTask();
+            //DateTime dt = DateTime.Parse(p.pmaInfo.MailingTime);
+
+            //new PMATaskHandler().RunTask();
 
            // Environment.
 
@@ -37,10 +39,9 @@ namespace PMA.ProcessMemoryAnalyzer
         {
             pmaInfo = new PMAInfo();
 
-            pmaInfo.LogingTimeInterval = 0;
-            pmaInfo.MailingTime = DateTime.Now.ToShortTimeString();
+            pmaInfo.MailingTime = DateTime.Now.ToShortDateString()+" "+ DateTime.Now.ToShortTimeString();
 
-            //pmaInfo.ReportsInterval = "DAILY";
+            pmaInfo.ReportsIntervalHours = 24;
             pmaInfo.ServicesNames = new List<string>();
             pmaInfo.ServicesNames.Add("MSSQLSERVER");
 
@@ -64,22 +65,23 @@ namespace PMA.ProcessMemoryAnalyzer
             SerializedInfo();
         }
 
+        
         private void SerializedInfo()
         {
-            File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, PMAInfo.PMA_INFO_FILE), PMAInfoObj.Serialize());
+            File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, PMAInfo.PMA_INFO_FILE), pmaInfo.Serialize());
 
-            File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, Emails.EMAILS_INFO_FILE), EmailsInfoObj.Serialize());
+            File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, Emails.EMAILS_INFO_FILE), emailsInfo.Serialize());
 
-            File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, SmtpInfo.SMTP_INFO_FILE), SmtpInfoObj.Serialize());
+            File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, SmtpInfo.SMTP_INFO_FILE), smtpInfo.Serialize());
         }
 
         private void DeserilizeObjects()
         {
-            pmaInfo = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectory, PMAInfo.PMA_INFO_FILE)));
+            pmaInfo = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, PMAInfo.PMA_INFO_FILE)));
 
-            emailsInfo = Emails.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectory, Emails.EMAILS_INFO_FILE)));
+            emailsInfo = Emails.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, Emails.EMAILS_INFO_FILE)));
 
-            smtpInfo = SmtpInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectory, SmtpInfo.SMTP_INFO_FILE)));
+            smtpInfo = SmtpInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, SmtpInfo.SMTP_INFO_FILE)));
 
         }
 

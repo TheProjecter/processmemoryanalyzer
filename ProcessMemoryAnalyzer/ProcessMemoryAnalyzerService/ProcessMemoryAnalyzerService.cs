@@ -8,6 +8,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Timers;
 using PMA.ProcessMemoryAnalyzer;
+using System.Configuration;
 
 namespace ProcessMemoryAnalyzerService
 {
@@ -27,7 +28,8 @@ namespace ProcessMemoryAnalyzerService
 
         protected override void OnStart(string[] args)
         {
-            mTimer = new System.Timers.Timer(60000);
+            int logInterval = int.Parse(ConfigurationSettings.AppSettings["loginterval"]);
+            mTimer = new System.Timers.Timer(logInterval);
             mTimer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             mTimer.Start();
         }
