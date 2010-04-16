@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<PMAInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ServicesNames>
-    <string>MSSQLSERVER</string>
-  </ServicesNames>
-  <LogingTimeInterval>0</LogingTimeInterval>
-  <MailingTime>04:41:00</MailingTime>
-</PMAInfo>
