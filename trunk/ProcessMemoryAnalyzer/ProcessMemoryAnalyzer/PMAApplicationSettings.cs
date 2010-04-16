@@ -19,6 +19,19 @@ namespace PMA.ProcessMemoryAnalyzer
         {
             get { return Path.GetDirectoryName(Application.ExecutablePath)+"\\Config"; }
         }
+
+        public static string PMAApplicationDirectoryMemLog
+        {
+            get 
+            {
+                string path = Path.GetDirectoryName(Application.ExecutablePath) + "\\Memlog";
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                return path; 
+            }
+        }
     }
 
 }
