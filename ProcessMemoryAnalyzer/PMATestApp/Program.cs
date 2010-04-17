@@ -26,6 +26,7 @@ namespace PMA.PMAConsoleApp
             string command = string.Empty;
             Program p = new Program();
             int option;
+            p.SerializeDefaultObject();
             p.SerializedInfo();
             while (command != "exit")
             {
