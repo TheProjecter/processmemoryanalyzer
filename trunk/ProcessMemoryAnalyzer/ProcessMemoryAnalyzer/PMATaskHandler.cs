@@ -56,11 +56,18 @@ namespace PMA.ProcessMemoryAnalyzer
             else
             {
                 string Report = CreateAllProcessCSVReport(_fileName);
-                Transport.SmtpSend(SmtpInfoObj, EmailsInfoObj.EmailTo, EmailsInfoObj.EmailCC, EmailsInfoObj.Subject, EmailsInfoObj.BodyContent, Report);
                 _fileName = GenerateNewFileName();
-                mailingTime = mailingTime.AddHours(PMAInfoObj.ReportsIntervalHours);
-                PMAInfoObj.MailingTime = mailingTime.ToShortDateString() + " " + mailingTime.ToShortTimeString();
-                SerializedInfo();
+                try
+                {
+                    mailingTime = mailingTime.AddHours(PMAInfoObj.ReportsIntervalHours);
+                    PMAInfoObj.MailingTime = mailingTime.ToShortDateString() + " " + mailingTime.ToShortTimeString();
+                    SerializedInfo();
+                    Transport.SmtpSend(SmtpInfoObj, EmailsInfoObj.EmailTo, EmailsInfoObj.EmailCC, EmailsInfoObj.Subject, EmailsInfoObj.BodyContent, Report);
+                }
+                catch
+                {
+                    // Start New Loging
+                }
             }
 
         }
@@ -113,7 +120,8 @@ namespace PMA.ProcessMemoryAnalyzer
         {
             StringBuilder sb = new StringBuilder();
             Dictionary<string, string> procDic = new Dictionary<string, string>();
-            sb.AppendLine("Ω" + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
+            string currentDateTimeString = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+            sb.AppendLine("Ω" + currentDateTimeString);
             foreach (Process p in Process.GetProcesses())
             {
                 if (procDic.ContainsKey(p.ProcessName))
@@ -134,7 +142,7 @@ namespace PMA.ProcessMemoryAnalyzer
 
             foreach (string key in procDic.Keys)
             {
-                sb.AppendLine(key + "#" + procDic[key]);
+                sb.AppendLine(key + "#" + procDic[key] + "#" + currentDateTimeString);
             }
             //sb.AppendLine(p.ProcessName + "#" + p.WorkingSet64/1024);
 
@@ -165,6 +173,7 @@ namespace PMA.ProcessMemoryAnalyzer
             reportData.Append("ProcessNames");
             List<string> times = (from value in rawData
                                   where value.Contains('Ω')
+                                  orderby DateTime.Parse(value.Substring(1, value.Length - 1))
                                   select value).ToList<string>();
             foreach (string time in times)
             {
@@ -181,6 +190,7 @@ namespace PMA.ProcessMemoryAnalyzer
                 reportData.Append(processName);
                 List<string> processMemUsage = (from value in rawData
                                                 where value.Contains('#') && value.Split('#')[0] == processName
+                                                orderby DateTime.Parse(value.Split('#')[2])
                                                 select value.Split('#')[1]).ToList<string>();
                 foreach (string memusage in processMemUsage)
                 {
