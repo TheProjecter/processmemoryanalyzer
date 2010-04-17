@@ -19,7 +19,7 @@ namespace PMA.ProcessMemoryAnalyzer
         public SmtpInfo SmtpInfoObj { get; set; }
 
         public string _fileName;
-        Dictionary<string, string> dic;
+        
 
         //----------------------------------------------------------------------------------------------------------------------------
         /// <summary>
@@ -112,37 +112,43 @@ namespace PMA.ProcessMemoryAnalyzer
         private static void LogAllProcessMemory(string fileName)
         {
             StringBuilder sb = new StringBuilder();
-            Dictionary<string, string> dic = new Dictionary<string, string>();
+            Dictionary<string, string> procDic = new Dictionary<string, string>();
             sb.AppendLine("Ω" + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
             foreach (Process p in Process.GetProcesses())
             {
-                if (dic.ContainsKey(p.ProcessName))
+                if (procDic.ContainsKey(p.ProcessName))
                 {
                     string duplicateProcessName = p.ProcessName;
-                   
+
                     int i = 0;
-                    while (dic.ContainsKey(duplicateProcessName))
+                    LogDuplicateProcess(ref duplicateProcessName, procDic, ref i);
+                    while (procDic.ContainsKey(duplicateProcessName))
                     {
                         duplicateProcessName = duplicateProcessName + "_" + i;
-                        dic.Add(p.ProcessName, (p.WorkingSet64 / 1024).ToString());
+                        procDic.Add(p.ProcessName, (p.WorkingSet64 / 1024).ToString());
                         i++;
                     }
                 }
-                else dic.Add(p.ProcessName, (p.WorkingSet64 / 1024).ToString());
+                else procDic.Add(p.ProcessName, (p.WorkingSet64 / 1024).ToString());
             }
 
-            foreach (string key in dic.Keys)
+            foreach (string key in procDic.Keys)
             {
-                sb.AppendLine(key + "#" + dic[key]);
+                sb.AppendLine(key + "#" + procDic[key]);
             }
             //sb.AppendLine(p.ProcessName + "#" + p.WorkingSet64/1024);
 
             File.AppendAllText(fileName, sb.ToString());
         }
 
-        private static void LogDuplicateProcess(string processName, Dictionary<string,string> procdic)
+        private static void LogDuplicateProcess(ref string processName, Dictionary<string,string> procDic, ref int i)
         {
-
+            if(procDic.ContainsKey(processName))
+            {
+                processName = processName + "_" + i;
+                i++;
+                LogDuplicateProcess(ref processName, procDic, ref i);
+            }
         }
 
 
