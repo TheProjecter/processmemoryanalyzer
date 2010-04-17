@@ -5,15 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B21E52A2-4719-4636-A389-65997F898C19}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{AD20BC87-6876-4227-980E-9E0D08A69068}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ProcessMemoryAnalyzer</RootNamespace>
-    <AssemblyName>ProcessMemoryAnalyzer</AssemblyName>
+    <RootNamespace>PMATestApp</RootNamespace>
+    <AssemblyName>PMATestApp</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>
-    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,17 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoogleChartSharp, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\referencedlls\GoogleChartSharp-1.0.2\GoogleChartSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Management" />
     <Reference Include="System.ServiceProcess" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -54,16 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PMAApplicationSettings.cs" />
-    <Compile Include="PMAInfo.cs" />
-    <Compile Include="PMAServiceProcessController.cs" />
-    <Compile Include="PMATaskHandler.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PMAUtils\PMAUtils.csproj">
       <Project>{3AD8D720-A6E4-4D4B-B94D-4E78BE843520}</Project>
       <Name>PMAUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProcessMemoryAnalyzer\ProcessMemoryAnalyzer.csproj">
+      <Project>{B21E52A2-4719-4636-A389-65997F898C19}</Project>
+      <Name>ProcessMemoryAnalyzer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
