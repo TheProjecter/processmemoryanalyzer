@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FTP\FTPInfo.cs" />
+    <Compile Include="FTP\PMAFTPHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SMTP\SMTPTransport.cs" />
     <Compile Include="SMTP\SmtpInfo.cs" />

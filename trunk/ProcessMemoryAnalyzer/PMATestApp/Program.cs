@@ -23,6 +23,7 @@ namespace PMA.PMAConsoleApp
         
         static void Main(string[] args)
         {
+     
             string command = string.Empty;
             Program p = new Program();
             int option;
@@ -56,6 +57,8 @@ namespace PMA.PMAConsoleApp
                             p.pmaInfo.MailingTime = Console.ReadLine();
                             Console.WriteLine("Enter Mailing Report Interval (Hours) :");
                             p.pmaInfo.ReportsIntervalHours = int.Parse(Console.ReadLine()) ;
+                            Console.WriteLine("Enter Client Name :");
+                            p.pmaInfo.ClientName = Console.ReadLine();
                             
                             p.pmaInfo.ServicesNames = new List<string>();
                             Console.WriteLine("Enter Services Name(Enter ! to exit) :");
@@ -230,6 +233,7 @@ namespace PMA.PMAConsoleApp
             pmaInfo.ReportsIntervalHours = 24;
             pmaInfo.ServicesNames = new List<string>();
             pmaInfo.ServicesNames.Add("MSSQLSERVER");
+            pmaInfo.ClientName = "IVP";
 
             emailsInfo = new Emails();
             emailsInfo.EmailTo = new List<string>();
