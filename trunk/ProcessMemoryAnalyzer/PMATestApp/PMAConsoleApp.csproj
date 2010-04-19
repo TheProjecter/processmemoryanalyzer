@@ -8,8 +8,8 @@
     <ProjectGuid>{AD20BC87-6876-4227-980E-9E0D08A69068}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PMATestApp</RootNamespace>
-    <AssemblyName>PMATestApp</AssemblyName>
+    <RootNamespace>PMAConsoleApp</RootNamespace>
+    <AssemblyName>PMAConsoleApp</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

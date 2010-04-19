@@ -165,7 +165,7 @@ namespace PMA.ProcessMemoryAnalyzer
         /// Creates all process CSV report.
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
-        private static string CreateAllProcessCSVReport(string rawfileName)
+        public static string CreateAllProcessCSVReport(string rawfileName)
         {
             List<string> rawData = File.ReadAllLines(rawfileName).ToList<string>();
             StringBuilder reportData = new StringBuilder();
@@ -174,10 +174,11 @@ namespace PMA.ProcessMemoryAnalyzer
             List<string> times = (from value in rawData
                                   where value.Contains('Ω')
                                   orderby DateTime.Parse(value.Substring(1, value.Length - 1))
-                                  select value).ToList<string>();
+                                  select value.Substring(1, value.Length - 1)).ToList<string>();
+            
             foreach (string time in times)
             {
-                reportData.Append("," + time.Substring(1,time.Length-1));
+                reportData.Append("," + time);
             }
 
             List<string> processNames = (from value in rawData
@@ -188,20 +189,32 @@ namespace PMA.ProcessMemoryAnalyzer
             {
                 reportData.Append("\r\n");
                 reportData.Append(processName);
-                List<string> processMemUsage = (from value in rawData
-                                                where value.Contains('#') && value.Split('#')[0] == processName
-                                                orderby DateTime.Parse(value.Split('#')[2])
-                                                select value.Split('#')[1]).ToList<string>();
-                foreach (string memusage in processMemUsage)
+                var processMemUsageAtTime = (from value in rawData
+                                             where value.Contains('#') && value.Split('#')[0] == processName
+                                             orderby DateTime.Parse(value.Split('#')[2])
+                                             select new KeyValuePair<string, string>(value.Split('#')[2], value.Split('#')[1]));
+
+                Dictionary<string, string> memTimeMap = new Dictionary<string, string>();
+                foreach (var item in processMemUsageAtTime)
                 {
-                    reportData.Append("," + memusage);
+                    memTimeMap.Add(item.Key.ToString(), item.Value.ToString());
+                }
+
+                foreach (string time in times)
+                {
+                    if (memTimeMap.Keys.Contains<string>(time))
+                    {
+                        reportData.Append("," + memTimeMap[time]);
+                    }
+                    else reportData.Append(",");
                 }
 
             }
 
-            File.WriteAllText(Path.GetDirectoryName(rawfileName)+"\\"+ Path.GetFileNameWithoutExtension(rawfileName) + "_formated.csv", reportData.ToString());
+            string reportFile = Path.GetDirectoryName(rawfileName) + "\\" + Path.GetFileNameWithoutExtension(rawfileName) + "_formated.csv"; 
+            File.WriteAllText(reportFile, reportData.ToString());
 
-            return Path.GetFileNameWithoutExtension(rawfileName) + "_formated.csv";                     
+            return reportFile;                     
 
         }
 
