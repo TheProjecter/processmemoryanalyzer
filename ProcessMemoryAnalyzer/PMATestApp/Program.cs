@@ -26,8 +26,17 @@ namespace PMA.PMAConsoleApp
             string command = string.Empty;
             Program p = new Program();
             int option;
-            p.SerializeDefaultObject();
-            p.SerializedInfo();
+            try
+            {
+                p.DeserilizeObjects();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Invalid or no config Found, Creating Default");
+                p.SerializeDefaultObject();
+            }
+            //p.SerializedInfo();
             while (command != "exit")
             {
                 try
@@ -155,6 +164,11 @@ namespace PMA.PMAConsoleApp
                             Console.WriteLine(p.emailsInfo.Serialize());
                             break;
                         }
+                        case 7:
+                        {
+                            RunTest();
+                            break;
+                        }
      
                     }
                 }
@@ -166,6 +180,11 @@ namespace PMA.PMAConsoleApp
                 p.SerializedInfo();
                 
             }
+        }
+
+        private static void RunTest()
+        {
+            PMATaskHandler.CreateAllProcessCSVReport("G:\\PMAService\\Memlog\\18 April 2010_17-24-25.txt");
         }
 
         private int CreateUserOptions()
@@ -180,11 +199,12 @@ namespace PMA.PMAConsoleApp
                 Console.WriteLine("Press 4 to Start PMA Service");
                 Console.WriteLine("Press 5 to Restore Default Setting Files");
                 Console.WriteLine("Press 6 to Show Settings");
+                Console.WriteLine("Press 7 to runTest code");
 
                 try
                 {
                     i = int.Parse(Console.ReadKey().KeyChar.ToString());
-                    if (i < 0 && i > 6)
+                    if (i < 0 && i > 7)
                     {
                         throw new Exception();
                     }
