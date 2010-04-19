@@ -20,6 +20,7 @@ namespace PMA.ProcessMemoryAnalyzer
         private static double _totalVirtualMemory;
         private static double _availableVirtualMemory;
 
+       
 
         //-------------------------------------------------------------------------------------------------------------------------------
         /// <summary>
@@ -82,7 +83,7 @@ namespace PMA.ProcessMemoryAnalyzer
         /// <value>The total physical memory.</value>
         public static double TotalPhysicalMemory
         {
-            get { return _totalPhysicalMemory; }
+            get { return _totalPhysicalMemory/1024; }
         }
 
       

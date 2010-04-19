@@ -18,6 +18,8 @@ namespace PMA.ProcessMemoryAnalyzer
         public List<string> ServicesNames { get; set; }
         public int ReportsIntervalHours { get; set; }
         public string MailingTime { get; set; }
+        public string ClientName { get; set; }
+
 
         public string Serialize()
         {

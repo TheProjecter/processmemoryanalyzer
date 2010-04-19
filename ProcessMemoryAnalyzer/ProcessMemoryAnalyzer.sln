@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessMemoryAnalyzerServic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMAConsoleApp", "PMATestApp\PMAConsoleApp.csproj", "{AD20BC87-6876-4227-980E-9E0D08A69068}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMAReportGen", "PMAReportGen\PMAReportGen.csproj", "{3EB04E5B-E69E-4DBE-94A4-1F836AB6B10A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{AD20BC87-6876-4227-980E-9E0D08A69068}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD20BC87-6876-4227-980E-9E0D08A69068}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD20BC87-6876-4227-980E-9E0D08A69068}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EB04E5B-E69E-4DBE-94A4-1F836AB6B10A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB04E5B-E69E-4DBE-94A4-1F836AB6B10A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB04E5B-E69E-4DBE-94A4-1F836AB6B10A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB04E5B-E69E-4DBE-94A4-1F836AB6B10A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
