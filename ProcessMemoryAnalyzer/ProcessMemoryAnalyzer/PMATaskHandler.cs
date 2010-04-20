@@ -57,7 +57,7 @@ namespace PMA.ProcessMemoryAnalyzer
         /// </summary>
         public void RunTask()
         {
-            mailingTime = DateTime.Parse(PMAInfoObj.MailingTime);
+            mailingTime = DateTime.ParseExact(PMAInfoObj.MailingTime, "d/M/yyyy HH:mm", null);
             if (DateTime.Now < mailingTime)
             {
                 LogAllProcessMemory(_fileName);
@@ -85,7 +85,7 @@ namespace PMA.ProcessMemoryAnalyzer
                     _reportFileName = CreateAllProcessCSVReport(_fileName);
                 }
                 mailingTime = mailingTime.AddHours(PMAInfoObj.ReportsIntervalHours);
-                PMAInfoObj.MailingTime = mailingTime.ToShortDateString() + " " + mailingTime.ToShortTimeString();
+                PMAInfoObj.MailingTime = mailingTime.ToString("d/M/yyyy HH:mm");
                 if (File.Exists(_fileName))
                 {
                     smtpTransport.SmtpSend(SmtpInfoObj, EmailsInfoObj.EmailTo, EmailsInfoObj.EmailCC,
