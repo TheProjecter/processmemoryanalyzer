@@ -11,7 +11,7 @@ using PMA.Utils;
 
 namespace PMA.Utils.smtp
 {
-    public class Transport
+    public class SMTPTransport
     {
 
 
@@ -24,11 +24,16 @@ namespace PMA.Utils.smtp
         /// <param name="subject">The subject.</param>
         /// <param name="message">The message.</param>
         /// <param name="attachment">The attachment. send empty in case nothing to attach</param>
-        public static void SmtpSend(SmtpInfo smtpInfo, List<string> toEmails, List<string> ccEmails, string subject, string message, string attachment)
+        public void SmtpSend(SmtpInfo smtpInfo, List<string> toEmails, List<string> ccEmails, string subject, string message, string attachment)
         {
             SmtpClient smtp = new SmtpClient();
             MailMessage mail = new MailMessage();
             Attachment updatesAttachement = null;
+
+            if (smtpInfo.ProtectPassword)
+            {
+                smtpInfo.Password = OperationUtils.EncryptDecrypt(smtpInfo.Password, 22);
+            }
 
             try
             {
@@ -68,14 +73,18 @@ namespace PMA.Utils.smtp
             }
             catch (Exception ex)
             {
-            
                 Console.WriteLine(ex.Message);
                 throw ex;
+            }
+            finally
+            {
+                mail.Dispose();
             }
             
         }
 
-                
+        
+        
     }
  
 }

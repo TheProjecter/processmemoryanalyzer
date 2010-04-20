@@ -36,6 +36,11 @@ namespace ProcessMemoryAnalyzerService
 
         protected override void OnStop()
         {
+            if (pmaTaskHandler != null)
+            {
+                pmaTaskHandler.ReportingTask();
+            }
+            is_lock = false;
         }
 
 
