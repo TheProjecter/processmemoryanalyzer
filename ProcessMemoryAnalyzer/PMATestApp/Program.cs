@@ -234,6 +234,7 @@ namespace PMA.PMAConsoleApp
             pmaInfo.ServicesNames = new List<string>();
             pmaInfo.ServicesNames.Add("MSSQLSERVER");
             pmaInfo.ClientName = "IVP";
+            pmaInfo.DisposeLogFile = false;
 
             emailsInfo = new Emails();
             emailsInfo.EmailTo = new List<string>();
@@ -245,6 +246,7 @@ namespace PMA.PMAConsoleApp
             emailsInfo.BodyContent = "Please Find the Report Attached";
 
             smtpInfo = new SmtpInfo();
+            smtpInfo.ProtectPassword = true;
             smtpInfo.UserName = "productitsupport@cosmostech.in";
             smtpInfo.Password = "123@cosmos";
             smtpInfo.Port = 587;

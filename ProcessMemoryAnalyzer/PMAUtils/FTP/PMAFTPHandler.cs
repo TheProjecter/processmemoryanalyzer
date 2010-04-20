@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Net;
 using System.Collections;
+using PMA.Utils;
 
 
 namespace PMA.Utils.ftp
@@ -25,6 +26,11 @@ namespace PMA.Utils.ftp
         public void FTPSend(FTPInfo ftpInfo, List<string> filesToUpload)
         {
             this.ftpInfo = ftpInfo;
+            
+            if(ftpInfo.ProtectPassword)
+            {
+                ftpInfo.Password = OperationUtils.EncryptDecrypt(ftpInfo.Password, 22);
+            }
 
             foreach (string file in filesToUpload)
             {

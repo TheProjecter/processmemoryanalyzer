@@ -19,6 +19,7 @@ namespace PMA.ProcessMemoryAnalyzer
         public int ReportsIntervalHours { get; set; }
         public string MailingTime { get; set; }
         public string ClientName { get; set; }
+        public bool DisposeLogFile { get; set; }
 
 
         public string Serialize()

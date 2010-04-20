@@ -13,20 +13,9 @@ namespace PMA.Utils.smtp
     {
         public const string SMTP_INFO_FILE = "SMTPInfo.xml";
 
-        private string _password;
-
+        public bool ProtectPassword { get; set; } 
         public string UserName { get; set;}
-        public string Password 
-        {
-            get
-            {
-                return OperationUtils.EncryptDecrypt(_password, 129);
-            }
-            set
-            {
-                _password = OperationUtils.EncryptDecrypt(value, 129);
-            }
-        }
+        public string Password { get; set;}
         public string SmtpServer { get; set; }
         public int Port { get; set; }
         public int TimeOut { get; set; }

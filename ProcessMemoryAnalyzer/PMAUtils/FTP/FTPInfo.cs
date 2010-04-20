@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Xml.Serialization;
 
+
 namespace PMA.Utils.ftp
 {
 
@@ -12,20 +13,9 @@ namespace PMA.Utils.ftp
     {
         public const string FTP_INFO_FILE = "FTPInfo.xml";
 
-        private string _password;
-
+        public bool ProtectPassword { get; set; } 
         public string UserName { get; set; }
-        public string Password
-        {
-            get
-            {
-                return OperationUtils.EncryptDecrypt(_password, 129);
-            }
-            set
-            {
-                _password = OperationUtils.EncryptDecrypt(value, 129);
-            }
-        }
+        public string Password { get; set; }
         public string FTPServer { get; set; }
         public string FTPServerFolder { get; set; }
         public int Port { get; set; }
