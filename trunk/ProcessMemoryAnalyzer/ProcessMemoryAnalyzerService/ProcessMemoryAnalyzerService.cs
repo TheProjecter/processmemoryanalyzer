@@ -31,6 +31,7 @@ namespace ProcessMemoryAnalyzerService
             int logInterval = int.Parse(ConfigurationSettings.AppSettings["loginterval"]);
             mTimer = new System.Timers.Timer(logInterval);
             mTimer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
+            timer_Elapsed(null, null);
             mTimer.Start();
         }
 
