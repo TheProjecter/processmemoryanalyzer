@@ -118,7 +118,7 @@ namespace PMA.ProcessMemoryAnalyzer
         private static void LogAllProcessMemory(string fileName)
         {
             StringBuilder sb = new StringBuilder();
-            
+
             string currentDateTimeString = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString();
             sb.AppendLine("Ω" + currentDateTimeString);
             
@@ -126,6 +126,7 @@ namespace PMA.ProcessMemoryAnalyzer
             foreach (Process p in Process.GetProcesses())
             {
                 sb.AppendLine(p.ProcessName + "(" + p.Id + ")" + "#" + (p.WorkingSet64 / 1024).ToString() + "#" + currentDateTimeString);
+
             }
             File.AppendAllText(fileName, sb.ToString());
         }
