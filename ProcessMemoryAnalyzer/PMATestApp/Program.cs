@@ -187,7 +187,17 @@ namespace PMA.PMAConsoleApp
 
         private static void RunTest()
         {
-            PMATaskHandler.CreateAllProcessCSVReport("G:\\PMAService\\Memlog\\18 April 2010_17-24-25.txt");
+            PerformanceCounter cpuCounter = new PerformanceCounter();
+            cpuCounter.CategoryName = "Processor";
+            cpuCounter.CounterName = "% Processor Time";
+            cpuCounter.InstanceName = "_Total";
+            Console.WriteLine(cpuCounter.NextValue() + "%");
+
+            PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
+
+            Console.WriteLine(ramCounter.NextValue() + "MB");
+
+
         }
 
         private int CreateUserOptions()
