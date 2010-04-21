@@ -31,7 +31,6 @@ namespace PMAReportGen
         private void buttonBrowse_Click(object sender, EventArgs e)
         {
             textBoxFeedFile.Text = openFileDialogReportFeed.FileName;
-
         }
 
         private void buttonSelectFile_Click(object sender, EventArgs e)
@@ -45,8 +44,6 @@ namespace PMAReportGen
                 MessageBox.Show("Please Select a Feed");
             }
             else PopulateFeedProcess();
-
-
         }
 
         private void PopulateFeedProcess()
@@ -64,25 +61,28 @@ namespace PMAReportGen
 
         }
 
-        private void GetProcessNamesFromFeed(string FeedFile)
+        private void GetProcessNamesFromFeed(string feedFile)
         {
-            string[] rawFeed = File.ReadAllLines(FeedFile);
+            if (File.Exists(feedFile))
+            {
+                string[] rawFeed = File.ReadAllLines(feedFile);
 
-             
-            
-            timeLine = (from value in rawFeed[0].Split(',')
-                       where value != "ProcessNames"
-                       select value).ToList<string>();
+                timeLine = (from value in rawFeed[0].Split(',')
+                            where value != "ProcessNames"
+                            select value).ToList<string>();
 
-            List<string> processNames = (from value in rawFeed
-                                        where value != "ProcessNames"
-                                        select value.Split(',')[0]).ToList<string>();
+                List<string> processNames = (from value in rawFeed
+                                             where value != "ProcessNames"
+                                             select value.Split(',')[0]).ToList<string>();
 
-            List<int> memForProcess = null;
-            //foreach (string processName in processNames)
-            //{
-            //    foreach(string in 
-            //}
+                List<int> memForProcess = null;
+                foreach (string processName in processNames)
+                {
+                    //memForProcess = from value in rawFeed
+                    //                where value.Split(',')[0] == processName
+                    //                select
+                }
+            }
             
 
             
