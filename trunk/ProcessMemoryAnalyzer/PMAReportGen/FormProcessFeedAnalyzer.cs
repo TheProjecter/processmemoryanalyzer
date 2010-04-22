@@ -78,9 +78,7 @@ namespace PMAReportGen
                 List<int> memForProcess = null;
                 foreach (string processName in processNames)
                 {
-                    //memForProcess = from value in rawFeed
-                    //                where value.Split(',')[0] == processName
-                    //                select
+                    
                 }
             }
             

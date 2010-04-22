@@ -120,12 +120,35 @@ namespace PMA.ProcessMemoryAnalyzer
             StringBuilder sb = new StringBuilder();
 
             string currentDateTimeString = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString();
-            sb.AppendLine("Ω" + currentDateTimeString);
+            sb.Append("Ω" + currentDateTimeString);
             
             Dictionary<string, int> procDic = new Dictionary<string, int>();
             foreach (Process p in Process.GetProcesses())
             {
-                sb.AppendLine(p.ProcessName + "(" + p.Id + ")" + "#" + (p.WorkingSet64 / 1024).ToString() + "#" + currentDateTimeString);
+                try
+                {
+                    sb.Append("\r\n"+p.ProcessName + "(" + p.Id + ")" + "#" + (p.WorkingSet64 / 1024).ToString() + "#" + currentDateTimeString);
+                    try
+                    {
+                        sb.Append("#" + p.UserProcessorTime.TotalMilliseconds / p.TotalProcessorTime.Milliseconds);
+                    }
+                    catch (Exception ex)
+                    {
+                        sb.Append("#"+ex.Message);
+                    }
+                    if (p.ProcessName.Equals("iexplore"))
+                    {
+                        if (p.MainWindowTitle.Contains("COSMOS") || p.MainWindowTitle.Contains("Reconciliation Framework"))
+                        {
+                            sb.Append("#Recon Act");
+                        }
+                    }
+                    else sb.Append("# ");
+                }
+                catch (Exception ex)
+                {
+                    sb.Append(ex.Message);
+                }
 
             }
             File.AppendAllText(fileName, sb.ToString());
@@ -140,75 +163,84 @@ namespace PMA.ProcessMemoryAnalyzer
         /// <param name="fileName">Name of the file.</param>
         public static string CreateAllProcessCSVReport(string rawfileName)
         {
-            List<string> rawData = File.ReadAllLines(rawfileName).ToList<string>();
-            StringBuilder reportData = new StringBuilder();
-            reportData.Append("Total Memory Available," + PMAServiceProcessController.TotalPhysicalMemory +" MB");
-            reportData.Append("\r\nProcessNames");
-
-            List<int> totalMemoryUsageAtTime = new List<int>();
-            
-            //Getting Time Line
-            List<string> times = (from value in rawData
-                                  where value.Contains('Ω')
-                                  orderby DateTime.Parse(value.Substring(1, value.Length - 1))
-                                  select value.Substring(1, value.Length - 1)).ToList<string>();
-            
-            //Creating Time Line in report
-            foreach (string time in times)
+            string reportFile = string.Empty;
+            try
             {
-                reportData.Append("," + time);
-            }
+                List<string> rawData = File.ReadAllLines(rawfileName).ToList<string>();
+                StringBuilder reportData = new StringBuilder();
+                reportData.Append("Total Memory Available," + PMAServiceProcessController.TotalPhysicalMemory + " MB");
+                reportData.Append("\r\nProcessNames");
 
-            //Getting All Process names
-            List<string> processNames = (from value in rawData
-                                         where value.Contains('#')
-                                         select value.Split('#')[0]).Distinct().ToList<string>();
+                List<int> totalMemoryUsageAtTime = new List<int>();
 
-            //logging Memory for process in time line
-            foreach (string processName in processNames)
-            {
-                reportData.Append("\r\n");
-                reportData.Append(processName);
-                var processMemUsageAtTime = (from value in rawData
-                                             where value.Contains('#') && value.Split('#')[0] == processName
-                                             orderby DateTime.Parse(value.Split('#')[2])
-                                             select new KeyValuePair<string, string>(value.Split('#')[2], value.Split('#')[1]));
+                //Getting Time Line
+                List<string> times = (from value in rawData
+                                      where value.Contains('Ω')
+                                      orderby DateTime.Parse(value.Substring(1, value.Length - 1))
+                                      select value.Substring(1, value.Length - 1)).ToList<string>();
 
-                Dictionary<string, string> memTimeMap = new Dictionary<string, string>();
-                foreach (var item in processMemUsageAtTime)
-                {
-                    memTimeMap.Add(item.Key.ToString(), item.Value.ToString());
-                }
-
+                //Creating Time Line in report
                 foreach (string time in times)
                 {
-                    if (memTimeMap.Keys.Contains<string>(time))
-                    {
-                        reportData.Append("," + memTimeMap[time]);
-                    }
-                    else reportData.Append(",");
+                    reportData.Append("," + time);
                 }
-            }
-            
-            //Getting Total Memory usaage at a time line
-            long totalMemory = 0;
-            reportData.Append("\r\nTotal Memory");
-            foreach (string time in times)
-            {
 
-                totalMemory = 0;
-                totalMemoryUsageAtTime = (from value in rawData
-                                          where value.Contains('#') && value.Split('#')[2] == time
-                                          select int.Parse(value.Split('#')[1])).ToList<int>();
-                foreach (int mem in totalMemoryUsageAtTime)
+                //Getting All Process names
+                List<string> processNames = (from value in rawData
+                                             where value.Contains('#')
+                                             select value.Split('#')[0]).Distinct().ToList<string>();
+
+                //logging Memory|Process Time|Active Recon Window for process in time line
+                foreach (string processName in processNames)
                 {
-                    totalMemory = totalMemory + mem;
-                }
-                reportData.Append("," + totalMemory);
-            }
+                    reportData.Append("\r\n");
+                    reportData.Append(processName);
+                    var processMemUsageAtTime = (from value in rawData
+                                                 where value.Contains('#') && value.Split('#')[0] == processName
+                                                 orderby DateTime.Parse(value.Split('#')[2])
+                                                 select new KeyValuePair<string, string>(value.Split('#')[2], value.Split('#')[1] + "|" + value.Split('#')[3]
+                                                     + "|" + value.Split('#')[4]));
 
-            string reportFile = Path.GetDirectoryName(rawfileName) + "\\" + Path.GetFileNameWithoutExtension(rawfileName) + "_formated.csv"; 
-            File.WriteAllText(reportFile, reportData.ToString());
+                    Dictionary<string, string> memTimeMap = new Dictionary<string, string>();
+                    foreach (var item in processMemUsageAtTime)
+                    {
+                        memTimeMap.Add(item.Key.ToString(), item.Value.ToString());
+                    }
+
+                    foreach (string time in times)
+                    {
+                        if (memTimeMap.Keys.Contains<string>(time))
+                        {
+                            reportData.Append("," + memTimeMap[time]);
+                        }
+                        else reportData.Append(",");
+                    }
+                }
+
+                //Getting Total Memory usaage at a time line
+                long totalMemory = 0;
+                reportData.Append("\r\nTotal Memory");
+                foreach (string time in times)
+                {
+
+                    totalMemory = 0;
+                    totalMemoryUsageAtTime = (from value in rawData
+                                              where value.Contains('#') && value.Split('#')[2] == time
+                                              select int.Parse(value.Split('#')[1])).ToList<int>();
+                    foreach (int mem in totalMemoryUsageAtTime)
+                    {
+                        totalMemory = totalMemory + mem;
+                    }
+                    reportData.Append("," + totalMemory);
+                }
+
+                reportFile = Path.GetDirectoryName(rawfileName) + "\\" + Path.GetFileNameWithoutExtension(rawfileName) + "_formated.csv";
+                File.WriteAllText(reportFile, reportData.ToString());
+            }
+            catch(Exception ex)
+            {
+                // handle
+            }
 
             return reportFile;                     
 

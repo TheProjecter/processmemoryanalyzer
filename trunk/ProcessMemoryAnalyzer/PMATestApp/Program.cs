@@ -197,6 +197,10 @@ namespace PMA.PMAConsoleApp
 
             Console.WriteLine(ramCounter.NextValue() + "MB");
 
+            PMATaskHandler pmaTaskHandler = new PMATaskHandler();
+
+            pmaTaskHandler.RunTask();
+
 
         }
 
