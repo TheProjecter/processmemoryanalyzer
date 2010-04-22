@@ -14,12 +14,6 @@ namespace PMA.ProcessMemoryAnalyzer
     {
 
         private Process _process;
-
-        private static double _totalPageFileSpace;
-        private static double _totalPhysicalMemory;
-        private static double _totalVirtualMemory;
-        private static double _availableVirtualMemory;
-
        
 
         //-------------------------------------------------------------------------------------------------------------------------------
@@ -31,24 +25,6 @@ namespace PMA.ProcessMemoryAnalyzer
         {
             _process = GetProcess(serviceName);
         }
-
-        static PMAServiceProcessController()
-        {
-            ObjectQuery winQuery = new ObjectQuery("SELECT * FROM Win32_LogicalMemoryConfiguration");
-
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(winQuery);
-
-            foreach (ManagementObject item in searcher.Get())
-            {
-                _totalPageFileSpace = double.Parse(item["TotalPageFileSpace"].ToString());
-                _totalPhysicalMemory = double.Parse(item["TotalPhysicalMemory"].ToString());
-                _totalVirtualMemory = double.Parse(item["TotalVirtualMemory"].ToString());
-                _availableVirtualMemory = double.Parse(item["AvailableVirtualMemory"].ToString()); 
-
-            }
-
-        }
-
 
         //-------------------------------------------------------------------------------------------------------------------------------
         /// <summary>
@@ -81,9 +57,12 @@ namespace PMA.ProcessMemoryAnalyzer
         /// Gets the total physical memory.
         /// </summary>
         /// <value>The total physical memory.</value>
-        public static double TotalPhysicalMemory
+        public static double TotalPhysicalMemoryInMB
         {
-            get { return _totalPhysicalMemory/1024; }
+            get 
+            {
+                return (double)new Microsoft.VisualBasic.Devices.ComputerInfo().AvailablePhysicalMemory / (1024 * 1024);
+            }
         }
 
       
