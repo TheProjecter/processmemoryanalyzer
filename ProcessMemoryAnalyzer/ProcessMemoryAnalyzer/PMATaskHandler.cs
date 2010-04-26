@@ -167,7 +167,7 @@ namespace PMA.ProcessMemoryAnalyzer
                         {
                             sb.Append("#Google");
                         }
-                        sb.Append("# ");
+                        else sb.Append("# ");
                     }
                     else sb.Append("# "); 
                 }
@@ -240,6 +240,7 @@ namespace PMA.ProcessMemoryAnalyzer
                 //Getting All Process names
                 List<string> processNames = (from value in rawData
                                              where value.Contains('#')
+                                             orderby value.Split('#')[0]
                                              select value.Split('#')[0]).Distinct().ToList<string>();
 
                 //logging Memory|Process Time|Active Recon Window for process in time line
