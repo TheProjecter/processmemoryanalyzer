@@ -20,7 +20,7 @@ namespace PMA.ProcessMemoryAnalyzer
         private string _fileName;
         private string _reportFileName;
         DateTime mailingTime;
-        
+
 
         //----------------------------------------------------------------------------------------------------------------------------
         /// <summary>
@@ -39,7 +39,7 @@ namespace PMA.ProcessMemoryAnalyzer
         /// <returns></returns>
         private string GenerateNewFileName()
         {
-            if(File.Exists(_fileName) && PMAInfoObj.DisposeLogFile)
+            if (File.Exists(_fileName) && PMAInfoObj.DisposeLogFile)
             {
                 File.Delete(_fileName);
             }
@@ -47,8 +47,8 @@ namespace PMA.ProcessMemoryAnalyzer
             {
                 File.Delete(_reportFileName);
             }
-            return Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryMemLog,PMAInfoObj.ClientName + "_" + 
-                DateTime.Now.ToLongDateString() + "_" + DateTime.Now.ToShortTimeString().Replace(':','-')) + ".txt";
+            return Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryMemLog, PMAInfoObj.ClientName + "_" +
+                DateTime.Now.ToLongDateString() + "_" + DateTime.Now.ToShortTimeString().Replace(':', '-')) + ".txt";
         }
 
         //----------------------------------------------------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ namespace PMA.ProcessMemoryAnalyzer
             SMTPTransport smtpTransport = new SMTPTransport();
             try
             {
-                
+
                 _reportFileName = string.Empty;
                 smtpPassword = SmtpInfoObj.Password;
                 if (File.Exists(_fileName))
@@ -92,7 +92,7 @@ namespace PMA.ProcessMemoryAnalyzer
                         EmailsInfoObj.Subject + ":" + PMAInfoObj.ClientName, GenerateMailMessageBody(), _reportFileName);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 // Start New Loging
             }
@@ -108,7 +108,7 @@ namespace PMA.ProcessMemoryAnalyzer
         }
 
 
-        
+
 
         //----------------------------------------------------------------------------------------------------------------------------
         /// <summary>
@@ -132,55 +132,71 @@ namespace PMA.ProcessMemoryAnalyzer
 
             System.Threading.Thread.Sleep(500);
             string currentDateTimeString = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString();
-            sb.Append("\r\nΩ" + currentDateTimeString +"|"+ cpuCounter.NextValue()+"%"+"|"+ramCounter.NextValue()+"MB Free");
-            
+            sb.Append("\r\nΩ" + currentDateTimeString + "|" + cpuCounter.NextValue() + "%" + "|" + ramCounter.NextValue() + "MB Free");
+
             Dictionary<string, int> procDic = new Dictionary<string, int>();
 
             PerformanceCounter processCPUCounter = new PerformanceCounter();
 
             cpuCounter.CategoryName = "Process";
             cpuCounter.CounterName = "% Processor Time";
-            
+
             foreach (Process p in Process.GetProcesses())
             {
+                sb.Append("\r\n" + p.ProcessName + "(" + p.Id + ")" + "#" + (p.WorkingSet64 / 1024).ToString() + "#" + currentDateTimeString);
                 try
                 {
-                    sb.Append("\r\n"+p.ProcessName + "(" + p.Id + ")" + "#" + (p.WorkingSet64 / 1024).ToString() + "#" + currentDateTimeString);
+                    cpuCounter.InstanceName = p.ProcessName;
+                    cpuCounter.NextValue();
+                    System.Threading.Thread.Sleep(5);
+                    sb.Append("#" + cpuCounter.NextValue() + "%");
+                }
+                catch
+                {
+                    sb.Append("#" + "??");
+                }
+                
+                if (p.ProcessName.Equals("iexplore"))
+                {
                     try
                     {
-                        cpuCounter.InstanceName = p.ProcessName;
-                        cpuCounter.NextValue();
-                        System.Threading.Thread.Sleep(5);
-                        sb.Append("#" +cpuCounter.NextValue()+"%");
-                    }
-                    catch (Exception ex)
-                    {
-                        sb.Append("#"+ex.Message);
-                    }
-                    if (p.ProcessName.Equals("iexplore"))
-                    {
-                        if (p.MainWindowTitle.Contains("COSMOS") || p.MainWindowTitle.Contains("Reconciliation Framework"))
+                        Process getTitle = new Process();
+                        getTitle.StartInfo.Arguments = p.Id.ToString();
+                        getTitle.StartInfo.FileName = PMAApplicationSettings.PMAApplicationDirectory + "\\" + "GetProcessMainWindowTitle.exe";
+                        getTitle.StartInfo.CreateNoWindow = false;
+                        
+                        getTitle.Start();
+                        getTitle.WaitForExit();
+                        if (getTitle.ExitCode == 5)
                         {
-                            sb.Append("#Recon");
-                        }
-                        else if (p.MainWindowTitle.Contains("Google"))
-                        {
-                            sb.Append("#Google");
+                            sb.Append("#OurApp");
                         }
                         else sb.Append("# ");
+                        //if (p.MainWindowTitle.Contains("COSMOS") || p.MainWindowTitle.Contains("Reconciliation Framework"))
+                        //{
+                        //    sb.Append("#Recon");
+                        //}
+                        //else if (p.MainWindowTitle.Contains("Google"))
+                        //{
+                        //    sb.Append("#Google");
+                        //}
+                        //else sb.Append("# ");
                     }
-                    else sb.Append("# "); 
+                    catch
+                    {
+                        sb.Append("#?IO?");
+                    }
                 }
-                catch (Exception ex)
-                {
-                    sb.Append(ex.Message);
-                }
+                else sb.Append("# ");
+
+
+
 
             }
             File.AppendAllText(fileName, sb.ToString());
         }
 
-       
+
 
         //----------------------------------------------------------------------------------------------------------------------------
         /// <summary>
@@ -200,8 +216,8 @@ namespace PMA.ProcessMemoryAnalyzer
                 List<int> totalMemoryUsageAtTime = new List<int>();
 
                 DateTime.Parse(rawData[1].Split('|')[0].Substring(1, rawData[1].Split('|')[0].Length - 1));
-                
-                
+
+
 
                 //Getting Time Line
                 List<string> times = (from value in rawData
@@ -290,12 +306,12 @@ namespace PMA.ProcessMemoryAnalyzer
                 reportFile = Path.GetDirectoryName(rawfileName) + "\\" + Path.GetFileNameWithoutExtension(rawfileName) + "_formated.csv";
                 File.WriteAllText(reportFile, reportData.ToString());
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
 
-            return reportFile;                     
+            return reportFile;
 
         }
 
