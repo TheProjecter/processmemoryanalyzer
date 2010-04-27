@@ -20,6 +20,8 @@ namespace PMA.PMAConsoleApp
         PMAInfo pmaInfo;
         Emails emailsInfo;
         SmtpInfo smtpInfo;
+
+        static PMATaskHandler pmaTaskHandler;
         
         static void Main(string[] args)
         {
@@ -188,11 +190,14 @@ namespace PMA.PMAConsoleApp
         private static void RunTest()
         {
 
-            PMATaskHandler pmaTaskHandler = new PMATaskHandler();
-
-            pmaTaskHandler.RunTask();
+            if (pmaTaskHandler == null)
+            {
+                pmaTaskHandler = new PMATaskHandler();
+            }
+            //pmaTaskHandler.RunTask();
             
             //PMATaskHandler.CreateAllProcessCSVReport("G:\\PMAService\\Memlog\\IVP_23 April 2010_01-20-54.txt");
+            PMATaskHandler.CreateAllProcessCSVReport("D:\\My Applications\\ProcessMemoryAnalyzer\\PMATestApp\\bin\\Debug\\Memlog\\IVP_27 April 2010_15-56.txt");
 
 
         }
