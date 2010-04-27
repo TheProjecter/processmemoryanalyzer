@@ -84,8 +84,11 @@ namespace PMA.ProcessMemoryAnalyzer
                 {
                     _reportFileName = CreateAllProcessCSVReport(_fileName);
                 }
-                mailingTime = mailingTime.AddHours(PMAInfoObj.ReportsIntervalHours);
-                PMAInfoObj.MailingTime = mailingTime.ToString("d/M/yyyy HH:mm");
+                if (DateTime.Now > mailingTime)
+                {
+                    mailingTime = mailingTime.AddHours(PMAInfoObj.ReportsIntervalHours);
+                    PMAInfoObj.MailingTime = mailingTime.ToString("d/M/yyyy HH:mm");
+                }
                 if (File.Exists(_fileName))
                 {
                     smtpTransport.SmtpSend(SmtpInfoObj, EmailsInfoObj.EmailTo, EmailsInfoObj.EmailCC,
@@ -143,12 +146,12 @@ namespace PMA.ProcessMemoryAnalyzer
 
             foreach (Process p in Process.GetProcesses())
             {
-                sb.Append("\r\n" + p.ProcessName + "(" + p.Id + ")" + "#" + (p.WorkingSet64 / 1024).ToString() + "#" + currentDateTimeString);
+                sb.Append("\r\n" + p.ProcessName + "(" + p.Id + ")" + "#" + (  p.WorkingSet64 / (1024)).ToString() + "#" + currentDateTimeString);
                 try
                 {
                     cpuCounter.InstanceName = p.ProcessName;
                     cpuCounter.NextValue();
-                    System.Threading.Thread.Sleep(5);
+                    System.Threading.Thread.Sleep(10);
                     sb.Append("#" + cpuCounter.NextValue() + "%");
                 }
                 catch
@@ -160,27 +163,15 @@ namespace PMA.ProcessMemoryAnalyzer
                 {
                     try
                     {
-                        Process getTitle = new Process();
-                        getTitle.StartInfo.Arguments = p.Id.ToString();
-                        getTitle.StartInfo.FileName = PMAApplicationSettings.PMAApplicationDirectory + "\\" + "GetProcessMainWindowTitle.exe";
-                        getTitle.StartInfo.CreateNoWindow = false;
-                        
-                        getTitle.Start();
-                        getTitle.WaitForExit();
-                        if (getTitle.ExitCode == 5)
+                        if (p.MainWindowTitle.Contains("COSMOS") || p.MainWindowTitle.Contains("Reconciliation Framework"))
                         {
-                            sb.Append("#OurApp");
+                            sb.Append("#Recon");
+                        }
+                        else if (p.MainWindowTitle.Contains("Google"))
+                        {
+                            sb.Append("#Google");
                         }
                         else sb.Append("# ");
-                        //if (p.MainWindowTitle.Contains("COSMOS") || p.MainWindowTitle.Contains("Reconciliation Framework"))
-                        //{
-                        //    sb.Append("#Recon");
-                        //}
-                        //else if (p.MainWindowTitle.Contains("Google"))
-                        //{
-                        //    sb.Append("#Google");
-                        //}
-                        //else sb.Append("# ");
                     }
                     catch
                     {

@@ -33,6 +33,7 @@
             // 
             // serviceProcessInstallerPMA
             // 
+            this.serviceProcessInstallerPMA.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
             this.serviceProcessInstallerPMA.Password = null;
             this.serviceProcessInstallerPMA.Username = null;
             // 

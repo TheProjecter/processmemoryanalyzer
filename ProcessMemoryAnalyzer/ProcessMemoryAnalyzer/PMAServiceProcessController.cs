@@ -61,7 +61,7 @@ namespace PMA.ProcessMemoryAnalyzer
         {
             get 
             {
-                return (double)new Microsoft.VisualBasic.Devices.ComputerInfo().AvailablePhysicalMemory / (1024 * 1024);
+                return (double)new Microsoft.VisualBasic.Devices.ComputerInfo().TotalPhysicalMemory / (1024 * 1024);
             }
         }
 
