@@ -190,6 +190,8 @@ namespace PMA.PMAConsoleApp
 
             PMATaskHandler pmaTaskHandler = new PMATaskHandler();
 
+            pmaTaskHandler.RunTask();
+            
             //PMATaskHandler.CreateAllProcessCSVReport("G:\\PMAService\\Memlog\\IVP_23 April 2010_01-20-54.txt");
 
 

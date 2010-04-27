@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMAConsoleApp", "PMATestApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMAReportGen", "PMAReportGen\PMAReportGen.csproj", "{3EB04E5B-E69E-4DBE-94A4-1F836AB6B10A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetProcessMainWindowTitle", "GetProcessMainWindowTitle\GetProcessMainWindowTitle.csproj", "{FFEEC04C-E731-4C0D-AC83-A8FD54AC1BA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{3EB04E5B-E69E-4DBE-94A4-1F836AB6B10A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EB04E5B-E69E-4DBE-94A4-1F836AB6B10A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EB04E5B-E69E-4DBE-94A4-1F836AB6B10A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFEEC04C-E731-4C0D-AC83-A8FD54AC1BA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFEEC04C-E731-4C0D-AC83-A8FD54AC1BA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFEEC04C-E731-4C0D-AC83-A8FD54AC1BA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFEEC04C-E731-4C0D-AC83-A8FD54AC1BA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
