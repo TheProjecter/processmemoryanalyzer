@@ -52,8 +52,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button_ClearGraph = new System.Windows.Forms.Button();
+            this.button_ClearList = new System.Windows.Forms.Button();
             this.buttonShowGraph = new System.Windows.Forms.Button();
             this.openFileDialogReportFeed = new System.Windows.Forms.OpenFileDialog();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -137,6 +141,7 @@
             this.listBoxAvailableProcess.Name = "listBoxAvailableProcess";
             this.listBoxAvailableProcess.Size = new System.Drawing.Size(250, 147);
             this.listBoxAvailableProcess.TabIndex = 2;
+            this.listBoxAvailableProcess.DoubleClick += new System.EventHandler(this.listBoxAvailableProcess_DoubleClick);
             // 
             // listBoxProcessToGraph
             // 
@@ -145,7 +150,7 @@
             this.listBoxProcessToGraph.Name = "listBoxProcessToGraph";
             this.listBoxProcessToGraph.Size = new System.Drawing.Size(241, 147);
             this.listBoxProcessToGraph.TabIndex = 3;
-            this.listBoxProcessToGraph.SelectedIndexChanged += new System.EventHandler(this.listBoxServicesToGraph_SelectedIndexChanged);
+
             // 
             // panel1
             // 
@@ -222,7 +227,6 @@
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.ImageLocation = ".\\\\Images\\\\arrow-right.jpg";
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
             this.pictureBox1.Location = new System.Drawing.Point(277, 73);
@@ -266,11 +270,33 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.button_ClearGraph);
+            this.panel3.Controls.Add(this.button_ClearList);
             this.panel3.Controls.Add(this.buttonShowGraph);
             this.panel3.Location = new System.Drawing.Point(13, 265);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1002, 66);
             this.panel3.TabIndex = 8;
+            // 
+            // button_ClearGraph
+            // 
+            this.button_ClearGraph.Location = new System.Drawing.Point(812, 15);
+            this.button_ClearGraph.Name = "button_ClearGraph";
+            this.button_ClearGraph.Size = new System.Drawing.Size(75, 23);
+            this.button_ClearGraph.TabIndex = 2;
+            this.button_ClearGraph.Text = "ClearGraph";
+            this.button_ClearGraph.UseVisualStyleBackColor = true;
+            this.button_ClearGraph.Click += new System.EventHandler(this.button_ClearGraph_Click);
+            // 
+            // button_ClearList
+            // 
+            this.button_ClearList.Location = new System.Drawing.Point(919, 15);
+            this.button_ClearList.Name = "button_ClearList";
+            this.button_ClearList.Size = new System.Drawing.Size(75, 23);
+            this.button_ClearList.TabIndex = 1;
+            this.button_ClearList.Text = "ClearList";
+            this.button_ClearList.UseVisualStyleBackColor = true;
+            this.button_ClearList.Click += new System.EventHandler(this.button_ClearList_Click);
             // 
             // buttonShowGraph
             // 
@@ -280,12 +306,18 @@
             this.buttonShowGraph.TabIndex = 0;
             this.buttonShowGraph.Text = "ShowGraph";
             this.buttonShowGraph.UseVisualStyleBackColor = true;
+            this.buttonShowGraph.Click += new System.EventHandler(this.buttonShowGraph_Click);
             // 
             // openFileDialogReportFeed
             // 
             this.openFileDialogReportFeed.DefaultExt = "csv";
             this.openFileDialogReportFeed.FileName = "openFileDialogReportFeed";
             this.openFileDialogReportFeed.Title = "Select Report Feed";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // FormProcessFeedAnalyzer
             // 
@@ -339,6 +371,10 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button buttonShowGraph;
         private System.Windows.Forms.OpenFileDialog openFileDialogReportFeed;
+        private System.Windows.Forms.Button button_ClearGraph;
+        private System.Windows.Forms.Button button_ClearList;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        public System.Windows.Forms.ColorDialog colorDialog;
     }
 }
 
