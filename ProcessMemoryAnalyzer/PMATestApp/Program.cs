@@ -197,7 +197,7 @@ namespace PMA.PMAConsoleApp
             //pmaTaskHandler.RunTask();
             
             //PMATaskHandler.CreateAllProcessCSVReport("G:\\PMAService\\Memlog\\IVP_23 April 2010_01-20-54.txt");
-            PMATaskHandler.CreateAllProcessCSVReport("D:\\My Applications\\ProcessMemoryAnalyzer\\PMATestApp\\bin\\Debug\\Memlog\\IVP_27 April 2010_15-56.txt");
+            PMATaskHandler.CreateAllProcessCSVReport("D:\\My Applications\\ProcessMemoryAnalyzer\\PMATestApp\\bin\\Debug\\Memlog\\IVP_29 April 2010_20-14.txt");
 
 
         }
@@ -247,6 +247,7 @@ namespace PMA.PMAConsoleApp
             pmaInfo.ServicesNames.Add("MSSQLSERVER");
             pmaInfo.ClientName = "IVP";
             pmaInfo.DisposeLogFile = false;
+            pmaInfo.TriggerSeed = 5;
 
             emailsInfo = new Emails();
             emailsInfo.EmailTo = new List<string>();

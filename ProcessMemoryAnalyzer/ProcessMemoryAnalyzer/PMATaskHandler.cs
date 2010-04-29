@@ -60,7 +60,10 @@ namespace PMA.ProcessMemoryAnalyzer
             mailingTime = DateTime.ParseExact(PMAInfoObj.MailingTime, "d/M/yyyy HH:mm", null);
             if (DateTime.Now < mailingTime)
             {
-                LogAllProcessMemory(_fileName);
+                if (DateTime.Now.Minute % PMAInfoObj.TriggerSeed == 0)
+                {
+                    LogAllProcessMemory(_fileName);
+                }
             }
             else
             {
@@ -133,9 +136,9 @@ namespace PMA.ProcessMemoryAnalyzer
 
             PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
 
-            System.Threading.Thread.Sleep(500);
+            System.Threading.Thread.Sleep(900);
             string currentDateTimeString = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString();
-            sb.Append("\r\nΩ" + currentDateTimeString + "|" + cpuCounter.NextValue() + "%" + "|" + ramCounter.NextValue() + "MB Free");
+            sb.Append("\r\nΩ" + currentDateTimeString + "|" + cpuCounter.NextValue() + "%" + "|" + ramCounter.NextValue()*1024 + "KB Free");
 
             Dictionary<string, int> procDic = new Dictionary<string, int>();
 
@@ -144,9 +147,12 @@ namespace PMA.ProcessMemoryAnalyzer
             cpuCounter.CategoryName = "Process";
             cpuCounter.CounterName = "% Processor Time";
 
+            //Counter Order
+            // ProcessName#PhysicalMem#Time#cpuTime#IE#VirtualMem#ThreadCount
             foreach (Process p in Process.GetProcesses())
             {
                 sb.Append("\r\n" + p.ProcessName + "(" + p.Id + ")" + "#" + (  p.WorkingSet64 / (1024)).ToString() + "#" + currentDateTimeString);
+                
                 try
                 {
                     cpuCounter.InstanceName = p.ProcessName;
@@ -158,7 +164,6 @@ namespace PMA.ProcessMemoryAnalyzer
                 {
                     sb.Append("#" + "??");
                 }
-                
                 if (p.ProcessName.Equals("iexplore"))
                 {
                     try
@@ -180,9 +185,8 @@ namespace PMA.ProcessMemoryAnalyzer
                 }
                 else sb.Append("# ");
 
-
-
-
+                sb.Append("#" + (p.VirtualMemorySize64 / (1024)).ToString());
+                sb.Append("#" + p.Threads.Count.ToString());
             }
             File.AppendAllText(fileName, sb.ToString());
         }
@@ -201,10 +205,11 @@ namespace PMA.ProcessMemoryAnalyzer
             {
                 List<string> rawData = File.ReadAllLines(rawfileName).ToList<string>();
                 StringBuilder reportData = new StringBuilder();
-                reportData.Append("Total Memory Available," + PMAServiceProcessController.TotalPhysicalMemoryInMB + " MB");
+                reportData.Append("TotalMemoryAvailable," + PMAServiceProcessController.TotalPhysicalMemoryInKB + " KB");
                 reportData.Append("\r\nProcessNames");
 
-                List<int> totalMemoryUsageAtTime = new List<int>();
+                List<int> totalPhyMemoryUsageAtTime = new List<int>();
+                List<int> totalVirtualMemUseAtTime = new List<int>();
 
                 DateTime.Parse(rawData[1].Split('|')[0].Substring(1, rawData[1].Split('|')[0].Length - 1));
 
@@ -250,7 +255,8 @@ namespace PMA.ProcessMemoryAnalyzer
                                              orderby value.Split('#')[0]
                                              select value.Split('#')[0]).Distinct().ToList<string>();
 
-                //logging Memory|Process Time|Active Recon Window for process in time line
+                //logging 
+                //PhyMemory|VirtualMem|CPU Use|Thread|Active Recon Window for process in time line
                 foreach (string processName in processNames)
                 {
                     reportData.Append("\r\n");
@@ -258,8 +264,8 @@ namespace PMA.ProcessMemoryAnalyzer
                     var processMemUsageAtTime = (from value in rawData
                                                  where value.Contains('#') && value.Split('#')[0] == processName
                                                  orderby DateTime.Parse(value.Split('#')[2])
-                                                 select new KeyValuePair<string, string>(value.Split('#')[2], value.Split('#')[1] + "|" + value.Split('#')[3]
-                                                     + "|" + value.Split('#')[4]));
+                                                 select new KeyValuePair<string, string>(value.Split('#')[2], value.Split('#')[1]+"|"+value.Split('#')[5] + "|" + value.Split('#')[3]
+                                                     + "|" + value.Split('#')[6] + "|" + value.Split('#')[4]));
 
                     Dictionary<string, string> memTimeMap = new Dictionary<string, string>();
                     foreach (var item in processMemUsageAtTime)
@@ -284,10 +290,29 @@ namespace PMA.ProcessMemoryAnalyzer
                 {
 
                     totalMemory = 0;
-                    totalMemoryUsageAtTime = (from value in rawData
+                    totalPhyMemoryUsageAtTime = (from value in rawData
                                               where value.Contains('#') && value.Split('#')[2] == time
                                               select int.Parse(value.Split('#')[1])).ToList<int>();
-                    foreach (int mem in totalMemoryUsageAtTime)
+
+                    
+                    
+                    foreach (int mem in totalPhyMemoryUsageAtTime)
+                    {
+                        totalMemory = totalMemory + mem;
+                    }
+                    reportData.Append("," + totalMemory);
+                }
+
+                reportData.Append("\r\nTotal Virtual Memory");
+                foreach (string time in times)
+                {
+
+                    totalMemory = 0;
+                    totalVirtualMemUseAtTime = (from value in rawData
+                                                where value.Contains('#') && value.Split('#')[2] == time
+                                                select int.Parse(value.Split('#')[5])).ToList<int>();
+
+                    foreach (int mem in totalVirtualMemUseAtTime)
                     {
                         totalMemory = totalMemory + mem;
                     }
@@ -316,15 +341,19 @@ namespace PMA.ProcessMemoryAnalyzer
         {
             StringBuilder builder = new StringBuilder();
             builder.Append("Hi,");
-            builder.Append("<br>");
-            builder.Append("<br>");
+            builder.Append("\r\n");
+            builder.Append("\r\n");
             builder.Append(EmailsInfoObj.BodyContent);
-            builder.Append("<br>");
+            builder.Append("\r\n");
             builder.Append("Please find attached Machine Process Report for " + PMAInfoObj.ClientName);
-            builder.Append("<br>");
-            builder.Append("<br>");
+            builder.Append("\r\n");
+            builder.Append("CELL FROMAT");
+            builder.Append("\r\n");
+            builder.Append("PhyMemory|VirtualMem|CPU Use|Thread|Active Recon Window for process in time line");
+            builder.Append("\r\n");
+            builder.Append("\r\n");
             builder.Append("Thanks,");
-            builder.Append("<br>");
+            builder.Append("\r\n");
             builder.Append("Cosmos Team.");
             return builder.ToString();
         }

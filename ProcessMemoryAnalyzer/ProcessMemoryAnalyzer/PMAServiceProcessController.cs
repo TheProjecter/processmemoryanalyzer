@@ -57,11 +57,11 @@ namespace PMA.ProcessMemoryAnalyzer
         /// Gets the total physical memory.
         /// </summary>
         /// <value>The total physical memory.</value>
-        public static double TotalPhysicalMemoryInMB
+        public static double TotalPhysicalMemoryInKB
         {
             get 
             {
-                return (double)new Microsoft.VisualBasic.Devices.ComputerInfo().TotalPhysicalMemory / (1024 * 1024);
+                return (double)new Microsoft.VisualBasic.Devices.ComputerInfo().TotalPhysicalMemory / (1024);
             }
         }
 
