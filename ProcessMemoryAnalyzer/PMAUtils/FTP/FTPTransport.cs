@@ -10,7 +10,7 @@ using PMA.Utils;
 
 namespace PMA.Utils.ftp
 {
-    public sealed class FTPTransportHandler
+    public sealed class FTPTransport
     {
 
         FtpWebRequest request = null;
