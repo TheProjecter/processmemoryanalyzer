@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using PMA.Utils.smtp;
 using PMA.Utils;
+using PMA.Utils.ftp;
 using System.IO;
 using System.Diagnostics;
 
@@ -16,6 +17,7 @@ namespace PMA.ProcessMemoryAnalyzer
         public PMAInfo PMAInfoObj { get; set; }
         public Emails EmailsInfoObj { get; set; }
         public SmtpInfo SmtpInfoObj { get; set; }
+        public FTPInfo FtpInfoObj { get; set; }
 
         private string _fileName;
         private string _reportFileName;
@@ -77,12 +79,15 @@ namespace PMA.ProcessMemoryAnalyzer
         public void ReportingTask()
         {
             string smtpPassword = string.Empty;
+            string ftpPassword = string.Empty;
             SMTPTransport smtpTransport = new SMTPTransport();
+            FTPTransport ftpTransport = new FTPTransport();
             try
             {
 
                 _reportFileName = string.Empty;
                 smtpPassword = SmtpInfoObj.Password;
+                ftpPassword = FtpInfoObj.Password;
                 if (File.Exists(_fileName))
                 {
                     _reportFileName = CreateAllProcessCSVReport(_fileName);
@@ -94,20 +99,32 @@ namespace PMA.ProcessMemoryAnalyzer
                 }
                 if (File.Exists(_fileName))
                 {
-                    smtpTransport.SmtpSend(SmtpInfoObj, EmailsInfoObj.EmailTo, EmailsInfoObj.EmailCC,
-                        EmailsInfoObj.Subject + ":" + PMAInfoObj.ClientName, GenerateMailMessageBody(), _reportFileName);
+                    if (PMAInfoObj.UseSMTP)
+                    {
+                        smtpTransport.SmtpSend(SmtpInfoObj, EmailsInfoObj.EmailTo, EmailsInfoObj.EmailCC,
+                            EmailsInfoObj.Subject + ":" + PMAInfoObj.ClientName, GenerateMailMessageBody(), _reportFileName);
+                    }
+                    if (PMAInfoObj.UseFTP)
+                    {
+                        List<string> ftpFiles = new List<string>();
+                        ftpFiles.Add(_reportFileName);
+                        ftpTransport.FTPSend(FtpInfoObj,ftpFiles);
+                    }
                 }
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Exception : " + ex.Message);
                 // Start New Loging
             }
             finally
             {
                 smtpTransport = null;
+                ftpTransport = null;
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
                 SmtpInfoObj.Password = smtpPassword;
+                FtpInfoObj.Password = ftpPassword;
                 _fileName = GenerateNewFileName();
                 SerializedInfo();
             }
@@ -370,6 +387,7 @@ namespace PMA.ProcessMemoryAnalyzer
                 PMAInfoObj = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, PMAInfo.PMA_INFO_FILE)));
                 EmailsInfoObj = Emails.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, Emails.EMAILS_INFO_FILE)));
                 SmtpInfoObj = SmtpInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, SmtpInfo.SMTP_INFO_FILE)));
+                FtpInfoObj = FTPInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, FTPInfo.FTP_INFO_FILE)));
             }
             catch (FileNotFoundException ex)
             {
@@ -386,6 +404,7 @@ namespace PMA.ProcessMemoryAnalyzer
             File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, PMAInfo.PMA_INFO_FILE), PMAInfoObj.Serialize());
             File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, Emails.EMAILS_INFO_FILE), EmailsInfoObj.Serialize());
             File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, SmtpInfo.SMTP_INFO_FILE), SmtpInfoObj.Serialize());
+            File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, FTPInfo.FTP_INFO_FILE), FtpInfoObj.Serialize());
         }
 
 

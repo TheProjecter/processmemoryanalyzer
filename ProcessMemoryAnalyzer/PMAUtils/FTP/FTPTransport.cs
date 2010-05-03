@@ -26,17 +26,24 @@ namespace PMA.Utils.ftp
         public void FTPSend(FTPInfo ftpInfo, List<string> filesToUpload)
         {
             this.ftpInfo = ftpInfo;
-            
-            if(ftpInfo.ProtectPassword)
+
+            try
             {
-                ftpInfo.Password = OperationUtils.EncryptDecrypt(ftpInfo.Password, 22);
+                if (ftpInfo.ProtectPassword)
+                {
+                    ftpInfo.Password = OperationUtils.EncryptDecrypt(ftpInfo.Password, 22);
+                }
+
+                foreach (string file in filesToUpload)
+                {
+                    CreateRecursiveFTPFolder();
+
+                    Stream requestStream = UploadFile(file);
+                }
             }
-
-            foreach (string file in filesToUpload)
+            catch (Exception ex)
             {
-                CreateRecursiveFTPFolder();
-
-                Stream requestStream = UploadFile(file);
+                throw ex;
             }
 
 
@@ -147,7 +154,8 @@ namespace PMA.Utils.ftp
             {
                 if (request != null)
                 {
-                    //request.KeepAlive = false;
+                    
+                    request.KeepAlive = false;
                 }
                 if (response != null)
                 {

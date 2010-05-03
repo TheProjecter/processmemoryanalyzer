@@ -21,6 +21,8 @@ namespace PMA.ProcessMemoryAnalyzer
         public string ClientName { get; set; }
         public bool DisposeLogFile { get; set; }
         public int TriggerSeed { get; set; }
+        public bool UseFTP { get; set; }
+        public bool UseSMTP { get; set; }
 
 
         public string Serialize()
