@@ -266,7 +266,7 @@ namespace PMA.PMAConsoleApp
             smtpInfo = new SmtpInfo();
             smtpInfo.ProtectPassword = true;
             smtpInfo.UserName = "productitsupport@cosmostech.in";
-            smtpInfo.Password = "123@cosmos";
+            smtpInfo.Password = "secret";
             smtpInfo.Port = 587;
             smtpInfo.SmtpServer = "smtp.gmail.com";
             smtpInfo.SSL = true;
@@ -276,7 +276,7 @@ namespace PMA.PMAConsoleApp
             ftpInfo = new FTPInfo();
             ftpInfo.FTPServer = "202.54.213.231";
             ftpInfo.FTPServerFolder = "PerformanceReports";
-            ftpInfo.Password = "568@partners";
+            ftpInfo.Password = "secret";
             ftpInfo.Port = 21;
             ftpInfo.ProtectPassword = false;
             ftpInfo.SSL = false;
