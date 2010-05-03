@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using PMA.Utils.smtp;
+using PMA.Utils.ftp;
 using PMA.Utils;
 using System.IO;
 using System.Diagnostics;
@@ -20,6 +21,7 @@ namespace PMA.PMAConsoleApp
         PMAInfo pmaInfo;
         Emails emailsInfo;
         SmtpInfo smtpInfo;
+        FTPInfo ftpInfo; 
 
         static PMATaskHandler pmaTaskHandler;
         
@@ -194,10 +196,10 @@ namespace PMA.PMAConsoleApp
             {
                 pmaTaskHandler = new PMATaskHandler();
             }
-            //pmaTaskHandler.RunTask();
+            pmaTaskHandler.RunTask();
             
             //PMATaskHandler.CreateAllProcessCSVReport("G:\\PMAService\\Memlog\\IVP_23 April 2010_01-20-54.txt");
-            PMATaskHandler.CreateAllProcessCSVReport("D:\\My Applications\\ProcessMemoryAnalyzer\\PMATestApp\\bin\\Debug\\Memlog\\IVP_29 April 2010_20-14.txt");
+            //PMATaskHandler.CreateAllProcessCSVReport("D:\\My Applications\\ProcessMemoryAnalyzer\\PMATestApp\\bin\\Debug\\Memlog\\IVP_29 April 2010_20-14.txt");
 
 
         }
@@ -238,17 +240,19 @@ namespace PMA.PMAConsoleApp
         
         private void SerializeDefaultObject()
         {
+            //PMAInfo
             pmaInfo = new PMAInfo();
-
             pmaInfo.MailingTime = DateTime.Now.ToString("d/M/yyyy HH:mm");
-
             pmaInfo.ReportsIntervalHours = 24;
             pmaInfo.ServicesNames = new List<string>();
             pmaInfo.ServicesNames.Add("MSSQLSERVER");
             pmaInfo.ClientName = "IVP";
             pmaInfo.DisposeLogFile = false;
             pmaInfo.TriggerSeed = 5;
+            pmaInfo.UseFTP = true;
+            pmaInfo.UseSMTP = false;
 
+            // EMAIL INFO
             emailsInfo = new Emails();
             emailsInfo.EmailTo = new List<string>();
             emailsInfo.EmailTo.Add("msareen@ivp.in");
@@ -258,6 +262,7 @@ namespace PMA.PMAConsoleApp
             emailsInfo.Subject = "Server Report";
             emailsInfo.BodyContent = "Please Find the Report Attached";
 
+            // SMTP Info
             smtpInfo = new SmtpInfo();
             smtpInfo.ProtectPassword = true;
             smtpInfo.UserName = "productitsupport@cosmostech.in";
@@ -266,6 +271,18 @@ namespace PMA.PMAConsoleApp
             smtpInfo.SmtpServer = "smtp.gmail.com";
             smtpInfo.SSL = true;
             smtpInfo.TimeOut = 100000;
+
+            //FTP Info
+            ftpInfo = new FTPInfo();
+            ftpInfo.FTPServer = "202.54.213.231";
+            ftpInfo.FTPServerFolder = "PerformanceReports";
+            ftpInfo.Password = "568@partners";
+            ftpInfo.Port = 21;
+            ftpInfo.ProtectPassword = false;
+            ftpInfo.SSL = false;
+            ftpInfo.TimeOut = 100000;
+            ftpInfo.UserName = "ftpuser";
+            
 
             SerializedInfo();
         }
@@ -280,6 +297,7 @@ namespace PMA.PMAConsoleApp
                 File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, PMAInfo.PMA_INFO_FILE), pmaInfo.Serialize());
                 File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, Emails.EMAILS_INFO_FILE), emailsInfo.Serialize());
                 File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, SmtpInfo.SMTP_INFO_FILE), smtpInfo.Serialize());
+                File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, FTPInfo.FTP_INFO_FILE), ftpInfo.Serialize());
             }
             catch (Exception ex)
             {
@@ -294,6 +312,7 @@ namespace PMA.PMAConsoleApp
                 pmaInfo = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, PMAInfo.PMA_INFO_FILE)));
                 emailsInfo = Emails.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, Emails.EMAILS_INFO_FILE)));
                 smtpInfo = SmtpInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, SmtpInfo.SMTP_INFO_FILE)));
+                ftpInfo = FTPInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, FTPInfo.FTP_INFO_FILE)));
             }
             catch(Exception ex)
             {
