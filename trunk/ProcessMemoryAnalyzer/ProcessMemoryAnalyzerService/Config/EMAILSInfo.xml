@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Emails xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EmailTo>
+    <string>msareen@ivp.in</string>
+  </EmailTo>
+  <EmailCC>
+    <string>manasvi.sareen@gmail.com</string>
+  </EmailCC>
+  <Subject>Server Report</Subject>
+  <AttachmentPath />
+  <BodyContent>Please Find the Report Attached</BodyContent>
+</Emails>

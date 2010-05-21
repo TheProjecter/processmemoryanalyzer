@@ -42,6 +42,7 @@
             this.serviceInstallerPMA.Description = "Process Memory analyzer service";
             this.serviceInstallerPMA.DisplayName = "PMAService";
             this.serviceInstallerPMA.ServiceName = "PMAService";
+            this.serviceInstallerPMA.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller
             // 
