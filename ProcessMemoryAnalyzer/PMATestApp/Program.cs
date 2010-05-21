@@ -27,7 +27,8 @@ namespace PMA.PMAConsoleApp
         
         static void Main(string[] args)
         {
-     
+
+            //File.WriteAllText("C:\\log.txt", "enter the text top");
             string command = string.Empty;
             Program p = new Program();
             int option;
@@ -42,150 +43,194 @@ namespace PMA.PMAConsoleApp
                 p.SerializeDefaultObject();
             }
             //p.SerializedInfo();
-            while (command != "exit")
+            if (args.Length == 0)
             {
-                try
+                while (command != "exit")
                 {
-                    p.DeserilizeObjects();
-                    option = p.CreateUserOptions();
-                    switch (option)
+                    try
                     {
-                        case 0:
+                        p.DeserilizeObjects();
+                        option = p.CreateUserOptions();
+                        switch (option)
                         {
-                            Console.WriteLine();
-                            Console.WriteLine("PMA Settings :");
-                            
-                            string serviceName = string.Empty;
-                            p.pmaInfo = new PMAInfo();
-                            Console.WriteLine("Enter Mailing Time(DD/MM/YYYY HH:MM) :");
-                            p.pmaInfo.MailingTime = Console.ReadLine();
-                            Console.WriteLine("Enter Mailing Report Interval (Hours) :");
-                            p.pmaInfo.ReportsIntervalHours = int.Parse(Console.ReadLine()) ;
-                            Console.WriteLine("Enter Client Name :");
-                            p.pmaInfo.ClientName = Console.ReadLine();
-                            
-                            p.pmaInfo.ServicesNames = new List<string>();
-                            Console.WriteLine("Enter Services Name(Enter ! to exit) :");
-                            while (serviceName != "!")
-                            {
-                                serviceName = Console.ReadLine();
-                                if (serviceName != "!")
-                                    p.pmaInfo.ServicesNames.Add(serviceName);
-                            }
+                            case 0:
+                                {
+                                    CreatePMASettings(p);
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    CreateSMTPSettings(p);
+                                    break;
+                                }
 
-                            break;
-                        }
-                        case 1:
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine("SMTP Settings :");
-                            
-                            p.smtpInfo = new SmtpInfo();
-                            Console.WriteLine("Enter User Name : ");
-                            p.smtpInfo.UserName = Console.ReadLine();
-                            Console.WriteLine("Enter User Password : ");
-                            p.smtpInfo.Password = Console.ReadLine();
-                            Console.WriteLine("Enter port : ");
-                            p.smtpInfo.Port = int.Parse(Console.ReadLine());
-                            Console.WriteLine("Enter SMTP Name : ");
-                            p.smtpInfo.SmtpServer = Console.ReadLine(); ;
-                            Console.WriteLine("Enable SSL : ");
-                            p.smtpInfo.SSL = bool.Parse(Console.ReadLine());
-                            Console.WriteLine("Timeout : ");
-                            p.smtpInfo.TimeOut = int.Parse(Console.ReadLine());
-                            break;
-                        }
-                        
-                        case 2:
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine("Email Settings :");
-                            
-                            string email = string.Empty;
-                            p.emailsInfo = new Emails();
-                            p.emailsInfo.AttachmentPath = "";
-                            Console.WriteLine("Subject Prefix :");
-                            p.emailsInfo.Subject = Console.ReadLine() ;
-                            Console.WriteLine("Mail Body Draft :");
-                            p.emailsInfo.BodyContent = Console.ReadLine();
-                            p.emailsInfo.EmailTo = new List<string>();
-                            while (email != "!")
-                            {
-                                email = Console.ReadLine();
-                                if (email != "!")
-                                    p.emailsInfo.EmailTo.Add(email);
-                            }
-                            email = string.Empty;
-                            p.emailsInfo.EmailCC = new List<string>();
-                            while (email != "!")
-                            {
-                                email = Console.ReadLine();
-                                if (email != "!")
-                                    p.emailsInfo.EmailCC.Add(email);
-                            }
-                            break;
-                        }
-                        case 3:
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine("Installing PMA Service :");
-                            
-                            Process process = new Process();
-                            process.StartInfo.FileName = Environment.GetEnvironmentVariable("windir") + 
-                                "\\Microsoft.NET\\Framework\\v3.5\\installutil.exe";
-                            process.StartInfo.Arguments = PMAApplicationSettings.PMAApplicationDirectory +
-                                "\\ProcessMemoryAnalyzerService.exe";
-                            process.Start();
-                            break;
-                        }
-                        
-                        case 4:
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine("Starting PMA Service :");
-                            ServiceController service = new ServiceController("PMAService");
-                            service.Start();
-                            break;
-                        }
-                        
-                        case 5:
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine("Restoring Defaults :");
-                            p.SerializeDefaultObject();
-                            break;
-                        }
+                            case 2:
+                                {
+                                    CreateEmailSettings(p);
+                                    break;
+                                }
 
-                        case 6:
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine("Show Settings :");
-                            Console.WriteLine();
-                            Console.WriteLine("PMA Settings :");
-                            Console.WriteLine(p.pmaInfo.Serialize());
-                            Console.WriteLine();
-                            Console.WriteLine("SMTP Settings :");
-                            Console.WriteLine(p.smtpInfo.Serialize());
-                            Console.WriteLine();
-                            Console.WriteLine("Email Settings :");
-                            Console.WriteLine(p.emailsInfo.Serialize());
-                            break;
+                            case 3:
+                                {
+                                    StopPMAService();
+                                    break;
+                                }
+
+                            case 4:
+                                {
+                                    StartPMAService();
+                                    break;
+                                }
+
+                            case 5:
+                                {
+                                    RestoreSettings(p);
+                                    break;
+                                }
+
+                            case 6:
+                                {
+                                    ShowSettings(p);
+                                    break;
+                                }
+                            case 7:
+                                {
+                                    RunTest();
+                                    break;
+                                }
+
                         }
-                        case 7:
-                        {
-                            RunTest();
-                            break;
-                        }
-     
                     }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Exception :");
+                        Console.WriteLine(ex.Message);
+                    }
+                    p.SerializedInfo();
+
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Exception :");
-                    Console.WriteLine(ex.Message);
-                }
-                p.SerializedInfo();
-                
+            }
+            else
+            {
+                //File.AppendAllText("C:\\log.txt", "enter the text");
+                RestoreSettings(p);
+                StartPMAService();
+            }
+        }
+
+        private static void ConfigureApplication()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void ShowSettings(Program p)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Show Settings :");
+            Console.WriteLine();
+            Console.WriteLine("PMA Settings :");
+            Console.WriteLine(p.pmaInfo.Serialize());
+            Console.WriteLine();
+            Console.WriteLine("SMTP Settings :");
+            Console.WriteLine(p.smtpInfo.Serialize());
+            Console.WriteLine();
+            Console.WriteLine("Email Settings :");
+            Console.WriteLine(p.emailsInfo.Serialize());
+        }
+
+        private static void RestoreSettings(Program p)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Restoring Defaults :");
+            p.SerializeDefaultObject();
+        }
+
+        private static void StartPMAService()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Starting PMA Service :");
+            ServiceController service = new ServiceController("PMAService");
+            service.Start();
+        }
+
+        private static void StopPMAService()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Stoping PMA Service :");
+            ServiceController service = new ServiceController("PMAService");
+            service.Stop();
+        }
+
+        private static void CreateEmailSettings(Program p)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Email Settings :");
+
+            string email = string.Empty;
+            p.emailsInfo = new Emails();
+            p.emailsInfo.AttachmentPath = "";
+            Console.WriteLine("Subject Prefix :");
+            p.emailsInfo.Subject = Console.ReadLine();
+            Console.WriteLine("Mail Body Draft :");
+            p.emailsInfo.BodyContent = Console.ReadLine();
+            p.emailsInfo.EmailTo = new List<string>();
+            while (email != "!")
+            {
+                email = Console.ReadLine();
+                if (email != "!")
+                    p.emailsInfo.EmailTo.Add(email);
+            }
+            email = string.Empty;
+            p.emailsInfo.EmailCC = new List<string>();
+            while (email != "!")
+            {
+                email = Console.ReadLine();
+                if (email != "!")
+                    p.emailsInfo.EmailCC.Add(email);
+            }
+        }
+
+        private static void CreateSMTPSettings(Program p)
+        {
+            Console.WriteLine();
+            Console.WriteLine("SMTP Settings :");
+
+            p.smtpInfo = new SmtpInfo();
+            Console.WriteLine("Enter User Name : ");
+            p.smtpInfo.UserName = Console.ReadLine();
+            Console.WriteLine("Enter User Password : ");
+            p.smtpInfo.Password = Console.ReadLine();
+            Console.WriteLine("Enter port : ");
+            p.smtpInfo.Port = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter SMTP Name : ");
+            p.smtpInfo.SmtpServer = Console.ReadLine(); ;
+            Console.WriteLine("Enable SSL : ");
+            p.smtpInfo.SSL = bool.Parse(Console.ReadLine());
+            Console.WriteLine("Timeout : ");
+            p.smtpInfo.TimeOut = int.Parse(Console.ReadLine());
+        }
+
+        private static void CreatePMASettings(Program p)
+        {
+            Console.WriteLine();
+            Console.WriteLine("PMA Settings :");
+
+            string serviceName = string.Empty;
+            p.pmaInfo = new PMAInfo();
+            Console.WriteLine("Enter Mailing Time(DD/MM/YYYY HH:MM) :");
+            p.pmaInfo.MailingTime = Console.ReadLine();
+            Console.WriteLine("Enter Mailing Report Interval (Hours) :");
+            p.pmaInfo.ReportsIntervalHours = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter Client Name :");
+            p.pmaInfo.ClientName = Console.ReadLine();
+
+            p.pmaInfo.ServicesNames = new List<string>();
+            Console.WriteLine("Enter Services Name(Enter ! to exit) :");
+            while (serviceName != "!")
+            {
+                serviceName = Console.ReadLine();
+                if (serviceName != "!")
+                    p.pmaInfo.ServicesNames.Add(serviceName);
             }
         }
 
@@ -212,16 +257,16 @@ namespace PMA.PMAConsoleApp
                 Console.WriteLine("Press 0 to Edit/Create PMA Setting");
                 Console.WriteLine("Press 1 to Edit/Create SMTP Setting");
                 Console.WriteLine("Press 2 to Edit/Create Email Setting");
-                Console.WriteLine("Press 3 to install PMA Service");
+                Console.WriteLine("Press 3 to Stop PMA Service");
                 Console.WriteLine("Press 4 to Start PMA Service");
                 Console.WriteLine("Press 5 to Restore Default Setting Files");
                 Console.WriteLine("Press 6 to Show Settings");
-                Console.WriteLine("Press 7 to runTest code");
+                //Console.WriteLine("Press 7 to runTest code");
 
                 try
                 {
                     i = int.Parse(Console.ReadKey().KeyChar.ToString());
-                    if (i < 0 && i > 7)
+                    if (i < 0 && i > 6)
                     {
                         throw new Exception();
                     }
@@ -243,12 +288,12 @@ namespace PMA.PMAConsoleApp
             //PMAInfo
             pmaInfo = new PMAInfo();
             pmaInfo.MailingTime = DateTime.Now.ToString("d/M/yyyy HH:mm");
-            pmaInfo.ReportsIntervalHours = 24;
+            pmaInfo.ReportsIntervalHours = 12;
             pmaInfo.ServicesNames = new List<string>();
             pmaInfo.ServicesNames.Add("MSSQLSERVER");
-            pmaInfo.ClientName = "IVP";
+            pmaInfo.ClientName = System.Environment.MachineName;
             pmaInfo.DisposeLogFile = false;
-            pmaInfo.TriggerSeed = 5;
+            pmaInfo.TriggerSeed = 1;
             pmaInfo.UseFTP = true;
             pmaInfo.UseSMTP = false;
 
@@ -257,7 +302,7 @@ namespace PMA.PMAConsoleApp
             emailsInfo.EmailTo = new List<string>();
             emailsInfo.EmailTo.Add("msareen@ivp.in");
             emailsInfo.EmailCC = new List<string>();
-            emailsInfo.EmailCC.Add("manasvi.sareen@gmail.com");
+            emailsInfo.EmailCC.Add("smalhotra@ivp.in");
             emailsInfo.AttachmentPath = "";
             emailsInfo.Subject = "Server Report";
             emailsInfo.BodyContent = "Please Find the Report Attached";
@@ -266,7 +311,7 @@ namespace PMA.PMAConsoleApp
             smtpInfo = new SmtpInfo();
             smtpInfo.ProtectPassword = true;
             smtpInfo.UserName = "productitsupport@cosmostech.in";
-            smtpInfo.Password = "secret";
+            smtpInfo.Password = "'$%Vuye{ye";
             smtpInfo.Port = 587;
             smtpInfo.SmtpServer = "smtp.gmail.com";
             smtpInfo.SSL = true;
@@ -274,11 +319,11 @@ namespace PMA.PMAConsoleApp
 
             //FTP Info
             ftpInfo = new FTPInfo();
-            ftpInfo.FTPServer = "202.54.213.231";
+            ftpInfo.FTPServer = "ftp://202.54.213.231";
             ftpInfo.FTPServerFolder = "PerformanceReports";
-            ftpInfo.Password = "secret";
+            ftpInfo.Password = "# .Vfwdbxsde";
             ftpInfo.Port = 21;
-            ftpInfo.ProtectPassword = false;
+            ftpInfo.ProtectPassword = true;
             ftpInfo.SSL = false;
             ftpInfo.TimeOut = 100000;
             ftpInfo.UserName = "ftpuser";

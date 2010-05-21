@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMAConsoleApp", "PMATestApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMAReportGen", "PMAReportGen\PMAReportGen.csproj", "{3EB04E5B-E69E-4DBE-94A4-1F836AB6B10A}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PMASetup", "PMASetup\PMASetup.vdproj", "{0E38C8EB-F935-44F5-A620-84C83403ADE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,8 @@ Global
 		{3EB04E5B-E69E-4DBE-94A4-1F836AB6B10A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EB04E5B-E69E-4DBE-94A4-1F836AB6B10A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EB04E5B-E69E-4DBE-94A4-1F836AB6B10A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E38C8EB-F935-44F5-A620-84C83403ADE4}.Debug|Any CPU.ActiveCfg = Debug
+		{0E38C8EB-F935-44F5-A620-84C83403ADE4}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
