@@ -68,6 +68,10 @@ namespace PMA.Utils.smtp
                         updatesAttachement = new Attachment(attachment);
                         mail.Attachments.Add(updatesAttachement);
                     }
+                    else
+                    {
+                        throw new ArgumentException("The attachment provided is not valid");
+                    }
                 }
 
                 smtp.Send(mail);
