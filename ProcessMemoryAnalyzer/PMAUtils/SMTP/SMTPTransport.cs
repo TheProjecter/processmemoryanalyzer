@@ -50,17 +50,24 @@ namespace PMA.Utils.smtp
                 {
                     mail.To.Add(toEmail);
                 }
-                foreach (string ccEmail in ccEmails)
+
+                if (ccEmails != null)
                 {
-                    mail.CC.Add(ccEmail);
+                    foreach (string ccEmail in ccEmails)
+                    {
+                        mail.CC.Add(ccEmail);
+                    }
                 }
 
                 mail.Subject = subject;
                 mail.Body = message;
-                if (attachment != string.Empty)
+                if (attachment != null && attachment != string.Empty)
                 {
-                    updatesAttachement = new Attachment(attachment);
-                    mail.Attachments.Add(updatesAttachement);
+                    if (File.Exists(attachment))
+                    {
+                        updatesAttachement = new Attachment(attachment);
+                        mail.Attachments.Add(updatesAttachement);
+                    }
                 }
 
                 smtp.Send(mail);
