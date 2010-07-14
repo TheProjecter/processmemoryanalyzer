@@ -293,7 +293,7 @@ namespace PMA.PMAConsoleApp
             pmaInfo.ServicesNames.Add("MSSQLSERVER");
             pmaInfo.ClientName = System.Environment.MachineName;
             pmaInfo.DisposeLogFile = false;
-            pmaInfo.TriggerSeed = 1;
+            pmaInfo.TriggerSeed = 20;
             pmaInfo.UseFTP = true;
             pmaInfo.UseSMTP = false;
 
@@ -321,7 +321,7 @@ namespace PMA.PMAConsoleApp
             ftpInfo = new FTPInfo();
             ftpInfo.FTPServer = "ftp://202.54.213.231";
             ftpInfo.FTPServerFolder = "PerformanceReports";
-            ftpInfo.Password = "# .Vfwdbxsde";
+            ftpInfo.Password = "#!!!Vbbb";
             ftpInfo.Port = 21;
             ftpInfo.ProtectPassword = true;
             ftpInfo.SSL = false;
