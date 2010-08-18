@@ -23,8 +23,8 @@ namespace PMA.Utils.smtp
         /// <param name="emails">The emails.</param>
         /// <param name="subject">The subject.</param>
         /// <param name="message">The message.</param>
-        /// <param name="attachment">The attachment. send empty in case nothing to attach</param>
-        public void SmtpSend(SmtpInfo smtpInfo, List<string> toEmails, List<string> ccEmails, string subject, string message, string attachment)
+        /// <param name="attachment">The attachments list. Send null in case there is no attachment</param>
+        public void SmtpSend(SmtpInfo smtpInfo, List<string> toEmails, List<string> ccEmails, string subject, string message, List<string> attachments)
         {
             SmtpClient smtp = new SmtpClient();
             MailMessage mail = new MailMessage();
@@ -61,16 +61,21 @@ namespace PMA.Utils.smtp
 
                 mail.Subject = subject;
                 mail.Body = message;
-                if (attachment != null && attachment != string.Empty)
+                if (attachments != null)
                 {
-                    if (File.Exists(attachment))
+                    foreach (string attachment in attachments)
                     {
-                        updatesAttachement = new Attachment(attachment);
-                        mail.Attachments.Add(updatesAttachement);
-                    }
-                    else
-                    {
-                        throw new ArgumentException("The attachment provided is not valid");
+                        if (File.Exists(attachment))
+                        {
+                            using (updatesAttachement = new Attachment(attachment))
+                            {
+                                mail.Attachments.Add(updatesAttachement);
+                            }
+                        }
+                        else
+                        {
+                            throw new ArgumentException("One or more attachment provided are not valid");
+                        }
                     }
                 }
 
