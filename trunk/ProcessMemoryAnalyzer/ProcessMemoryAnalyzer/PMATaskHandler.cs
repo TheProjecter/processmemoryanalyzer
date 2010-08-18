@@ -101,8 +101,11 @@ namespace PMA.ProcessMemoryAnalyzer
                 {
                     if (PMAInfoObj.UseSMTP)
                     {
+                        List<string> attachments = new List<string>();
+                        attachments.Add(_reportFileName);
                         smtpTransport.SmtpSend(SmtpInfoObj, EmailsInfoObj.EmailTo, EmailsInfoObj.EmailCC,
-                            EmailsInfoObj.Subject + ":" + PMAInfoObj.ClientName, GenerateMailMessageBody(), _reportFileName);
+                             EmailsInfoObj.Subject + ":" + PMAInfoObj.ClientName, GenerateMailMessageBody(),attachments );
+                        
                     }
                     if (PMAInfoObj.UseFTP)
                     {
