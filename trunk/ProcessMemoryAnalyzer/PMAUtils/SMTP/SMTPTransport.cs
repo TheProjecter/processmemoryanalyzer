@@ -40,7 +40,7 @@ namespace PMA.Utils.smtp
                 smtp.Credentials = new System.Net.NetworkCredential(smtpInfo.UserName, smtpInfo.Password);
                 smtp.Host = smtpInfo.SmtpServer;
                 smtp.Port = smtpInfo.Port;
-                smtp.EnableSsl = true;
+                smtp.EnableSsl = smtpInfo.SSL;
                 smtp.Timeout = smtpInfo.TimeOut;
 
                 mail = new MailMessage();
