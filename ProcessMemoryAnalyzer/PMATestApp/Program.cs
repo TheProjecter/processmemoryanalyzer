@@ -311,7 +311,7 @@ namespace PMA.PMAConsoleApp
             smtpInfo = new SmtpInfo();
             smtpInfo.ProtectPassword = true;
             smtpInfo.UserName = "productitsupport@cosmostech.in";
-            smtpInfo.Password = "'$%Vuye{ye";
+            smtpInfo.Password = "'$e{ye";
             smtpInfo.Port = 587;
             smtpInfo.SmtpServer = "smtp.gmail.com";
             smtpInfo.SSL = true;
