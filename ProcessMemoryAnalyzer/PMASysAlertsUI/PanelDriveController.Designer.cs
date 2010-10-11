@@ -33,13 +33,14 @@
             this.label_UseLimit = new System.Windows.Forms.Label();
             this.numericUpDown_DriveUse = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.label_DiscDrives = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_DriveUse)).BeginInit();
             this.SuspendLayout();
             // 
             // label_Drives
             // 
             this.label_Drives.AutoSize = true;
-            this.label_Drives.Location = new System.Drawing.Point(23, 50);
+            this.label_Drives.Location = new System.Drawing.Point(40, 32);
             this.label_Drives.Name = "label_Drives";
             this.label_Drives.Size = new System.Drawing.Size(37, 13);
             this.label_Drives.TabIndex = 0;
@@ -48,40 +49,51 @@
             // checkedListBox_Drives
             // 
             this.checkedListBox_Drives.FormattingEnabled = true;
-            this.checkedListBox_Drives.Location = new System.Drawing.Point(103, 23);
+            this.checkedListBox_Drives.Location = new System.Drawing.Point(40, 48);
             this.checkedListBox_Drives.Name = "checkedListBox_Drives";
-            this.checkedListBox_Drives.Size = new System.Drawing.Size(123, 79);
+            this.checkedListBox_Drives.Size = new System.Drawing.Size(185, 79);
             this.checkedListBox_Drives.TabIndex = 1;
             // 
             // label_UseLimit
             // 
             this.label_UseLimit.AutoSize = true;
-            this.label_UseLimit.Location = new System.Drawing.Point(23, 130);
+            this.label_UseLimit.Location = new System.Drawing.Point(37, 139);
             this.label_UseLimit.Name = "label_UseLimit";
-            this.label_UseLimit.Size = new System.Drawing.Size(35, 13);
+            this.label_UseLimit.Size = new System.Drawing.Size(176, 13);
             this.label_UseLimit.TabIndex = 2;
-            this.label_UseLimit.Text = "label2";
+            this.label_UseLimit.Text = "Generate Alert When Disc Usage Is";
             // 
             // numericUpDown_DriveUse
             // 
-            this.numericUpDown_DriveUse.Location = new System.Drawing.Point(103, 130);
+            this.numericUpDown_DriveUse.Location = new System.Drawing.Point(40, 155);
             this.numericUpDown_DriveUse.Name = "numericUpDown_DriveUse";
-            this.numericUpDown_DriveUse.Size = new System.Drawing.Size(46, 20);
+            this.numericUpDown_DriveUse.Size = new System.Drawing.Size(72, 20);
             this.numericUpDown_DriveUse.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(155, 137);
+            this.label3.Location = new System.Drawing.Point(118, 157);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(15, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "%";
             // 
+            // label_DiscDrives
+            // 
+            this.label_DiscDrives.AutoSize = true;
+            this.label_DiscDrives.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_DiscDrives.Location = new System.Drawing.Point(37, 9);
+            this.label_DiscDrives.Name = "label_DiscDrives";
+            this.label_DiscDrives.Size = new System.Drawing.Size(73, 13);
+            this.label_DiscDrives.TabIndex = 5;
+            this.label_DiscDrives.Text = "Drive Alerts";
+            // 
             // PanelDriveController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label_DiscDrives);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.numericUpDown_DriveUse);
             this.Controls.Add(this.label_UseLimit);
@@ -102,5 +114,6 @@
         private System.Windows.Forms.Label label_UseLimit;
         private System.Windows.Forms.NumericUpDown numericUpDown_DriveUse;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label_DiscDrives;
     }
 }

@@ -30,9 +30,10 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label_SMTP = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label_FTP = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -54,42 +55,53 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label_SMTP);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(426, 83);
             this.panel1.TabIndex = 0;
             // 
+            // label_SMTP
+            // 
+            this.label_SMTP.AutoSize = true;
+            this.label_SMTP.Location = new System.Drawing.Point(4, 4);
+            this.label_SMTP.Name = "label_SMTP";
+            this.label_SMTP.Size = new System.Drawing.Size(37, 13);
+            this.label_SMTP.TabIndex = 0;
+            this.label_SMTP.Text = "SMTP";
+            // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.label_FTP);
             this.panel2.Location = new System.Drawing.Point(3, 92);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(426, 84);
             this.panel2.TabIndex = 1;
             // 
+            // label_FTP
+            // 
+            this.label_FTP.AutoSize = true;
+            this.label_FTP.Location = new System.Drawing.Point(7, 4);
+            this.label_FTP.Name = "label_FTP";
+            this.label_FTP.Size = new System.Drawing.Size(27, 13);
+            this.label_FTP.TabIndex = 0;
+            this.label_FTP.Text = "FTP";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 4);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 4);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "label2";
+            this.label1.Size = new System.Drawing.Size(111, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Transport Settings";
             // 
             // PanelTransportController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "PanelTransportController";
             this.Size = new System.Drawing.Size(438, 258);
@@ -99,6 +111,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -106,8 +119,9 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_SMTP;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label_FTP;
+        private System.Windows.Forms.Label label1;
     }
 }
