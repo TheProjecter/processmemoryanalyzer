@@ -65,6 +65,18 @@ namespace PMASysAlertsUI
                 control.Hide();
             }
         }
+
+        private void ChangeCursorStyle()
+        {
+            foreach (Control control in tableLayoutPanel_LeftMenu.Controls)
+            {
+                if (control is Label)
+                {
+                    Label label = control as Label;
+                    label.Cursor = Cursors.Hand;
+                }
+            }
+        }
         
         
         public PMASysAlertsUI()
@@ -96,7 +108,11 @@ namespace PMASysAlertsUI
             panel_MainContainer.Controls.Add(panelTransportController);
 
             HideAllControls();
+
+            ChangeCursorStyle();
         }
+
+       
 
         private void stopServiceToolStripMenuItem_Click(object sender, EventArgs e)
         {
