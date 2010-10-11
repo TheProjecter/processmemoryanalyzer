@@ -88,7 +88,7 @@ namespace PMA.SystemAnalyzer
         /// </summary>
         /// <param name="strObject">The STR object.</param>
         /// <returns></returns>
-        public static PMAInfo Deserialize(string strObject)
+        public static PMASystemAnalyzerInfo Deserialize(string strObject)
         {
             XmlSerializer x = new XmlSerializer(typeof(PMASystemAnalyzerInfo));
             return (PMASystemAnalyzerInfo)x.Deserialize(new StringReader(strObject));

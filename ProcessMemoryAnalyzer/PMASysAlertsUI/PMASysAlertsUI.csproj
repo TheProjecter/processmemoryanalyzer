@@ -48,6 +48,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PanelHome.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelHome.Designer.cs">
+      <DependentUpon>PanelHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelPhyMemController.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelPhyMemController.Designer.cs">
+      <DependentUpon>PanelPhyMemController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelServiceWatcher.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelServiceWatcher.Designer.cs">
+      <DependentUpon>PanelServiceWatcher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelDatabaseOptimizer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelDatabaseOptimizer.Designer.cs">
+      <DependentUpon>PanelDatabaseOptimizer.cs</DependentUpon>
+    </Compile>
     <Compile Include="PMASysAlertsUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,10 +80,31 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PanelHome.resx">
+      <DependentUpon>PanelHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelPhyMemController.resx">
+      <DependentUpon>PanelPhyMemController.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelServiceWatcher.resx">
+      <DependentUpon>PanelServiceWatcher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelDatabaseOptimizer.resx">
+      <DependentUpon>PanelDatabaseOptimizer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelTransportController.resx">
+      <DependentUpon>PanelTransportController.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PMASysAlertsUI.resx">
+      <DependentUpon>PMASysAlertsUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelDriveController.resx">
+      <DependentUpon>PanelDriveController.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -73,6 +118,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PanelDriveController.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelDriveController.Designer.cs">
+      <DependentUpon>PanelDriveController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelTransportController.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelTransportController.Designer.cs">
+      <DependentUpon>PanelTransportController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
