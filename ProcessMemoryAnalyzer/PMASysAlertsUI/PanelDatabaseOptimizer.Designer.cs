@@ -56,6 +56,7 @@
             this.checkBox_IsWebServer.TabIndex = 1;
             this.checkBox_IsWebServer.Text = "Is Web Server";
             this.checkBox_IsWebServer.UseVisualStyleBackColor = true;
+            this.checkBox_IsWebServer.CheckedChanged += new System.EventHandler(this.checkBox_IsWebServer_CheckedChanged);
             // 
             // textBox_Database
             // 
@@ -119,7 +120,7 @@
             this.Controls.Add(this.checkBox_IsWebServer);
             this.Controls.Add(this.label_Database);
             this.Name = "PanelDatabaseOptimizer";
-            this.Size = new System.Drawing.Size(353, 180);
+            this.Size = new System.Drawing.Size(400, 200);
             this.ResumeLayout(false);
             this.PerformLayout();
 

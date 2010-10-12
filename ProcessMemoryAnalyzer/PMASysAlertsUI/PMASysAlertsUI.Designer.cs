@@ -31,7 +31,6 @@
             System.Windows.Forms.Label label_DatabaseOptimizer;
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.startServiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stopServiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stopServiceToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.transportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +45,7 @@
             this.label_Service = new System.Windows.Forms.Label();
             this.label_PhysicalMemory = new System.Windows.Forms.Label();
             this.label_Transport = new System.Windows.Forms.Label();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             label_DatabaseOptimizer = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel_LeftMenu.SuspendLayout();
@@ -77,30 +77,24 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.startServiceToolStripMenuItem,
             this.stopServiceToolStripMenuItem,
-            this.stopServiceToolStripMenuItem1});
+            this.stopServiceToolStripMenuItem1,
+            this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // startServiceToolStripMenuItem
-            // 
-            this.startServiceToolStripMenuItem.Name = "startServiceToolStripMenuItem";
-            this.startServiceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.startServiceToolStripMenuItem.Text = "Home";
-            // 
             // stopServiceToolStripMenuItem
             // 
             this.stopServiceToolStripMenuItem.Name = "stopServiceToolStripMenuItem";
-            this.stopServiceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.stopServiceToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.stopServiceToolStripMenuItem.Text = "Start Service";
             this.stopServiceToolStripMenuItem.Click += new System.EventHandler(this.stopServiceToolStripMenuItem_Click);
             // 
             // stopServiceToolStripMenuItem1
             // 
             this.stopServiceToolStripMenuItem1.Name = "stopServiceToolStripMenuItem1";
-            this.stopServiceToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.stopServiceToolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
             this.stopServiceToolStripMenuItem1.Text = "Stop Service";
             // 
             // transportToolStripMenuItem
@@ -115,14 +109,16 @@
             // sMTPToolStripMenuItem
             // 
             this.sMTPToolStripMenuItem.Name = "sMTPToolStripMenuItem";
-            this.sMTPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sMTPToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.sMTPToolStripMenuItem.Text = "SMTP";
+            this.sMTPToolStripMenuItem.Click += new System.EventHandler(this.sMTPToolStripMenuItem_Click);
             // 
             // fTPToolStripMenuItem
             // 
             this.fTPToolStripMenuItem.Name = "fTPToolStripMenuItem";
-            this.fTPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fTPToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.fTPToolStripMenuItem.Text = "FTP";
+            this.fTPToolStripMenuItem.Click += new System.EventHandler(this.fTPToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -135,7 +131,7 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(95, 22);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // panel_MainContainer
@@ -226,6 +222,12 @@
             this.label_Transport.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label_Transport.Click += new System.EventHandler(this.label_Transport_Click);
             // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            // 
             // PMASysAlertsUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -236,6 +238,8 @@
             this.Controls.Add(this.panel_MainContainer);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximumSize = new System.Drawing.Size(613, 300);
+            this.MinimumSize = new System.Drawing.Size(613, 300);
             this.Name = "PMASysAlertsUI";
             this.Text = "System Analyzer";
             this.menuStrip1.ResumeLayout(false);
@@ -251,7 +255,6 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem startServiceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stopServiceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem transportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sMTPToolStripMenuItem;
@@ -266,6 +269,7 @@
         private System.Windows.Forms.Label label_Service;
         private System.Windows.Forms.Label label_PhysicalMemory;
         private System.Windows.Forms.Label label_Transport;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 
     }
 }

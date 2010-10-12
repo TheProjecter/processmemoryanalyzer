@@ -9,18 +9,18 @@ using System.Windows.Forms;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelPhyMemController : UserControl
+    public partial class PanelFTPSettings : UserControl
     {
-        public PanelPhyMemController()
+        public PanelFTPSettings()
         {
             InitializeComponent();
         }
 
-        private void numericUpDown_PhyMemLimit_KeyUp(object sender, KeyEventArgs e)
+        private void numericUpDown_port_KeyUp(object sender, KeyEventArgs e)
         {
-            if (numericUpDown_PhyMemLimit.Value > 100)
+            if (numericUpDown_port.Value > 65536)
             {
-                numericUpDown_PhyMemLimit.Value = 99;
+                numericUpDown_port.Value = 65535;
             }
         }
     }

@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PanelFTPSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelFTPSettings.Designer.cs">
+      <DependentUpon>PanelFTPSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="PanelHome.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -72,6 +78,12 @@
     <Compile Include="PanelDatabaseOptimizer.Designer.cs">
       <DependentUpon>PanelDatabaseOptimizer.cs</DependentUpon>
     </Compile>
+    <Compile Include="PanelSMTPSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelSMTPSettings.Designer.cs">
+      <DependentUpon>PanelSMTPSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="PMASysAlertsUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +92,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PanelFTPSettings.resx">
+      <DependentUpon>PanelFTPSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PanelHome.resx">
       <DependentUpon>PanelHome.cs</DependentUpon>
     </EmbeddedResource>
@@ -91,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PanelDatabaseOptimizer.resx">
       <DependentUpon>PanelDatabaseOptimizer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelSMTPSettings.resx">
+      <DependentUpon>PanelSMTPSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelTransportController.resx">
       <DependentUpon>PanelTransportController.cs</DependentUpon>
@@ -131,6 +149,12 @@
     <Compile Include="PanelTransportController.Designer.cs">
       <DependentUpon>PanelTransportController.cs</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PMASystemAnalyzer\PMASystemAnalyzer.csproj">
+      <Project>{0F7EC0D7-D320-465F-B8F9-400D7E7C8E63}</Project>
+      <Name>PMASystemAnalyzer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
