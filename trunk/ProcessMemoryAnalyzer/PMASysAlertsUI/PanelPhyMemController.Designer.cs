@@ -41,6 +41,7 @@
             this.numericUpDown_PhyMemLimit.Name = "numericUpDown_PhyMemLimit";
             this.numericUpDown_PhyMemLimit.Size = new System.Drawing.Size(57, 20);
             this.numericUpDown_PhyMemLimit.TabIndex = 0;
+            this.numericUpDown_PhyMemLimit.KeyUp += new System.Windows.Forms.KeyEventHandler(this.numericUpDown_PhyMemLimit_KeyUp);
             // 
             // label1
             // 
@@ -79,7 +80,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericUpDown_PhyMemLimit);
             this.Name = "PanelPhyMemController";
-            this.Size = new System.Drawing.Size(288, 150);
+            this.Size = new System.Drawing.Size(400, 200);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_PhyMemLimit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

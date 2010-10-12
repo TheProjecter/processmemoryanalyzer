@@ -14,6 +14,32 @@ namespace PMASysAlertsUI
         public PanelDatabaseOptimizer()
         {
             InitializeComponent();
+            checkBox_IsWebServer.Checked = false;
+            ToggleTextControls(false);
+        }
+
+        private void ToggleTextControls(bool enableControls)
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (control is TextBox)
+                {
+                    TextBox tb = control as TextBox;
+                    tb.Enabled = enableControls;
+                }
+            }
+        }
+
+        private void checkBox_IsWebServer_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_IsWebServer.Checked)
+            {
+                ToggleTextControls(true);
+            }
+            else
+            {
+                ToggleTextControls(false);
+            }
         }
     }
 }

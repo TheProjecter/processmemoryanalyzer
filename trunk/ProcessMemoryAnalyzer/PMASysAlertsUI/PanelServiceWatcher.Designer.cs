@@ -31,16 +31,16 @@
             this.label_Services = new System.Windows.Forms.Label();
             this.checkedListBox_Services = new System.Windows.Forms.CheckedListBox();
             this.label_GeneAlertAt = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_ServiceMemLimit = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label_ConfigureServices = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ServiceMemLimit)).BeginInit();
             this.SuspendLayout();
             // 
             // label_Services
             // 
             this.label_Services.AutoSize = true;
-            this.label_Services.Location = new System.Drawing.Point(32, 86);
+            this.label_Services.Location = new System.Drawing.Point(32, 42);
             this.label_Services.Name = "label_Services";
             this.label_Services.Size = new System.Drawing.Size(48, 13);
             this.label_Services.TabIndex = 0;
@@ -49,9 +49,9 @@
             // checkedListBox_Services
             // 
             this.checkedListBox_Services.FormattingEnabled = true;
-            this.checkedListBox_Services.Location = new System.Drawing.Point(105, 46);
+            this.checkedListBox_Services.Location = new System.Drawing.Point(35, 58);
             this.checkedListBox_Services.Name = "checkedListBox_Services";
-            this.checkedListBox_Services.Size = new System.Drawing.Size(120, 94);
+            this.checkedListBox_Services.Size = new System.Drawing.Size(216, 94);
             this.checkedListBox_Services.TabIndex = 1;
             // 
             // label_GeneAlertAt
@@ -63,17 +63,18 @@
             this.label_GeneAlertAt.TabIndex = 2;
             this.label_GeneAlertAt.Text = "Alert Point";
             // 
-            // numericUpDown1
+            // numericUpDown_ServiceMemLimit
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(105, 158);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(59, 20);
-            this.numericUpDown1.TabIndex = 3;
+            this.numericUpDown_ServiceMemLimit.Location = new System.Drawing.Point(93, 163);
+            this.numericUpDown_ServiceMemLimit.Name = "numericUpDown_ServiceMemLimit";
+            this.numericUpDown_ServiceMemLimit.Size = new System.Drawing.Size(59, 20);
+            this.numericUpDown_ServiceMemLimit.TabIndex = 3;
+            this.numericUpDown_ServiceMemLimit.KeyUp += new System.Windows.Forms.KeyEventHandler(this.numericUpDown_ServiceMemLimit_KeyUp);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(170, 160);
+            this.label1.Location = new System.Drawing.Point(158, 165);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 13);
             this.label1.TabIndex = 4;
@@ -95,13 +96,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label_ConfigureServices);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numericUpDown_ServiceMemLimit);
             this.Controls.Add(this.label_GeneAlertAt);
             this.Controls.Add(this.checkedListBox_Services);
             this.Controls.Add(this.label_Services);
             this.Name = "PanelServiceWatcher";
-            this.Size = new System.Drawing.Size(286, 221);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.Size = new System.Drawing.Size(400, 200);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ServiceMemLimit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,7 +113,7 @@
         private System.Windows.Forms.Label label_Services;
         private System.Windows.Forms.CheckedListBox checkedListBox_Services;
         private System.Windows.Forms.Label label_GeneAlertAt;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDown_ServiceMemLimit;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_ConfigureServices;
     }

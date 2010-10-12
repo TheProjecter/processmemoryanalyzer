@@ -18,6 +18,8 @@ namespace PMASysAlertsUI
         PanelServiceWatcher panelServiceWatcher = null;
         PanelDatabaseOptimizer panelDatabaseOptimizer = null;
         PanelTransportController panelTransportController = null;
+        PanelSMTPSettings panelSMTPSettings = null;
+        PanelFTPSettings panelFTPSettings = null;
         PanelHome panelHome = null;
 
         private void ShowPanelHome()
@@ -55,6 +57,18 @@ namespace PMASysAlertsUI
         {
             HideAllControls();
             panelTransportController.Show();
+        }
+
+        private void ShowPanelSMTPSettings()
+        {
+            HideAllControls();
+            panelSMTPSettings.Show();
+        }
+
+        private void ShowPanelFTPSettings()
+        {
+            HideAllControls();
+            panelFTPSettings.Show();
         }
 
 
@@ -107,6 +121,12 @@ namespace PMASysAlertsUI
             panelTransportController = new PanelTransportController();
             panel_MainContainer.Controls.Add(panelTransportController);
 
+            panelSMTPSettings = new PanelSMTPSettings();
+            panel_MainContainer.Controls.Add(panelSMTPSettings);
+
+            panelFTPSettings = new PanelFTPSettings();
+            panel_MainContainer.Controls.Add(panelFTPSettings);
+
             HideAllControls();
 
             ChangeCursorStyle();
@@ -148,6 +168,18 @@ namespace PMASysAlertsUI
         {
             ShowPanelTransportController();
         }
+
+        private void sMTPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPanelSMTPSettings();
+        }
+
+        private void fTPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPanelFTPSettings();
+        }
+
+
 
         
 

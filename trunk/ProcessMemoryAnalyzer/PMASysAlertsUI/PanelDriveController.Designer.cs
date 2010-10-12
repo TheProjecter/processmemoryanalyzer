@@ -69,6 +69,7 @@
             this.numericUpDown_DriveUse.Name = "numericUpDown_DriveUse";
             this.numericUpDown_DriveUse.Size = new System.Drawing.Size(72, 20);
             this.numericUpDown_DriveUse.TabIndex = 3;
+            this.numericUpDown_DriveUse.KeyUp += new System.Windows.Forms.KeyEventHandler(this.numericUpDown_DriveUse_KeyUp);
             // 
             // label3
             // 
@@ -100,7 +101,7 @@
             this.Controls.Add(this.checkedListBox_Drives);
             this.Controls.Add(this.label_Drives);
             this.Name = "PanelDriveController";
-            this.Size = new System.Drawing.Size(313, 204);
+            this.Size = new System.Drawing.Size(400, 200);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_DriveUse)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
