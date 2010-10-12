@@ -6,13 +6,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using PMA.Utils.ftp;
+using PMA.Utils.smtp;
 
 namespace PMASysAlertsUI
 {
     public partial class PMASysAlertsUI : Form
     {
-        
-        //Panels
+
+        #region Panels Declaration 
         PanelDriveController panelDriveController = null;
         PanelPhyMemController panelPhyMemController = null;
         PanelServiceWatcher panelServiceWatcher = null;
@@ -21,7 +23,9 @@ namespace PMASysAlertsUI
         PanelSMTPSettings panelSMTPSettings = null;
         PanelFTPSettings panelFTPSettings = null;
         PanelHome panelHome = null;
+        #endregion
 
+        #region Show Functions For Panels
         private void ShowPanelHome()
         {
             HideAllControls();
@@ -70,29 +74,10 @@ namespace PMASysAlertsUI
             HideAllControls();
             panelFTPSettings.Show();
         }
+        #endregion
 
+        #region Initilize Form
 
-        private void HideAllControls()
-        {
-            foreach (Control control in panel_MainContainer.Controls)
-            {
-                control.Hide();
-            }
-        }
-
-        private void ChangeCursorStyle()
-        {
-            foreach (Control control in tableLayoutPanel_LeftMenu.Controls)
-            {
-                if (control is Label)
-                {
-                    Label label = control as Label;
-                    label.Cursor = Cursors.Hand;
-                }
-            }
-        }
-        
-        
         public PMASysAlertsUI()
         {
             InitializeComponent();
@@ -132,13 +117,35 @@ namespace PMASysAlertsUI
             ChangeCursorStyle();
         }
 
-       
+        private void HideAllControls()
+        {
+            foreach (Control control in panel_MainContainer.Controls)
+            {
+                control.Hide();
+            }
+        }
 
+        private void ChangeCursorStyle()
+        {
+            foreach (Control control in tableLayoutPanel_LeftMenu.Controls)
+            {
+                if (control is Label)
+                {
+                    Label label = control as Label;
+                    label.Cursor = Cursors.Hand;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Events
         private void stopServiceToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
+        
         private void label_Home_Click(object sender, EventArgs e)
         {
             ShowPanelHome();
@@ -178,16 +185,8 @@ namespace PMASysAlertsUI
         {
             ShowPanelFTPSettings();
         }
+        #endregion
 
 
-
-        
-
-        
-
-        
-
-
-        
     }
 }
