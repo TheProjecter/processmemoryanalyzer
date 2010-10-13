@@ -26,7 +26,7 @@ namespace PMA.SystemAnalyzer
         /// Gets or sets the disc to analyze.
         /// </summary>
         /// <value>The disc to analyze.</value>
-        public List<string> DiscToAnalyze { get; set; }
+        public List<string> DiscsToAnalyze { get; set; }
         
         
         /// <summary>
@@ -59,7 +59,6 @@ namespace PMA.SystemAnalyzer
         /// Gets or sets the generate low disc alert On Crossing Provided Value in %.
         /// </summary>
         /// <value>The generate low disc alert at.</value>
-        
         public int GenerateLowDiscAlertAt { get; set; }
        
         
@@ -68,6 +67,14 @@ namespace PMA.SystemAnalyzer
         /// </summary>
         /// <value>The generate process physical memory alert at.</value>
         public int GenerateProcessPhysicalMemoryAlertAt { get; set; }
+
+        public bool SendMail { get; set; }
+
+        public bool PostFTP { get; set; }
+
+        public List<string> SendMailTo { get; set; }
+
+        public List<string> PostFTPMessageOn { get; set; }
 
 
 
