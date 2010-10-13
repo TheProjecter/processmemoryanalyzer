@@ -51,6 +51,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PMAUtils\PMAUtils.csproj">
+      <Project>{3AD8D720-A6E4-4D4B-B94D-4E78BE843520}</Project>
+      <Name>PMAUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProcessMemoryAnalyzer\ProcessMemoryAnalyzer.csproj">
       <Project>{B21E52A2-4719-4636-A389-65997F898C19}</Project>
       <Name>ProcessMemoryAnalyzer</Name>
