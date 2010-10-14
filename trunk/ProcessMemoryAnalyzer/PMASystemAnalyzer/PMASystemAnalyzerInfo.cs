@@ -45,6 +45,8 @@ namespace PMA.SystemAnalyzer
         /// 	<c>true</c> if [generate stopped service alert]; otherwise, <c>false</c>.
         /// </value>
         public bool GenerateStoppedServiceAlert { get; set; }
+
+        public bool TryToStartStoppedServices { get; set; }
         
         
         /// <summary>

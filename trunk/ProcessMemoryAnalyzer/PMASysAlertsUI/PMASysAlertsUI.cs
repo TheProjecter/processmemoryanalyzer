@@ -8,12 +8,15 @@ using System.Text;
 using System.Windows.Forms;
 using PMA.Utils.ftp;
 using PMA.Utils.smtp;
+using PMA.SystemAnalyzer;
 
 namespace PMASysAlertsUI
 {
     public partial class PMASysAlertsUI : Form
     {
 
+        PMAConfigManager configManager = null;
+        
         #region Panels Declaration 
         PanelDriveController panelDriveController = null;
         PanelPhyMemController panelPhyMemController = null;
@@ -82,8 +85,14 @@ namespace PMASysAlertsUI
         {
             InitializeComponent();
             InitializeAllPanels();
-
             ShowPanelHome();
+
+            configManager = PMAConfigManager.GetConfigManagerInstance;
+        }
+
+        public void UpdateConfig()
+        {
+            configManager.
         }
 
         private void InitializeAllPanels()
