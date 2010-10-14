@@ -92,7 +92,7 @@ namespace PMASysAlertsUI
 
         public void UpdateConfig()
         {
-            configManager.
+            
         }
 
         private void InitializeAllPanels()
