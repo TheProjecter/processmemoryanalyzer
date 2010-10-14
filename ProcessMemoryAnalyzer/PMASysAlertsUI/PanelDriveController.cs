@@ -11,8 +11,11 @@ using System.IO;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelDriveController : UserControl
+    public partial class PanelDriveController : UserControl, IUIConfigManager
     {
+
+        private PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
+        
         public PanelDriveController()
         {
             InitializeComponent();
@@ -41,5 +44,32 @@ namespace PMASysAlertsUI
             }
         }
 
+
+        #region IUIConfigManager Members
+
+        public void UpdateUI()
+        {
+            numericUpDown_DriveUse.Value = configManager.SystemAnalyzerInfo.LowDiscAlertAt;
+
+            for (int i = 0; i < checkedListBox_Drives.Items.Count; i++)
+            {
+                if (configManager.SystemAnalyzerInfo.ListDrivesToWatch.Contains(checkedListBox_Drives.Items[i].ToString()))
+                {
+                    checkedListBox_Drives.GetItemChecked(i);
+                }
+            }
+        }
+
+        public void UpdateConfig()
+        {
+            foreach (object item in checkedListBox_Drives.Items)
+            {
+                configManager.SystemAnalyzerInfo.ListDrivesToWatch.Add(item.ToString());
+            }
+
+            configManager.SystemAnalyzerInfo.LowDiscAlertAt = decimal.ToInt32(numericUpDown_DriveUse.Value);
+        }
+
+        #endregion
     }
 }

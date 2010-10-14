@@ -10,7 +10,7 @@ using PMA.SystemAnalyzer;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelFTPSettings : UserControl
+    public partial class PanelFTPSettings : UserControl, IUIConfigManager
     {
 
         private PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
@@ -28,7 +28,7 @@ namespace PMASysAlertsUI
             }
         }
 
-        internal void UpdateUI()
+        public void UpdateUI()
         {
             textBox_FTPServer.Text = configManager.FtpInfo.FTPServer;
             textBox_User.Text = configManager.FtpInfo.UserName ;
@@ -39,7 +39,7 @@ namespace PMASysAlertsUI
             numericUpDown_Timeout.Value = configManager.FtpInfo.TimeOut;
         }
 
-        internal void UpdateConfig()
+        public void UpdateConfig()
         {
             configManager.FtpInfo.FTPServer = textBox_FTPServer.Text;
             configManager.FtpInfo.UserName = textBox_User.Text;

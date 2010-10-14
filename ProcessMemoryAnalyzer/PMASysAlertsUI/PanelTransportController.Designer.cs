@@ -30,12 +30,12 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.richTextBox_Emails = new System.Windows.Forms.RichTextBox();
             this.label_Emails = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.richTextBox_FtpFolder = new System.Windows.Forms.RichTextBox();
             this.label_FTPFolders = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -57,12 +57,20 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.richTextBox1);
+            this.panel1.Controls.Add(this.richTextBox_Emails);
             this.panel1.Controls.Add(this.label_Emails);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(388, 80);
             this.panel1.TabIndex = 0;
+            // 
+            // richTextBox_Emails
+            // 
+            this.richTextBox_Emails.Location = new System.Drawing.Point(7, 21);
+            this.richTextBox_Emails.Name = "richTextBox_Emails";
+            this.richTextBox_Emails.Size = new System.Drawing.Size(378, 56);
+            this.richTextBox_Emails.TabIndex = 1;
+            this.richTextBox_Emails.Text = "";
             // 
             // label_Emails
             // 
@@ -75,12 +83,20 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.richTextBox2);
+            this.panel2.Controls.Add(this.richTextBox_FtpFolder);
             this.panel2.Controls.Add(this.label_FTPFolders);
             this.panel2.Location = new System.Drawing.Point(3, 89);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(388, 78);
             this.panel2.TabIndex = 1;
+            // 
+            // richTextBox_FtpFolder
+            // 
+            this.richTextBox_FtpFolder.Location = new System.Drawing.Point(10, 20);
+            this.richTextBox_FtpFolder.Name = "richTextBox_FtpFolder";
+            this.richTextBox_FtpFolder.Size = new System.Drawing.Size(375, 51);
+            this.richTextBox_FtpFolder.TabIndex = 1;
+            this.richTextBox_FtpFolder.Text = "";
             // 
             // label_FTPFolders
             // 
@@ -100,22 +116,6 @@
             this.label1.Size = new System.Drawing.Size(111, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Transport Settings";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(7, 21);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(378, 56);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Location = new System.Drawing.Point(10, 20);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(375, 51);
-            this.richTextBox2.TabIndex = 1;
-            this.richTextBox2.Text = "";
             // 
             // PanelTransportController
             // 
@@ -143,7 +143,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label_FTPFolders;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox richTextBox_Emails;
+        private System.Windows.Forms.RichTextBox richTextBox_FtpFolder;
     }
 }

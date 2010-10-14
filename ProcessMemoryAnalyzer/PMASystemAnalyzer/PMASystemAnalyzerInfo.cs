@@ -15,71 +15,97 @@ namespace PMA.SystemAnalyzer
 
         public const string PMA_INFO_FILE = "PMASystemAnalyzerInfo.xml";
 
-        /// <summary>
-        /// Gets or sets the services names.
-        /// </summary>
-        /// <value>The services names.</value>
-        public List<string> ServicesNames { get; set; }
-        
-        
-        /// <summary>
-        /// Gets or sets the disc to analyze.
-        /// </summary>
-        /// <value>The disc to analyze.</value>
-        public List<string> DiscsToAnalyze { get; set; }
-        
-        
-        /// <summary>
-        /// Gets or sets a value indicating whether [generate low disc alert].
-        /// </summary>
-        /// <value>
-        /// 	<c>true</c> if [generate low disc alert]; otherwise, <c>false</c>.
-        /// </value>
-        public bool GenerateLowDiscAlert { get; set; }
-        
-        
-        /// <summary>
-        /// Gets or sets a value indicating whether [generate stopped service alert].
-        /// </summary>
-        /// <value>
-        /// 	<c>true</c> if [generate stopped service alert]; otherwise, <c>false</c>.
-        /// </value>
-        public bool GenerateStoppedServiceAlert { get; set; }
+        private List<string> _listDrivesToWatch = null;
 
-        public bool TryToStartStoppedServices { get; set; }
+        //-------------------------------------------------------------------------------------------------
+
+        #region Home Configs
         
+        public bool SetDiscWatch { get; set; }
+
+        public bool SetPhysicalMemWatch { get; set; }
+
+        public bool SetServiceWatcher { get; set; }
+
+        public bool SetOptimizeDB { get; set; }
         
-        /// <summary>
-        /// Gets or sets a value indicating whether [generate process physical mem alerts].
-        /// </summary>
-        /// <value>
-        /// 	<c>true</c> if [generate process physical mem alerts]; otherwise, <c>false</c>.
-        /// </value>
-        public bool GenerateProcessPhysicalMemAlerts { get; set; }
+        public bool SetSendMail { get; set; }
 
-        /// <summary>
-        /// Gets or sets the generate low disc alert On Crossing Provided Value in %.
-        /// </summary>
-        /// <value>The generate low disc alert at.</value>
-        public int GenerateLowDiscAlertAt { get; set; }
-       
+        public bool SetPostFTP { get; set; }
+
+        #endregion 
+
+        //-------------------------------------------------------------------------------------------------
         
-        /// <summary>
-        /// Gets or sets the generate process physical memory alert On Crossing Provided Value in %.
-        /// </summary>
-        /// <value>The generate process physical memory alert at.</value>
-        public int GenerateProcessPhysicalMemoryAlertAt { get; set; }
+        #region DatabaseOptimizer
+        
+        public bool IsWebServer { get; set; }
 
-        public bool SendMail { get; set; }
+        public string Database { get; set; }
 
-        public bool PostFTP { get; set; }
+        public string DBUser { get; set; }
 
-        public List<string> SendMailTo { get; set; }
+        public string DBPassword { get; set; }
+        
+        #endregion 
 
-        public List<string> PostFTPMessageOn { get; set; }
+        //-------------------------------------------------------------------------------------------------
+        
+        #region DriveController
+        
+        public List<string> ListDrivesToWatch 
+        {
+            get
+            {
+                if (ListDrivesToWatch == null)
+                {
+                    _listDrivesToWatch = new List<string>();
+                }
+                return _listDrivesToWatch;
+            }
+            set
+            {
+                _listDrivesToWatch = value;
+            }
+            
+        }
+        public int LowDiscAlertAt { get; set; }
+        
+        #endregion 
+
+        //-------------------------------------------------------------------------------------------------
+        
+        #region PhysicalMemory
+
+        public int SystemPhysicalMemoryAlertAt { get; set; }
+        
+        #endregion 
+
+        //-------------------------------------------------------------------------------------------------
+        
+        #region Service Watcher
+
+        public List<string> ListServicesNames { get; set; }
+
+        public bool SetStartStoppedServicesAlerts { get; set; }
+
+        public int ProcessPhysicalMemoryAlertAt { get; set; }
+
+        #endregion 
+
+        //-------------------------------------------------------------------------------------------------
 
 
+        #region Transport Server
+        public List<string> ListSendMailTo { get; set; }
 
+        public List<string> ListPostFTPMessageOn { get; set; }
+        #endregion 
+
+        //--------------------------------------------------------------------------------------------------
+
+
+        #region Serializer & Deserializer
         /// <summary>
         /// Serializes this instance.
         /// </summary>
@@ -102,6 +128,7 @@ namespace PMA.SystemAnalyzer
             XmlSerializer x = new XmlSerializer(typeof(PMASystemAnalyzerInfo));
             return (PMASystemAnalyzerInfo)x.Deserialize(new StringReader(strObject));
         }
+        #endregion 
 
     }
 

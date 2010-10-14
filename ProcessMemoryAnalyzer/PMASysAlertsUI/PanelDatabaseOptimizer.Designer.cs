@@ -32,9 +32,9 @@
             this.checkBox_IsWebServer = new System.Windows.Forms.CheckBox();
             this.textBox_Database = new System.Windows.Forms.TextBox();
             this.label_User = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox_DBUser = new System.Windows.Forms.TextBox();
             this.label_Password = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox_DBPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -74,12 +74,12 @@
             this.label_User.TabIndex = 3;
             this.label_User.Text = "User";
             // 
-            // textBox2
+            // textBox_DBUser
             // 
-            this.textBox2.Location = new System.Drawing.Point(95, 109);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(174, 20);
-            this.textBox2.TabIndex = 4;
+            this.textBox_DBUser.Location = new System.Drawing.Point(95, 109);
+            this.textBox_DBUser.Name = "textBox_DBUser";
+            this.textBox_DBUser.Size = new System.Drawing.Size(174, 20);
+            this.textBox_DBUser.TabIndex = 4;
             // 
             // label_Password
             // 
@@ -90,12 +90,12 @@
             this.label_Password.TabIndex = 5;
             this.label_Password.Text = "Password";
             // 
-            // textBox3
+            // textBox_DBPassword
             // 
-            this.textBox3.Location = new System.Drawing.Point(95, 135);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(174, 20);
-            this.textBox3.TabIndex = 6;
+            this.textBox_DBPassword.Location = new System.Drawing.Point(95, 135);
+            this.textBox_DBPassword.Name = "textBox_DBPassword";
+            this.textBox_DBPassword.Size = new System.Drawing.Size(174, 20);
+            this.textBox_DBPassword.TabIndex = 6;
             // 
             // label1
             // 
@@ -112,9 +112,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox_DBPassword);
             this.Controls.Add(this.label_Password);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox_DBUser);
             this.Controls.Add(this.label_User);
             this.Controls.Add(this.textBox_Database);
             this.Controls.Add(this.checkBox_IsWebServer);
@@ -132,9 +132,9 @@
         private System.Windows.Forms.CheckBox checkBox_IsWebServer;
         private System.Windows.Forms.TextBox textBox_Database;
         private System.Windows.Forms.Label label_User;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox_DBUser;
         private System.Windows.Forms.Label label_Password;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox_DBPassword;
         private System.Windows.Forms.Label label1;
     }
 }
