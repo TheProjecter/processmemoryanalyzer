@@ -6,11 +6,14 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using PMA.SystemAnalyzer;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelDatabaseOptimizer : UserControl
+    public partial class PanelDatabaseOptimizer : UserControl, IUIConfigManager
     {
+        private PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
+        
         public PanelDatabaseOptimizer()
         {
             InitializeComponent();
@@ -41,5 +44,26 @@ namespace PMASysAlertsUI
                 ToggleTextControls(false);
             }
         }
+
+        #region IUIConfigManager Members
+
+        public void UpdateUI()
+        {
+            checkBox_IsWebServer.Checked = configManager.SystemAnalyzerInfo.IsWebServer;
+            textBox_Database.Text = configManager.SystemAnalyzerInfo.Database;
+            textBox_DBUser.Text = configManager.SystemAnalyzerInfo.DBUser;
+            textBox_DBPassword.Text = configManager.SystemAnalyzerInfo.DBPassword;
+        }
+
+        public void UpdateConfig()
+        {
+            configManager.SystemAnalyzerInfo.IsWebServer = checkBox_IsWebServer.Checked;
+            configManager.SystemAnalyzerInfo.Database = textBox_Database.Text;
+            configManager.SystemAnalyzerInfo.DBUser = textBox_DBUser.Text;
+            configManager.SystemAnalyzerInfo.DBPassword = textBox_DBPassword.Text;
+
+        }
+
+        #endregion
     }
 }

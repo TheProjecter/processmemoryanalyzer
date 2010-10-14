@@ -33,7 +33,6 @@
             this.checkBox_ServiceWatch = new System.Windows.Forms.CheckBox();
             this.checkBox_MemWatch = new System.Windows.Forms.CheckBox();
             this.checkBox_DBOptimizer = new System.Windows.Forms.CheckBox();
-            this.checkBox_PhyMemWatch = new System.Windows.Forms.CheckBox();
             this.panel_Transport = new System.Windows.Forms.Panel();
             this.checkBox_UseSMTP = new System.Windows.Forms.CheckBox();
             this.checkBox_UseFTP = new System.Windows.Forms.CheckBox();
@@ -51,7 +50,6 @@
             this.tableLayoutPanel1.Controls.Add(this.checkBox_ServiceWatch, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.checkBox_MemWatch, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.checkBox_DBOptimizer, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox_PhyMemWatch, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.panel_Transport, 1, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(21, 39);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -102,16 +100,6 @@
             this.checkBox_DBOptimizer.Text = "Database Optimizer";
             this.checkBox_DBOptimizer.UseVisualStyleBackColor = true;
             // 
-            // checkBox_PhyMemWatch
-            // 
-            this.checkBox_PhyMemWatch.AutoSize = true;
-            this.checkBox_PhyMemWatch.Location = new System.Drawing.Point(3, 131);
-            this.checkBox_PhyMemWatch.Name = "checkBox_PhyMemWatch";
-            this.checkBox_PhyMemWatch.Size = new System.Drawing.Size(140, 17);
-            this.checkBox_PhyMemWatch.TabIndex = 4;
-            this.checkBox_PhyMemWatch.Text = "Physical Memory Watch";
-            this.checkBox_PhyMemWatch.UseVisualStyleBackColor = true;
-            // 
             // panel_Transport
             // 
             this.panel_Transport.Controls.Add(this.checkBox_UseSMTP);
@@ -124,7 +112,7 @@
             // checkBox_UseSMTP
             // 
             this.checkBox_UseSMTP.AutoSize = true;
-            this.checkBox_UseSMTP.Location = new System.Drawing.Point(4, 26);
+            this.checkBox_UseSMTP.Location = new System.Drawing.Point(0, 26);
             this.checkBox_UseSMTP.Name = "checkBox_UseSMTP";
             this.checkBox_UseSMTP.Size = new System.Drawing.Size(126, 17);
             this.checkBox_UseSMTP.TabIndex = 1;
@@ -134,7 +122,7 @@
             // checkBox_UseFTP
             // 
             this.checkBox_UseFTP.AutoSize = true;
-            this.checkBox_UseFTP.Location = new System.Drawing.Point(4, 3);
+            this.checkBox_UseFTP.Location = new System.Drawing.Point(0, 3);
             this.checkBox_UseFTP.Name = "checkBox_UseFTP";
             this.checkBox_UseFTP.Size = new System.Drawing.Size(116, 17);
             this.checkBox_UseFTP.TabIndex = 0;
@@ -175,7 +163,6 @@
         private System.Windows.Forms.CheckBox checkBox_ServiceWatch;
         private System.Windows.Forms.CheckBox checkBox_MemWatch;
         private System.Windows.Forms.CheckBox checkBox_DBOptimizer;
-        private System.Windows.Forms.CheckBox checkBox_PhyMemWatch;
         private System.Windows.Forms.Panel panel_Transport;
         private System.Windows.Forms.CheckBox checkBox_UseSMTP;
         private System.Windows.Forms.CheckBox checkBox_UseFTP;

@@ -10,7 +10,7 @@ using PMA.SystemAnalyzer;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelSMTPSettings : UserControl
+    public partial class PanelSMTPSettings : UserControl, IUIConfigManager
     {
 
         private PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
@@ -28,7 +28,7 @@ namespace PMASysAlertsUI
             }
         }
 
-        internal void UpdateUI()
+        public void UpdateUI()
         {
             textBox_SMTPServer.Text = configManager.SmtpInfo.SmtpServer;
             textBox_UserName.Text = configManager.SmtpInfo.UserName;
@@ -38,7 +38,7 @@ namespace PMASysAlertsUI
             checkBox_EnableSSL.Checked = configManager.SmtpInfo.SSL;
         }
 
-        internal void UpdateConfig()
+        public void UpdateConfig()
         {
             configManager.SmtpInfo.SmtpServer = textBox_SMTPServer.Text;
             configManager.SmtpInfo.UserName = textBox_UserName.Text;

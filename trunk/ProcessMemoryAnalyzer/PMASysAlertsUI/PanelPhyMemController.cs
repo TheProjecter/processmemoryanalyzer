@@ -6,11 +6,15 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using PMA.SystemAnalyzer;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelPhyMemController : UserControl
+    public partial class PanelPhyMemController : UserControl, IUIConfigManager
     {
+
+        private PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
+        
         public PanelPhyMemController()
         {
             InitializeComponent();
@@ -23,5 +27,19 @@ namespace PMASysAlertsUI
                 numericUpDown_PhyMemLimit.Value = 99;
             }
         }
+
+        #region IUIConfigManager Members
+
+        public void UpdateUI()
+        {
+            numericUpDown_PhyMemLimit.Value = configManager.SystemAnalyzerInfo.SystemPhysicalMemoryAlertAt;
+        }
+
+        public void UpdateConfig()
+        {
+            configManager.SystemAnalyzerInfo.SystemPhysicalMemoryAlertAt = decimal.ToInt32(numericUpDown_PhyMemLimit.Value);
+        }
+
+        #endregion
     }
 }

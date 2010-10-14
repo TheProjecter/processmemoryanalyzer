@@ -10,8 +10,11 @@ using PMA.SystemAnalyzer;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelServiceWatcher : UserControl
+    public partial class PanelServiceWatcher : UserControl, IUIConfigManager
     {
+
+        private PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="PanelServiceWatcher"/> class.
         /// </summary>
@@ -38,7 +41,36 @@ namespace PMASysAlertsUI
             }
         }
 
-        
 
+
+
+        #region IUIConfigManager Members
+
+        public void UpdateUI()
+        {
+            for (int i = 0; i < checkedListBox_Services.Items.Count; i++)
+            {
+                if (configManager.SystemAnalyzerInfo.ListServicesNames.Contains(checkedListBox_Services.Items[i].ToString()))
+                {
+                    checkedListBox_Services.GetItemChecked(i);
+                }
+            }
+
+            checkBox_StoppedServiceAlert.Checked = configManager.SystemAnalyzerInfo.SetStartStoppedServicesAlerts;
+            numericUpDown_ServiceMemLimit.Value = configManager.SystemAnalyzerInfo.ProcessPhysicalMemoryAlertAt;
+        }
+
+        public void UpdateConfig()
+        {
+            foreach (object item in checkedListBox_Services.Items)
+            {
+                configManager.SystemAnalyzerInfo.ListServicesNames.Add(item.ToString());
+            }
+
+            configManager.SystemAnalyzerInfo.SetStartStoppedServicesAlerts = checkBox_StoppedServiceAlert.Checked;
+            configManager.SystemAnalyzerInfo.ProcessPhysicalMemoryAlertAt = decimal.ToInt32(numericUpDown_ServiceMemLimit.Value) ;
+        }
+
+        #endregion
     }
 }
