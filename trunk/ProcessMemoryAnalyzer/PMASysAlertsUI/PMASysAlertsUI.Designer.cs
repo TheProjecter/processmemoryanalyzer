@@ -33,6 +33,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stopServiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stopServiceToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sMTPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fTPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +46,6 @@
             this.label_Service = new System.Windows.Forms.Label();
             this.label_PhysicalMemory = new System.Windows.Forms.Label();
             this.label_Transport = new System.Windows.Forms.Label();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             label_DatabaseOptimizer = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel_LeftMenu.SuspendLayout();
@@ -87,15 +87,22 @@
             // stopServiceToolStripMenuItem
             // 
             this.stopServiceToolStripMenuItem.Name = "stopServiceToolStripMenuItem";
-            this.stopServiceToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.stopServiceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.stopServiceToolStripMenuItem.Text = "Start Service";
             this.stopServiceToolStripMenuItem.Click += new System.EventHandler(this.stopServiceToolStripMenuItem_Click);
             // 
             // stopServiceToolStripMenuItem1
             // 
             this.stopServiceToolStripMenuItem1.Name = "stopServiceToolStripMenuItem1";
-            this.stopServiceToolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
+            this.stopServiceToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.stopServiceToolStripMenuItem1.Text = "Stop Service";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // transportToolStripMenuItem
             // 
@@ -221,12 +228,6 @@
             this.label_Transport.Text = "Transports";
             this.label_Transport.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label_Transport.Click += new System.EventHandler(this.label_Transport_Click);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
             // 
             // PMASysAlertsUI
             // 
