@@ -6,14 +6,15 @@ using PMA.Utils.ftp;
 using PMA.Utils.smtp;
 using System.IO;
 
+
 namespace PMA.SystemAnalyzer
 {
     public class PMAConfigManager
     {
 
-        private FTPInfo ftpInfo = null;
-        private SmtpInfo smtpInfo = null;
-        private PMASystemAnalyzerInfo systemAnalyzerInfo = null;
+        public FTPInfo FtpInfo { get; set; }
+        public SmtpInfo SmtpInfo { get; set; }
+        public PMASystemAnalyzerInfo SystemAnalyzerInfo { get; set; }
 
         private static string CONFIG_DIR = "Config";
 
@@ -34,48 +35,48 @@ namespace PMA.SystemAnalyzer
 
         private void InitilizeFTPObject()
         {
-            if (ftpInfo == null)
+            if (FtpInfo == null)
             {
                 if (File.Exists(Path.Combine(CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE)))
                 {
-                    ftpInfo = FTPInfo.Deserialize(Path.Combine(CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE));
+                    FtpInfo = FTPInfo.Deserialize(Path.Combine(CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE));
                 }
-                else ftpInfo = new FTPInfo();
+                else FtpInfo = new FTPInfo();
             }
         }
 
         private void InitilizeSMTPObject()
         {
-            if (smtpInfo == null)
+            if (SmtpInfo == null)
             {
                 if (File.Exists(Path.Combine(CurrentAppConfigDir, SmtpInfo.SMTP_INFO_FILE)))
                 {
-                    smtpInfo = SmtpInfo.Deserialize(Path.Combine(CurrentAppConfigDir, SmtpInfo.SMTP_INFO_FILE));
+                    SmtpInfo = SmtpInfo.Deserialize(Path.Combine(CurrentAppConfigDir, SmtpInfo.SMTP_INFO_FILE));
                 }
-                else smtpInfo = new SmtpInfo();
+                else SmtpInfo = new SmtpInfo();
             }
         }
 
         private void InitilizeSystemAnalyzerObject()
         {
-            if (systemAnalyzerInfo == null)
+            if (SystemAnalyzerInfo == null)
             {
                 if (File.Exists(Path.Combine(CurrentAppConfigDir, PMASystemAnalyzerInfo.PMA_INFO_FILE)))
                 {
-                    systemAnalyzerInfo = PMASystemAnalyzerInfo.Deserialize(Path.Combine(CurrentAppConfigDir, PMASystemAnalyzerInfo.PMA_INFO_FILE));
+                    SystemAnalyzerInfo = PMASystemAnalyzerInfo.Deserialize(Path.Combine(CurrentAppConfigDir, PMASystemAnalyzerInfo.PMA_INFO_FILE));
                 }
-                else systemAnalyzerInfo = new PMASystemAnalyzerInfo();
+                else SystemAnalyzerInfo = new PMASystemAnalyzerInfo();
             }
         }
 
         
         public void SaveConfiguration()
         {
-            File.WriteAllText(Path.Combine(CurrentAppConfigDir,FTPInfo.FTP_INFO_FILE), ftpInfo.Serialize());
+            File.WriteAllText(Path.Combine(CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE), FtpInfo.Serialize());
 
-            File.WriteAllText(Path.Combine(CurrentAppConfigDir, SmtpInfo.SMTP_INFO_FILE), smtpInfo.Serialize());
+            File.WriteAllText(Path.Combine(CurrentAppConfigDir, SmtpInfo.SMTP_INFO_FILE), SmtpInfo.Serialize());
 
-            File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMASystemAnalyzerInfo.PMA_INFO_FILE), systemAnalyzerInfo.Serialize());
+            File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMASystemAnalyzerInfo.PMA_INFO_FILE), SystemAnalyzerInfo.Serialize());
         }
 
         

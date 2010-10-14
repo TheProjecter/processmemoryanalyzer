@@ -37,10 +37,11 @@
             this.textBox_UserName = new System.Windows.Forms.TextBox();
             this.textBox_Password = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox_PollingTimeout = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.numericUpDown_port = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_PollingTimeout = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_port)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_PollingTimeout)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox_SMTPServer
@@ -120,13 +121,6 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "Polling Timeout";
             // 
-            // textBox_PollingTimeout
-            // 
-            this.textBox_PollingTimeout.Location = new System.Drawing.Point(115, 91);
-            this.textBox_PollingTimeout.Name = "textBox_PollingTimeout";
-            this.textBox_PollingTimeout.Size = new System.Drawing.Size(57, 20);
-            this.textBox_PollingTimeout.TabIndex = 10;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -145,13 +139,25 @@
             this.numericUpDown_port.TabIndex = 12;
             this.numericUpDown_port.KeyUp += new System.Windows.Forms.KeyEventHandler(this.numericUpDown_port_KeyUp);
             // 
+            // numericUpDown_PollingTimeout
+            // 
+            this.numericUpDown_PollingTimeout.Location = new System.Drawing.Point(115, 92);
+            this.numericUpDown_PollingTimeout.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown_PollingTimeout.Name = "numericUpDown_PollingTimeout";
+            this.numericUpDown_PollingTimeout.Size = new System.Drawing.Size(97, 20);
+            this.numericUpDown_PollingTimeout.TabIndex = 13;
+            // 
             // PanelSMTPSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.numericUpDown_PollingTimeout);
             this.Controls.Add(this.numericUpDown_port);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox_PollingTimeout);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox_Password);
             this.Controls.Add(this.textBox_UserName);
@@ -164,6 +170,7 @@
             this.Name = "PanelSMTPSettings";
             this.Size = new System.Drawing.Size(400, 200);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_port)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_PollingTimeout)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,8 +187,8 @@
         private System.Windows.Forms.TextBox textBox_UserName;
         private System.Windows.Forms.TextBox textBox_Password;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox_PollingTimeout;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericUpDown_port;
+        private System.Windows.Forms.NumericUpDown numericUpDown_PollingTimeout;
     }
 }
