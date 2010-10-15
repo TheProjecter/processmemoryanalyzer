@@ -61,9 +61,17 @@ namespace PMASysAlertsUI
             configManager.SystemAnalyzerInfo.Database = textBox_Database.Text;
             configManager.SystemAnalyzerInfo.DBUser = textBox_DBUser.Text;
             configManager.SystemAnalyzerInfo.DBPassword = textBox_DBPassword.Text;
-
         }
 
+        public void CauseValidation()
+        {
+            throw new NotImplementedException();
+        }
+
+        
+
         #endregion
+
+        
     }
 }

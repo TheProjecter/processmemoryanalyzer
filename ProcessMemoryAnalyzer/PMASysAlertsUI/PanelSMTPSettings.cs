@@ -50,6 +50,11 @@ namespace PMASysAlertsUI
             configManager.SmtpInfo.ProtectPassword = true;
         }
 
+        public void CauseValidation()
+        {
+            throw new NotImplementedException();
+        }
+
       
     }
 }

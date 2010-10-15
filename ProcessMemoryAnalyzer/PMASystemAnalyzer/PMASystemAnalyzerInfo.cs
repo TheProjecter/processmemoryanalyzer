@@ -15,7 +15,9 @@ namespace PMA.SystemAnalyzer
 
         public const string PMA_INFO_FILE = "PMASystemAnalyzerInfo.xml";
 
-        private List<string> _listDrivesToWatch = null;
+        private HashSet<string> _listDrivesToWatch = null;
+
+        private HashSet<string> _listServiceWatcher = null;
 
         //-------------------------------------------------------------------------------------------------
 
@@ -53,13 +55,13 @@ namespace PMA.SystemAnalyzer
         
         #region DriveController
         
-        public List<string> ListDrivesToWatch 
+        public HashSet<string> ListDrivesToWatch 
         {
             get
             {
-                if (ListDrivesToWatch == null)
+                if (_listDrivesToWatch == null)
                 {
-                    _listDrivesToWatch = new List<string>();
+                    _listDrivesToWatch = new HashSet<string>();
                 }
                 return _listDrivesToWatch;
             }
@@ -85,7 +87,22 @@ namespace PMA.SystemAnalyzer
         
         #region Service Watcher
 
-        public List<string> ListServicesNames { get; set; }
+        public HashSet<string> ListServicesNames 
+        {
+            get
+            {
+                if (_listServiceWatcher == null)
+                {
+                    _listServiceWatcher = new HashSet<string>();
+                }
+                return _listServiceWatcher;
+            }
+            set
+            {
+                _listServiceWatcher = value;
+            }
+        
+        }
 
         public bool SetStartStoppedServicesAlerts { get; set; }
 

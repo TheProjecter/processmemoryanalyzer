@@ -42,6 +42,11 @@ namespace PMASysAlertsUI
             configManager.SystemAnalyzerInfo.SetSendMail = checkBox_UseSMTP.Checked;
         }
 
+        public void CauseValidation()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

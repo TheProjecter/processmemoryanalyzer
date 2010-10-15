@@ -50,5 +50,10 @@ namespace PMASysAlertsUI
             configManager.FtpInfo.FTPServerFolder = textBox_DefaultFolder.Text;
             configManager.FtpInfo.TimeOut = decimal.ToInt32(numericUpDown_Timeout.Value);
         }
+
+        public void CauseValidation()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

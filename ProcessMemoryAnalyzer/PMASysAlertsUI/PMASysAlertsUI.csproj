@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ENUMPanel.cs" />
     <Compile Include="IUIConfigManager.cs" />
     <Compile Include="PanelFTPSettings.cs">
       <SubType>UserControl</SubType>
@@ -61,11 +62,11 @@
     <Compile Include="PanelHome.Designer.cs">
       <DependentUpon>PanelHome.cs</DependentUpon>
     </Compile>
-    <Compile Include="PanelPhyMemController.cs">
+    <Compile Include="PanelPhyMemWatcher.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PanelPhyMemController.Designer.cs">
-      <DependentUpon>PanelPhyMemController.cs</DependentUpon>
+    <Compile Include="PanelPhyMemWatcher.Designer.cs">
+      <DependentUpon>PanelPhyMemWatcher.cs</DependentUpon>
     </Compile>
     <Compile Include="PanelServiceWatcher.cs">
       <SubType>UserControl</SubType>
@@ -99,8 +100,8 @@
     <EmbeddedResource Include="PanelHome.resx">
       <DependentUpon>PanelHome.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PanelPhyMemController.resx">
-      <DependentUpon>PanelPhyMemController.cs</DependentUpon>
+    <EmbeddedResource Include="PanelPhyMemWatcher.resx">
+      <DependentUpon>PanelPhyMemWatcher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelServiceWatcher.resx">
       <DependentUpon>PanelServiceWatcher.cs</DependentUpon>

@@ -62,13 +62,21 @@ namespace PMASysAlertsUI
 
         public void UpdateConfig()
         {
-            foreach (object item in checkedListBox_Services.Items)
+            foreach (object item in checkedListBox_Services.CheckedItems)
             {
-                configManager.SystemAnalyzerInfo.ListServicesNames.Add(item.ToString());
+                if (!configManager.SystemAnalyzerInfo.ListServicesNames.Contains(item.ToString()))
+                {
+                    configManager.SystemAnalyzerInfo.ListServicesNames.Add(item.ToString());
+                }
             }
 
             configManager.SystemAnalyzerInfo.SetStartStoppedServicesAlerts = checkBox_StoppedServiceAlert.Checked;
             configManager.SystemAnalyzerInfo.ProcessPhysicalMemoryAlertAt = decimal.ToInt32(numericUpDown_ServiceMemLimit.Value) ;
+        }
+
+        public void CauseValidation()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

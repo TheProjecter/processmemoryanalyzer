@@ -59,6 +59,11 @@ namespace PMASysAlertsUI
             }
         }
 
+        public void CauseValidation()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }
