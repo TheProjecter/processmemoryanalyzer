@@ -62,12 +62,20 @@ namespace PMASysAlertsUI
 
         public void UpdateConfig()
         {
-            foreach (object item in checkedListBox_Drives.Items)
+            foreach (object item in checkedListBox_Drives.CheckedItems)
             {
-                configManager.SystemAnalyzerInfo.ListDrivesToWatch.Add(item.ToString());
+                if (!configManager.SystemAnalyzerInfo.ListDrivesToWatch.Contains(item.ToString()))
+                {
+                    configManager.SystemAnalyzerInfo.ListDrivesToWatch.Add(item.ToString());
+                }
             }
 
             configManager.SystemAnalyzerInfo.LowDiscAlertAt = decimal.ToInt32(numericUpDown_DriveUse.Value);
+        }
+
+        public void CauseValidation()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

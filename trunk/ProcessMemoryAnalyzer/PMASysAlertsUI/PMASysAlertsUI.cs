@@ -12,14 +12,19 @@ using PMA.SystemAnalyzer;
 
 namespace PMASysAlertsUI
 {
+    
+        
     public partial class PMASysAlertsUI : Form
     {
 
+               
+        ENUMPanel PANEL;
+        
         PMAConfigManager configManager = null;
         
         #region Panels Declaration 
         PanelDriveController panelDriveController = null;
-        PanelPhyMemController panelPhyMemController = null;
+        PanelPhyMemWatcher panelPhyMemController = null;
         PanelServiceWatcher panelServiceWatcher = null;
         PanelDatabaseOptimizer panelDatabaseOptimizer = null;
         PanelTransportController panelTransportController = null;
@@ -38,42 +43,56 @@ namespace PMASysAlertsUI
 
         private void ShowPanelDriveController()
         {
+            PANEL = ENUMPanel.PANEL_DRIVE_CONTROLLER;
+            panelDriveController.UpdateConfig();
             HideAllControls();
             panelDriveController.Show();
         }
 
-        private void ShowPanelPhyMemController()
+        private void ShowPanelPhyMemWatcher()
         {
+            PANEL = ENUMPanel.PANEL_PHY_MEM_WATCHER;
+            panelPhyMemController.UpdateConfig();
             HideAllControls();
             panelPhyMemController.Show();
         }
 
         private void ShowPanelServiceWatcher()
         {
+            PANEL = ENUMPanel.PANEL_SERVICE_WATCHER;
+            panelServiceWatcher.UpdateConfig();
             HideAllControls();
             panelServiceWatcher.Show();
         }
 
         private void ShowPanelDatabaseOptimizer()
         {
+            PANEL = ENUMPanel.PANEL_DATABASE_OPTIMIZER;
+            panelDatabaseOptimizer.Show();
             HideAllControls();
             panelDatabaseOptimizer.Show();
         }
 
         private void ShowPanelTransportController()
         {
+            PANEL = ENUMPanel.PANEL_TRANSPORT_CONTROLLER;
+            panelTransportController.UpdateConfig();
             HideAllControls();
             panelTransportController.Show();
         }
 
         private void ShowPanelSMTPSettings()
         {
+            PANEL = ENUMPanel.PANEL_SMTP_SETTINGS;
+            panelSMTPSettings.Show();
             HideAllControls();
             panelSMTPSettings.Show();
         }
 
         private void ShowPanelFTPSettings()
         {
+            PANEL = ENUMPanel.PANEL_FTP_SETTINGS;
+            panelFTPSettings.UpdateConfig();
             HideAllControls();
             panelFTPSettings.Show();
         }
@@ -90,10 +109,7 @@ namespace PMASysAlertsUI
             configManager = PMAConfigManager.GetConfigManagerInstance;
         }
 
-        public void UpdateConfig()
-        {
-            
-        }
+        
 
         private void InitializeAllPanels()
         {
@@ -103,7 +119,7 @@ namespace PMASysAlertsUI
             panelDriveController = new PanelDriveController();
             panel_MainContainer.Controls.Add(panelDriveController);
 
-            panelPhyMemController = new PanelPhyMemController();
+            panelPhyMemController = new PanelPhyMemWatcher();
             panel_MainContainer.Controls.Add(panelPhyMemController);
 
             panelServiceWatcher = new PanelServiceWatcher();
@@ -124,8 +140,44 @@ namespace PMASysAlertsUI
             HideAllControls();
 
             ChangeCursorStyle();
+
+            
         }
 
+        public void CauseValidation()
+        {
+            
+            switch (PANEL)
+            {
+                case ENUMPanel.PANEL_DATABASE_OPTIMIZER:
+                    //panelDatabaseOptimizer.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_DRIVE_CONTROLLER:
+                    //panelDriveController.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_FTP_SETTINGS:
+                    //panelFTPSettings.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_HOME:
+                    //panelHome.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_PHY_MEM_WATCHER:
+                    //panelPhyMemController.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_SERVICE_WATCHER:
+                    //panelServiceWatcher.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_SMTP_SETTINGS:
+                    //panelSMTPSettings.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_TRANSPORT_CONTROLLER:
+                    //panelTransportController.CauseValidation();
+                    break;
+            }
+            
+        }
+
+       
         private void HideAllControls()
         {
             foreach (Control control in panel_MainContainer.Controls)
@@ -172,7 +224,7 @@ namespace PMASysAlertsUI
 
         private void label_PhysicalMemory_Click(object sender, EventArgs e)
         {
-            ShowPanelPhyMemController();
+            ShowPanelPhyMemWatcher();
         }
 
         private void label_DatabaseOptimizer_Click(object sender, EventArgs e)
