@@ -74,9 +74,9 @@ namespace PMASysAlertsUI
             configManager.SystemAnalyzerInfo.ProcessPhysicalMemoryAlertAt = decimal.ToInt32(numericUpDown_ServiceMemLimit.Value) ;
         }
 
-        public void CauseValidation()
+        public bool CauseValidation()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         #endregion

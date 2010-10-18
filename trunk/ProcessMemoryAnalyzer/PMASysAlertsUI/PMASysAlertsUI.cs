@@ -33,66 +33,197 @@ namespace PMASysAlertsUI
         PanelHome panelHome = null;
         #endregion
 
+
+        private bool CauseValidation(ENUMPanel enumPanel)
+        {
+            bool result = false;
+            switch (enumPanel)
+            {
+                case ENUMPanel.PANEL_DATABASE_OPTIMIZER:
+                    result = panelDatabaseOptimizer.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_DRIVE_CONTROLLER:
+                    result = panelDriveController.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_FTP_SETTINGS:
+                    result = panelFTPSettings.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_HOME:
+                    result = panelHome.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_PHY_MEM_WATCHER:
+                    result = panelPhyMemController.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_SERVICE_WATCHER:
+                    result = panelServiceWatcher.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_SMTP_SETTINGS:
+                    result = panelSMTPSettings.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_TRANSPORT_CONTROLLER:
+                    result = panelTransportController.CauseValidation();
+                    break;
+                default:
+                    result = false;
+                    break;
+            }
+            return result;
+        }
+
+        
+        private void UpdateConfig(ENUMPanel enumPanel)
+        {
+            switch (enumPanel)
+            {
+                case ENUMPanel.PANEL_DATABASE_OPTIMIZER:
+                    panelDatabaseOptimizer.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_DRIVE_CONTROLLER:
+                    panelDriveController.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_FTP_SETTINGS:
+                    panelFTPSettings.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_HOME:
+                    panelHome.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_PHY_MEM_WATCHER:
+                    panelPhyMemController.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_SERVICE_WATCHER:
+                    panelServiceWatcher.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_SMTP_SETTINGS:
+                    panelSMTPSettings.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_TRANSPORT_CONTROLLER:
+                    panelTransportController.UpdateConfig();
+                    break;
+            }
+
+        }
+
+
+
         #region Show Functions For Panels
         private void ShowPanelHome()
         {
+            if (CauseValidation(PANEL))
+            {
+                UpdateConfig(PANEL);
+            }
+            else
+            {
+                MessageBox.Show("Please check the settings");
+            }
+            PANEL = ENUMPanel.PANEL_HOME;
             HideAllControls();
             panelHome.Show();
         }
 
+       
 
         private void ShowPanelDriveController()
         {
+            if (CauseValidation(PANEL))
+            {
+                UpdateConfig(PANEL);
+            }
+            else
+            {
+                MessageBox.Show("Please check the settings");
+            }
             PANEL = ENUMPanel.PANEL_DRIVE_CONTROLLER;
-            panelDriveController.UpdateConfig();
             HideAllControls();
             panelDriveController.Show();
         }
 
         private void ShowPanelPhyMemWatcher()
         {
+            if (CauseValidation(PANEL))
+            {
+                UpdateConfig(PANEL);
+            }
+            else
+            {
+                MessageBox.Show("Please check the settings");
+            }
             PANEL = ENUMPanel.PANEL_PHY_MEM_WATCHER;
-            panelPhyMemController.UpdateConfig();
             HideAllControls();
             panelPhyMemController.Show();
         }
 
         private void ShowPanelServiceWatcher()
         {
+            if (CauseValidation(PANEL))
+            {
+                UpdateConfig(PANEL);
+            }
+            else
+            {
+                MessageBox.Show("Please check the settings");
+            }
             PANEL = ENUMPanel.PANEL_SERVICE_WATCHER;
-            panelServiceWatcher.UpdateConfig();
             HideAllControls();
             panelServiceWatcher.Show();
         }
 
         private void ShowPanelDatabaseOptimizer()
         {
+            if (CauseValidation(PANEL))
+            {
+                UpdateConfig(PANEL);
+            }
+            else
+            {
+                MessageBox.Show("Please check the settings");
+            }
             PANEL = ENUMPanel.PANEL_DATABASE_OPTIMIZER;
-            panelDatabaseOptimizer.Show();
             HideAllControls();
             panelDatabaseOptimizer.Show();
         }
 
         private void ShowPanelTransportController()
         {
+            if (CauseValidation(PANEL))
+            {
+                UpdateConfig(PANEL);
+            }
+            else
+            {
+                MessageBox.Show("Please check the settings");
+            }
             PANEL = ENUMPanel.PANEL_TRANSPORT_CONTROLLER;
-            panelTransportController.UpdateConfig();
             HideAllControls();
             panelTransportController.Show();
         }
 
         private void ShowPanelSMTPSettings()
         {
+            if (CauseValidation(PANEL))
+            {
+                UpdateConfig(PANEL);
+            }
+            else
+            {
+                MessageBox.Show("Please check the settings");
+            }
             PANEL = ENUMPanel.PANEL_SMTP_SETTINGS;
-            panelSMTPSettings.Show();
             HideAllControls();
             panelSMTPSettings.Show();
         }
 
         private void ShowPanelFTPSettings()
         {
+            if (CauseValidation(PANEL))
+            {
+                UpdateConfig(PANEL);
+            }
+            else
+            {
+                MessageBox.Show("Please check the settings");
+            }
             PANEL = ENUMPanel.PANEL_FTP_SETTINGS;
-            panelFTPSettings.UpdateConfig();
             HideAllControls();
             panelFTPSettings.Show();
         }
@@ -140,42 +271,8 @@ namespace PMASysAlertsUI
             HideAllControls();
 
             ChangeCursorStyle();
-
-            
         }
 
-        public void CauseValidation()
-        {
-            
-            switch (PANEL)
-            {
-                case ENUMPanel.PANEL_DATABASE_OPTIMIZER:
-                    //panelDatabaseOptimizer.CauseValidation();
-                    break;
-                case ENUMPanel.PANEL_DRIVE_CONTROLLER:
-                    //panelDriveController.CauseValidation();
-                    break;
-                case ENUMPanel.PANEL_FTP_SETTINGS:
-                    //panelFTPSettings.CauseValidation();
-                    break;
-                case ENUMPanel.PANEL_HOME:
-                    //panelHome.CauseValidation();
-                    break;
-                case ENUMPanel.PANEL_PHY_MEM_WATCHER:
-                    //panelPhyMemController.CauseValidation();
-                    break;
-                case ENUMPanel.PANEL_SERVICE_WATCHER:
-                    //panelServiceWatcher.CauseValidation();
-                    break;
-                case ENUMPanel.PANEL_SMTP_SETTINGS:
-                    //panelSMTPSettings.CauseValidation();
-                    break;
-                case ENUMPanel.PANEL_TRANSPORT_CONTROLLER:
-                    //panelTransportController.CauseValidation();
-                    break;
-            }
-            
-        }
 
        
         private void HideAllControls()

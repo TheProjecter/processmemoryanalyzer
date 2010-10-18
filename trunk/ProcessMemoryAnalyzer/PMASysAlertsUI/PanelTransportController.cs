@@ -59,9 +59,9 @@ namespace PMASysAlertsUI
             }
         }
 
-        public void CauseValidation()
+        public bool CauseValidation()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         #endregion
