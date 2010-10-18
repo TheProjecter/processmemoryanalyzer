@@ -63,9 +63,9 @@ namespace PMASysAlertsUI
             configManager.SystemAnalyzerInfo.DBPassword = textBox_DBPassword.Text;
         }
 
-        public void CauseValidation()
+        public bool CauseValidation()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         

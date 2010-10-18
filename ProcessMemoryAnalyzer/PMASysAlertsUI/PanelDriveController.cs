@@ -73,9 +73,9 @@ namespace PMASysAlertsUI
             configManager.SystemAnalyzerInfo.LowDiscAlertAt = decimal.ToInt32(numericUpDown_DriveUse.Value);
         }
 
-        public void CauseValidation()
+        public bool CauseValidation()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         #endregion

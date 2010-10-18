@@ -11,6 +11,6 @@ namespace PMASysAlertsUI
 
         void UpdateConfig();
 
-        void CauseValidation();
+        bool CauseValidation();
     }
 }

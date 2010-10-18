@@ -51,9 +51,9 @@ namespace PMASysAlertsUI
             configManager.FtpInfo.TimeOut = decimal.ToInt32(numericUpDown_Timeout.Value);
         }
 
-        public void CauseValidation()
+        public bool CauseValidation()
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

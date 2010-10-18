@@ -40,9 +40,9 @@ namespace PMASysAlertsUI
             configManager.SystemAnalyzerInfo.SystemPhysicalMemoryAlertAt = decimal.ToInt32(numericUpDown_PhyMemLimit.Value);
         }
 
-        public void CauseValidation()
+        public bool CauseValidation()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         #endregion
