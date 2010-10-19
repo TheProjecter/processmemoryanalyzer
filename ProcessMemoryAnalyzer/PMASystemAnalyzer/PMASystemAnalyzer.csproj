@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PMADatabaseController.cs" />
     <Compile Include="PMASysAlertsConfigManager.cs" />
     <Compile Include="PMASystemAnalyzer.cs" />
     <Compile Include="PMASystemAnalyzerInfo.cs" />

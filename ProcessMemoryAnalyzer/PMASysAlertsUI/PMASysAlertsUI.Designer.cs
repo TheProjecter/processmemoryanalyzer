@@ -243,6 +243,7 @@
             this.MinimumSize = new System.Drawing.Size(613, 300);
             this.Name = "PMASysAlertsUI";
             this.Text = "System Analyzer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PMASysAlertsUI_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tableLayoutPanel_LeftMenu.ResumeLayout(false);

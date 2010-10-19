@@ -94,6 +94,7 @@
             // 
             this.textBox_DBPassword.Location = new System.Drawing.Point(95, 135);
             this.textBox_DBPassword.Name = "textBox_DBPassword";
+            this.textBox_DBPassword.PasswordChar = '*';
             this.textBox_DBPassword.Size = new System.Drawing.Size(174, 20);
             this.textBox_DBPassword.TabIndex = 6;
             // 
