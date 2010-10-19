@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Xml.Serialization;
+using System.ComponentModel;
 
 namespace PMA.SystemAnalyzer
 {
@@ -19,20 +20,30 @@ namespace PMA.SystemAnalyzer
 
         private HashSet<string> _listServiceWatcher = null;
 
+        private List<string> _listSendMailTo = null;
+
+        private List<string> _listPostFTPMessageOn = null;
+
         //-------------------------------------------------------------------------------------------------
 
         #region Home Configs
         
+        [DefaultValue(false)]
         public bool SetDiscWatch { get; set; }
 
+        [DefaultValue(false)]
         public bool SetPhysicalMemWatch { get; set; }
 
+        [DefaultValue(false)]
         public bool SetServiceWatcher { get; set; }
 
+        [DefaultValue(false)]
         public bool SetOptimizeDB { get; set; }
-        
+
+        [DefaultValue(false)]
         public bool SetSendMail { get; set; }
 
+        [DefaultValue(false)]
         public bool SetPostFTP { get; set; }
 
         #endregion 
@@ -40,13 +51,17 @@ namespace PMA.SystemAnalyzer
         //-------------------------------------------------------------------------------------------------
         
         #region DatabaseOptimizer
-        
+
+        [DefaultValue(false)]
         public bool IsWebServer { get; set; }
 
+        [DefaultValue("")]
         public string Database { get; set; }
 
+        [DefaultValue("")]
         public string DBUser { get; set; }
 
+        [DefaultValue("")]
         public string DBPassword { get; set; }
         
         #endregion 
@@ -71,6 +86,8 @@ namespace PMA.SystemAnalyzer
             }
             
         }
+
+        [DefaultValue(0)]
         public int LowDiscAlertAt { get; set; }
         
         #endregion 
@@ -79,6 +96,7 @@ namespace PMA.SystemAnalyzer
         
         #region PhysicalMemory
 
+        [DefaultValue(0)]
         public int SystemPhysicalMemoryAlertAt { get; set; }
         
         #endregion 
@@ -104,8 +122,10 @@ namespace PMA.SystemAnalyzer
         
         }
 
+        [DefaultValue(false)]
         public bool SetStartStoppedServicesAlerts { get; set; }
 
+        [DefaultValue(0)]
         public int ProcessPhysicalMemoryAlertAt { get; set; }
 
         #endregion 
@@ -114,9 +134,38 @@ namespace PMA.SystemAnalyzer
 
 
         #region Transport Server
-        public List<string> ListSendMailTo { get; set; }
+        public List<string> ListSendMailTo 
+        {
+            get
+            {
+                if (_listSendMailTo == null)
+                {
+                    _listSendMailTo = new List<string>();
+                }
+                return _listSendMailTo;
+            }
 
-        public List<string> ListPostFTPMessageOn { get; set; }
+            set
+            {
+                _listSendMailTo = value;
+            }
+        }
+
+        public List<string> ListPostFTPMessageOn
+        {
+            get
+            {
+                if (_listPostFTPMessageOn == null)
+                {
+                    _listPostFTPMessageOn = new List<string>();
+                }
+                return _listPostFTPMessageOn;
+            }
+            set
+            {
+                _listPostFTPMessageOn = value;
+            }
+        }
         #endregion 
 
         //--------------------------------------------------------------------------------------------------

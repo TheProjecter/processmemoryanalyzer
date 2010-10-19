@@ -55,7 +55,8 @@ namespace PMASysAlertsUI
             {
                 if (configManager.SystemAnalyzerInfo.ListDrivesToWatch.Contains(checkedListBox_Drives.Items[i].ToString()))
                 {
-                    checkedListBox_Drives.GetItemChecked(i);
+                    checkedListBox_Drives.SetItemChecked(i,true);
+                    //checkedListBox_Drives.GetItemChecked(i);
                 }
             }
         }

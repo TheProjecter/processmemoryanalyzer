@@ -65,7 +65,16 @@ namespace PMASysAlertsUI
 
         public bool CauseValidation()
         {
-            return true;
+            bool result = false;
+            PMADatabaseController dbController = new PMADatabaseController();
+            if (!dbController.CreateDBConnection(textBox_Database.Text, textBox_DBUser.Text, textBox_DBPassword.Text))
+            {
+                configManager.ErrorMessage.Add(dbController.Message);
+                result = false;
+            }
+            else result = true;
+
+            return result;
         }
 
         

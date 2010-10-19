@@ -52,7 +52,7 @@ namespace PMASysAlertsUI
             {
                 if (configManager.SystemAnalyzerInfo.ListServicesNames.Contains(checkedListBox_Services.Items[i].ToString()))
                 {
-                    checkedListBox_Services.GetItemChecked(i);
+                    checkedListBox_Services.SetItemChecked(i, true);
                 }
             }
 

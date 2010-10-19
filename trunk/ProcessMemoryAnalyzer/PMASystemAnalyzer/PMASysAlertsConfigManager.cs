@@ -16,6 +16,47 @@ namespace PMA.SystemAnalyzer
         public SmtpInfo SmtpInfo { get; set; }
         public PMASystemAnalyzerInfo SystemAnalyzerInfo { get; set; }
 
+        public List<string> _errorMessage = null;
+        
+        public List<string> ErrorMessage 
+        {
+            get
+            {
+                if (_errorMessage == null)
+                {
+                    _errorMessage = new List<string>();
+                }
+                return _errorMessage;
+            }
+            set
+            {
+                if (_errorMessage == null)
+                {
+                    _errorMessage = new List<string>();
+                }
+                _errorMessage = value;
+            }
+        }
+
+        public void ClearErrorMessage()
+        {
+            _errorMessage.Clear();
+            _errorMessage = null;
+            _errorMessage = new List<string>();
+        }
+
+        public string GetConsolidatedError(string caption)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(caption);
+            sb.AppendLine();
+            foreach (string message in _errorMessage)
+            {
+                sb.AppendLine(message);
+            }
+            return sb.ToString();
+        }
+
         private static string CONFIG_DIR = "Config";
 
         private static PMAConfigManager pmaConfigManager = null;
@@ -39,7 +80,7 @@ namespace PMA.SystemAnalyzer
             {
                 if (File.Exists(Path.Combine(CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE)))
                 {
-                    FtpInfo = FTPInfo.Deserialize(Path.Combine(CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE));
+                    FtpInfo = FTPInfo.Deserialize(File.ReadAllText(Path.Combine(CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE)));
                 }
                 else FtpInfo = new FTPInfo();
             }
@@ -51,7 +92,7 @@ namespace PMA.SystemAnalyzer
             {
                 if (File.Exists(Path.Combine(CurrentAppConfigDir, SmtpInfo.SMTP_INFO_FILE)))
                 {
-                    SmtpInfo = SmtpInfo.Deserialize(Path.Combine(CurrentAppConfigDir, SmtpInfo.SMTP_INFO_FILE));
+                    SmtpInfo = SmtpInfo.Deserialize(File.ReadAllText(Path.Combine(CurrentAppConfigDir, SmtpInfo.SMTP_INFO_FILE)));
                 }
                 else SmtpInfo = new SmtpInfo();
             }
@@ -63,7 +104,7 @@ namespace PMA.SystemAnalyzer
             {
                 if (File.Exists(Path.Combine(CurrentAppConfigDir, PMASystemAnalyzerInfo.PMA_INFO_FILE)))
                 {
-                    SystemAnalyzerInfo = PMASystemAnalyzerInfo.Deserialize(Path.Combine(CurrentAppConfigDir, PMASystemAnalyzerInfo.PMA_INFO_FILE));
+                    SystemAnalyzerInfo = PMASystemAnalyzerInfo.Deserialize(File.ReadAllText(Path.Combine(CurrentAppConfigDir, PMASystemAnalyzerInfo.PMA_INFO_FILE)));
                 }
                 else SystemAnalyzerInfo = new PMASystemAnalyzerInfo();
             }
