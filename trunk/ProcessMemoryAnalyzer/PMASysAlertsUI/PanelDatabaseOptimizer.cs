@@ -18,6 +18,7 @@ namespace PMASysAlertsUI
         {
             InitializeComponent();
             checkBox_IsWebServer.Checked = false;
+            label_Wait.Visible = false;
             ToggleTextControls(false);
         }
 
@@ -65,6 +66,8 @@ namespace PMASysAlertsUI
 
         public bool CauseValidation()
         {
+            configManager.ClearErrorMessage();
+            label_Wait.Visible = true;
             bool result = false;
             PMADatabaseController dbController = new PMADatabaseController();
             if (!dbController.CreateDBConnection(textBox_Database.Text, textBox_DBUser.Text, textBox_DBPassword.Text))
@@ -73,7 +76,7 @@ namespace PMASysAlertsUI
                 result = false;
             }
             else result = true;
-
+            label_Wait.Visible = false;
             return result;
         }
 

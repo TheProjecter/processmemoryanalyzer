@@ -234,13 +234,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Desktop;
-            this.ClientSize = new System.Drawing.Size(605, 273);
+            this.ClientSize = new System.Drawing.Size(605, 283);
             this.Controls.Add(this.tableLayoutPanel_LeftMenu);
             this.Controls.Add(this.panel_MainContainer);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximumSize = new System.Drawing.Size(613, 300);
-            this.MinimumSize = new System.Drawing.Size(613, 300);
+            this.MaximumSize = new System.Drawing.Size(613, 310);
+            this.MinimumSize = new System.Drawing.Size(613, 310);
             this.Name = "PMASysAlertsUI";
             this.Text = "System Analyzer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PMASysAlertsUI_FormClosing);

@@ -16,7 +16,7 @@ namespace PMASysAlertsUI
 
         private static string REGX_VERIFY_EMAIL = @"^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+)*$";
 
-        private static string REGX_VERIFY_FTP = @"^[\w\d]*";
+        private static string REGX_VERIFY_FTP = @"^[A-Za-z0-9][A-Za-z0-9]+[:]?[0-9A-Za-z]*$";
 
         /// <summary>
         /// 
@@ -66,13 +66,20 @@ namespace PMASysAlertsUI
 
         public bool CauseValidation()
         {
-            if (Regex.IsMatch(richTextBox_Emails.Text, REGX_VERIFY_EMAIL))
+            configManager.ClearErrorMessage();
+            
+            if ((richTextBox_Emails.Text == string.Empty || Regex.IsMatch(richTextBox_Emails.Text, REGX_VERIFY_EMAIL)) &&
+                (richTextBox_FtpFolder.Text == string.Empty || Regex.IsMatch(richTextBox_FtpFolder.Text, REGX_VERIFY_FTP)))
             {
                 return true;
             }
             else
             {
-                return true;
+                if (!(Regex.IsMatch(richTextBox_Emails.Text, REGX_VERIFY_EMAIL)))
+                    configManager.ErrorMessage.Add("Invalid or no Email Address");
+                if (!Regex.IsMatch(richTextBox_FtpFolder.Text, REGX_VERIFY_FTP))
+                    configManager.ErrorMessage.Add("Invalid or no FTP Folders");
+                return false;
             }
         }
 
