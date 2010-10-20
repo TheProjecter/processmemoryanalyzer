@@ -40,9 +40,7 @@ namespace PMA.SystemAnalyzer
 
         public void ClearErrorMessage()
         {
-            _errorMessage.Clear();
-            _errorMessage = null;
-            _errorMessage = new List<string>();
+            ErrorMessage.Clear();
         }
 
         public string GetConsolidatedError(string caption)
@@ -50,7 +48,7 @@ namespace PMA.SystemAnalyzer
             StringBuilder sb = new StringBuilder();
             sb.Append(caption);
             sb.AppendLine();
-            foreach (string message in _errorMessage)
+            foreach (string message in ErrorMessage)
             {
                 sb.AppendLine(message);
             }

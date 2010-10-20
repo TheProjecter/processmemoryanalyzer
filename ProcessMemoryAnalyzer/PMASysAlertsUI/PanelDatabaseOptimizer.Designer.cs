@@ -36,6 +36,7 @@
             this.label_Password = new System.Windows.Forms.Label();
             this.textBox_DBPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label_Wait = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label_Database
@@ -108,10 +109,20 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Database Optimizer";
             // 
+            // label_Wait
+            // 
+            this.label_Wait.AutoSize = true;
+            this.label_Wait.Location = new System.Drawing.Point(25, 169);
+            this.label_Wait.Name = "label_Wait";
+            this.label_Wait.Size = new System.Drawing.Size(82, 13);
+            this.label_Wait.TabIndex = 8;
+            this.label_Wait.Text = "Please Wait .... ";
+            // 
             // PanelDatabaseOptimizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label_Wait);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox_DBPassword);
             this.Controls.Add(this.label_Password);
@@ -137,5 +148,6 @@
         private System.Windows.Forms.Label label_Password;
         private System.Windows.Forms.TextBox textBox_DBPassword;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_Wait;
     }
 }
