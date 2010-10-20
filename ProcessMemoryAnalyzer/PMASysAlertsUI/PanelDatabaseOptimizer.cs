@@ -70,7 +70,7 @@ namespace PMASysAlertsUI
             label_Wait.Visible = true;
             bool result = false;
             PMADatabaseController dbController = new PMADatabaseController();
-            if (!dbController.CreateDBConnection(textBox_Database.Text, textBox_DBUser.Text, textBox_DBPassword.Text))
+            if (textBox_Database.Text != string.Empty && !dbController.CreateDBConnection(textBox_Database.Text, textBox_DBUser.Text, textBox_DBPassword.Text))
             {
                 configManager.ErrorMessage.Add(dbController.Message);
                 result = false;
