@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PMADatabaseController.cs" />
+    <Compile Include="PMAFlowController.cs" />
     <Compile Include="PMASysAlertsConfigManager.cs" />
     <Compile Include="PMASystemAnalyzer.cs" />
     <Compile Include="PMASystemAnalyzerInfo.cs" />

@@ -1,4 +1,4 @@
-﻿namespace PMAAlertService
+﻿namespace PMA.PMAService
 {
     partial class PMAAlertService
     {
