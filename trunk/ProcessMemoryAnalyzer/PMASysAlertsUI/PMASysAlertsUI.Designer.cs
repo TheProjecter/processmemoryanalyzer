@@ -143,7 +143,7 @@
             // 
             // panel_MainContainer
             // 
-            this.panel_MainContainer.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panel_MainContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel_MainContainer.Location = new System.Drawing.Point(175, 41);
             this.panel_MainContainer.Name = "panel_MainContainer";
             this.panel_MainContainer.Size = new System.Drawing.Size(412, 221);
@@ -151,7 +151,7 @@
             // 
             // tableLayoutPanel_LeftMenu
             // 
-            this.tableLayoutPanel_LeftMenu.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.tableLayoutPanel_LeftMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.tableLayoutPanel_LeftMenu.ColumnCount = 1;
             this.tableLayoutPanel_LeftMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_Home, 0, 0);
@@ -233,7 +233,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Desktop;
+            this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(599, 274);
             this.Controls.Add(this.tableLayoutPanel_LeftMenu);
             this.Controls.Add(this.panel_MainContainer);
