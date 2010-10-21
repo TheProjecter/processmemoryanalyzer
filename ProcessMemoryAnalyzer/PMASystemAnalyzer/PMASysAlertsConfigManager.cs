@@ -16,6 +16,8 @@ namespace PMA.SystemAnalyzer
         public SmtpInfo SmtpInfo { get; set; }
         public PMASystemAnalyzerInfo SystemAnalyzerInfo { get; set; }
 
+        public PMAFlagInfo FlagInfo { get; set; }
+
         public List<string> _errorMessage = null;
         
         public List<string> ErrorMessage 
@@ -38,6 +40,7 @@ namespace PMA.SystemAnalyzer
             }
         }
 
+       
         public void ClearErrorMessage()
         {
             ErrorMessage.Clear();

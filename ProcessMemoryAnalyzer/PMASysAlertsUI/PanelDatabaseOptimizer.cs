@@ -80,8 +80,6 @@ namespace PMASysAlertsUI
             return result;
         }
 
-        
-
         #endregion
 
         
