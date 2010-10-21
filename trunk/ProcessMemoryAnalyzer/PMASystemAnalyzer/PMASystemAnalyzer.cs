@@ -17,6 +17,8 @@ namespace PMA.SystemAnalyzer
     public class PMASystemAnalyzer
     {
 
+        
+        
         public static DriveInfo[] GetSystemDiscs()
         {
             DriveInfo[] driveInfo = DriveInfo.GetDrives();
@@ -30,44 +32,21 @@ namespace PMA.SystemAnalyzer
             return servicenames;
         }
 
-        public static bool GenerateAlertForDrive(List<string> listDriveLetter, out Dictionary<string,string> dicMessages)
+        
+        #region DriveAlert 
+        public static bool GenerateDriveSpaceAlert(string drivename, int alertLevel)
         {
-            dicMessages = new Dictionary<string,string>();
-            return false;
+            DriveInfo driveInfo = new DriveInfo(drivename);
+            if ((driveInfo.TotalFreeSpace / driveInfo.TotalSize) / 100 < alertLevel)
+            {
+                return true;
+            }
+            else return false;
         }
+        #endregion 
 
-        public static bool GenerateAlertForServices(List<string> serviceNames, out Dictionary<string, string> dicMessages)
-        {
-            dicMessages = new Dictionary<string, string>();
-            return false;
-        }
+        
 
-        public static bool GenerateAlertForPhysicalMemory(out string message)
-        {
-            message = string.Empty;
-            return false;
-        }
-
-        public static void OptimizeSessionState(string dbstring)
-        {
-            
-        }
-
-
-        public static string MessageBodyCreator()
-        {
-            return null;
-        }
-
-        public static void SendMail()
-        {
-
-        }
-
-        public static void PostFTPMessage()
-        {
-
-        }
 
     }
 }
