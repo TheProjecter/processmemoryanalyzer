@@ -235,6 +235,7 @@ namespace PMASysAlertsUI
         {
             if (CauseValidation())
             {
+                UpdateConfig(PANEL);
                 ShowPanel(ENUMPanel.PANEL_HOME);
             }
             else
@@ -247,6 +248,7 @@ namespace PMASysAlertsUI
         {
             if (CauseValidation())
             {
+                UpdateConfig(PANEL);
                 ShowPanel(ENUMPanel.PANEL_DRIVE_CONTROLLER);
             }
             else
@@ -258,15 +260,21 @@ namespace PMASysAlertsUI
         private void label_Service_Click(object sender, EventArgs e)
         {
             if (CauseValidation())
+            {
+                UpdateConfig(PANEL);
                 ShowPanel(ENUMPanel.PANEL_SERVICE_WATCHER);
+            }
             else
                 MessageBox.Show(this, configManager.GetConsolidatedError("Error"));
         }
 
         private void label_PhysicalMemory_Click(object sender, EventArgs e)
         {
-            if (CauseValidation())    
+            if (CauseValidation())
+            {
+                UpdateConfig(PANEL);
                 ShowPanel(ENUMPanel.PANEL_PHY_MEM_WATCHER);
+            }
             else
                 MessageBox.Show(this, configManager.GetConsolidatedError("Error"));
         }
@@ -275,6 +283,7 @@ namespace PMASysAlertsUI
         {
             if (CauseValidation())
             {
+                UpdateConfig(PANEL);
                 ShowPanel(ENUMPanel.PANEL_DATABASE_OPTIMIZER);
             }
             else
@@ -287,7 +296,10 @@ namespace PMASysAlertsUI
         private void label_Transport_Click(object sender, EventArgs e)
         {
             if (CauseValidation())
+            {
+                UpdateConfig(PANEL);
                 ShowPanel(ENUMPanel.PANEL_TRANSPORT_CONTROLLER);
+            }
             else
                 MessageBox.Show(this, configManager.GetConsolidatedError("Error"));
         }
@@ -295,7 +307,10 @@ namespace PMASysAlertsUI
         private void sMTPToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (CauseValidation())
+            {
+                UpdateConfig(PANEL);
                 ShowPanel(ENUMPanel.PANEL_SMTP_SETTINGS);
+            }
             else
                 MessageBox.Show(this, configManager.GetConsolidatedError("Error"));
         }
@@ -303,7 +318,10 @@ namespace PMASysAlertsUI
         private void fTPToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (CauseValidation())
+            {
+                UpdateConfig(PANEL);
                 ShowPanel(ENUMPanel.PANEL_FTP_SETTINGS);
+            }
             else
                 MessageBox.Show(this, configManager.GetConsolidatedError("Error"));
         }
@@ -311,18 +329,34 @@ namespace PMASysAlertsUI
 
         private void stopServiceToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            UpdateConfig(PANEL);
             configManager.SaveConfiguration();
         }
         
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UpdateConfig(PANEL);
+            configManager.SaveConfiguration();
             Environment.Exit(0);
         }
 
         private void PMASysAlertsUI_FormClosing(object sender, FormClosingEventArgs e)
         {
             UpdateConfig(PANEL);
+            configManager.SaveConfiguration();
+        }
+
+        
+        private void startServiceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateConfig(PANEL);
+            configManager.SaveConfiguration();
+        }
+
+        private void stopServiceToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            UpdateConfig(PANEL);
+            configManager.SaveConfiguration();
         }
 
 

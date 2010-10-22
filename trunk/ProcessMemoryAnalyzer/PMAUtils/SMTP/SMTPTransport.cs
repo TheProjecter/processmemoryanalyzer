@@ -32,7 +32,7 @@ namespace PMA.Utils.smtp
 
             if (smtpInfo.ProtectPassword)
             {
-                smtpInfo.Password = OperationUtils.EncryptDecrypt(smtpInfo.Password, 22);
+                smtpInfo.Password = OperationUtils.EncryptDecrypt(smtpInfo.Password);
             }
 
             try

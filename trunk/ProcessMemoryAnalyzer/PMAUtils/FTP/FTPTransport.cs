@@ -31,7 +31,7 @@ namespace PMA.Utils.ftp
             {
                 if (ftpInfo.ProtectPassword)
                 {
-                    ftpInfo.Password = OperationUtils.EncryptDecrypt(ftpInfo.Password, 22);
+                    ftpInfo.Password = OperationUtils.EncryptDecrypt(ftpInfo.Password);
                 }
 
                 foreach (string file in filesToUpload)

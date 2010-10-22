@@ -14,8 +14,9 @@ namespace PMA.Utils
         /// <param name="textToEncrypt">The text to encrypt.</param>
         /// <param name="key">The key.</param>
         /// <returns></returns>
-        public static string EncryptDecrypt(string textToEncrypt, int key)
+        public static string EncryptDecrypt(string textToEncrypt)
         {
+            int key = 22;
             StringBuilder inSb = new StringBuilder(textToEncrypt);
             StringBuilder outSb = new StringBuilder(textToEncrypt.Length);
             char c;
