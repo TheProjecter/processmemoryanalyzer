@@ -13,18 +13,7 @@ namespace PMA.ProcessMemoryAnalyzer
     public class PMAServiceProcessController
     {
 
-        private Process _process;
        
-
-        //-------------------------------------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PMAServiceProcessController"/> class.
-        /// </summary>
-        /// <param name="serviceName">Name of the service.</param>
-        public PMAServiceProcessController(string serviceName)
-        {
-            _process = GetProcess(serviceName);
-        }
 
         //-------------------------------------------------------------------------------------------------------------------------------
         /// <summary>
@@ -32,7 +21,7 @@ namespace PMA.ProcessMemoryAnalyzer
         /// </summary>
         /// <param name="serviceName">Name of the service.</param>
         /// <returns></returns>
-        private Process GetProcess(string serviceName)
+        public static Process GetProcess(string serviceName)
         {
             string query = string.Format("SELECT ProcessId FROM Win32_Service WHERE Name='{0}'", serviceName);
             ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
@@ -65,15 +54,28 @@ namespace PMA.ProcessMemoryAnalyzer
             }
         }
 
+        //-------------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the total free physical memory in KB.
+        /// </summary>
+        /// <value>The total free physical memory in KB.</value>
+        public static double TotalFreePhysicalMemoryInKB
+        {
+            get
+            {
+                return (double)new Microsoft.VisualBasic.Devices.ComputerInfo().AvailablePhysicalMemory / (1024);
+            }
+        }
+
       
         //-------------------------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Gets the get service process working set.
         /// </summary>
         /// <value>The get service process working set.</value>
-        public double GetServiceProcessWorkingSet
+        public static double GetServiceProcessWorkingSetInKB(Process process)
         {
-            get { return _process.WorkingSet64/1024; }
+            return process.WorkingSet64/1024;
         }
 
         
