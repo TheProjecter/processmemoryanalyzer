@@ -42,10 +42,11 @@ namespace PMASysAlertsUI
         {
             configManager.SmtpInfo.SmtpServer = textBox_SMTPServer.Text;
             configManager.SmtpInfo.UserName = textBox_UserName.Text;
-            configManager.SmtpInfo.UserName = textBox_Password.Text;
+            configManager.SmtpInfo.Password = textBox_Password.Text;
             configManager.SmtpInfo.TimeOut = decimal.ToInt32(numericUpDown_PollingTimeout.Value);
             configManager.SmtpInfo.Port = decimal.ToInt32(numericUpDown_port.Value);
             configManager.SmtpInfo.SSL = checkBox_EnableSSL.Checked;
+            
 
             configManager.SmtpInfo.ProtectPassword = true;
         }
