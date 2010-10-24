@@ -62,7 +62,7 @@ namespace PMA.SystemAnalyzer
 
         private static PMAConfigManager pmaConfigManager = null;
 
-        private String CurrentAppConfigDir
+        public String CurrentAppConfigDir
         {
             get
             {
