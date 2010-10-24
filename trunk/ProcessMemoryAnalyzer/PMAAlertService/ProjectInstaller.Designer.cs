@@ -38,7 +38,7 @@
             // 
             // serviceInstallerPMA
             // 
-            this.serviceInstallerPMA.ServiceName = "PMAService";
+            this.serviceInstallerPMA.ServiceName = "PMAAlertService";
             // 
             // ProjectInstaller
             // 
