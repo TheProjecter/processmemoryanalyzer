@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using PMA.Utils.smtp;
+using System.IO;
+using PMA.Utils.ftp;
 
 namespace PMA.SystemAnalyzer
 {
     public class PMAFlowController
     {
         PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
-
         bool postAlert;
+        private string systemName = Environment.MachineName;
 
-
+        //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Runs the task.
         /// </summary>
@@ -52,6 +55,7 @@ namespace PMA.SystemAnalyzer
 
         }
 
+        //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Runs the disc watch.
         /// </summary>
@@ -75,6 +79,7 @@ namespace PMA.SystemAnalyzer
             }
         }
 
+        //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Runs the service watcher.
         /// </summary>
@@ -99,6 +104,7 @@ namespace PMA.SystemAnalyzer
 
         }
 
+        //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Runs the physical memory watch.
         /// </summary>
@@ -119,6 +125,7 @@ namespace PMA.SystemAnalyzer
 
         }
 
+        //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Runs the DB optimizer.
         /// </summary>
@@ -141,29 +148,59 @@ namespace PMA.SystemAnalyzer
         }
 
 
+        //-------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Sends the mail.
+        /// </summary>
         private void SendMail()
         {
-
-
+            string subject = "PMA System Alert for : " + systemName;
+            SMTPTransport smtp = new SMTPTransport();
+            smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListSendMailTo, null, subject, GenerateMessageBody(), null);
         }
 
+        //-------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Posts the FTP message.
+        /// </summary>
         private void PostFTPMessage()
         {
+            string tempFileName = configManager.CurrentAppConfigDir + "\\PMA_ALERTS_" + systemName + ".txt";
+            File.WriteAllText(tempFileName, GenerateMessageBody());
+            FTPTransport ftpTransport = new FTPTransport();
+            List<string> filetoUpload = new List<string>();
+            filetoUpload.Add(tempFileName);
+            ftpTransport.FTPSend(configManager.FtpInfo, filetoUpload);
+            filetoUpload = null;
 
+            try
+            {
+                File.Delete(tempFileName);
+            }
+            catch
+            {
+
+            }
         }
-        
-        private string GenerateMailMessageBody()
+
+        //-------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Generates the message body.
+        /// </summary>
+        /// <returns></returns>
+        private string GenerateMessageBody()
         {
             StringBuilder builder = new StringBuilder();
             builder.Append("Hi,");
             builder.Append("\r\n");
             builder.Append("\r\n");
             builder.Append("\r\n");
-            //builder.Append("Please find attached Machine Process Report for " + PMAInfoObj.ClientName);
+            builder.Append("Alert Generated For machine :" + systemName);
+            builder.Append("\r\n");
+            builder.Append(configManager.GetConsolidatedError("System Alert"));
             builder.Append("\r\n");
             builder.Append("CELL FROMAT");
             builder.Append("\r\n");
-            builder.Append("PhyMemory|VirtualMem|CPU Use|Thread|Active Recon Window for process in time line");
             builder.Append("\r\n");
             builder.Append("\r\n");
             builder.Append("Thanks,");
