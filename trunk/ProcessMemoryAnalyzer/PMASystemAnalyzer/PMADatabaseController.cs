@@ -24,6 +24,16 @@ namespace PMA.SystemAnalyzer
             }
         }
 
+        public PMADatabaseController()
+        {
+
+        }
+
+        public PMADatabaseController(string database, string user, string password)
+        {
+            CreateDBConnection(database, user, password);
+        }
+        
         //-----------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Creates the DB connection.

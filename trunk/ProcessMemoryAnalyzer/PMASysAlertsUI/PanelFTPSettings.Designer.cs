@@ -79,9 +79,19 @@
             0,
             0,
             0});
+            this.numericUpDown_port.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown_port.Name = "numericUpDown_port";
             this.numericUpDown_port.Size = new System.Drawing.Size(70, 20);
             this.numericUpDown_port.TabIndex = 3;
+            this.numericUpDown_port.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown_port.KeyUp += new System.Windows.Forms.KeyEventHandler(this.numericUpDown_port_KeyUp);
             // 
             // label3
@@ -159,6 +169,11 @@
             this.numericUpDown_Timeout.Name = "numericUpDown_Timeout";
             this.numericUpDown_Timeout.Size = new System.Drawing.Size(79, 20);
             this.numericUpDown_Timeout.TabIndex = 12;
+            this.numericUpDown_Timeout.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label_Timeout
             // 

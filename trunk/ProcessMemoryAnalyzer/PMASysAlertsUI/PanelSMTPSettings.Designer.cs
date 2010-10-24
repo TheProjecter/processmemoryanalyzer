@@ -139,9 +139,19 @@
             0,
             0,
             0});
+            this.numericUpDown_port.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown_port.Name = "numericUpDown_port";
             this.numericUpDown_port.Size = new System.Drawing.Size(97, 20);
             this.numericUpDown_port.TabIndex = 12;
+            this.numericUpDown_port.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown_port.KeyUp += new System.Windows.Forms.KeyEventHandler(this.numericUpDown_port_KeyUp);
             // 
             // numericUpDown_PollingTimeout

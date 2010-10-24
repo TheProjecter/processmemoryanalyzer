@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace PMA.SystemAnalyzer
 {
@@ -123,7 +124,20 @@ namespace PMA.SystemAnalyzer
         /// </summary>
         private void RunDBOptimizer()
         {
-            throw new NotImplementedException();
+            PMAConfigManager cm = configManager;
+            if (cm.SystemAnalyzerInfo.IsWebServer)
+            {
+                List<Process> proceessList = (from process in Process.GetProcesses()
+                                            where process.ProcessName == "w3wp" || process.ProcessName == "w3wp*32"
+                                             select process).ToList<Process>() ;
+
+                if (proceessList.Count == 0)
+                {
+                    PMADatabaseController dbController = new PMADatabaseController(cm.SystemAnalyzerInfo.Database,
+                    cm.SystemAnalyzerInfo.DBUser, cm.SystemAnalyzerInfo.DBPassword);
+                    dbController.TruncateSessionStateDatabase();
+                }
+            }
         }
 
 
