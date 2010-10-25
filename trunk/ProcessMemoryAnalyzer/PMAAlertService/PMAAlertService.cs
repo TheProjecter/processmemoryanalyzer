@@ -20,12 +20,21 @@ namespace PMA.PMAService
         PMAFlowController flowController = null;
 
         private static bool is_lock = false;
-        
+
+        //-----------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PMAAlertService"/> class.
+        /// </summary>
         public PMAAlertService()
         {
             InitializeComponent();
         }
 
+        //-----------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// When implemented in a derived class, executes when a Start command is sent to the service by the Service Control Manager (SCM) or when the operating system starts (for a service that starts automatically). Specifies actions to take when the service starts.
+        /// </summary>
+        /// <param name="args">Data passed by the start command.</param>
         protected override void OnStart(string[] args)
         {
             int logInterval = int.Parse(ConfigurationSettings.AppSettings["interval"]);
@@ -35,6 +44,10 @@ namespace PMA.PMAService
             mTimer.Start();
         }
 
+        //-----------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// When implemented in a derived class, executes when a Stop command is sent to the service by the Service Control Manager (SCM). Specifies actions to take when a service stops running.
+        /// </summary>
         protected override void OnStop()
         {
             if (flowController != null)
@@ -44,6 +57,12 @@ namespace PMA.PMAService
             is_lock = false;
         }
 
+        //-----------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Handles the Elapsed event of the timer control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
         private void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             if (!is_lock)

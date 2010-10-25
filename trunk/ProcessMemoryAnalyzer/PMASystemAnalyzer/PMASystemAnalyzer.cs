@@ -19,6 +19,10 @@ namespace PMA.SystemAnalyzer
     {
 
 
+        private const string SERVICE_NAME = "PMAAlertService";
+
+        
+        
         //---------------------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Gets the system discs.
@@ -42,6 +46,46 @@ namespace PMA.SystemAnalyzer
             return servicenames;
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Starts the service.
+        /// </summary>
+        public static string StartService()
+        {
+            ServiceController service = null;
+            try
+            {
+                service = new ServiceController(SERVICE_NAME);
+                service.Start();
+                return "Service Started Succesfully";
+            }
+            catch(Exception ex)
+            {
+                return ex.Message;
+            }
+            
+        }
+
+        //---------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Stops the service.
+        /// </summary>
+        public static string StopService()
+        {
+            ServiceController service = null;
+            try
+            {
+                service = new ServiceController(SERVICE_NAME);
+                service.Stop();
+                return "Service Stopped Succesfully";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            
+        }
+
         
         #region DriveAlert 
         //---------------------------------------------------------------------------------------------------------------------------
@@ -61,7 +105,7 @@ namespace PMA.SystemAnalyzer
             foreach (string driveName in listDriveNames)
             {
                 driveInfo = new DriveInfo(driveName);
-                if ((driveInfo.TotalFreeSpace / driveInfo.TotalSize) * 100 > alertLevel)
+                if (((decimal)driveInfo.TotalFreeSpace / (decimal)driveInfo.TotalSize) * 100 < alertLevel)
                 {
                     listMessage.Add("Drive " + driveName + " is exceeding set alert level");
                     flag = true;
@@ -80,7 +124,7 @@ namespace PMA.SystemAnalyzer
         /// <returns></returns>
         public static bool GeneratePhyMemAlert(int alertlevel, out string message)
         {
-            if ((PMAServiceProcessController.TotalFreePhysicalMemoryInKB / PMAServiceProcessController.TotalPhysicalMemoryInKB) * 100 > alertlevel)
+            if (((decimal)PMAServiceProcessController.TotalFreePhysicalMemoryInKB / (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB) * 100 < alertlevel)
             {
                 message = "Physical Memory cumsumtion is more then set alert level";
                 return true;
@@ -122,7 +166,7 @@ namespace PMA.SystemAnalyzer
                     listMessage.Add("Service " + service.ServiceName + " is stopped");
                 }
                 Process serviceProcess = PMAServiceProcessController.GetProcess(service.ServiceName);
-                if ((PMAServiceProcessController.GetServiceProcessWorkingSetInKB(serviceProcess) / PMAServiceProcessController.TotalPhysicalMemoryInKB) * 100 > alertLevel)
+                if (((decimal)PMAServiceProcessController.GetServiceProcessWorkingSetInKB(serviceProcess) / (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB) * 100 > alertLevel)
                 {
                     flag = true;
                     listMessage.Add("Service " + service.ServiceName + " is growing more then alert levels");

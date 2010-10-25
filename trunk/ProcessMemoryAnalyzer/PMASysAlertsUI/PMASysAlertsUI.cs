@@ -351,12 +351,21 @@ namespace PMASysAlertsUI
         {
             UpdateConfig(PANEL);
             configManager.SaveConfiguration();
+            MessageBox.Show(PMASystemAnalyzer.StartService());
+
         }
 
         private void stopServiceToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             UpdateConfig(PANEL);
             configManager.SaveConfiguration();
+            MessageBox.Show(PMASystemAnalyzer.StopService());
+        }
+
+        private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            AboutBoxPMAAlerts aboutBox = new AboutBoxPMAAlerts();
+            aboutBox.Show(this);
         }
 
 

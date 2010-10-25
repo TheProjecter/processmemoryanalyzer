@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using PMA.SystemAnalyzer;
+using PMA.Utils;
 
 namespace PMASysAlertsUI
 {
@@ -32,7 +33,7 @@ namespace PMASysAlertsUI
         {
             textBox_SMTPServer.Text = configManager.SmtpInfo.SmtpServer;
             textBox_UserName.Text = configManager.SmtpInfo.UserName;
-            textBox_Password.Text = configManager.SmtpInfo.Password;
+            textBox_Password.Text = OperationUtils.EncryptDecrypt(configManager.SmtpInfo.Password);
             numericUpDown_PollingTimeout.Value = configManager.SmtpInfo.TimeOut;
             numericUpDown_port.Value = configManager.SmtpInfo.Port;
             checkBox_EnableSSL.Checked = configManager.SmtpInfo.SSL;
@@ -42,7 +43,7 @@ namespace PMASysAlertsUI
         {
             configManager.SmtpInfo.SmtpServer = textBox_SMTPServer.Text;
             configManager.SmtpInfo.UserName = textBox_UserName.Text;
-            configManager.SmtpInfo.Password = textBox_Password.Text;
+            configManager.SmtpInfo.Password = OperationUtils.EncryptDecrypt(textBox_Password.Text);
             configManager.SmtpInfo.TimeOut = decimal.ToInt32(numericUpDown_PollingTimeout.Value);
             configManager.SmtpInfo.Port = decimal.ToInt32(numericUpDown_port.Value);
             configManager.SmtpInfo.SSL = checkBox_EnableSSL.Checked;

@@ -111,6 +111,14 @@ namespace PMA.SystemAnalyzer
             }
         }
 
+        private void InitilizeFlagInfo()
+        {
+            if (FlagInfo == null)
+            {
+                FlagInfo = new PMAFlagInfo();
+            }
+        }
+
         
         public void SaveConfiguration()
         {
@@ -127,6 +135,7 @@ namespace PMA.SystemAnalyzer
             InitilizeFTPObject();
             InitilizeSMTPObject();
             InitilizeSystemAnalyzerObject();
+            InitilizeFlagInfo();
         }
 
         public static PMAConfigManager GetConfigManagerInstance
