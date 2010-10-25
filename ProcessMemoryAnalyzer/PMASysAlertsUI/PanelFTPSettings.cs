@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using PMA.SystemAnalyzer;
+using PMA.Utils;
 
 namespace PMASysAlertsUI
 {
@@ -32,7 +33,7 @@ namespace PMASysAlertsUI
         {
             textBox_FTPServer.Text = configManager.FtpInfo.FTPServer;
             textBox_User.Text = configManager.FtpInfo.UserName ;
-            textBox_Password.Text = configManager.FtpInfo.Password;
+            textBox_Password.Text = OperationUtils.EncryptDecrypt(configManager.FtpInfo.Password);
             numericUpDown_port.Value = configManager.FtpInfo.Port;
             checkBox_EnableSSL.Checked = configManager.FtpInfo.SSL;
             textBox_DefaultFolder.Text= configManager.FtpInfo.FTPServerFolder;
@@ -43,7 +44,7 @@ namespace PMASysAlertsUI
         {
             configManager.FtpInfo.FTPServer = textBox_FTPServer.Text;
             configManager.FtpInfo.UserName = textBox_User.Text;
-            configManager.FtpInfo.Password = textBox_Password.Text;
+            configManager.FtpInfo.Password = OperationUtils.EncryptDecrypt(textBox_Password.Text);
             configManager.FtpInfo.ProtectPassword = true;
             configManager.FtpInfo.Port = decimal.ToInt32(numericUpDown_port.Value);
             configManager.FtpInfo.SSL = checkBox_EnableSSL.Checked;

@@ -33,11 +33,14 @@
             // 
             // serviceProcessInstallerPMA
             // 
+            this.serviceProcessInstallerPMA.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
             this.serviceProcessInstallerPMA.Password = null;
             this.serviceProcessInstallerPMA.Username = null;
             // 
             // serviceInstallerPMA
             // 
+            this.serviceInstallerPMA.Description = "Alert Service of disc and memory and services.";
+            this.serviceInstallerPMA.DisplayName = "PMA Alert Service";
             this.serviceInstallerPMA.ServiceName = "PMAAlertService";
             // 
             // ProjectInstaller

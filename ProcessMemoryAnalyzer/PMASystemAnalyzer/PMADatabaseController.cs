@@ -15,7 +15,11 @@ namespace PMA.SystemAnalyzer
         private SqlConnection connection = null;
 
         private string _message = string.Empty;
-        
+
+        /// <summary>
+        /// Gets the message.
+        /// </summary>
+        /// <value>The message.</value>
         public string Message 
         {
             get
@@ -24,11 +28,20 @@ namespace PMA.SystemAnalyzer
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PMADatabaseController"/> class.
+        /// </summary>
         public PMADatabaseController()
         {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PMADatabaseController"/> class.
+        /// </summary>
+        /// <param name="database">The database.</param>
+        /// <param name="user">The user.</param>
+        /// <param name="password">The password.</param>
         public PMADatabaseController(string database, string user, string password)
         {
             CreateDBConnection(database, user, password);

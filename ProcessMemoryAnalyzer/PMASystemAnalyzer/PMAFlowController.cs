@@ -199,7 +199,6 @@ namespace PMA.SystemAnalyzer
             builder.Append("\r\n");
             builder.Append(configManager.GetConsolidatedError("System Alert"));
             builder.Append("\r\n");
-            builder.Append("CELL FROMAT");
             builder.Append("\r\n");
             builder.Append("\r\n");
             builder.Append("\r\n");

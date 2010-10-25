@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutBoxPMAAlerts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBoxPMAAlerts.Designer.cs">
+      <DependentUpon>AboutBoxPMAAlerts.cs</DependentUpon>
+    </Compile>
     <Compile Include="ENUMPanel.cs" />
     <Compile Include="IUIConfigManager.cs" />
     <Compile Include="PanelFTPSettings.cs">
@@ -94,6 +100,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutBoxPMAAlerts.resx">
+      <DependentUpon>AboutBoxPMAAlerts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PanelFTPSettings.resx">
       <DependentUpon>PanelFTPSettings.cs</DependentUpon>
     </EmbeddedResource>
