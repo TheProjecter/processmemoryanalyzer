@@ -40,7 +40,7 @@ namespace PMA.PMAService
             int logInterval = int.Parse(ConfigurationSettings.AppSettings["interval"]);
             mTimer = new System.Timers.Timer(logInterval);
             mTimer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
-            timer_Elapsed(null, null);
+          //  timer_Elapsed(null, null);
             mTimer.Start();
         }
 
