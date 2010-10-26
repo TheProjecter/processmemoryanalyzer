@@ -13,11 +13,31 @@ namespace PMA.Utils.smtp
     {
         public const string SMTP_INFO_FILE = "SMTPInfo.xml";
 
+        private int _port;
+
         public bool ProtectPassword { get; set; } 
         public string UserName { get; set;}
         public string Password { get; set;}
         public string SmtpServer { get; set; }
-        public int Port { get; set; }
+        public int Port 
+        { 
+            get
+            {
+                if (_port == 0)
+                {
+                    _port = 1;
+                }
+                return _port;
+            }
+            set
+            {
+                if (value == 0)
+                {
+                    _port = 1;
+                }
+                else _port = value;
+            }
+        }
         public int TimeOut { get; set; }
         public bool SSL { get; set; }
 

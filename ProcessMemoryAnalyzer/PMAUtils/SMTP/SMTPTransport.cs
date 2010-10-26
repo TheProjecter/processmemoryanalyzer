@@ -15,6 +15,11 @@ namespace PMA.Utils.smtp
     {
 
 
+        public bool SendAsynchronous { get; set; }
+        
+
+
+
         //------------------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Send Emails using smtp settings
@@ -79,7 +84,12 @@ namespace PMA.Utils.smtp
                     }
                 }
 
-                smtp.Send(mail);
+                if (SendAsynchronous)
+                {
+                    smtp.SendCompleted += new SendCompletedEventHandler(smtp_SendCompleted);
+                    smtp.SendAsync(mail,null);
+                }
+                else smtp.Send(mail);
 
             }
             catch (ArgumentException ex)
@@ -96,6 +106,11 @@ namespace PMA.Utils.smtp
             {
                 mail.Dispose();
             }
+            
+        }
+
+        void smtp_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
             
         }
 

@@ -16,17 +16,21 @@ namespace PMA.Utils
         /// <returns></returns>
         public static string EncryptDecrypt(string textToEncrypt)
         {
-            int key = 22;
-            StringBuilder inSb = new StringBuilder(textToEncrypt);
-            StringBuilder outSb = new StringBuilder(textToEncrypt.Length);
-            char c;
-            for (int i = 0; i < textToEncrypt.Length; i++)
+            if (textToEncrypt != null)
             {
-                c = inSb[i];
-                c = (char)(c ^ key);
-                outSb.Append(c);
+                int key = 22;
+                StringBuilder inSb = new StringBuilder(textToEncrypt);
+                StringBuilder outSb = new StringBuilder(textToEncrypt.Length);
+                char c;
+                for (int i = 0; i < textToEncrypt.Length; i++)
+                {
+                    c = inSb[i];
+                    c = (char)(c ^ key);
+                    outSb.Append(c);
+                }
+                return outSb.ToString();
             }
-            return outSb.ToString();
+            else return null;
         }   
 
     }

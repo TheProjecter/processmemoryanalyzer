@@ -13,12 +13,32 @@ namespace PMA.Utils.ftp
     {
         public const string FTP_INFO_FILE = "FTPInfo.xml";
 
+        private int _port;
+
         public bool ProtectPassword { get; set; } 
         public string UserName { get; set; }
         public string Password { get; set; }
         public string FTPServer { get; set; }
         public string FTPServerFolder { get; set; }
-        public int Port { get; set; }
+        public int Port
+        {
+            get
+            {
+                if (_port == 0)
+                {
+                    _port = 1;
+                }
+                return _port;
+            }
+            set
+            {
+                if (value == 0)
+                {
+                    _port = 1;
+                }
+                else _port = value;
+            }
+        }
         public int TimeOut { get; set; }
         public bool SSL { get; set; }
 
