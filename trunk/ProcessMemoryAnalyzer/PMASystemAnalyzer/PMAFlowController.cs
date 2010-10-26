@@ -156,7 +156,17 @@ namespace PMA.SystemAnalyzer
         {
             string subject = "PMA System Alert for : " + systemName;
             SMTPTransport smtp = new SMTPTransport();
-            smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListSendMailTo, null, subject, GenerateMessageBody(), null);
+            try
+            {
+                smtp.SendAsynchronous = true;
+                smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListSendMailTo, null, subject, GenerateMessageBody(), null);
+            }
+            catch
+            {
+                configManager.FlagInfo.FlagedDiscAlert = false;
+                configManager.FlagInfo.FlagedPhysicalMemoryAlert = false;
+                configManager.FlagInfo.FlagedServiceAlert = false;
+            }
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -165,6 +175,8 @@ namespace PMA.SystemAnalyzer
         /// </summary>
         private void PostFTPMessage()
         {
+            try
+            {
             string tempFileName = configManager.CurrentAppConfigDir + "\\PMA_ALERTS_" + systemName + ".txt";
             File.WriteAllText(tempFileName, GenerateMessageBody());
             FTPTransport ftpTransport = new FTPTransport();
@@ -172,14 +184,13 @@ namespace PMA.SystemAnalyzer
             filetoUpload.Add(tempFileName);
             ftpTransport.FTPSend(configManager.FtpInfo, filetoUpload);
             filetoUpload = null;
-
-            try
-            {
-                File.Delete(tempFileName);
+            File.Delete(tempFileName);
             }
             catch
             {
-
+                configManager.FlagInfo.FlagedDiscAlert = false;
+                configManager.FlagInfo.FlagedPhysicalMemoryAlert = false;
+                configManager.FlagInfo.FlagedServiceAlert = false;
             }
         }
 
