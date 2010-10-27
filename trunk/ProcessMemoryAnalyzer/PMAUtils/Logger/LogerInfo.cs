@@ -5,15 +5,26 @@ using System.Text;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace PMA.Logger
+namespace PMA.Utils.Logger
 {
     public class LoggerInfo
     {
-        const string LOGGER_FILE = "logger.xml";
+        public const string LOGGER_FILE = "logger.xml";
 
         private string _loggerFile;
 
-        const string defaultLogPath = AppDomain.CurrentDomain.BaseDirectory + "\\" + LOGGER_FILE;
+        private static string _defaultLogPath = AppDomain.CurrentDomain.BaseDirectory + "\\" + LOGGER_FILE;
+
+        internal LoggerInfo()
+        {
+
+        }
+
+        internal LoggerInfo(string logFilePath, EnumLogger level)
+        {
+            _loggerFile = logFilePath;
+            Level = level;
+        }
 
         
         public string LoggerFile 
@@ -33,7 +44,7 @@ namespace PMA.Logger
                     }
                     catch
                     {
-                        File.Create(defaultLogPath);
+                        File.Create(_defaultLogPath);
                         _loggerFile = value;
                     }
                 }
@@ -44,9 +55,9 @@ namespace PMA.Logger
             }
         }
 
-        public bool Level { get; set; }
+        public EnumLogger Level { get; set; }
 
-        public string Serialize()
+        internal string Serialize()
         {
             StringWriter sw = new StringWriter();
             XmlSerializer x = new XmlSerializer(this.GetType());
@@ -54,7 +65,7 @@ namespace PMA.Logger
             return sw.ToString();
         }
 
-        public static LoggerInfo Deserialize(string strObject)
+        internal static LoggerInfo Deserialize(string strObject)
         {
             XmlSerializer x = new XmlSerializer(typeof(LoggerInfo));
             return (LoggerInfo)x.Deserialize(new StringReader(strObject));
