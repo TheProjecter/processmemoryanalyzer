@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using PMA.Utils.ftp;
 using PMA.Utils.smtp;
+using PMA.Utils.Logger;
 using System.IO;
 
 
@@ -15,11 +16,20 @@ namespace PMA.SystemAnalyzer
         public FTPInfo FtpInfo { get; set; }
         public SmtpInfo SmtpInfo { get; set; }
         public PMASystemAnalyzerInfo SystemAnalyzerInfo { get; set; }
-
         public PMAFlagInfo FlagInfo { get; set; }
-
-        public List<string> _errorMessage = null;
+        public Logger Logger { get; set; }
         
+        
+        private List<string> _errorMessage = null;
+        private static string CONFIG_DIR = "Config";
+        private static PMAConfigManager pmaConfigManager = null;
+
+
+        //--------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets or sets the error message.
+        /// </summary>
+        /// <value>The error message.</value>
         public List<string> ErrorMessage 
         {
             get
@@ -40,12 +50,22 @@ namespace PMA.SystemAnalyzer
             }
         }
 
-       
+
+        //--------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Clears the error message.
+        /// </summary>
         public void ClearErrorMessage()
         {
             ErrorMessage.Clear();
         }
 
+        //--------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the consolidated error.
+        /// </summary>
+        /// <param name="caption">The caption.</param>
+        /// <returns></returns>
         public string GetConsolidatedError(string caption)
         {
             StringBuilder sb = new StringBuilder();
@@ -58,10 +78,13 @@ namespace PMA.SystemAnalyzer
             return sb.ToString();
         }
 
-        private static string CONFIG_DIR = "Config";
 
-        private static PMAConfigManager pmaConfigManager = null;
-
+        #region initilize properties
+        //--------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the current app config dir.
+        /// </summary>
+        /// <value>The current app config dir.</value>
         public String CurrentAppConfigDir
         {
             get
@@ -75,6 +98,10 @@ namespace PMA.SystemAnalyzer
             }
         }
 
+        //--------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Initilizes the FTP object.
+        /// </summary>
         private void InitilizeFTPObject()
         {
             if (FtpInfo == null)
@@ -87,6 +114,10 @@ namespace PMA.SystemAnalyzer
             }
         }
 
+        //--------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Initilizes the SMTP object.
+        /// </summary>
         private void InitilizeSMTPObject()
         {
             if (SmtpInfo == null)
@@ -99,6 +130,10 @@ namespace PMA.SystemAnalyzer
             }
         }
 
+        //--------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Initilizes the system analyzer object.
+        /// </summary>
         private void InitilizeSystemAnalyzerObject()
         {
             if (SystemAnalyzerInfo == null)
@@ -111,6 +146,27 @@ namespace PMA.SystemAnalyzer
             }
         }
 
+        //--------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Initilizes the logger object.
+        /// </summary>
+        private void InitilizeLoggerObject()
+        {
+            if (Logger == null)
+            {
+                if (File.Exists(Path.Combine(CurrentAppConfigDir, LoggerInfo.LOGGER_FILE)))
+                {
+                    Logger = Logger.GetDeserializedInstance(File.ReadAllText(Path.Combine(CurrentAppConfigDir, LoggerInfo.LOGGER_FILE)));
+                }
+                else Logger = Logger.GetInstance();
+            }
+            
+        }
+
+        //--------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Initilizes the flag info.
+        /// </summary>
         private void InitilizeFlagInfo()
         {
             if (FlagInfo == null)
@@ -118,8 +174,14 @@ namespace PMA.SystemAnalyzer
                 FlagInfo = new PMAFlagInfo();
             }
         }
+        #endregion
 
-        
+
+        #region Serialize & save configuration
+        //--------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Saves the configuration.
+        /// </summary>
         public void SaveConfiguration()
         {
             File.WriteAllText(Path.Combine(CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE), FtpInfo.Serialize());
@@ -127,17 +189,31 @@ namespace PMA.SystemAnalyzer
             File.WriteAllText(Path.Combine(CurrentAppConfigDir, SmtpInfo.SMTP_INFO_FILE), SmtpInfo.Serialize());
 
             File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMASystemAnalyzerInfo.PMA_INFO_FILE), SystemAnalyzerInfo.Serialize());
-        }
 
-        
+            File.WriteAllText(Path.Combine(CurrentAppConfigDir, LoggerInfo.LOGGER_FILE), Logger.SerializedLoggerInstance());
+        }
+        #endregion
+
+
+        //--------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PMAConfigManager"/> class.
+        /// </summary>
         private PMAConfigManager()
         {
             InitilizeFTPObject();
             InitilizeSMTPObject();
             InitilizeSystemAnalyzerObject();
             InitilizeFlagInfo();
+            InitilizeLoggerObject();
         }
 
+
+        //--------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the get config manager instance.
+        /// </summary>
+        /// <value>The get config manager instance.</value>
         public static PMAConfigManager GetConfigManagerInstance
         {
             get
