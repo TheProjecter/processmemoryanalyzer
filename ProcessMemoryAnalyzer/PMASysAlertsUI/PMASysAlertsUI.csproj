@@ -92,6 +92,12 @@
     <Compile Include="PanelSMTPSettings.Designer.cs">
       <DependentUpon>PanelSMTPSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="PanelLogger.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelLogger.Designer.cs">
+      <DependentUpon>PanelLogger.cs</DependentUpon>
+    </Compile>
     <Compile Include="PMASysAlertsUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PanelTransportController.resx">
       <DependentUpon>PanelTransportController.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelLogger.resx">
+      <DependentUpon>PanelLogger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PMASysAlertsUI.resx">
       <DependentUpon>PMASysAlertsUI.cs</DependentUpon>
