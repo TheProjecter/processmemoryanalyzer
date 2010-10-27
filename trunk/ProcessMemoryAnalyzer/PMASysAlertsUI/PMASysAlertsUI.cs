@@ -31,6 +31,7 @@ namespace PMASysAlertsUI
         PanelSMTPSettings panelSMTPSettings = null;
         PanelFTPSettings panelFTPSettings = null;
         PanelHome panelHome = null;
+        PanelLogger panelLogger = null;
         #endregion
 
 
@@ -62,6 +63,9 @@ namespace PMASysAlertsUI
                     break;
                 case ENUMPanel.PANEL_TRANSPORT_CONTROLLER:
                     result = panelTransportController.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_LOGGER :
+                    result = panelLogger.CauseValidation();
                     break;
                 default:
                     result = false;
@@ -99,6 +103,9 @@ namespace PMASysAlertsUI
                     break;
                 case ENUMPanel.PANEL_TRANSPORT_CONTROLLER:
                     panelTransportController.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_LOGGER:
+                    panelLogger.UpdateConfig();
                     break;
             }
 
@@ -140,6 +147,10 @@ namespace PMASysAlertsUI
                 case ENUMPanel.PANEL_TRANSPORT_CONTROLLER:
                     HideAllControls();
                     panelTransportController.Show();
+                    break;
+                case ENUMPanel.PANEL_LOGGER:
+                    HideAllControls();
+                    panelLogger.Show();
                     break;
             }
 
@@ -184,6 +195,9 @@ namespace PMASysAlertsUI
             panelFTPSettings = new PanelFTPSettings();
             panel_MainContainer.Controls.Add(panelFTPSettings);
 
+            panelLogger = new PanelLogger();
+            panel_MainContainer.Controls.Add(panelLogger);
+
             HideAllControls();
 
             LoadConfigs();
@@ -201,6 +215,7 @@ namespace PMASysAlertsUI
             panelTransportController.UpdateUI();
             panelSMTPSettings.UpdateUI();
             panelFTPSettings.UpdateUI();
+            panelLogger.UpdateUI();
         }
 
 
@@ -325,6 +340,19 @@ namespace PMASysAlertsUI
             else
                 MessageBox.Show(this, configManager.GetConsolidatedError("Error"));
         }
+
+        private void loggerToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (CauseValidation())
+            {
+                UpdateConfig(PANEL);
+                ShowPanel(ENUMPanel.PANEL_LOGGER);
+            }
+            else
+            {
+                MessageBox.Show(this, configManager.GetConsolidatedError("Error"));
+            }
+        }
         #endregion
 
         private void stopServiceToolStripMenuItem_Click(object sender, EventArgs e)
@@ -367,6 +395,10 @@ namespace PMASysAlertsUI
             AboutBoxPMAAlerts aboutBox = new AboutBoxPMAAlerts();
             aboutBox.Show(this);
         }
+
+       
+
+        
 
 
     }
