@@ -22,13 +22,13 @@
         "Entry"
         {
         "MsmKey" = "8:_59C286555E2567F672C138D90784DA9F"
-        "OwnerKey" = "8:_DEC50CB49AF0FD88389675EDE88745B7"
+        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_59C286555E2567F672C138D90784DA9F"
-        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
+        "OwnerKey" = "8:_DEC50CB49AF0FD88389675EDE88745B7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -40,13 +40,19 @@
         "Entry"
         {
         "MsmKey" = "8:_96C190A7BB2B6F9FF5CF670A8DB21294"
+        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_96C190A7BB2B6F9FF5CF670A8DB21294"
         "OwnerKey" = "8:_DEC50CB49AF0FD88389675EDE88745B7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_96C190A7BB2B6F9FF5CF670A8DB21294"
-        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
+        "OwnerKey" = "8:_800BC5C4928C79DCCF02DE668D0CFE6A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -59,12 +65,6 @@
         {
         "MsmKey" = "8:_A67D0C64B66C4C41459BF4EB4A2A7698"
         "OwnerKey" = "8:_E398E11376684CABBBDC08E0F42C461E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A67D0C64B66C4C41459BF4EB4A2A7698"
-        "OwnerKey" = "8:_800BC5C4928C79DCCF02DE668D0CFE6A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -88,7 +88,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_96C190A7BB2B6F9FF5CF670A8DB21294"
+        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -112,12 +112,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_DEC50CB49AF0FD88389675EDE88745B7"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -125,6 +119,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_59C286555E2567F672C138D90784DA9F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_96C190A7BB2B6F9FF5CF670A8DB21294"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -145,6 +145,27 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5.SP1"
+                    {
+                    "Name" = "8:.NET Framework 3.5 SP1"
+                    "ProductCode" = "8:Microsoft.Net.Framework.3.5.SP1"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -161,12 +182,48 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_3650471E45C846C78C8D626F08B80E63"
+            {
+            "Name" = "8:Primary output from PMAAlertService (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_39B48664893F4161AC2FFFF9673F04C4"
+            "FileType" = "3:2"
+            "InstallAction" = "3:1"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_B721C7A9_9A1E_44AB_BC98_8AA9DACDAF01"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_66E1E62F0B534E29A30BD34573963F93"
+            {
+            "Name" = "8:Primary output from PMAAlertService (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_39B48664893F4161AC2FFFF9673F04C4"
+            "FileType" = "3:2"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_7B49E334_C471_42D3_A7CB_9A4F232061D9"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
         }
         "DefaultFeature"
         {
@@ -360,6 +417,17 @@
             "Property" = "8:ProgramMenuFolder"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_C4EE1F0ACC3147DA89DCB8762B36CBF4"
+                    {
+                    "Name" = "8:CosmosTech"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_29D7219716884CA2A0675A0C768C1463"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_72478BDDD55A4CDC92396C5E79FD701D"
@@ -402,22 +470,22 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PMASysAlertSetup"
         "ProductCode" = "8:{29E2D90F-682B-4554-9779-4487908145F7}"
-        "PackageCode" = "8:{0B6C13E4-C280-44C3-96E1-05D9EF4924B5}"
+        "PackageCode" = "8:{FF0B08DC-D97B-4961-9409-5D53D25E9F28}"
         "UpgradeCode" = "8:{482DBF0D-5136-4894-9BE9-0F51320D94CC}"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "InstallAllUsers" = "11:FALSE"
+        "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Default Company Name"
+        "Manufacturer" = "8:CosmosTech"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:PMASysAlertSetup"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Default Company Name"
+        "ARPCONTACT" = "8:Manasvi Sareen"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
-        "ARPURLINFOABOUT" = "8:"
+        "ARPURLINFOABOUT" = "8:www.cosmostech.in"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
@@ -521,6 +589,20 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_ED072A0D02AA4E5EB38B5EB5E45A642A"
+            {
+            "Name" = "8:PMAAlerts"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_E398E11376684CABBBDC08E0F42C461E"
+            "Folder" = "8:_C4EE1F0ACC3147DA89DCB8762B36CBF4"
+            "WorkingFolder" = "8:_9F6D78044B0146DCBEEA56C6AA61398C"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
