@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:PMASysAlertSetup"
+"ProjectName" = "8:PMASysAlert"
 "LanguageId" = "3:1033"
 "CodePage" = "3:1252"
 "UILanguageId" = "3:1033"
@@ -22,25 +22,19 @@
         "Entry"
         {
         "MsmKey" = "8:_59C286555E2567F672C138D90784DA9F"
-        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
+        "OwnerKey" = "8:_DEC50CB49AF0FD88389675EDE88745B7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_59C286555E2567F672C138D90784DA9F"
-        "OwnerKey" = "8:_DEC50CB49AF0FD88389675EDE88745B7"
+        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_800BC5C4928C79DCCF02DE668D0CFE6A"
         "OwnerKey" = "8:_E398E11376684CABBBDC08E0F42C461E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_96C190A7BB2B6F9FF5CF670A8DB21294"
-        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -53,6 +47,12 @@
         {
         "MsmKey" = "8:_96C190A7BB2B6F9FF5CF670A8DB21294"
         "OwnerKey" = "8:_800BC5C4928C79DCCF02DE668D0CFE6A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_96C190A7BB2B6F9FF5CF670A8DB21294"
+        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -189,6 +189,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5.SP1"
+                    {
+                    "Name" = "8:.NET Framework 3.5 SP1"
+                    "ProductCode" = "8:Microsoft.Net.Framework.3.5.SP1"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
     }
@@ -470,7 +483,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PMASysAlertSetup"
         "ProductCode" = "8:{29E2D90F-682B-4554-9779-4487908145F7}"
-        "PackageCode" = "8:{FF0B08DC-D97B-4961-9409-5D53D25E9F28}"
+        "PackageCode" = "8:{02B04C49-CFE8-476A-8911-C106863C4C2F}"
         "UpgradeCode" = "8:{482DBF0D-5136-4894-9BE9-0F51320D94CC}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
@@ -480,7 +493,7 @@
         "Manufacturer" = "8:CosmosTech"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:PMASysAlertSetup"
+        "Title" = "8:PMASysAlert"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Manasvi Sareen"
         "Keywords" = "8:"
