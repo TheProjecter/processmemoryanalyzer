@@ -16,7 +16,8 @@ namespace PMA.Utils.smtp
 
 
         public bool SendAsynchronous { get; set; }
-        
+
+        MailMessage mail = null;
 
 
 
@@ -32,7 +33,6 @@ namespace PMA.Utils.smtp
         public void SmtpSend(SmtpInfo smtpInfo, List<string> toEmails, List<string> ccEmails, string subject, string message, List<string> attachments)
         {
             SmtpClient smtp = new SmtpClient();
-            MailMessage mail = new MailMessage();
             Attachment updatesAttachement = null;
 
             if (smtpInfo.ProtectPassword)
@@ -104,14 +104,19 @@ namespace PMA.Utils.smtp
             }
             finally
             {
-                mail.Dispose();
+                if(!SendAsynchronous)
+                    mail.Dispose();
             }
             
         }
 
         void smtp_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
-            
+            if (mail != null)
+            {
+                mail.Dispose();
+            }
+
         }
 
         
