@@ -481,7 +481,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:PMASysAlertSetup"
+        "ProductName" = "8:PMASysAlert"
         "ProductCode" = "8:{29E2D90F-682B-4554-9779-4487908145F7}"
         "PackageCode" = "8:{02B04C49-CFE8-476A-8911-C106863C4C2F}"
         "UpgradeCode" = "8:{482DBF0D-5136-4894-9BE9-0F51320D94CC}"
