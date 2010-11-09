@@ -158,7 +158,7 @@
             // 
             this.numericUpDown_PollingTimeout.Location = new System.Drawing.Point(115, 92);
             this.numericUpDown_PollingTimeout.Maximum = new decimal(new int[] {
-            10000,
+            90000,
             0,
             0,
             0});

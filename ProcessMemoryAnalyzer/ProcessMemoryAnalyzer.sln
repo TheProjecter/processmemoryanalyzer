@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMAConsoleApp", "PMATestApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMAReportGen", "PMAReportGen\PMAReportGen.csproj", "{3EB04E5B-E69E-4DBE-94A4-1F836AB6B10A}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PMASetup", "PMASetup\PMASetup.vdproj", "{0E38C8EB-F935-44F5-A620-84C83403ADE4}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PMA", "PMASetup\PMASetup.vdproj", "{0E38C8EB-F935-44F5-A620-84C83403ADE4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMASystemAnalyzer", "PMASystemAnalyzer\PMASystemAnalyzer.csproj", "{0F7EC0D7-D320-465F-B8F9-400D7E7C8E63}"
 EndProject
@@ -30,7 +30,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMAAlertService", "PMAAlert
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMASysAlertsTestApp", "PMASysAlertsTestApp\PMASysAlertsTestApp.csproj", "{1C30CDF2-0233-49CA-803C-0F03ABBFF047}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PMASysAlertSetup", "PMASysAlertSetup\PMASysAlertSetup.vdproj", "{0D330909-CAB4-42CE-8A33-0956F8C55B11}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PMASysAlert", "PMASysAlertSetup\PMASysAlertSetup.vdproj", "{0D330909-CAB4-42CE-8A33-0956F8C55B11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMATestApplication", "PMATestApplication\PMATestApplication.csproj", "{25B3C3DF-4204-4D84-A542-A56050A135F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +80,10 @@ Global
 		{1C30CDF2-0233-49CA-803C-0F03ABBFF047}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0D330909-CAB4-42CE-8A33-0956F8C55B11}.Debug|Any CPU.ActiveCfg = Debug
 		{0D330909-CAB4-42CE-8A33-0956F8C55B11}.Release|Any CPU.ActiveCfg = Release
+		{25B3C3DF-4204-4D84-A542-A56050A135F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25B3C3DF-4204-4D84-A542-A56050A135F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25B3C3DF-4204-4D84-A542-A56050A135F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25B3C3DF-4204-4D84-A542-A56050A135F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
