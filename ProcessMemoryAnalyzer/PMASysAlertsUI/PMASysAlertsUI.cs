@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using PMA.Utils.ftp;
 using PMA.Utils.smtp;
-using PMA.SystemAnalyzer;
+using PMA.ConfigManager;
 
 namespace PMASysAlertsUI
 {

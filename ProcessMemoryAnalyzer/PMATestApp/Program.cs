@@ -9,6 +9,8 @@ using System.IO;
 using System.Diagnostics;
 using PMA.ProcessMemoryAnalyzer;
 using System.ServiceProcess;
+using PMA.Info;
+using PMA.ConfigManager;
 
 
 namespace PMA.PMAConsoleApp
@@ -16,6 +18,8 @@ namespace PMA.PMAConsoleApp
     public class Program
     {
 
+        PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
+        
         const int SPACE_LENGTH = 20;
 
         PMAInfo pmaInfo;
@@ -224,14 +228,7 @@ namespace PMA.PMAConsoleApp
             Console.WriteLine("Enter Client Name :");
             p.pmaInfo.ClientName = Console.ReadLine();
 
-            p.pmaInfo.ServicesNames = new List<string>();
-            Console.WriteLine("Enter Services Name(Enter ! to exit) :");
-            while (serviceName != "!")
-            {
-                serviceName = Console.ReadLine();
-                if (serviceName != "!")
-                    p.pmaInfo.ServicesNames.Add(serviceName);
-            }
+            
         }
 
         private static void RunTest()
@@ -289,8 +286,6 @@ namespace PMA.PMAConsoleApp
             pmaInfo = new PMAInfo();
             pmaInfo.MailingTime = DateTime.Now.ToString("d/M/yyyy HH:mm");
             pmaInfo.ReportsIntervalHours = 12;
-            pmaInfo.ServicesNames = new List<string>();
-            pmaInfo.ServicesNames.Add("MSSQLSERVER");
             pmaInfo.ClientName = System.Environment.MachineName;
             pmaInfo.DisposeLogFile = false;
             pmaInfo.TriggerSeed = 20;
@@ -339,10 +334,10 @@ namespace PMA.PMAConsoleApp
         {
             try
             {
-                File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, PMAInfo.PMA_INFO_FILE), pmaInfo.Serialize());
-                File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, Emails.EMAILS_INFO_FILE), emailsInfo.Serialize());
-                File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, SmtpInfo.SMTP_INFO_FILE), smtpInfo.Serialize());
-                File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, FTPInfo.FTP_INFO_FILE), ftpInfo.Serialize());
+                File.WriteAllText(Path.Combine(configManager.CurrentAppConfigDir , PMAInfo.PMA_INFO_FILE), pmaInfo.Serialize());
+                File.WriteAllText(Path.Combine(configManager.CurrentAppConfigDir, Emails.EMAILS_INFO_FILE), emailsInfo.Serialize());
+                File.WriteAllText(Path.Combine(configManager.CurrentAppConfigDir, SmtpInfo.SMTP_INFO_FILE), smtpInfo.Serialize());
+                File.WriteAllText(Path.Combine(configManager.CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE), ftpInfo.Serialize());
             }
             catch (Exception ex)
             {
@@ -354,10 +349,10 @@ namespace PMA.PMAConsoleApp
         {
             try
             {
-                pmaInfo = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, PMAInfo.PMA_INFO_FILE)));
-                emailsInfo = Emails.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, Emails.EMAILS_INFO_FILE)));
-                smtpInfo = SmtpInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, SmtpInfo.SMTP_INFO_FILE)));
-                ftpInfo = FTPInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, FTPInfo.FTP_INFO_FILE)));
+                pmaInfo = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(configManager.CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE)));
+                emailsInfo = Emails.Deserialize(File.ReadAllText(Path.Combine(configManager.CurrentAppConfigDir, Emails.EMAILS_INFO_FILE)));
+                smtpInfo = SmtpInfo.Deserialize(File.ReadAllText(Path.Combine(configManager.CurrentAppConfigDir, SmtpInfo.SMTP_INFO_FILE)));
+                ftpInfo = FTPInfo.Deserialize(File.ReadAllText(Path.Combine(configManager.CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE)));
             }
             catch(Exception ex)
             {

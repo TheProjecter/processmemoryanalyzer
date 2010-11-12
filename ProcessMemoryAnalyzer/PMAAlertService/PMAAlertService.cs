@@ -8,7 +8,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Configuration;
 using System.Timers;
-using PMA.SystemAnalyzer;
+using PMA.ConfigManager;
 
 namespace PMA.PMAService
 {

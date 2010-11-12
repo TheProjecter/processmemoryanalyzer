@@ -34,6 +34,10 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PMASysAlert", "PMASysAlertS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMATestApplication", "PMATestApplication\PMATestApplication.csproj", "{25B3C3DF-4204-4D84-A542-A56050A135F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMAConfigManager", "PMAConfigManager\PMAConfigManager.csproj", "{954AA129-AB47-4E49-B739-174AC64B7770}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMAInfoManager", "PMAInfoManager\PMAInfoManager.csproj", "{66628469-3255-430A-834D-EB192F32D6C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +88,14 @@ Global
 		{25B3C3DF-4204-4D84-A542-A56050A135F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25B3C3DF-4204-4D84-A542-A56050A135F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25B3C3DF-4204-4D84-A542-A56050A135F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{954AA129-AB47-4E49-B739-174AC64B7770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{954AA129-AB47-4E49-B739-174AC64B7770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{954AA129-AB47-4E49-B739-174AC64B7770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{954AA129-AB47-4E49-B739-174AC64B7770}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66628469-3255-430A-834D-EB192F32D6C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66628469-3255-430A-834D-EB192F32D6C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66628469-3255-430A-834D-EB192F32D6C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66628469-3255-430A-834D-EB192F32D6C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

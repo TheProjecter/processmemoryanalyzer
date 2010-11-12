@@ -6,9 +6,10 @@ using PMA.Utils.ftp;
 using PMA.Utils.smtp;
 using PMA.Utils.Logger;
 using System.IO;
+using PMA.Info;
 
 
-namespace PMA.SystemAnalyzer
+namespace PMA.ConfigManager
 {
     public class PMAConfigManager
     {
@@ -17,12 +18,28 @@ namespace PMA.SystemAnalyzer
         public SmtpInfo SmtpInfo { get; set; }
         public PMASystemAnalyzerInfo SystemAnalyzerInfo { get; set; }
         public PMAFlagInfo FlagInfo { get; set; }
+        public PMAInfo PMAInfoObj { get; set; }
         public Logger Logger { get; set; }
-        
-        
+
+
         private List<string> _errorMessage = null;
         private static string CONFIG_DIR = "Config";
+        private static string PMA_LOG_DIR = "PMALog";
         private static PMAConfigManager pmaConfigManager = null;
+
+
+        public string PMAApplicationDirectoryMemLog
+        {
+            get
+            {
+                string path = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "\\" + PMA_LOG_DIR;
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                return path;
+            }
+        }
 
 
         //--------------------------------------------------------------------------------------------
@@ -30,7 +47,7 @@ namespace PMA.SystemAnalyzer
         /// Gets or sets the error message.
         /// </summary>
         /// <value>The error message.</value>
-        public List<string> ErrorMessage 
+        public List<string> ErrorMessage
         {
             get
             {
@@ -160,7 +177,23 @@ namespace PMA.SystemAnalyzer
                 }
                 else Logger = Logger.GetInstance();
             }
-            
+
+        }
+
+        //--------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Initilizes the PMA object.
+        /// </summary>
+        private void InitilizePMAObject()
+        {
+            if (PMAInfoObj == null)
+            {
+                if(File.Exists(Path.Combine(CurrentAppConfigDir,PMAInfo.PMA_INFO_FILE)))
+                {
+                    PMAInfoObj = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(CurrentAppConfigDir,PMAInfo.PMA_INFO_FILE)));
+                }
+                else PMAInfoObj = new PMAInfo();
+            }
         }
 
         //--------------------------------------------------------------------------------------------
@@ -191,6 +224,8 @@ namespace PMA.SystemAnalyzer
             File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMASystemAnalyzerInfo.PMA_INFO_FILE), SystemAnalyzerInfo.Serialize());
 
             File.WriteAllText(Path.Combine(CurrentAppConfigDir, LoggerInfo.LOGGER_FILE), Logger.SerializedLoggerInstance());
+
+            File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE), PMAInfoObj.Serialize());
         }
         #endregion
 
@@ -218,7 +253,7 @@ namespace PMA.SystemAnalyzer
         {
             get
             {
-                if(pmaConfigManager == null)
+                if (pmaConfigManager == null)
                     pmaConfigManager = new PMAConfigManager();
                 return pmaConfigManager;
             }

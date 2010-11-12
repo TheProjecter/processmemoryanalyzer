@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace PMA.ProcessMemoryAnalyzer
+namespace PMA.Info
 {
     /// <summary>
     /// 
@@ -15,7 +15,6 @@ namespace PMA.ProcessMemoryAnalyzer
 
         public const string PMA_INFO_FILE = "PMAInfo.xml";
         
-        public List<string> ServicesNames { get; set; }
         public int ReportsIntervalHours { get; set; }
         public string MailingTime { get; set; }
         public string ClientName { get; set; }

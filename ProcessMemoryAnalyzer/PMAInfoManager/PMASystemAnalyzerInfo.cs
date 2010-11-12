@@ -6,7 +6,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.ComponentModel;
 
-namespace PMA.SystemAnalyzer
+namespace PMA.Info
 {
     /// <summary>
     /// 

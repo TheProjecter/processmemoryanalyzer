@@ -7,6 +7,9 @@ using PMA.Utils;
 using PMA.Utils.ftp;
 using System.IO;
 using System.Diagnostics;
+using PMA.ConfigManager;
+using PMA.Info;
+using PMA.ConfigManager;
 
 
 namespace PMA.ProcessMemoryAnalyzer
@@ -22,6 +25,8 @@ namespace PMA.ProcessMemoryAnalyzer
         private string _fileName;
         private string _reportFileName;
         DateTime mailingTime;
+
+        PMAConfigManager pmaConfigManager = PMAConfigManager.GetConfigManagerInstance;
 
 
         //----------------------------------------------------------------------------------------------------------------------------
@@ -49,7 +54,7 @@ namespace PMA.ProcessMemoryAnalyzer
             {
                 File.Delete(_reportFileName);
             }
-            return Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryMemLog, PMAInfoObj.ClientName + "_" +
+            return Path.Combine(pmaConfigManager.PMAApplicationDirectoryMemLog, PMAInfoObj.ClientName + "_" +
                 DateTime.Now.ToLongDateString() + "_" + DateTime.Now.ToShortTimeString().Replace(':', '-')) + ".txt";
         }
 
@@ -387,10 +392,10 @@ namespace PMA.ProcessMemoryAnalyzer
         {
             try
             {
-                PMAInfoObj = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, PMAInfo.PMA_INFO_FILE)));
-                EmailsInfoObj = Emails.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, Emails.EMAILS_INFO_FILE)));
-                SmtpInfoObj = SmtpInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, SmtpInfo.SMTP_INFO_FILE)));
-                FtpInfoObj = FTPInfo.Deserialize(File.ReadAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, FTPInfo.FTP_INFO_FILE)));
+                PMAInfoObj = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE)));
+                EmailsInfoObj = Emails.Deserialize(File.ReadAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, Emails.EMAILS_INFO_FILE)));
+                SmtpInfoObj = SmtpInfo.Deserialize(File.ReadAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, SmtpInfo.SMTP_INFO_FILE)));
+                FtpInfoObj = FTPInfo.Deserialize(File.ReadAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE)));
             }
             catch (FileNotFoundException ex)
             {
@@ -404,10 +409,10 @@ namespace PMA.ProcessMemoryAnalyzer
         /// </summary>
         private void SerializedInfo()
         {
-            File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, PMAInfo.PMA_INFO_FILE), PMAInfoObj.Serialize());
-            File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, Emails.EMAILS_INFO_FILE), EmailsInfoObj.Serialize());
-            File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, SmtpInfo.SMTP_INFO_FILE), SmtpInfoObj.Serialize());
-            File.WriteAllText(Path.Combine(PMAApplicationSettings.PMAApplicationDirectoryConfig, FTPInfo.FTP_INFO_FILE), FtpInfoObj.Serialize());
+            File.WriteAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE), PMAInfoObj.Serialize());
+            File.WriteAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, Emails.EMAILS_INFO_FILE), EmailsInfoObj.Serialize());
+            File.WriteAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, SmtpInfo.SMTP_INFO_FILE), SmtpInfoObj.Serialize());
+            File.WriteAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE), FtpInfoObj.Serialize());
         }
 
 
