@@ -36,6 +36,7 @@
             this.panel_Transport = new System.Windows.Forms.Panel();
             this.checkBox_UseSMTP = new System.Windows.Forms.CheckBox();
             this.checkBox_UseFTP = new System.Windows.Forms.CheckBox();
+            this.checkBox_ProcessWatch = new System.Windows.Forms.CheckBox();
             this.label_Home = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel_Transport.SuspendLayout();
@@ -51,6 +52,7 @@
             this.tableLayoutPanel1.Controls.Add(this.checkBox_MemWatch, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.checkBox_DBOptimizer, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel_Transport, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.checkBox_ProcessWatch, 0, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(21, 39);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
@@ -129,6 +131,16 @@
             this.checkBox_UseFTP.Text = "Use FTP Transport";
             this.checkBox_UseFTP.UseVisualStyleBackColor = true;
             // 
+            // checkBox_ProcessWatch
+            // 
+            this.checkBox_ProcessWatch.AutoSize = true;
+            this.checkBox_ProcessWatch.Location = new System.Drawing.Point(3, 131);
+            this.checkBox_ProcessWatch.Name = "checkBox_ProcessWatch";
+            this.checkBox_ProcessWatch.Size = new System.Drawing.Size(99, 17);
+            this.checkBox_ProcessWatch.TabIndex = 6;
+            this.checkBox_ProcessWatch.Text = "Process Watch";
+            this.checkBox_ProcessWatch.UseVisualStyleBackColor = true;
+            // 
             // label_Home
             // 
             this.label_Home.AutoSize = true;
@@ -167,5 +179,6 @@
         private System.Windows.Forms.CheckBox checkBox_UseSMTP;
         private System.Windows.Forms.CheckBox checkBox_UseFTP;
         private System.Windows.Forms.Label label_Home;
+        private System.Windows.Forms.CheckBox checkBox_ProcessWatch;
     }
 }

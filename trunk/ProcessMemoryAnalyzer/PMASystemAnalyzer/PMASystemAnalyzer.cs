@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using PMA.SystemAnalyzer;
+using PMA.ConfigManager;
 using System.Diagnostics;
 using System.IO;
 using System.ServiceProcess;
@@ -12,7 +12,7 @@ using PMA.Utils.smtp;
 
 
 
-namespace PMA.SystemAnalyzer
+namespace PMA.ConfigManager
 {
     
     public class PMASystemAnalyzer

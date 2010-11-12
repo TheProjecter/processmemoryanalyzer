@@ -6,7 +6,7 @@ using System.Data.Sql;
 using Microsoft.SqlServer;
 using System.Data.SqlClient;
 
-namespace PMA.SystemAnalyzer
+namespace PMA.ConfigManager
 {
     public class PMADatabaseController
     {

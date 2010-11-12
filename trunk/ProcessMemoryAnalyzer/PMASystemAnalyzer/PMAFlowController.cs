@@ -6,8 +6,9 @@ using System.Diagnostics;
 using PMA.Utils.smtp;
 using System.IO;
 using PMA.Utils.ftp;
+using PMA.ConfigManager;
 
-namespace PMA.SystemAnalyzer
+namespace PMA.ConfigManager
 {
     public class PMAFlowController
     {
