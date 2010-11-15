@@ -15,7 +15,8 @@ namespace PMASysAlertsUI
         PANEL_SERVICE_WATCHER,
         PANEL_SMTP_SETTINGS,
         PANEL_TRANSPORT_CONTROLLER,
-        PANEL_LOGGER
+        PANEL_LOGGER,
+        PANEL_MEMEORY_ANALYZER
 
     }
 }

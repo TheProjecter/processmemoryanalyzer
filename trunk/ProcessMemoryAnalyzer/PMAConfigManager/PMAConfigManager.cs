@@ -188,11 +188,17 @@ namespace PMA.ConfigManager
         {
             if (PMAInfoObj == null)
             {
-                if(File.Exists(Path.Combine(CurrentAppConfigDir,PMAInfo.PMA_INFO_FILE)))
+                if (File.Exists(Path.Combine(CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE)))
                 {
-                    PMAInfoObj = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(CurrentAppConfigDir,PMAInfo.PMA_INFO_FILE)));
+                    PMAInfoObj = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE)));
                 }
-                else PMAInfoObj = new PMAInfo();
+                else
+                {
+                    PMAInfoObj = new PMAInfo();
+                    PMAInfoObj.MailingTime = DateTime.Now;
+                    PMAInfoObj.TriggerSeed = 1;
+                    PMAInfoObj.ReportsIntervalHours = 1;
+                }
             }
         }
 
@@ -241,6 +247,7 @@ namespace PMA.ConfigManager
             InitilizeSystemAnalyzerObject();
             InitilizeFlagInfo();
             InitilizeLoggerObject();
+            InitilizePMAObject();
         }
 
 

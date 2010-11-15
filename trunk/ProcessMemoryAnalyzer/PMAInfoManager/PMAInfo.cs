@@ -16,7 +16,7 @@ namespace PMA.Info
         public const string PMA_INFO_FILE = "PMAInfo.xml";
         
         public int ReportsIntervalHours { get; set; }
-        public string MailingTime { get; set; }
+        public DateTime MailingTime { get; set; }
         public string ClientName { get; set; }
         public bool DisposeLogFile { get; set; }
         public int TriggerSeed { get; set; }
@@ -40,33 +40,6 @@ namespace PMA.Info
 
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Emails
-    {
-        public const string EMAILS_INFO_FILE = "EMAILSInfo.xml";
-
-        public List<string> EmailTo { get; set;}
-        public List<string> EmailCC { get; set; }
-
-        public string Subject { get; set; }
-        public string AttachmentPath { get; set; }
-        public string BodyContent { get; set; }
-
-        public string Serialize()
-        {
-            StringWriter sw = new StringWriter();
-            XmlSerializer x = new XmlSerializer(this.GetType());
-            x.Serialize(sw, this);
-            return sw.ToString();
-        }
-
-        public static Emails Deserialize(string strObject)
-        {
-            XmlSerializer x = new XmlSerializer(typeof(Emails));
-            return (Emails)x.Deserialize(new StringReader(strObject));
-        }
-    }
+  
 
 }

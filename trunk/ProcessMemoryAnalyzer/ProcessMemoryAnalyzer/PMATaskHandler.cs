@@ -17,16 +17,11 @@ namespace PMA.ProcessMemoryAnalyzer
     public class PMATaskHandler
     {
 
-        public PMAInfo PMAInfoObj { get; set; }
-        public Emails EmailsInfoObj { get; set; }
-        public SmtpInfo SmtpInfoObj { get; set; }
-        public FTPInfo FtpInfoObj { get; set; }
-
         private string _fileName;
         private string _reportFileName;
         DateTime mailingTime;
 
-        PMAConfigManager pmaConfigManager = PMAConfigManager.GetConfigManagerInstance;
+        PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
 
 
         //----------------------------------------------------------------------------------------------------------------------------
@@ -35,7 +30,7 @@ namespace PMA.ProcessMemoryAnalyzer
         /// </summary>
         public PMATaskHandler()
         {
-            DeserilizeInfos();
+            DeserilizePMAInfo();
             _fileName = GenerateNewFileName();
         }
 
@@ -46,15 +41,15 @@ namespace PMA.ProcessMemoryAnalyzer
         /// <returns></returns>
         private string GenerateNewFileName()
         {
-            if (File.Exists(_fileName) && PMAInfoObj.DisposeLogFile)
+            if (File.Exists(_fileName) && configManager.PMAInfoObj.DisposeLogFile)
             {
                 File.Delete(_fileName);
             }
-            if (File.Exists(_reportFileName) && PMAInfoObj.DisposeLogFile)
+            if (File.Exists(_reportFileName) && configManager.PMAInfoObj.DisposeLogFile)
             {
                 File.Delete(_reportFileName);
             }
-            return Path.Combine(pmaConfigManager.PMAApplicationDirectoryMemLog, PMAInfoObj.ClientName + "_" +
+            return Path.Combine(configManager.PMAApplicationDirectoryMemLog, configManager.PMAInfoObj.ClientName + "_" +
                 DateTime.Now.ToLongDateString() + "_" + DateTime.Now.ToShortTimeString().Replace(':', '-')) + ".txt";
         }
 
@@ -64,10 +59,10 @@ namespace PMA.ProcessMemoryAnalyzer
         /// </summary>
         public void RunTask()
         {
-            mailingTime = DateTime.ParseExact(PMAInfoObj.MailingTime, "d/M/yyyy HH:mm", null);
+            mailingTime = configManager.PMAInfoObj.MailingTime;
             if (DateTime.Now < mailingTime)
             {
-                if (DateTime.Now.Minute % PMAInfoObj.TriggerSeed == 0)
+                if (DateTime.Now.Minute % configManager.PMAInfoObj.TriggerSeed == 0)
                 {
                     LogAllProcessMemory(_fileName);
                 }
@@ -91,8 +86,8 @@ namespace PMA.ProcessMemoryAnalyzer
             {
 
                 _reportFileName = string.Empty;
-                smtpPassword = SmtpInfoObj.Password;
-                ftpPassword = FtpInfoObj.Password;
+                smtpPassword = configManager.SmtpInfo.Password;
+                ftpPassword = configManager.FtpInfo.Password;
                 if (File.Exists(_fileName))
                 {
                     _reportFileName = CreateAllProcessCSVReport(_fileName);
@@ -100,7 +95,7 @@ namespace PMA.ProcessMemoryAnalyzer
                 if (DateTime.Now > mailingTime)
                 {
                     mailingTime = mailingTime.AddHours(PMAInfoObj.ReportsIntervalHours);
-                    PMAInfoObj.MailingTime = mailingTime.ToString("d/M/yyyy HH:mm");
+                    PMAInfoObj.MailingTime = mailingTime;
                 }
                 if (File.Exists(_fileName))
                 {
@@ -134,7 +129,7 @@ namespace PMA.ProcessMemoryAnalyzer
                 SmtpInfoObj.Password = smtpPassword;
                 FtpInfoObj.Password = ftpPassword;
                 _fileName = GenerateNewFileName();
-                SerializedInfo();
+                SerializedPMAInfo();
             }
         }
 
@@ -388,14 +383,11 @@ namespace PMA.ProcessMemoryAnalyzer
         /// <summary>
         /// Deserilizes the infos.
         /// </summary>
-        private void DeserilizeInfos()
+        private void DeserilizePMAInfo()
         {
             try
             {
-                PMAInfoObj = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE)));
-                EmailsInfoObj = Emails.Deserialize(File.ReadAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, Emails.EMAILS_INFO_FILE)));
-                SmtpInfoObj = SmtpInfo.Deserialize(File.ReadAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, SmtpInfo.SMTP_INFO_FILE)));
-                FtpInfoObj = FTPInfo.Deserialize(File.ReadAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE)));
+                PMAInfoObj = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(configManager.CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE)));
             }
             catch (FileNotFoundException ex)
             {
@@ -407,12 +399,9 @@ namespace PMA.ProcessMemoryAnalyzer
         /// <summary>
         /// Serializeds the info.
         /// </summary>
-        private void SerializedInfo()
+        private void SerializedPMAInfo()
         {
-            File.WriteAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE), PMAInfoObj.Serialize());
-            File.WriteAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, Emails.EMAILS_INFO_FILE), EmailsInfoObj.Serialize());
-            File.WriteAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, SmtpInfo.SMTP_INFO_FILE), SmtpInfoObj.Serialize());
-            File.WriteAllText(Path.Combine(pmaConfigManager.CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE), FtpInfoObj.Serialize());
+            File.WriteAllText(Path.Combine(configManager.CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE), PMAInfoObj.Serialize());
         }
 
 

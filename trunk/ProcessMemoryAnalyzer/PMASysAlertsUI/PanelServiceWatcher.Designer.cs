@@ -49,6 +49,7 @@
             // 
             // checkedListBox_Services
             // 
+            this.checkedListBox_Services.CheckOnClick = true;
             this.checkedListBox_Services.FormattingEnabled = true;
             this.checkedListBox_Services.Location = new System.Drawing.Point(35, 58);
             this.checkedListBox_Services.Name = "checkedListBox_Services";
