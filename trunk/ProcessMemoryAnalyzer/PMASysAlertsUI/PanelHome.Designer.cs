@@ -140,6 +140,7 @@
             this.checkBox_ProcessWatch.TabIndex = 6;
             this.checkBox_ProcessWatch.Text = "Process Watch";
             this.checkBox_ProcessWatch.UseVisualStyleBackColor = true;
+            this.checkBox_ProcessWatch.CheckedChanged += new System.EventHandler(this.checkBox_ProcessWatch_CheckedChanged);
             // 
             // label_Home
             // 

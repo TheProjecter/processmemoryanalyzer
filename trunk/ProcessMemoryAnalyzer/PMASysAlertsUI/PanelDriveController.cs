@@ -63,6 +63,7 @@ namespace PMASysAlertsUI
 
         public void UpdateConfig()
         {
+            configManager.SystemAnalyzerInfo.ListDrivesToWatch.Clear();
             foreach (object item in checkedListBox_Drives.CheckedItems)
             {
                 if (!configManager.SystemAnalyzerInfo.ListDrivesToWatch.Contains(item.ToString()))

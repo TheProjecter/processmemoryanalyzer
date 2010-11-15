@@ -62,6 +62,7 @@ namespace PMASysAlertsUI
 
         public void UpdateConfig()
         {
+            configManager.SystemAnalyzerInfo.ListServicesNames.Clear();
             foreach (object item in checkedListBox_Services.CheckedItems)
             {
                 if (!configManager.SystemAnalyzerInfo.ListServicesNames.Contains(item.ToString()))

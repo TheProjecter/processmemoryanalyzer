@@ -46,6 +46,9 @@ namespace PMA.Info
         [DefaultValue(false)]
         public bool SetPostFTP { get; set; }
 
+        [DefaultValue(false)]
+        public bool SetPMA { get; set; }
+
         #endregion 
 
         //-------------------------------------------------------------------------------------------------
