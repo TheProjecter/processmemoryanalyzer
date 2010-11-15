@@ -59,17 +59,20 @@ namespace PMA.ProcessMemoryAnalyzer
         /// </summary>
         public void RunTask()
         {
-            mailingTime = configManager.PMAInfoObj.MailingTime;
-            if (DateTime.Now < mailingTime)
+            if (configManager.SystemAnalyzerInfo.SetPMA)
             {
-                if (DateTime.Now.Minute % configManager.PMAInfoObj.TriggerSeed == 0)
+                mailingTime = configManager.PMAInfoObj.MailingTime;
+                if (DateTime.Now < mailingTime)
                 {
-                    LogAllProcessMemory(_fileName);
+                    if (DateTime.Now.Minute % configManager.PMAInfoObj.TriggerSeed == 0)
+                    {
+                        LogAllProcessMemory(_fileName);
+                    }
                 }
-            }
-            else
-            {
-                ReportingTask();
+                else
+                {
+                    ReportingTask();
+                }
             }
         }
 
@@ -78,58 +81,61 @@ namespace PMA.ProcessMemoryAnalyzer
         /// </summary>
         public void ReportingTask()
         {
-            string smtpPassword = string.Empty;
-            string ftpPassword = string.Empty;
-            SMTPTransport smtpTransport = new SMTPTransport();
-            FTPTransport ftpTransport = new FTPTransport();
-            try
+            if (configManager.SystemAnalyzerInfo.SetPMA)
             {
+                string smtpPassword = string.Empty;
+                string ftpPassword = string.Empty;
+                SMTPTransport smtpTransport = new SMTPTransport();
+                FTPTransport ftpTransport = new FTPTransport();
+                try
+                {
 
-                _reportFileName = string.Empty;
-                smtpPassword = configManager.SmtpInfo.Password;
-                ftpPassword = configManager.FtpInfo.Password;
-                if (File.Exists(_fileName))
-                {
-                    _reportFileName = CreateAllProcessCSVReport(_fileName);
-                }
-                if (DateTime.Now > mailingTime)
-                {
-                    mailingTime = mailingTime.AddHours(PMAInfoObj.ReportsIntervalHours);
-                    PMAInfoObj.MailingTime = mailingTime;
-                }
-                if (File.Exists(_fileName))
-                {
-                    if (PMAInfoObj.UseSMTP)
+                    _reportFileName = string.Empty;
+                    smtpPassword = configManager.SmtpInfo.Password;
+                    ftpPassword = configManager.FtpInfo.Password;
+                    if (File.Exists(_fileName))
                     {
-                        List<string> attachments = new List<string>();
-                        attachments.Add(_reportFileName);
-                        smtpTransport.SmtpSend(SmtpInfoObj, EmailsInfoObj.EmailTo, EmailsInfoObj.EmailCC,
-                             EmailsInfoObj.Subject + ":" + PMAInfoObj.ClientName, GenerateMailMessageBody(),attachments );
-                        
+                        _reportFileName = CreateAllProcessCSVReport(_fileName);
                     }
-                    if (PMAInfoObj.UseFTP)
+                    if (DateTime.Now > mailingTime)
                     {
-                        List<string> ftpFiles = new List<string>();
-                        ftpFiles.Add(_reportFileName);
-                        ftpTransport.FTPSend(FtpInfoObj,ftpFiles);
+                        mailingTime = mailingTime.AddHours(configManager.PMAInfoObj.ReportsIntervalHours);
+                        configManager.PMAInfoObj.MailingTime = mailingTime;
+                    }
+                    if (File.Exists(_fileName))
+                    {
+                        if (configManager.PMAInfoObj.UseSMTP)
+                        {
+                            List<string> attachments = new List<string>();
+                            attachments.Add(_reportFileName);
+                            smtpTransport.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListSendMailTo, null,
+                                 "PMA Report" + ":" + configManager.PMAInfoObj.ClientName, GenerateMailMessageBody(), attachments);
+
+                        }
+                        if (configManager.PMAInfoObj.UseFTP)
+                        {
+                            List<string> ftpFiles = new List<string>();
+                            ftpFiles.Add(_reportFileName);
+                            ftpTransport.FTPSend(configManager.FtpInfo, ftpFiles);
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception : " + ex.Message);
-                // Start New Loging
-            }
-            finally
-            {
-                smtpTransport = null;
-                ftpTransport = null;
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                SmtpInfoObj.Password = smtpPassword;
-                FtpInfoObj.Password = ftpPassword;
-                _fileName = GenerateNewFileName();
-                SerializedPMAInfo();
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Exception : " + ex.Message);
+                    // Start New Loging
+                }
+                finally
+                {
+                    smtpTransport = null;
+                    ftpTransport = null;
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    configManager.SmtpInfo.Password = smtpPassword;
+                    configManager.FtpInfo.Password = ftpPassword;
+                    _fileName = GenerateNewFileName();
+                    SerializedPMAInfo();
+                }
             }
         }
 
@@ -363,9 +369,9 @@ namespace PMA.ProcessMemoryAnalyzer
             builder.Append("Hi,");
             builder.Append("\r\n");
             builder.Append("\r\n");
-            builder.Append(EmailsInfoObj.BodyContent);
+            builder.Append("Please find the Process Memory information file attached.");
             builder.Append("\r\n");
-            builder.Append("Please find attached Machine Process Report for " + PMAInfoObj.ClientName);
+            builder.Append("Please find attached Machine Process Report for " + configManager.PMAInfoObj.ClientName);
             builder.Append("\r\n");
             builder.Append("CELL FROMAT");
             builder.Append("\r\n");
@@ -387,7 +393,7 @@ namespace PMA.ProcessMemoryAnalyzer
         {
             try
             {
-                PMAInfoObj = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(configManager.CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE)));
+                configManager.PMAInfoObj = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(configManager.CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE)));
             }
             catch (FileNotFoundException ex)
             {
@@ -401,7 +407,7 @@ namespace PMA.ProcessMemoryAnalyzer
         /// </summary>
         private void SerializedPMAInfo()
         {
-            File.WriteAllText(Path.Combine(configManager.CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE), PMAInfoObj.Serialize());
+            File.WriteAllText(Path.Combine(configManager.CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE), configManager.PMAInfoObj.Serialize());
         }
 
 

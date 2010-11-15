@@ -9,6 +9,7 @@ using System.Text;
 using System.Configuration;
 using System.Timers;
 using PMA.ConfigManager;
+using PMA.ProcessMemoryAnalyzer;
 
 namespace PMA.PMAService
 {
@@ -18,6 +19,8 @@ namespace PMA.PMAService
         Timer mTimer = null;
 
         PMAFlowController flowController = null;
+        PMATaskHandler pmaTaskHandler;
+
 
         private static bool is_lock = false;
 
@@ -54,6 +57,10 @@ namespace PMA.PMAService
             {
                 //flowController.;
             }
+            if (pmaTaskHandler != null)
+            {
+                pmaTaskHandler.ReportingTask();
+            }
             is_lock = false;
         }
 
@@ -70,11 +77,19 @@ namespace PMA.PMAService
                 try
                 {
                     is_lock = true;
-                    if (flowController == null)
+                    if (flowController == null || pmaTaskHandler == null)
                     {
-                        flowController = new PMAFlowController();
+                        if (flowController == null)
+                        {
+                            flowController = new PMAFlowController();
+                        }
+                        if (pmaTaskHandler == null)
+                        {
+                            pmaTaskHandler = new PMATaskHandler();
+                        }
                     }
                     flowController.RunTask();
+                    pmaTaskHandler.RunTask();
                 }
                 finally
                 {

@@ -425,6 +425,44 @@ namespace PMASysAlertsUI
             aboutBox.Show(this);
         }
 
+        private void showToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Visible = true;
+            WindowState = FormWindowState.Normal;
+            this.Show();
+        }
+
+        private void hideToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+            this.Visible = false;
+            this.Hide();
+            notifyIconSystemAnalyzer.ShowBalloonTip(3000);
+        }
+
+        private void iISResetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PMASysAlertsUI_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                this.Visible = false;
+                Hide();
+                notifyIconSystemAnalyzer.ShowBalloonTip(3000);
+            }
+        }
+
+        private void notifyIconSystemAnalyzer_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Visible = true;
+            WindowState = FormWindowState.Normal;
+            this.Show();
+        }
+
+        
         
 
        

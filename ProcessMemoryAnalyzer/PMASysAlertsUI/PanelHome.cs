@@ -30,6 +30,7 @@ namespace PMASysAlertsUI
             checkBox_ServiceWatch.Checked = configManager.SystemAnalyzerInfo.SetServiceWatcher;
             checkBox_UseFTP.Checked = configManager.SystemAnalyzerInfo.SetPostFTP;
             checkBox_UseSMTP.Checked = configManager.SystemAnalyzerInfo.SetSendMail;
+            checkBox_ProcessWatch.Checked = configManager.SystemAnalyzerInfo.SetPMA;
         }
 
         public void UpdateConfig()
@@ -40,6 +41,7 @@ namespace PMASysAlertsUI
             configManager.SystemAnalyzerInfo.SetServiceWatcher = checkBox_ServiceWatch.Checked;
             configManager.SystemAnalyzerInfo.SetPostFTP = checkBox_UseFTP.Checked;
             configManager.SystemAnalyzerInfo.SetSendMail = checkBox_UseSMTP.Checked;
+            configManager.SystemAnalyzerInfo.SetPMA = checkBox_ProcessWatch.Checked;
         }
 
         public bool CauseValidation()
@@ -48,5 +50,10 @@ namespace PMASysAlertsUI
         }
 
         #endregion
+
+        private void checkBox_ProcessWatch_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
