@@ -48,6 +48,7 @@
             // 
             // checkedListBox_Drives
             // 
+            this.checkedListBox_Drives.CheckOnClick = true;
             this.checkedListBox_Drives.FormattingEnabled = true;
             this.checkedListBox_Drives.Location = new System.Drawing.Point(40, 48);
             this.checkedListBox_Drives.Name = "checkedListBox_Drives";

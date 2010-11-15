@@ -56,11 +56,11 @@
     </Compile>
     <Compile Include="ENUMPanel.cs" />
     <Compile Include="IUIConfigManager.cs" />
-    <Compile Include="PanelAnalyzeMemory.cs">
+    <Compile Include="PanelMemoryAnalyzer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PanelAnalyzeMemory.Designer.cs">
-      <DependentUpon>PanelAnalyzeMemory.cs</DependentUpon>
+    <Compile Include="PanelMemoryAnalyzer.Designer.cs">
+      <DependentUpon>PanelMemoryAnalyzer.cs</DependentUpon>
     </Compile>
     <Compile Include="PanelFTPSettings.cs">
       <SubType>UserControl</SubType>
@@ -115,8 +115,8 @@
     <EmbeddedResource Include="AboutBoxPMAAlerts.resx">
       <DependentUpon>AboutBoxPMAAlerts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PanelAnalyzeMemory.resx">
-      <DependentUpon>PanelAnalyzeMemory.cs</DependentUpon>
+    <EmbeddedResource Include="PanelMemoryAnalyzer.resx">
+      <DependentUpon>PanelMemoryAnalyzer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelFTPSettings.resx">
       <DependentUpon>PanelFTPSettings.cs</DependentUpon>

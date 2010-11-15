@@ -32,12 +32,14 @@ namespace PMASysAlertsUI
         PanelFTPSettings panelFTPSettings = null;
         PanelHome panelHome = null;
         PanelLogger panelLogger = null;
+        PanelMemoryAnalyzer panelMemoryAnalyzer = null;
         #endregion
 
 
         private bool CauseValidation()
         {
             bool result = false;
+            configManager.ErrorMessage.Clear();
             switch (PANEL)
             {
                 case ENUMPanel.PANEL_DATABASE_OPTIMIZER:
@@ -66,6 +68,9 @@ namespace PMASysAlertsUI
                     break;
                 case ENUMPanel.PANEL_LOGGER :
                     result = panelLogger.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_MEMEORY_ANALYZER :
+                    result = panelMemoryAnalyzer.CauseValidation();
                     break;
                 default:
                     result = false;
@@ -106,6 +111,9 @@ namespace PMASysAlertsUI
                     break;
                 case ENUMPanel.PANEL_LOGGER:
                     panelLogger.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_MEMEORY_ANALYZER :
+                    panelMemoryAnalyzer.UpdateConfig();
                     break;
             }
 
@@ -151,6 +159,10 @@ namespace PMASysAlertsUI
                 case ENUMPanel.PANEL_LOGGER:
                     HideAllControls();
                     panelLogger.Show();
+                    break;
+                case ENUMPanel.PANEL_MEMEORY_ANALYZER :
+                    HideAllControls();
+                    panelMemoryAnalyzer.Show();
                     break;
             }
 
@@ -198,6 +210,9 @@ namespace PMASysAlertsUI
             panelLogger = new PanelLogger();
             panel_MainContainer.Controls.Add(panelLogger);
 
+            panelMemoryAnalyzer = new PanelMemoryAnalyzer();
+            panel_MainContainer.Controls.Add(panelMemoryAnalyzer);
+
             HideAllControls();
 
             LoadConfigs();
@@ -216,6 +231,7 @@ namespace PMASysAlertsUI
             panelSMTPSettings.UpdateUI();
             panelFTPSettings.UpdateUI();
             panelLogger.UpdateUI();
+            panelMemoryAnalyzer.UpdateUI();
         }
 
 
@@ -353,6 +369,19 @@ namespace PMASysAlertsUI
                 MessageBox.Show(this, configManager.GetConsolidatedError("Error"));
             }
         }
+
+        private void label_PMA_Click(object sender, EventArgs e)
+        {
+            if (CauseValidation())
+            {
+                UpdateConfig(PANEL);
+                ShowPanel(ENUMPanel.PANEL_MEMEORY_ANALYZER);
+            }
+            else
+            {
+                MessageBox.Show(this,configManager.GetConsolidatedError("PMA Error"));
+            }
+        }
         #endregion
 
         private void stopServiceToolStripMenuItem_Click(object sender, EventArgs e)
@@ -395,6 +424,8 @@ namespace PMASysAlertsUI
             AboutBoxPMAAlerts aboutBox = new AboutBoxPMAAlerts();
             aboutBox.Show(this);
         }
+
+        
 
        
 
