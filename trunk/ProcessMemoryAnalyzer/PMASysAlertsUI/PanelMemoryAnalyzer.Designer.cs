@@ -39,6 +39,8 @@
             this.dateTimePicker_MailTime = new System.Windows.Forms.DateTimePicker();
             this.label_ReportInterval = new System.Windows.Forms.Label();
             this.numericUpDown_ReportInterval = new System.Windows.Forms.NumericUpDown();
+            this.label_min = new System.Windows.Forms.Label();
+            this.label_hour = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Trigger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ReportInterval)).BeginInit();
             this.SuspendLayout();
@@ -169,10 +171,30 @@
             0,
             0});
             // 
+            // label_min
+            // 
+            this.label_min.AutoSize = true;
+            this.label_min.Location = new System.Drawing.Point(175, 78);
+            this.label_min.Name = "label_min";
+            this.label_min.Size = new System.Drawing.Size(23, 13);
+            this.label_min.TabIndex = 12;
+            this.label_min.Text = "min";
+            // 
+            // label_hour
+            // 
+            this.label_hour.AutoSize = true;
+            this.label_hour.Location = new System.Drawing.Point(175, 133);
+            this.label_hour.Name = "label_hour";
+            this.label_hour.Size = new System.Drawing.Size(35, 13);
+            this.label_hour.TabIndex = 13;
+            this.label_hour.Text = "Hours";
+            // 
             // PanelMemoryAnalyzer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label_hour);
+            this.Controls.Add(this.label_min);
             this.Controls.Add(this.numericUpDown_ReportInterval);
             this.Controls.Add(this.label_ReportInterval);
             this.Controls.Add(this.dateTimePicker_MailTime);
@@ -206,5 +228,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker_MailTime;
         private System.Windows.Forms.Label label_ReportInterval;
         private System.Windows.Forms.NumericUpDown numericUpDown_ReportInterval;
+        private System.Windows.Forms.Label label_min;
+        private System.Windows.Forms.Label label_hour;
     }
 }
