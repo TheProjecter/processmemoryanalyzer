@@ -40,7 +40,9 @@ namespace PMASysAlertsUI
                     sb.Append(email);
                     sb.Append(';');
                 }
+                richTextBox_Emails.Text = sb.ToString();
             }
+
             sb = new StringBuilder();
             if (configManager.SystemAnalyzerInfo.ListPostFTPMessageOn != null)
             {
@@ -49,15 +51,18 @@ namespace PMASysAlertsUI
                     sb.Append(ftpFolder);
                     sb.Append(';');
                 }
+                richTextBox_FtpFolder.Text = sb.ToString();
             }
         }
 
         public void UpdateConfig()
         {
+            configManager.SystemAnalyzerInfo.ListSendMailTo.Clear();
             if (richTextBox_Emails.Text != string.Empty)
             {
                 configManager.SystemAnalyzerInfo.ListSendMailTo = richTextBox_Emails.Text.Split(';').ToList<string>();
             }
+            configManager.SystemAnalyzerInfo.ListPostFTPMessageOn.Clear();
             if (richTextBox_FtpFolder.Text != string.Empty)
             {
                 configManager.SystemAnalyzerInfo.ListPostFTPMessageOn = richTextBox_FtpFolder.Text.Split(';').ToList<string>();
