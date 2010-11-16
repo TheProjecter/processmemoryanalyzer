@@ -262,9 +262,9 @@
             this.label_Transport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Transport.Location = new System.Drawing.Point(3, 165);
             this.label_Transport.Name = "label_Transport";
-            this.label_Transport.Size = new System.Drawing.Size(67, 13);
+            this.label_Transport.Size = new System.Drawing.Size(77, 13);
             this.label_Transport.TabIndex = 5;
-            this.label_Transport.Text = "Transports";
+            this.label_Transport.Text = "Subscription";
             this.label_Transport.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label_Transport.Click += new System.EventHandler(this.label_Transport_Click);
             // 
