@@ -92,7 +92,7 @@
             // 
             // richTextBox_FtpFolder
             // 
-            this.richTextBox_FtpFolder.Location = new System.Drawing.Point(10, 20);
+            this.richTextBox_FtpFolder.Location = new System.Drawing.Point(7, 20);
             this.richTextBox_FtpFolder.Name = "richTextBox_FtpFolder";
             this.richTextBox_FtpFolder.Size = new System.Drawing.Size(375, 51);
             this.richTextBox_FtpFolder.TabIndex = 1;
@@ -101,7 +101,7 @@
             // label_FTPFolders
             // 
             this.label_FTPFolders.AutoSize = true;
-            this.label_FTPFolders.Location = new System.Drawing.Point(7, 4);
+            this.label_FTPFolders.Location = new System.Drawing.Point(4, 4);
             this.label_FTPFolders.Name = "label_FTPFolders";
             this.label_FTPFolders.Size = new System.Drawing.Size(64, 13);
             this.label_FTPFolders.TabIndex = 0;

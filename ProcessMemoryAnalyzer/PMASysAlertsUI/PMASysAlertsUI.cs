@@ -394,6 +394,7 @@ namespace PMASysAlertsUI
         {
             UpdateConfig(PANEL);
             configManager.SaveConfiguration();
+            notifyIconSystemAnalyzer.Visible = false;
             Environment.Exit(0);
         }
 
@@ -401,6 +402,7 @@ namespace PMASysAlertsUI
         {
             UpdateConfig(PANEL);
             configManager.SaveConfiguration();
+            notifyIconSystemAnalyzer.Visible = false;
         }
 
         
@@ -442,7 +444,7 @@ namespace PMASysAlertsUI
 
         private void iISResetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            PMASystemAnalyzer.ResetIIS();
         }
 
         private void PMASysAlertsUI_Resize(object sender, EventArgs e)
@@ -451,7 +453,7 @@ namespace PMASysAlertsUI
             {
                 this.Visible = false;
                 Hide();
-                notifyIconSystemAnalyzer.ShowBalloonTip(3000);
+                notifyIconSystemAnalyzer.ShowBalloonTip(100);
             }
         }
 

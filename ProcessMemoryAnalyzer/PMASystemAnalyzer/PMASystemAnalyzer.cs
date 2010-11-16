@@ -176,6 +176,16 @@ namespace PMA.ConfigManager
             return flag;
             
         }
+
+        public static void ResetIIS()
+        {
+            ProcessStartInfo pInfo = new ProcessStartInfo(Environment.SystemDirectory + "\\iisreset.exe");
+            if (Environment.OSVersion.Version.Major > 5)
+            {
+                pInfo.Verb = "runas";
+            }
+            Process.Start(pInfo);
+        }
         #endregion 
 
         
