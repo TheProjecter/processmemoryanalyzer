@@ -11,4 +11,11 @@ namespace PMA.Utils.Logger
         DEBUG,
         ERROR
     }
+
+    public enum EnumMethod
+    {
+        START,
+        END,
+        NONE
+    }
 }

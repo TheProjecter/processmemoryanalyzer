@@ -4,12 +4,23 @@ using System.Linq;
 using System.Text;
 using PMA.Utils.smtp;
 using System.IO;
+using System.Diagnostics;
 
 namespace PMATestApplication
 {
     class Program
     {
         static void Main(string[] args)
+        {
+            Process[] proc = Process.GetProcesses();
+            foreach (Process p in proc)
+            {
+                
+            }
+            
+        }
+
+        static void SendMail()
         {
             string config = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + SmtpInfo.SMTP_INFO_FILE);
             SmtpInfo smtpInfo = SmtpInfo.Deserialize(config);
