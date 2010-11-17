@@ -17,7 +17,8 @@ namespace PMA.Utils.Logger
 
         internal LoggerInfo()
         {
-
+            LoggerFile = _defaultLogPath;
+            Level = EnumLogger.OFF;
         }
 
         internal LoggerInfo(string logFilePath, EnumLogger level)

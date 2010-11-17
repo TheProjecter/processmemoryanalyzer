@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Diagnostics;
 
 namespace PMA.Utils.Logger
 {
@@ -116,15 +117,36 @@ namespace PMA.Utils.Logger
         /// Debugs the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
-        public void Debug(string message)
+        public void Debug(EnumMethod enumMethod)
         {
+            StackTrace st = new StackTrace();
+            string whoCalledMe = st.GetFrame(1).GetMethod().Name;
+            string position = string.Empty;
+            if (enumMethod != EnumMethod.NONE)
+            {
+                if (enumMethod == EnumMethod.START)
+                {
+                    position = "--> Start";
+                }
+                else if (enumMethod == EnumMethod.END)
+                {
+                    position = "--> End";
+                }
+            }
+
             if (_loggerInfo.Level == EnumLogger.DEBUG)
             {
-                string log = ("Debug :" + DateTime.Now.ToShortDateString() + "_" + DateTime.Now.ToShortDateString() + "-->" + message);
+                
+                string log = ("Debug :" + DateTime.Now.ToShortDateString() + "_" + DateTime.Now.ToShortDateString() + "-->" + whoCalledMe  + position);
                 File.AppendAllText(_loggerInfo.LoggerFile, log);
             }
         }
 
+
+        public void Debug()
+        {
+            Debug(EnumMethod.NONE);
+        }
         //----------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Errors the specified ex.

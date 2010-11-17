@@ -176,6 +176,7 @@ namespace PMA.ConfigManager
                     Logger = Logger.GetDeserializedInstance(File.ReadAllText(Path.Combine(CurrentAppConfigDir, LoggerInfo.LOGGER_FILE)));
                 }
                 else Logger = Logger.GetInstance();
+                     
             }
 
         }

@@ -7,6 +7,7 @@ using PMA.Utils.smtp;
 using System.IO;
 using PMA.Utils.ftp;
 using PMA.ConfigManager;
+using PMA.Utils.Logger;
 
 namespace PMA.ConfigManager
 {
@@ -16,12 +17,14 @@ namespace PMA.ConfigManager
         bool postAlert;
         private string systemName = Environment.MachineName;
 
+
         //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Runs the task.
         /// </summary>
         public void RunTask()
         {
+            configManager.Logger.Debug(EnumMethod.START);
             configManager.ClearErrorMessage();
             postAlert = false;
             if (configManager.SystemAnalyzerInfo.SetDiscWatch)
@@ -53,6 +56,7 @@ namespace PMA.ConfigManager
                 }
 
             }
+            configManager.Logger.Debug(EnumMethod.END);
 
         }
 
@@ -62,6 +66,7 @@ namespace PMA.ConfigManager
         /// </summary>
         private void RunDiscWatch()
         {
+            configManager.Logger.Debug(EnumMethod.START);
             PMAConfigManager cm = configManager;
             List<string> listMessage = new List<string>();
             if (PMASystemAnalyzer.GenerateDriveSpaceAlert(cm.SystemAnalyzerInfo.ListDrivesToWatch.ToList<string>(),
@@ -86,6 +91,7 @@ namespace PMA.ConfigManager
         /// </summary>
         private void RunServiceWatcher()
         {
+            configManager.Logger.Debug();
             PMAConfigManager cm = configManager;
             List<string> listMessage = new List<string>();
             if (PMASystemAnalyzer.GenerateServiceMemoryAlert(cm.SystemAnalyzerInfo.ListServicesNames.ToList<string>(),
@@ -111,6 +117,7 @@ namespace PMA.ConfigManager
         /// </summary>
         private void RunPhysicalMemoryWatch()
         {
+            configManager.Logger.Debug();
             PMAConfigManager cm = configManager;
             string message = string.Empty;
             if (PMASystemAnalyzer.GeneratePhyMemAlert(cm.SystemAnalyzerInfo.SystemPhysicalMemoryAlertAt, out message))
@@ -132,6 +139,7 @@ namespace PMA.ConfigManager
         /// </summary>
         private void RunDBOptimizer()
         {
+            configManager.Logger.Debug();
             PMAConfigManager cm = configManager;
             if (cm.SystemAnalyzerInfo.IsWebServer)
             {
@@ -155,6 +163,7 @@ namespace PMA.ConfigManager
         /// </summary>
         private void SendMail()
         {
+            configManager.Logger.Debug();
             string subject = "PMA System Alert for : " + systemName;
             SMTPTransport smtp = new SMTPTransport();
             try
@@ -162,7 +171,7 @@ namespace PMA.ConfigManager
                 smtp.SendAsynchronous = true;
                 smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListSendMailTo, null, subject, GenerateMessageBody(), null);
             }
-            catch
+            catch(Exception ex)
             {
                 configManager.FlagInfo.FlagedDiscAlert = false;
                 configManager.FlagInfo.FlagedPhysicalMemoryAlert = false;
@@ -176,6 +185,7 @@ namespace PMA.ConfigManager
         /// </summary>
         private void PostFTPMessage()
         {
+            configManager.Logger.Debug();
             try
             {
             string tempFileName = configManager.CurrentAppConfigDir + "\\PMA_ALERTS_" + systemName + ".txt";
