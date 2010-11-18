@@ -39,12 +39,12 @@
             this.label_Wait = new System.Windows.Forms.Label();
             this.checkBox_GenerateSessionStateAlert = new System.Windows.Forms.CheckBox();
             this.checkBox_TempDBAlert = new System.Windows.Forms.CheckBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label_GB2 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.label_GB1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.numericUpDown_TempTB = new System.Windows.Forms.NumericUpDown();
+            this.label_MB2 = new System.Windows.Forms.Label();
+            this.numericUpDown_SessionAlert = new System.Windows.Forms.NumericUpDown();
+            this.label_MB1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TempTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_SessionAlert)).BeginInit();
             this.SuspendLayout();
             // 
             // label_Database
@@ -135,6 +135,7 @@
             this.checkBox_GenerateSessionStateAlert.TabIndex = 9;
             this.checkBox_GenerateSessionStateAlert.Text = "Session State Alert At";
             this.checkBox_GenerateSessionStateAlert.UseVisualStyleBackColor = true;
+            this.checkBox_GenerateSessionStateAlert.CheckedChanged += new System.EventHandler(this.checkBox_GenerateSessionStateAlert_CheckedChanged);
             // 
             // checkBox_TempDBAlert
             // 
@@ -145,47 +146,48 @@
             this.checkBox_TempDBAlert.TabIndex = 10;
             this.checkBox_TempDBAlert.Text = "Temp DB Alert At";
             this.checkBox_TempDBAlert.UseVisualStyleBackColor = true;
+            this.checkBox_TempDBAlert.CheckedChanged += new System.EventHandler(this.checkBox_TempDBAlert_CheckedChanged);
             // 
-            // numericUpDown1
+            // numericUpDown_TempTB
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(170, 164);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(54, 20);
-            this.numericUpDown1.TabIndex = 11;
+            this.numericUpDown_TempTB.Location = new System.Drawing.Point(170, 164);
+            this.numericUpDown_TempTB.Name = "numericUpDown_TempTB";
+            this.numericUpDown_TempTB.Size = new System.Drawing.Size(54, 20);
+            this.numericUpDown_TempTB.TabIndex = 11;
             // 
-            // label_GB2
+            // label_MB2
             // 
-            this.label_GB2.AutoSize = true;
-            this.label_GB2.Location = new System.Drawing.Point(233, 171);
-            this.label_GB2.Name = "label_GB2";
-            this.label_GB2.Size = new System.Drawing.Size(22, 13);
-            this.label_GB2.TabIndex = 12;
-            this.label_GB2.Text = "GB";
+            this.label_MB2.AutoSize = true;
+            this.label_MB2.Location = new System.Drawing.Point(233, 171);
+            this.label_MB2.Name = "label_MB2";
+            this.label_MB2.Size = new System.Drawing.Size(23, 13);
+            this.label_MB2.TabIndex = 12;
+            this.label_MB2.Text = "MB";
             // 
-            // numericUpDown2
+            // numericUpDown_SessionAlert
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(170, 143);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(54, 20);
-            this.numericUpDown2.TabIndex = 13;
+            this.numericUpDown_SessionAlert.Location = new System.Drawing.Point(170, 143);
+            this.numericUpDown_SessionAlert.Name = "numericUpDown_SessionAlert";
+            this.numericUpDown_SessionAlert.Size = new System.Drawing.Size(54, 20);
+            this.numericUpDown_SessionAlert.TabIndex = 13;
             // 
-            // label_GB1
+            // label_MB1
             // 
-            this.label_GB1.AutoSize = true;
-            this.label_GB1.Location = new System.Drawing.Point(234, 145);
-            this.label_GB1.Name = "label_GB1";
-            this.label_GB1.Size = new System.Drawing.Size(22, 13);
-            this.label_GB1.TabIndex = 14;
-            this.label_GB1.Text = "GB";
+            this.label_MB1.AutoSize = true;
+            this.label_MB1.Location = new System.Drawing.Point(234, 145);
+            this.label_MB1.Name = "label_MB1";
+            this.label_MB1.Size = new System.Drawing.Size(23, 13);
+            this.label_MB1.TabIndex = 14;
+            this.label_MB1.Text = "MB";
             // 
             // PanelDatabaseOptimizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label_GB1);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.label_GB2);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.label_MB1);
+            this.Controls.Add(this.numericUpDown_SessionAlert);
+            this.Controls.Add(this.label_MB2);
+            this.Controls.Add(this.numericUpDown_TempTB);
             this.Controls.Add(this.checkBox_TempDBAlert);
             this.Controls.Add(this.checkBox_GenerateSessionStateAlert);
             this.Controls.Add(this.label_Wait);
@@ -199,8 +201,8 @@
             this.Controls.Add(this.label_Database);
             this.Name = "PanelDatabaseOptimizer";
             this.Size = new System.Drawing.Size(400, 200);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TempTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_SessionAlert)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,9 +221,9 @@
         private System.Windows.Forms.Label label_Wait;
         private System.Windows.Forms.CheckBox checkBox_GenerateSessionStateAlert;
         private System.Windows.Forms.CheckBox checkBox_TempDBAlert;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label_GB2;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.Label label_GB1;
+        private System.Windows.Forms.NumericUpDown numericUpDown_TempTB;
+        private System.Windows.Forms.Label label_MB2;
+        private System.Windows.Forms.NumericUpDown numericUpDown_SessionAlert;
+        private System.Windows.Forms.Label label_MB1;
     }
 }

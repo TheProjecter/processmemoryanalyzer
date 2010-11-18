@@ -49,6 +49,9 @@ namespace PMA.Info
         [DefaultValue(false)]
         public bool SetPMA { get; set; }
 
+        [DefaultValue(false)]
+        public bool SetCrashReporting { get; set; }
+
         #endregion 
 
         //-------------------------------------------------------------------------------------------------
