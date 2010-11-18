@@ -55,6 +55,10 @@ namespace PMASysAlertsUI
             textBox_Database.Text = configManager.SystemAnalyzerInfo.Database;
             textBox_DBUser.Text = configManager.SystemAnalyzerInfo.DBUser;
             textBox_DBPassword.Text = configManager.SystemAnalyzerInfo.DBPassword;
+            checkBox_GenerateSessionStateAlert.Checked = configManager.SystemAnalyzerInfo.SetSessionStateSizeAlerts;
+            checkBox_TempDBAlert.Checked = configManager.SystemAnalyzerInfo.SetTempDBSizeAlerts;
+            numericUpDown_SessionAlert.Value = configManager.SystemAnalyzerInfo.SessionStateSizeAlertLevel;
+            numericUpDown_TempTB.Value = configManager.SystemAnalyzerInfo.TempDBSizeAlertLevel;
         }
 
         public void UpdateConfig()
@@ -63,6 +67,10 @@ namespace PMASysAlertsUI
             configManager.SystemAnalyzerInfo.Database = textBox_Database.Text;
             configManager.SystemAnalyzerInfo.DBUser = textBox_DBUser.Text;
             configManager.SystemAnalyzerInfo.DBPassword = textBox_DBPassword.Text;
+            configManager.SystemAnalyzerInfo.SetSessionStateSizeAlerts = checkBox_GenerateSessionStateAlert.Checked;
+            configManager.SystemAnalyzerInfo.SetTempDBSizeAlerts = checkBox_TempDBAlert.Checked;
+            configManager.SystemAnalyzerInfo.SessionStateSizeAlertLevel = decimal.ToInt32(numericUpDown_SessionAlert.Value);
+            configManager.SystemAnalyzerInfo.TempDBSizeAlertLevel = decimal.ToInt32(numericUpDown_TempTB.Value);
         }
 
         public bool CauseValidation()
@@ -82,6 +90,26 @@ namespace PMASysAlertsUI
         }
 
         #endregion
+
+        private void checkBox_GenerateSessionStateAlert_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_GenerateSessionStateAlert.Checked)
+            {
+                numericUpDown_SessionAlert.Enabled = true;
+            }
+            else numericUpDown_SessionAlert.Enabled = false;
+        }
+
+        private void checkBox_TempDBAlert_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_TempDBAlert.Checked)
+            {
+                numericUpDown_TempTB.Enabled = true;
+            }
+            else numericUpDown_TempTB.Enabled = false;
+        }
+
+        
 
         
     }

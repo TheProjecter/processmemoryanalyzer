@@ -38,6 +38,7 @@
             this.checkBox_UseFTP = new System.Windows.Forms.CheckBox();
             this.checkBox_ProcessWatch = new System.Windows.Forms.CheckBox();
             this.label_Home = new System.Windows.Forms.Label();
+            this.checkBox_CrashReporting = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel_Transport.SuspendLayout();
             this.SuspendLayout();
@@ -51,14 +52,16 @@
             this.tableLayoutPanel1.Controls.Add(this.checkBox_ServiceWatch, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.checkBox_MemWatch, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.checkBox_DBOptimizer, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel_Transport, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.checkBox_ProcessWatch, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.panel_Transport, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.checkBox_CrashReporting, 1, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(21, 39);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(370, 194);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -75,7 +78,7 @@
             // checkBox_ServiceWatch
             // 
             this.checkBox_ServiceWatch.AutoSize = true;
-            this.checkBox_ServiceWatch.Location = new System.Drawing.Point(3, 67);
+            this.checkBox_ServiceWatch.Location = new System.Drawing.Point(3, 51);
             this.checkBox_ServiceWatch.Name = "checkBox_ServiceWatch";
             this.checkBox_ServiceWatch.Size = new System.Drawing.Size(97, 17);
             this.checkBox_ServiceWatch.TabIndex = 1;
@@ -95,7 +98,7 @@
             // checkBox_DBOptimizer
             // 
             this.checkBox_DBOptimizer.AutoSize = true;
-            this.checkBox_DBOptimizer.Location = new System.Drawing.Point(188, 67);
+            this.checkBox_DBOptimizer.Location = new System.Drawing.Point(188, 51);
             this.checkBox_DBOptimizer.Name = "checkBox_DBOptimizer";
             this.checkBox_DBOptimizer.Size = new System.Drawing.Size(118, 17);
             this.checkBox_DBOptimizer.TabIndex = 3;
@@ -106,9 +109,9 @@
             // 
             this.panel_Transport.Controls.Add(this.checkBox_UseSMTP);
             this.panel_Transport.Controls.Add(this.checkBox_UseFTP);
-            this.panel_Transport.Location = new System.Drawing.Point(188, 131);
+            this.panel_Transport.Location = new System.Drawing.Point(3, 147);
             this.panel_Transport.Name = "panel_Transport";
-            this.panel_Transport.Size = new System.Drawing.Size(179, 60);
+            this.panel_Transport.Size = new System.Drawing.Size(179, 44);
             this.panel_Transport.TabIndex = 5;
             // 
             // checkBox_UseSMTP
@@ -134,7 +137,7 @@
             // checkBox_ProcessWatch
             // 
             this.checkBox_ProcessWatch.AutoSize = true;
-            this.checkBox_ProcessWatch.Location = new System.Drawing.Point(3, 131);
+            this.checkBox_ProcessWatch.Location = new System.Drawing.Point(3, 99);
             this.checkBox_ProcessWatch.Name = "checkBox_ProcessWatch";
             this.checkBox_ProcessWatch.Size = new System.Drawing.Size(99, 17);
             this.checkBox_ProcessWatch.TabIndex = 6;
@@ -151,6 +154,16 @@
             this.label_Home.Size = new System.Drawing.Size(39, 13);
             this.label_Home.TabIndex = 1;
             this.label_Home.Text = "Home";
+            // 
+            // checkBox_CrashReporting
+            // 
+            this.checkBox_CrashReporting.AutoSize = true;
+            this.checkBox_CrashReporting.Location = new System.Drawing.Point(188, 99);
+            this.checkBox_CrashReporting.Name = "checkBox_CrashReporting";
+            this.checkBox_CrashReporting.Size = new System.Drawing.Size(102, 17);
+            this.checkBox_CrashReporting.TabIndex = 7;
+            this.checkBox_CrashReporting.Text = "Crash Reporting";
+            this.checkBox_CrashReporting.UseVisualStyleBackColor = true;
             // 
             // PanelHome
             // 
@@ -181,5 +194,6 @@
         private System.Windows.Forms.CheckBox checkBox_UseFTP;
         private System.Windows.Forms.Label label_Home;
         private System.Windows.Forms.CheckBox checkBox_ProcessWatch;
+        private System.Windows.Forms.CheckBox checkBox_CrashReporting;
     }
 }
