@@ -58,6 +58,18 @@ namespace PMA.Info
         [DefaultValue(false)]
         public bool IsWebServer { get; set; }
 
+        [DefaultValue(false)]
+        public bool SetSessionStateSizeAlerts { get; set; }
+
+        [DefaultValue(false)]
+        public bool SetTempDBSizeAlerts { get; set; }
+
+        [DefaultValue(0)]
+        public int SessionStateSizeAlertLevel { get; set; }
+
+        [DefaultValue(0)]
+        public int TempDBSizeAlertLevel { get; set; } 
+
         [DefaultValue("")]
         public string Database { get; set; }
 
