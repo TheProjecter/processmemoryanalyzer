@@ -12,11 +12,13 @@ namespace PMATestApplication
     {
         static void Main(string[] args)
         {
-            Process[] proc = Process.GetProcesses();
-            foreach (Process p in proc)
-            {
-                
-            }
+            EventLog e = new EventLog();
+            e.EntryWritten += new EntryWrittenEventHandler(entryHandler);
+            
+        }
+
+        private static void entryHandler(object sender, EntryWrittenEventArgs e)
+        {
             
         }
 

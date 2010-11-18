@@ -37,12 +37,20 @@
             this.textBox_DBPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label_Wait = new System.Windows.Forms.Label();
+            this.checkBox_GenerateSessionStateAlert = new System.Windows.Forms.CheckBox();
+            this.checkBox_TempDBAlert = new System.Windows.Forms.CheckBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label_GB2 = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label_GB1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // label_Database
             // 
             this.label_Database.AutoSize = true;
-            this.label_Database.Location = new System.Drawing.Point(25, 86);
+            this.label_Database.Location = new System.Drawing.Point(25, 38);
             this.label_Database.Name = "label_Database";
             this.label_Database.Size = new System.Drawing.Size(53, 13);
             this.label_Database.TabIndex = 0;
@@ -51,7 +59,7 @@
             // checkBox_IsWebServer
             // 
             this.checkBox_IsWebServer.AutoSize = true;
-            this.checkBox_IsWebServer.Location = new System.Drawing.Point(28, 48);
+            this.checkBox_IsWebServer.Location = new System.Drawing.Point(28, 121);
             this.checkBox_IsWebServer.Name = "checkBox_IsWebServer";
             this.checkBox_IsWebServer.Size = new System.Drawing.Size(94, 17);
             this.checkBox_IsWebServer.TabIndex = 1;
@@ -61,7 +69,7 @@
             // 
             // textBox_Database
             // 
-            this.textBox_Database.Location = new System.Drawing.Point(95, 83);
+            this.textBox_Database.Location = new System.Drawing.Point(95, 35);
             this.textBox_Database.Name = "textBox_Database";
             this.textBox_Database.Size = new System.Drawing.Size(174, 20);
             this.textBox_Database.TabIndex = 2;
@@ -69,7 +77,7 @@
             // label_User
             // 
             this.label_User.AutoSize = true;
-            this.label_User.Location = new System.Drawing.Point(25, 112);
+            this.label_User.Location = new System.Drawing.Point(25, 60);
             this.label_User.Name = "label_User";
             this.label_User.Size = new System.Drawing.Size(29, 13);
             this.label_User.TabIndex = 3;
@@ -77,7 +85,7 @@
             // 
             // textBox_DBUser
             // 
-            this.textBox_DBUser.Location = new System.Drawing.Point(95, 109);
+            this.textBox_DBUser.Location = new System.Drawing.Point(95, 57);
             this.textBox_DBUser.Name = "textBox_DBUser";
             this.textBox_DBUser.Size = new System.Drawing.Size(174, 20);
             this.textBox_DBUser.TabIndex = 4;
@@ -85,7 +93,7 @@
             // label_Password
             // 
             this.label_Password.AutoSize = true;
-            this.label_Password.Location = new System.Drawing.Point(25, 138);
+            this.label_Password.Location = new System.Drawing.Point(25, 82);
             this.label_Password.Name = "label_Password";
             this.label_Password.Size = new System.Drawing.Size(53, 13);
             this.label_Password.TabIndex = 5;
@@ -93,7 +101,7 @@
             // 
             // textBox_DBPassword
             // 
-            this.textBox_DBPassword.Location = new System.Drawing.Point(95, 135);
+            this.textBox_DBPassword.Location = new System.Drawing.Point(95, 79);
             this.textBox_DBPassword.Name = "textBox_DBPassword";
             this.textBox_DBPassword.PasswordChar = '*';
             this.textBox_DBPassword.Size = new System.Drawing.Size(174, 20);
@@ -103,7 +111,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(25, 16);
+            this.label1.Location = new System.Drawing.Point(25, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(117, 13);
             this.label1.TabIndex = 7;
@@ -112,16 +120,74 @@
             // label_Wait
             // 
             this.label_Wait.AutoSize = true;
-            this.label_Wait.Location = new System.Drawing.Point(25, 169);
+            this.label_Wait.Location = new System.Drawing.Point(286, 82);
             this.label_Wait.Name = "label_Wait";
             this.label_Wait.Size = new System.Drawing.Size(82, 13);
             this.label_Wait.TabIndex = 8;
             this.label_Wait.Text = "Please Wait .... ";
             // 
+            // checkBox_GenerateSessionStateAlert
+            // 
+            this.checkBox_GenerateSessionStateAlert.AutoSize = true;
+            this.checkBox_GenerateSessionStateAlert.Location = new System.Drawing.Point(28, 144);
+            this.checkBox_GenerateSessionStateAlert.Name = "checkBox_GenerateSessionStateAlert";
+            this.checkBox_GenerateSessionStateAlert.Size = new System.Drawing.Size(128, 17);
+            this.checkBox_GenerateSessionStateAlert.TabIndex = 9;
+            this.checkBox_GenerateSessionStateAlert.Text = "Session State Alert At";
+            this.checkBox_GenerateSessionStateAlert.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_TempDBAlert
+            // 
+            this.checkBox_TempDBAlert.AutoSize = true;
+            this.checkBox_TempDBAlert.Location = new System.Drawing.Point(28, 165);
+            this.checkBox_TempDBAlert.Name = "checkBox_TempDBAlert";
+            this.checkBox_TempDBAlert.Size = new System.Drawing.Size(108, 17);
+            this.checkBox_TempDBAlert.TabIndex = 10;
+            this.checkBox_TempDBAlert.Text = "Temp DB Alert At";
+            this.checkBox_TempDBAlert.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(170, 164);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(54, 20);
+            this.numericUpDown1.TabIndex = 11;
+            // 
+            // label_GB2
+            // 
+            this.label_GB2.AutoSize = true;
+            this.label_GB2.Location = new System.Drawing.Point(233, 171);
+            this.label_GB2.Name = "label_GB2";
+            this.label_GB2.Size = new System.Drawing.Size(22, 13);
+            this.label_GB2.TabIndex = 12;
+            this.label_GB2.Text = "GB";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(170, 143);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(54, 20);
+            this.numericUpDown2.TabIndex = 13;
+            // 
+            // label_GB1
+            // 
+            this.label_GB1.AutoSize = true;
+            this.label_GB1.Location = new System.Drawing.Point(234, 145);
+            this.label_GB1.Name = "label_GB1";
+            this.label_GB1.Size = new System.Drawing.Size(22, 13);
+            this.label_GB1.TabIndex = 14;
+            this.label_GB1.Text = "GB";
+            // 
             // PanelDatabaseOptimizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label_GB1);
+            this.Controls.Add(this.numericUpDown2);
+            this.Controls.Add(this.label_GB2);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.checkBox_TempDBAlert);
+            this.Controls.Add(this.checkBox_GenerateSessionStateAlert);
             this.Controls.Add(this.label_Wait);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox_DBPassword);
@@ -133,6 +199,8 @@
             this.Controls.Add(this.label_Database);
             this.Name = "PanelDatabaseOptimizer";
             this.Size = new System.Drawing.Size(400, 200);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -149,5 +217,11 @@
         private System.Windows.Forms.TextBox textBox_DBPassword;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_Wait;
+        private System.Windows.Forms.CheckBox checkBox_GenerateSessionStateAlert;
+        private System.Windows.Forms.CheckBox checkBox_TempDBAlert;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label_GB2;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.Label label_GB1;
     }
 }
