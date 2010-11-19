@@ -33,6 +33,7 @@ namespace PMASysAlertsUI
         PanelHome panelHome = null;
         PanelLogger panelLogger = null;
         PanelMemoryAnalyzer panelMemoryAnalyzer = null;
+        PanelCrashReporting panelCrashReporting = null;
         #endregion
 
 
@@ -71,6 +72,9 @@ namespace PMASysAlertsUI
                     break;
                 case ENUMPanel.PANEL_MEMEORY_ANALYZER :
                     result = panelMemoryAnalyzer.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_CRASH_REPORTING :
+                    result = panelCrashReporting.CauseValidation();
                     break;
                 default:
                     result = false;
@@ -114,6 +118,9 @@ namespace PMASysAlertsUI
                     break;
                 case ENUMPanel.PANEL_MEMEORY_ANALYZER :
                     panelMemoryAnalyzer.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_CRASH_REPORTING :
+                    panelCrashReporting.UpdateConfig();
                     break;
             }
 
@@ -164,6 +171,10 @@ namespace PMASysAlertsUI
                     HideAllControls();
                     panelMemoryAnalyzer.Show();
                     break;
+                case ENUMPanel.PANEL_CRASH_REPORTING :
+                    HideAllControls();
+                    panelCrashReporting.Show();
+                    break;
             }
 
         }
@@ -213,6 +224,9 @@ namespace PMASysAlertsUI
             panelMemoryAnalyzer = new PanelMemoryAnalyzer();
             panel_MainContainer.Controls.Add(panelMemoryAnalyzer);
 
+            panelCrashReporting = new PanelCrashReporting();
+            panel_MainContainer.Controls.Add(panelCrashReporting);
+
             HideAllControls();
 
             LoadConfigs();
@@ -232,6 +246,7 @@ namespace PMASysAlertsUI
             panelFTPSettings.UpdateUI();
             panelLogger.UpdateUI();
             panelMemoryAnalyzer.UpdateUI();
+            panelCrashReporting.UpdateUI();
         }
 
 
@@ -382,6 +397,19 @@ namespace PMASysAlertsUI
                 MessageBox.Show(this,configManager.GetConsolidatedError("PMA Error"));
             }
         }
+
+        private void label_crash_Click(object sender, EventArgs e)
+        {
+            if (CauseValidation())
+            {
+                UpdateConfig(PANEL);
+                ShowPanel(ENUMPanel.PANEL_CRASH_REPORTING);
+            }
+            else
+            {
+                MessageBox.Show(this,configManager.GetConsolidatedError("Event Setup Error"));
+            }
+        }
         #endregion
 
         private void stopServiceToolStripMenuItem_Click(object sender, EventArgs e)
@@ -463,6 +491,8 @@ namespace PMASysAlertsUI
             WindowState = FormWindowState.Normal;
             this.Show();
         }
+
+        
 
         
         
