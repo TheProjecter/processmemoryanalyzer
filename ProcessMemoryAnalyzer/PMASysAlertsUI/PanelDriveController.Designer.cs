@@ -52,21 +52,21 @@
             this.checkedListBox_Drives.FormattingEnabled = true;
             this.checkedListBox_Drives.Location = new System.Drawing.Point(40, 48);
             this.checkedListBox_Drives.Name = "checkedListBox_Drives";
-            this.checkedListBox_Drives.Size = new System.Drawing.Size(185, 79);
+            this.checkedListBox_Drives.Size = new System.Drawing.Size(225, 94);
             this.checkedListBox_Drives.TabIndex = 1;
             // 
             // label_UseLimit
             // 
             this.label_UseLimit.AutoSize = true;
-            this.label_UseLimit.Location = new System.Drawing.Point(37, 139);
+            this.label_UseLimit.Location = new System.Drawing.Point(37, 166);
             this.label_UseLimit.Name = "label_UseLimit";
-            this.label_UseLimit.Size = new System.Drawing.Size(176, 13);
+            this.label_UseLimit.Size = new System.Drawing.Size(220, 13);
             this.label_UseLimit.TabIndex = 2;
-            this.label_UseLimit.Text = "Generate Alert When Disc Usage Is";
+            this.label_UseLimit.Text = "Generate Alert When Free Space is less then";
             // 
             // numericUpDown_DriveUse
             // 
-            this.numericUpDown_DriveUse.Location = new System.Drawing.Point(40, 155);
+            this.numericUpDown_DriveUse.Location = new System.Drawing.Point(263, 164);
             this.numericUpDown_DriveUse.Name = "numericUpDown_DriveUse";
             this.numericUpDown_DriveUse.Size = new System.Drawing.Size(72, 20);
             this.numericUpDown_DriveUse.TabIndex = 3;
@@ -75,7 +75,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(118, 157);
+            this.label3.Location = new System.Drawing.Point(341, 166);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(15, 13);
             this.label3.TabIndex = 4;
@@ -102,7 +102,7 @@
             this.Controls.Add(this.checkedListBox_Drives);
             this.Controls.Add(this.label_Drives);
             this.Name = "PanelDriveController";
-            this.Size = new System.Drawing.Size(400, 200);
+            this.Size = new System.Drawing.Size(440, 260);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_DriveUse)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

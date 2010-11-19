@@ -53,13 +53,13 @@
             this.checkedListBox_Services.FormattingEnabled = true;
             this.checkedListBox_Services.Location = new System.Drawing.Point(35, 58);
             this.checkedListBox_Services.Name = "checkedListBox_Services";
-            this.checkedListBox_Services.Size = new System.Drawing.Size(216, 79);
+            this.checkedListBox_Services.Size = new System.Drawing.Size(314, 109);
             this.checkedListBox_Services.TabIndex = 1;
             // 
             // label_GeneAlertAt
             // 
             this.label_GeneAlertAt.AutoSize = true;
-            this.label_GeneAlertAt.Location = new System.Drawing.Point(32, 170);
+            this.label_GeneAlertAt.Location = new System.Drawing.Point(32, 217);
             this.label_GeneAlertAt.Name = "label_GeneAlertAt";
             this.label_GeneAlertAt.Size = new System.Drawing.Size(55, 13);
             this.label_GeneAlertAt.TabIndex = 2;
@@ -67,16 +67,16 @@
             // 
             // numericUpDown_ServiceMemLimit
             // 
-            this.numericUpDown_ServiceMemLimit.Location = new System.Drawing.Point(93, 168);
+            this.numericUpDown_ServiceMemLimit.Location = new System.Drawing.Point(95, 215);
             this.numericUpDown_ServiceMemLimit.Name = "numericUpDown_ServiceMemLimit";
-            this.numericUpDown_ServiceMemLimit.Size = new System.Drawing.Size(59, 20);
+            this.numericUpDown_ServiceMemLimit.Size = new System.Drawing.Size(81, 20);
             this.numericUpDown_ServiceMemLimit.TabIndex = 3;
             this.numericUpDown_ServiceMemLimit.KeyUp += new System.Windows.Forms.KeyEventHandler(this.numericUpDown_ServiceMemLimit_KeyUp);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(158, 170);
+            this.label1.Location = new System.Drawing.Point(182, 217);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 13);
             this.label1.TabIndex = 4;
@@ -95,7 +95,7 @@
             // checkBox_StoppedServiceAlert
             // 
             this.checkBox_StoppedServiceAlert.AutoSize = true;
-            this.checkBox_StoppedServiceAlert.Location = new System.Drawing.Point(35, 143);
+            this.checkBox_StoppedServiceAlert.Location = new System.Drawing.Point(35, 180);
             this.checkBox_StoppedServiceAlert.Name = "checkBox_StoppedServiceAlert";
             this.checkBox_StoppedServiceAlert.Size = new System.Drawing.Size(176, 17);
             this.checkBox_StoppedServiceAlert.TabIndex = 6;
@@ -114,7 +114,7 @@
             this.Controls.Add(this.checkedListBox_Services);
             this.Controls.Add(this.label_Services);
             this.Name = "PanelServiceWatcher";
-            this.Size = new System.Drawing.Size(400, 200);
+            this.Size = new System.Drawing.Size(440, 260);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ServiceMemLimit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

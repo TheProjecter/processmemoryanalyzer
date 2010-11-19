@@ -55,14 +55,14 @@
             this.tableLayoutPanel1.Controls.Add(this.checkBox_ProcessWatch, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.panel_Transport, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.checkBox_CrashReporting, 1, 2);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(13, 31);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(16, 39);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(384, 180);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(407, 201);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // checkBox_DriveWatch
@@ -78,7 +78,7 @@
             // checkBox_ServiceWatch
             // 
             this.checkBox_ServiceWatch.AutoSize = true;
-            this.checkBox_ServiceWatch.Location = new System.Drawing.Point(3, 48);
+            this.checkBox_ServiceWatch.Location = new System.Drawing.Point(3, 53);
             this.checkBox_ServiceWatch.Name = "checkBox_ServiceWatch";
             this.checkBox_ServiceWatch.Size = new System.Drawing.Size(97, 17);
             this.checkBox_ServiceWatch.TabIndex = 1;
@@ -88,7 +88,7 @@
             // checkBox_MemWatch
             // 
             this.checkBox_MemWatch.AutoSize = true;
-            this.checkBox_MemWatch.Location = new System.Drawing.Point(195, 3);
+            this.checkBox_MemWatch.Location = new System.Drawing.Point(206, 3);
             this.checkBox_MemWatch.Name = "checkBox_MemWatch";
             this.checkBox_MemWatch.Size = new System.Drawing.Size(98, 17);
             this.checkBox_MemWatch.TabIndex = 2;
@@ -98,7 +98,7 @@
             // checkBox_DBOptimizer
             // 
             this.checkBox_DBOptimizer.AutoSize = true;
-            this.checkBox_DBOptimizer.Location = new System.Drawing.Point(195, 48);
+            this.checkBox_DBOptimizer.Location = new System.Drawing.Point(206, 53);
             this.checkBox_DBOptimizer.Name = "checkBox_DBOptimizer";
             this.checkBox_DBOptimizer.Size = new System.Drawing.Size(118, 17);
             this.checkBox_DBOptimizer.TabIndex = 3;
@@ -108,7 +108,7 @@
             // checkBox_ProcessWatch
             // 
             this.checkBox_ProcessWatch.AutoSize = true;
-            this.checkBox_ProcessWatch.Location = new System.Drawing.Point(3, 93);
+            this.checkBox_ProcessWatch.Location = new System.Drawing.Point(3, 103);
             this.checkBox_ProcessWatch.Name = "checkBox_ProcessWatch";
             this.checkBox_ProcessWatch.Size = new System.Drawing.Size(99, 17);
             this.checkBox_ProcessWatch.TabIndex = 6;
@@ -120,15 +120,15 @@
             // 
             this.panel_Transport.Controls.Add(this.checkBox_UseSMTP);
             this.panel_Transport.Controls.Add(this.checkBox_UseFTP);
-            this.panel_Transport.Location = new System.Drawing.Point(3, 138);
+            this.panel_Transport.Location = new System.Drawing.Point(3, 153);
             this.panel_Transport.Name = "panel_Transport";
-            this.panel_Transport.Size = new System.Drawing.Size(179, 39);
+            this.panel_Transport.Size = new System.Drawing.Size(179, 45);
             this.panel_Transport.TabIndex = 5;
             // 
             // checkBox_UseSMTP
             // 
             this.checkBox_UseSMTP.AutoSize = true;
-            this.checkBox_UseSMTP.Location = new System.Drawing.Point(0, 17);
+            this.checkBox_UseSMTP.Location = new System.Drawing.Point(0, 25);
             this.checkBox_UseSMTP.Name = "checkBox_UseSMTP";
             this.checkBox_UseSMTP.Size = new System.Drawing.Size(126, 17);
             this.checkBox_UseSMTP.TabIndex = 1;
@@ -148,7 +148,7 @@
             // checkBox_CrashReporting
             // 
             this.checkBox_CrashReporting.AutoSize = true;
-            this.checkBox_CrashReporting.Location = new System.Drawing.Point(195, 93);
+            this.checkBox_CrashReporting.Location = new System.Drawing.Point(206, 103);
             this.checkBox_CrashReporting.Name = "checkBox_CrashReporting";
             this.checkBox_CrashReporting.Size = new System.Drawing.Size(102, 17);
             this.checkBox_CrashReporting.TabIndex = 7;
@@ -159,7 +159,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 0);
+            this.label1.Location = new System.Drawing.Point(13, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 1;
@@ -172,7 +172,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "PanelHome";
-            this.Size = new System.Drawing.Size(400, 214);
+            this.Size = new System.Drawing.Size(440, 260);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel_Transport.ResumeLayout(false);

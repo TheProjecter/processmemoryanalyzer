@@ -107,7 +107,7 @@ namespace PMA.ConfigManager
                 driveInfo = new DriveInfo(driveName);
                 if (((decimal)driveInfo.TotalFreeSpace / (decimal)driveInfo.TotalSize) * 100 < alertLevel)
                 {
-                    listMessage.Add("Drive " + driveName + " is exceeding set alert level");
+                    listMessage.Add("Drive " + driveName + " Free Space is less then " + alertLevel + "%");
                     flag = true;
                 }
             }
@@ -126,7 +126,7 @@ namespace PMA.ConfigManager
         {
             if (((decimal)PMAServiceProcessController.TotalFreePhysicalMemoryInKB / (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB) * 100 < alertlevel)
             {
-                message = "Physical Memory cumsumtion is more then set alert level";
+                message = "Physical Memory Free Space is less then " + alertlevel + "%";
                 return true;
             }
             else
@@ -169,7 +169,7 @@ namespace PMA.ConfigManager
                 if (((decimal)PMAServiceProcessController.GetServiceProcessWorkingSetInKB(serviceProcess) / (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB) * 100 > alertLevel)
                 {
                     flag = true;
-                    listMessage.Add("Service " + service.ServiceName + " is growing more then alert levels");
+                    listMessage.Add("Service " + service.ServiceName + " is growing more then " + alertLevel + "% of available physical memory of " + (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB/1024 + " MB");
                 }
             }
 
@@ -177,6 +177,10 @@ namespace PMA.ConfigManager
             
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Resets the IIS.
+        /// </summary>
         public static void ResetIIS()
         {
             ProcessStartInfo pInfo = new ProcessStartInfo(Environment.SystemDirectory + "\\iisreset.exe");

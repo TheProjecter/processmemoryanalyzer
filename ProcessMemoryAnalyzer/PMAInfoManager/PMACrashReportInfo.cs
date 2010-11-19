@@ -8,6 +8,8 @@ namespace PMA.Info
 {
     public class PMACrashReportInfo
     {
+
+        public string LogName { get; set; } 
         
         public string EventType { get; set; }
 

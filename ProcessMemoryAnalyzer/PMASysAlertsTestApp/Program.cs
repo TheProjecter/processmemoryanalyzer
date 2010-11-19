@@ -12,10 +12,10 @@ namespace PMASysAlertsTestApp
         {
             PMAFlowController flowController = new PMAFlowController();
 
-            for (int i = 0; i < 3; i++)
-            {
-                flowController.RunTask();
-            }
+            //PMACrashReporting crshReporting = new PMACrashReporting();
+            //crshReporting.SystemEventListener();
+
+            flowController.RunTask();
         }
     }
 }

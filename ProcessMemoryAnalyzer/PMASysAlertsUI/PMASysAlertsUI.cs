@@ -83,7 +83,6 @@ namespace PMASysAlertsUI
             return result;
         }
 
-        
         private void UpdateConfig(ENUMPanel enumPanel)
         {
             
@@ -460,6 +459,7 @@ namespace PMASysAlertsUI
             this.Visible = true;
             WindowState = FormWindowState.Normal;
             this.Show();
+            this.Focus();
         }
 
         private void hideToolStripMenuItem_Click(object sender, EventArgs e)
@@ -490,6 +490,14 @@ namespace PMASysAlertsUI
             this.Visible = true;
             WindowState = FormWindowState.Normal;
             this.Show();
+        }
+
+        private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            UpdateConfig(PANEL);
+            configManager.SaveConfiguration();
+            notifyIconSystemAnalyzer.Visible = false;
+            Environment.Exit(0);
         }
 
         

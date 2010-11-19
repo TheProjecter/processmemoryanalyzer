@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.Sql;
 using Microsoft.SqlServer;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace PMA.ConfigManager
 {
@@ -16,6 +17,7 @@ namespace PMA.ConfigManager
 
         private string _message = string.Empty;
 
+        //-----------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Gets the message.
         /// </summary>
@@ -28,6 +30,7 @@ namespace PMA.ConfigManager
             }
         }
 
+        //-----------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Initializes a new instance of the <see cref="PMADatabaseController"/> class.
         /// </summary>
@@ -36,6 +39,7 @@ namespace PMA.ConfigManager
 
         }
 
+        //-----------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Initializes a new instance of the <see cref="PMADatabaseController"/> class.
         /// </summary>
@@ -118,7 +122,36 @@ namespace PMA.ConfigManager
                 result = false;
             }
             return result;
-
         }
+
+
+        /// <summary>
+        /// Gets the size of the DB.
+        /// </summary>
+        /// <param name="dbname">The dbname.</param>
+        /// <returns></returns>
+        public decimal GetDBSize(string dbname)
+        {
+            
+            SqlDataAdapter dataAdapeter = new SqlDataAdapter("exec sp_databases",connection);
+            DataSet dataset = new DataSet();
+         
+            try
+            {
+                dataAdapeter.Fill(dataset);
+
+                decimal size = (from row in dataset.Tables[0].AsEnumerable()
+                                where row["DATABASE_NAME"].ToString() == dbname
+                                select decimal.Parse(row["DATABASE_SIZE"].ToString())).First<decimal>();
+                return size/1024;
+            }
+            catch (Exception ex)
+            {
+                _message = ex.Message;
+                return 0;
+            }
+        }
+
+
     }
 }

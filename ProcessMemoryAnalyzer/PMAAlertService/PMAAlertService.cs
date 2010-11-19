@@ -40,11 +40,25 @@ namespace PMA.PMAService
         /// <param name="args">Data passed by the start command.</param>
         protected override void OnStart(string[] args)
         {
+
+            //Starting EventLoging Thread - Have to imporve this 
+            //System.Threading.Thread th = new System.Threading.Thread(EvenLogTask);
+            //th.Start();
+            
             int logInterval = int.Parse(ConfigurationSettings.AppSettings["interval"]);
             mTimer = new System.Timers.Timer(logInterval);
             mTimer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
-          //  timer_Elapsed(null, null);
             mTimer.Start();
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Evens the log task.
+        /// </summary>
+        private void EvenLogTask()
+        {
+            PMACrashReporting crashReporting = new PMACrashReporting();
+            crashReporting.SystemEventListener();
         }
 
         //-----------------------------------------------------------------------------------------------------------------------

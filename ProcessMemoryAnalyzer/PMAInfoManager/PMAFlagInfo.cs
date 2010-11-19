@@ -12,5 +12,9 @@ namespace PMA.Info
         public bool FlagedServiceAlert { get; set; }
 
         public bool FlagedPhysicalMemoryAlert { get; set; }
+
+        public bool FlagedASPStateSizeAlert { get; set; }
+
+        public bool FlagedTempDBMemoryAlert { get; set; } 
     }
 }

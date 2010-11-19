@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace PMASysAlertsUI
 {
@@ -13,6 +14,13 @@ namespace PMASysAlertsUI
         [STAThread]
         static void Main()
         {
+            //Process[] p = Process.GetProcessesByName("PMASysAlertsUI");
+            //if (p.Length != 0)
+            //{
+            //    Console.WriteLine("Instance is Already Running");
+            //    System.Threading.Thread.Sleep(3000);
+            //    Environment.Exit(0);
+            //}
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new PMASysAlertsUI());

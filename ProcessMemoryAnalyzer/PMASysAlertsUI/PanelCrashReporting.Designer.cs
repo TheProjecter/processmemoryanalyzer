@@ -30,6 +30,7 @@
         {
             this.dataGridView_CrashReporting = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
+            this.Column_LogName = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Column_Type = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Column_Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,12 +41,13 @@
             // 
             this.dataGridView_CrashReporting.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_CrashReporting.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column_LogName,
             this.Column_Type,
             this.Column_Source,
             this.Column_Description});
-            this.dataGridView_CrashReporting.Location = new System.Drawing.Point(17, 50);
+            this.dataGridView_CrashReporting.Location = new System.Drawing.Point(17, 47);
             this.dataGridView_CrashReporting.Name = "dataGridView_CrashReporting";
-            this.dataGridView_CrashReporting.Size = new System.Drawing.Size(370, 138);
+            this.dataGridView_CrashReporting.Size = new System.Drawing.Size(415, 200);
             this.dataGridView_CrashReporting.TabIndex = 0;
             // 
             // label1
@@ -57,6 +59,15 @@
             this.label1.Size = new System.Drawing.Size(102, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Crash Monitoring";
+            // 
+            // Column_LogName
+            // 
+            this.Column_LogName.HeaderText = "LogName";
+            this.Column_LogName.Items.AddRange(new object[] {
+            "System",
+            "Application",
+            "Security"});
+            this.Column_LogName.Name = "Column_LogName";
             // 
             // Column_Type
             // 
@@ -92,7 +103,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView_CrashReporting);
             this.Name = "PanelCrashReporting";
-            this.Size = new System.Drawing.Size(400, 200);
+            this.Size = new System.Drawing.Size(450, 270);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_CrashReporting)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -103,6 +114,7 @@
 
         private System.Windows.Forms.DataGridView dataGridView_CrashReporting;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Column_LogName;
         private System.Windows.Forms.DataGridViewComboBoxColumn Column_Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Source;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Description;
