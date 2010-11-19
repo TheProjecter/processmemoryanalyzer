@@ -24,6 +24,8 @@ namespace PMA.Info
 
         private List<string> _listPostFTPMessageOn = null;
 
+        private List<PMACrashReportInfo> _listCrashReportInfo = null;
+
         //-------------------------------------------------------------------------------------------------
 
         #region Home Configs
@@ -188,6 +190,25 @@ namespace PMA.Info
 
         //--------------------------------------------------------------------------------------------------
 
+        #region Crash Report
+
+        public List<PMACrashReportInfo> ListCrashReportInfo 
+        {
+            get
+            {
+                if (_listCrashReportInfo == null)
+                {
+                    _listCrashReportInfo = new List<PMACrashReportInfo>();
+                }
+                return _listCrashReportInfo;
+            }
+            set
+            {
+                _listCrashReportInfo = value;
+            }
+        }
+
+        #endregion 
 
         #region Serializer & Deserializer
         /// <summary>
