@@ -35,6 +35,16 @@ namespace PMA.ConfigManager
             {
                 RunDBOptimizer();
             }
+            if (configManager.SystemAnalyzerInfo.SetSessionStateSizeAlerts)
+            {
+                RunDBSizeWatch("ASPState", configManager.SystemAnalyzerInfo.SessionStateSizeAlertLevel);
+            }
+
+            if (configManager.SystemAnalyzerInfo.SetTempDBSizeAlerts)
+            {
+                RunDBSizeWatch("tempdb", configManager.SystemAnalyzerInfo.TempDBSizeAlertLevel);
+            }
+            
             if (configManager.SystemAnalyzerInfo.SetPhysicalMemWatch)
             {
                 RunPhysicalMemoryWatch();
@@ -83,6 +93,7 @@ namespace PMA.ConfigManager
             {
                 cm.FlagInfo.FlagedDiscAlert = false;
             }
+            configManager.Logger.Debug(EnumMethod.END);
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -91,24 +102,23 @@ namespace PMA.ConfigManager
         /// </summary>
         private void RunServiceWatcher()
         {
-            configManager.Logger.Debug();
-            PMAConfigManager cm = configManager;
+            configManager.Logger.Debug(EnumMethod.START);
             List<string> listMessage = new List<string>();
-            if (PMASystemAnalyzer.GenerateServiceMemoryAlert(cm.SystemAnalyzerInfo.ListServicesNames.ToList<string>(),
-                cm.SystemAnalyzerInfo.ProcessPhysicalMemoryAlertAt, out listMessage, cm.SystemAnalyzerInfo.SetStartStoppedServicesAlerts))
+            if (PMASystemAnalyzer.GenerateServiceMemoryAlert(configManager.SystemAnalyzerInfo.ListServicesNames.ToList<string>(),
+                configManager.SystemAnalyzerInfo.ProcessPhysicalMemoryAlertAt, out listMessage, configManager.SystemAnalyzerInfo.SetStartStoppedServicesAlerts))
             {
-                cm.ErrorMessage.AddRange(listMessage);
-                if (!cm.FlagInfo.FlagedServiceAlert)
+                configManager.ErrorMessage.AddRange(listMessage);
+                if (!configManager.FlagInfo.FlagedServiceAlert)
                 {
                     postAlert = true;
                 }
-                cm.FlagInfo.FlagedServiceAlert = true;
+                configManager.FlagInfo.FlagedServiceAlert = true;
             }
             else
             {
-                cm.FlagInfo.FlagedServiceAlert = false;
+                configManager.FlagInfo.FlagedServiceAlert = false;
             }
-
+            configManager.Logger.Debug(EnumMethod.END);
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -117,7 +127,7 @@ namespace PMA.ConfigManager
         /// </summary>
         private void RunPhysicalMemoryWatch()
         {
-            configManager.Logger.Debug();
+            configManager.Logger.Debug(EnumMethod.START);
             PMAConfigManager cm = configManager;
             string message = string.Empty;
             if (PMASystemAnalyzer.GeneratePhyMemAlert(cm.SystemAnalyzerInfo.SystemPhysicalMemoryAlertAt, out message))
@@ -131,6 +141,8 @@ namespace PMA.ConfigManager
             }
             else cm.FlagInfo.FlagedPhysicalMemoryAlert = false;
 
+            configManager.Logger.Debug(EnumMethod.END);
+
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -139,7 +151,7 @@ namespace PMA.ConfigManager
         /// </summary>
         private void RunDBOptimizer()
         {
-            configManager.Logger.Debug();
+            configManager.Logger.Debug(EnumMethod.START);
             PMAConfigManager cm = configManager;
             if (cm.SystemAnalyzerInfo.IsWebServer)
             {
@@ -149,12 +161,61 @@ namespace PMA.ConfigManager
 
                 if (proceessList.Count == 0)
                 {
-                    PMADatabaseController dbController = new PMADatabaseController(cm.SystemAnalyzerInfo.Database,
-                    cm.SystemAnalyzerInfo.DBUser, cm.SystemAnalyzerInfo.DBPassword);
-                    dbController.TruncateSessionStateDatabase();
+                    //Implement Later
+                    //PMADatabaseController dbController = new PMADatabaseController(cm.SystemAnalyzerInfo.Database,
+                    //cm.SystemAnalyzerInfo.DBUser, cm.SystemAnalyzerInfo.DBPassword);
+                    //dbController.TruncateSessionStateDatabase();
                 }
             }
+            configManager.Logger.Debug(EnumMethod.END);
         }
+
+        //-------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Runs the DB size watch.
+        /// </summary>
+        /// <param name="dbName">Name of the db.</param>
+        /// <param name="alertLevel">The alert level.</param>
+        private void RunDBSizeWatch(string dbName,int alertLevel)
+        {
+            configManager.Logger.Debug(EnumMethod.START);
+            PMADatabaseController dbController = new PMADatabaseController(configManager.SystemAnalyzerInfo.Database,
+                    configManager.SystemAnalyzerInfo.DBUser, configManager.SystemAnalyzerInfo.DBPassword);
+            if (dbController.GetDBSize(dbName) > alertLevel)
+            {
+                configManager.ErrorMessage.Add("Database " + dbName + "is exceeding alert level of " + alertLevel + " MB");
+                if (dbName == "ASPState")
+                {
+                    if (!configManager.FlagInfo.FlagedASPStateSizeAlert)
+                    {
+                        postAlert = true;
+                    }
+                    configManager.FlagInfo.FlagedASPStateSizeAlert = true;
+                }
+                else if (dbName == "tempdb")
+                {
+                    if (!configManager.FlagInfo.FlagedTempDBMemoryAlert)
+                    {
+                        postAlert = true;
+                    }
+                    configManager.FlagInfo.FlagedTempDBMemoryAlert = true;
+                }
+            }
+            else
+            {
+                if(dbName == "ASPState")
+                {
+                    configManager.FlagInfo.FlagedASPStateSizeAlert = false;
+                }
+                else if(dbName == "tempdb")
+                {
+                    configManager.FlagInfo.FlagedTempDBMemoryAlert = false;
+                }
+            }
+            configManager.Logger.Debug(EnumMethod.END);
+        }
+
+        
 
 
         //-------------------------------------------------------------------------------------------------
@@ -163,12 +224,14 @@ namespace PMA.ConfigManager
         /// </summary>
         private void SendMail()
         {
-            configManager.Logger.Debug();
-            string subject = "PMA System Alert for : " + systemName;
+            configManager.Logger.Debug(EnumMethod.START);
+            string subject = "PMA System Alert for : " + systemName + " : " + 
+                configManager.SystemAnalyzerInfo.ClientInstanceName + " at " + 
+                DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() ;
             SMTPTransport smtp = new SMTPTransport();
             try
             {
-                smtp.SendAsynchronous = true;
+                smtp.SendAsynchronous = false;
                 smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListSendMailTo, null, subject, GenerateMessageBody(), null);
             }
             catch(Exception ex)
@@ -176,7 +239,9 @@ namespace PMA.ConfigManager
                 configManager.FlagInfo.FlagedDiscAlert = false;
                 configManager.FlagInfo.FlagedPhysicalMemoryAlert = false;
                 configManager.FlagInfo.FlagedServiceAlert = false;
+                configManager.Logger.Error(ex);
             }
+            configManager.Logger.Debug(EnumMethod.END);
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -185,24 +250,26 @@ namespace PMA.ConfigManager
         /// </summary>
         private void PostFTPMessage()
         {
-            configManager.Logger.Debug();
+            configManager.Logger.Debug(EnumMethod.START);
             try
             {
-            string tempFileName = configManager.CurrentAppConfigDir + "\\PMA_ALERTS_" + systemName + ".txt";
-            File.WriteAllText(tempFileName, GenerateMessageBody());
-            FTPTransport ftpTransport = new FTPTransport();
-            List<string> filetoUpload = new List<string>();
-            filetoUpload.Add(tempFileName);
-            ftpTransport.FTPSend(configManager.FtpInfo, filetoUpload);
-            filetoUpload = null;
-            File.Delete(tempFileName);
+                string tempFileName = configManager.CurrentAppConfigDir + "\\PMA_ALERTS_" + systemName + ".txt";
+                File.WriteAllText(tempFileName, GenerateMessageBody());
+                FTPTransport ftpTransport = new FTPTransport();
+                List<string> filetoUpload = new List<string>();
+                filetoUpload.Add(tempFileName);
+                ftpTransport.FTPSend(configManager.FtpInfo, filetoUpload);
+                filetoUpload = null;
+                File.Delete(tempFileName);
             }
-            catch
+            catch(Exception ex)
             {
                 configManager.FlagInfo.FlagedDiscAlert = false;
                 configManager.FlagInfo.FlagedPhysicalMemoryAlert = false;
                 configManager.FlagInfo.FlagedServiceAlert = false;
+                configManager.Logger.Error(ex);
             }
+            configManager.Logger.Debug(EnumMethod.END);
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -212,12 +279,13 @@ namespace PMA.ConfigManager
         /// <returns></returns>
         private string GenerateMessageBody()
         {
+            configManager.Logger.Debug(EnumMethod.START);
             StringBuilder builder = new StringBuilder();
             builder.Append("Hi,");
             builder.Append("\r\n");
             builder.Append("\r\n");
             builder.Append("\r\n");
-            builder.Append("Alert Generated For machine :" + systemName);
+            builder.Append("Alert Generated For machine :" + systemName +" : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
             builder.Append("\r\n");
             builder.Append(configManager.GetConsolidatedError("System Alert"));
             builder.Append("\r\n");
@@ -227,6 +295,7 @@ namespace PMA.ConfigManager
             builder.Append("Thanks,");
             builder.Append("\r\n");
             builder.Append("Cosmos Team.");
+            configManager.Logger.Debug(EnumMethod.END);
             return builder.ToString();
         }
     }

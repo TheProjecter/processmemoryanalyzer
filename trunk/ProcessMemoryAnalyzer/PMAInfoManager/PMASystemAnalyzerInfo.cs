@@ -186,6 +186,8 @@ namespace PMA.Info
                 _listPostFTPMessageOn = value;
             }
         }
+
+        public string ClientInstanceName { get; set; }
         #endregion 
 
         //--------------------------------------------------------------------------------------------------

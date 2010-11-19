@@ -43,6 +43,10 @@ namespace PMA.Utils.smtp
             try
             {
                 smtp.Credentials = new System.Net.NetworkCredential(smtpInfo.UserName, smtpInfo.Password);
+                if (smtpInfo.ProtectPassword)
+                {
+                    smtpInfo.Password = OperationUtils.EncryptDecrypt(smtpInfo.Password);
+                }
                 smtp.Host = smtpInfo.SmtpServer;
                 smtp.Port = smtpInfo.Port;
                 smtp.EnableSsl = smtpInfo.SSL;
@@ -53,14 +57,16 @@ namespace PMA.Utils.smtp
 
                 foreach (string toEmail in toEmails)
                 {
-                    mail.To.Add(toEmail);
+                    if(toEmail != string.Empty)
+                        mail.To.Add(toEmail);
                 }
 
                 if (ccEmails != null)
                 {
                     foreach (string ccEmail in ccEmails)
                     {
-                        mail.CC.Add(ccEmail);
+                        if(ccEmail != string.Empty)
+                            mail.CC.Add(ccEmail);
                     }
                 }
 

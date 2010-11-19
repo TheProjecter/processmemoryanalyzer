@@ -138,7 +138,7 @@ namespace PMA.Utils.Logger
             {
                 
                 string log = ("Debug :" + DateTime.Now.ToShortDateString() + "_" + DateTime.Now.ToShortDateString() + "-->" + whoCalledMe  + position);
-                File.AppendAllText(_loggerInfo.LoggerFile, log);
+                File.AppendAllText(_loggerInfo.LoggerFile, "\r\n" + log);
             }
         }
 
@@ -160,7 +160,7 @@ namespace PMA.Utils.Logger
                 sb.AppendLine("ERROR :" + DateTime.Now.ToShortDateString() + "_" + DateTime.Now.ToShortDateString() + "-->" + ex.Message);
                 sb.AppendLine("Stack Trace");
                 sb.AppendLine(ex.StackTrace);
-                File.AppendAllText(_loggerInfo.LoggerFile, sb.ToString());
+                File.AppendAllText(_loggerInfo.LoggerFile, "\r\n" + sb.ToString());
             }
         }
 

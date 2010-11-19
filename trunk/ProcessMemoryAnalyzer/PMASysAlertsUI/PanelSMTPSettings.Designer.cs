@@ -183,7 +183,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox_SMTPServer);
             this.Name = "PanelSMTPSettings";
-            this.Size = new System.Drawing.Size(400, 200);
+            this.Size = new System.Drawing.Size(440, 260);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_port)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_PollingTimeout)).EndInit();
             this.ResumeLayout(false);

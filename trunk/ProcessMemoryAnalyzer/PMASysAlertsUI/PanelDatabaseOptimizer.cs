@@ -20,7 +20,7 @@ namespace PMASysAlertsUI
             InitializeComponent();
             checkBox_IsWebServer.Checked = false;
             label_Wait.Visible = false;
-            ToggleTextControls(false);
+            ToggleTextControls(true);
         }
 
         private void ToggleTextControls(bool enableControls)
@@ -37,14 +37,14 @@ namespace PMASysAlertsUI
 
         private void checkBox_IsWebServer_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox_IsWebServer.Checked)
-            {
-                ToggleTextControls(true);
-            }
-            else
-            {
-                ToggleTextControls(false);
-            }
+            //if (checkBox_IsWebServer.Checked)
+            //{
+            //    ToggleTextControls(true);
+            //}
+            //else
+            //{
+            //    ToggleTextControls(false);
+            //}
         }
 
         #region IUIConfigManager Members
@@ -109,7 +109,7 @@ namespace PMASysAlertsUI
             else numericUpDown_TempTB.Enabled = false;
         }
 
-        
+               
 
         
     }

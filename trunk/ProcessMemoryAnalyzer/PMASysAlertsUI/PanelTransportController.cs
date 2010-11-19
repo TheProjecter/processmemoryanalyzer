@@ -14,9 +14,9 @@ namespace PMASysAlertsUI
     public partial class PanelTransportController : UserControl, IUIConfigManager
     {
 
-        private static string REGX_VERIFY_EMAIL = @"^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+)*$";
+        //private static string REGX_VERIFY_EMAIL = @"^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+)*$";
 
-        private static string REGX_VERIFY_FTP = @"^[A-Za-z0-9][A-Za-z0-9]+[:]?[0-9A-Za-z]*$";
+        //private static string REGX_VERIFY_FTP = @"^[A-Za-z0-9][A-Za-z0-9]+[:]?[0-9A-Za-z]*$";
 
         /// <summary>
         /// 
@@ -33,6 +33,9 @@ namespace PMASysAlertsUI
         public void UpdateUI()
         {
             StringBuilder sb = new StringBuilder();
+
+            textBox_ClientInstanceName.Text = configManager.SystemAnalyzerInfo.ClientInstanceName;
+            
             if (configManager.SystemAnalyzerInfo.ListSendMailTo != null)
             {
                 foreach (string email in configManager.SystemAnalyzerInfo.ListSendMailTo)
@@ -67,25 +70,27 @@ namespace PMASysAlertsUI
             {
                 configManager.SystemAnalyzerInfo.ListPostFTPMessageOn = richTextBox_FtpFolder.Text.Split(';').ToList<string>();
             }
+
+            configManager.SystemAnalyzerInfo.ClientInstanceName = textBox_ClientInstanceName.Text;
         }
 
         public bool CauseValidation()
         {
             configManager.ClearErrorMessage();
-            
-            if ((richTextBox_Emails.Text == string.Empty || Regex.IsMatch(richTextBox_Emails.Text, REGX_VERIFY_EMAIL)) &&
-                (richTextBox_FtpFolder.Text == string.Empty || Regex.IsMatch(richTextBox_FtpFolder.Text, REGX_VERIFY_FTP)))
-            {
-                return true;
-            }
-            else
-            {
-                if (!(Regex.IsMatch(richTextBox_Emails.Text, REGX_VERIFY_EMAIL)))
-                    configManager.ErrorMessage.Add("Invalid or no Email Address");
-                if (!Regex.IsMatch(richTextBox_FtpFolder.Text, REGX_VERIFY_FTP))
-                    configManager.ErrorMessage.Add("Invalid or no FTP Folders");
-                return false;
-            }
+            //if ((richTextBox_Emails.Text == string.Empty || Regex.IsMatch(richTextBox_Emails.Text, REGX_VERIFY_EMAIL)) &&
+            //    (richTextBox_FtpFolder.Text == string.Empty || Regex.IsMatch(richTextBox_FtpFolder.Text, REGX_VERIFY_FTP)))
+            //{
+            //    return true;
+            //}
+            //else
+            //{
+            //    if (!(Regex.IsMatch(richTextBox_Emails.Text, REGX_VERIFY_EMAIL)))
+            //        configManager.ErrorMessage.Add("Invalid or no Email Address");
+            //    if (!Regex.IsMatch(richTextBox_FtpFolder.Text, REGX_VERIFY_FTP))
+            //        configManager.ErrorMessage.Add("Invalid or no FTP Folders");
+            //    return false;
+            //}
+            return true;
         }
 
         #endregion

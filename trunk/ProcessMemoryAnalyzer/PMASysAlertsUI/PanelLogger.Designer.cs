@@ -114,10 +114,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label_log);
             this.Controls.Add(this.comboBox_logs);
-            this.MaximumSize = new System.Drawing.Size(400, 200);
-            this.MinimumSize = new System.Drawing.Size(400, 200);
+            this.MaximumSize = new System.Drawing.Size(440, 260);
+            this.MinimumSize = new System.Drawing.Size(440, 260);
             this.Name = "PanelLogger";
-            this.Size = new System.Drawing.Size(400, 200);
+            this.Size = new System.Drawing.Size(440, 260);
             this.ResumeLayout(false);
             this.PerformLayout();
 
