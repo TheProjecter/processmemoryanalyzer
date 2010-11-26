@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using PMA.Utils.smtp;
+using PMA.Info;
 
 namespace PMA.ConfigManager
 {
@@ -13,6 +14,7 @@ namespace PMA.ConfigManager
         PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
 
         private List<EventLogEntry> listEntryLog;
+
 
         //---------------------------------------------------------------------------------------------------------
         /// <summary>
@@ -39,14 +41,18 @@ namespace PMA.ConfigManager
                 System.Threading.Thread.Sleep(10000);
                 lock (listEntryLog)
                 {
-                    PostEventLogs();
+                    if (listEntryLog.Count > 0)
+                    {
+                        PostEventLogs();
+                        listEntryLog.Clear();
+                    }
                 }
             }
         }
 
         private void PostEventLogs()
         {
-            throw new NotImplementedException();
+            SendMail();
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -84,9 +90,12 @@ namespace PMA.ConfigManager
             builder.Append("\r\n");
             builder.Append("\r\n");
             builder.Append("\r\n");
-            builder.Append("Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
+            builder.Append("Event Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
             builder.Append("\r\n");
-            builder.Append(configManager.GetConsolidatedError("System Alert"));
+            foreach (EventLogEntry logEntry in listEntryLog)
+            {
+                builder.AppendLine(logEntry.EntryType.ToString() + " : " + logEntry.MachineName + " : " + logEntry.TimeGenerated.ToShortDateString() + "  " + logEntry.TimeGenerated.ToShortTimeString() + "\r\n" + logEntry.Message);
+            }
             builder.Append("\r\n");
             builder.Append("\r\n");
             builder.Append("\r\n");
@@ -97,6 +106,8 @@ namespace PMA.ConfigManager
             return builder.ToString();
         }
 
+
+
         //---------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Handles the event event of the SystemLogEntryWrittern control.
@@ -106,7 +117,8 @@ namespace PMA.ConfigManager
         public void SystemLogEntryWrittern_event(object args, EntryWrittenEventArgs e)
         {
             EventLogEntry logEntry = e.Entry;
-
+            if(IsWatcherSet("System", logEntry))
+                listEntryLog.Add(logEntry); 
         }
 
         //---------------------------------------------------------------------------------------------------------
@@ -118,6 +130,8 @@ namespace PMA.ConfigManager
         public void ApplicationLogEntryWrittern_event(object args, EntryWrittenEventArgs e)
         {
             EventLogEntry logEntry = e.Entry;
+            if (IsWatcherSet("Application", logEntry))
+                listEntryLog.Add(logEntry); 
         }
 
         //---------------------------------------------------------------------------------------------------------
@@ -129,10 +143,32 @@ namespace PMA.ConfigManager
         public void SecurityLogEntryWrittern_event(object args, EntryWrittenEventArgs e)
         {
             EventLogEntry logEntry = e.Entry;
+            if (IsWatcherSet("Security", logEntry))
+                listEntryLog.Add(logEntry); 
         }
 
 
+        //---------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Determines whether [is watcher set] [the specified log name].
+        /// </summary>
+        /// <param name="logName">Name of the log.</param>
+        /// <param name="logEntry">The log entry.</param>
+        /// <returns>
+        /// 	<c>true</c> if [is watcher set] [the specified log name]; otherwise, <c>false</c>.
+        /// </returns>
+        private bool IsWatcherSet(string logName, EventLogEntry logEntry)
+        {
+            int count = (from crashInfo in configManager.SystemAnalyzerInfo.ListCrashReportInfo
+                    where crashInfo.EventType == logEntry.EntryType.ToString() &&
+                    crashInfo.EventSource == logEntry.Source &&
+                    logEntry.Message.Contains(crashInfo.EventMessage)
+                         select crashInfo).ToList<PMACrashReportInfo>().Count;
 
+            if (count > 0)
+                return true;
+            else return false;
+        }
 
     }
 }
