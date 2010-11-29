@@ -22,8 +22,6 @@ namespace PMASysAlertsUI
             InitializeComponent();
         }
 
-
-
         #region IUIConfigManager Members
 
         public void UpdateUI()
