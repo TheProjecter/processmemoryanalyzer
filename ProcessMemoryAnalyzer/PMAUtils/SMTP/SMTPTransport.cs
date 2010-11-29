@@ -43,10 +43,6 @@ namespace PMA.Utils.smtp
             try
             {
                 smtp.Credentials = new System.Net.NetworkCredential(smtpInfo.UserName, smtpInfo.Password);
-                if (smtpInfo.ProtectPassword)
-                {
-                    smtpInfo.Password = OperationUtils.EncryptDecrypt(smtpInfo.Password);
-                }
                 smtp.Host = smtpInfo.SmtpServer;
                 smtp.Port = smtpInfo.Port;
                 smtp.EnableSsl = smtpInfo.SSL;
@@ -110,12 +106,24 @@ namespace PMA.Utils.smtp
             }
             finally
             {
-                if(!SendAsynchronous)
+                if (!SendAsynchronous)
+                {
                     mail.Dispose();
+                }
+                if (smtpInfo.ProtectPassword)
+                {
+                    smtpInfo.Password = OperationUtils.EncryptDecrypt(smtpInfo.Password);
+                }
             }
             
         }
 
+        //-------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Handles the SendCompleted event of the smtp control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.AsyncCompletedEventArgs"/> instance containing the event data.</param>
         void smtp_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
             if (mail != null)

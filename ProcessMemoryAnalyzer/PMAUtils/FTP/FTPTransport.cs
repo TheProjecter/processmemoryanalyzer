@@ -45,10 +45,24 @@ namespace PMA.Utils.ftp
             {
                 throw ex;
             }
+            finally
+            {
+                if (ftpInfo.ProtectPassword)
+                {
+                    ftpInfo.Password = OperationUtils.EncryptDecrypt(ftpInfo.Password);
+                }
+            }
 
 
         }
 
+        
+        //--------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Uploads the file.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <returns></returns>
         private Stream UploadFile(string file)
         {
             FtpWebRequest uploadRequest = null;
@@ -215,6 +229,7 @@ namespace PMA.Utils.ftp
             return filesList;
         }
 
+        //-----------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Gets the object,Not Implemented here.
         /// </summary>
