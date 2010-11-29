@@ -53,11 +53,30 @@ namespace PMA.ConfigManager
         public static string StartService()
         {
             ServiceController service = null;
+            Process process = new Process();
+            string serviceMessage = string.Empty;
             try
             {
-                service = new ServiceController(SERVICE_NAME);
-                service.Start();
-                return "Service Started Succesfully";
+                if (Environment.OSVersion.Version.Major > 5)
+                {
+                    process.StartInfo = new ProcessStartInfo("net","start PMAAlertService");
+                    process.StartInfo.Verb = "runas";
+                    process.Start();
+                    process.WaitForExit();
+                    if (process.ExitCode != 0)
+                    {
+                        serviceMessage = "There was an error while starting servcie";
+                    }
+                    else serviceMessage = "Service Is Started Successfully";
+
+                }
+                else
+                {
+                    service = new ServiceController(SERVICE_NAME);
+                    service.Start();
+                    serviceMessage = "Service Started Succesfully";    
+                }
+                return serviceMessage;
             }
             catch(Exception ex)
             {
@@ -73,16 +92,37 @@ namespace PMA.ConfigManager
         public static string StopService()
         {
             ServiceController service = null;
+            Process process = new Process();
+            string serviceMessage = string.Empty;
             try
             {
-                service = new ServiceController(SERVICE_NAME);
-                service.Stop();
-                return "Service Stopped Succesfully";
+                if (Environment.OSVersion.Version.Major > 5)
+                {
+                    process.StartInfo = new ProcessStartInfo("net", "stop PMAAlertService");
+                    process.StartInfo.Verb = "runas";
+                    process.Start();
+                    process.WaitForExit();
+                    if (process.ExitCode != 0)
+                    {
+                        serviceMessage = "There was an error while stoping servcie";
+                    }
+                    else serviceMessage = "Service Is stopped Successfully";
+
+                }
+                else
+                {
+                    service = new ServiceController(SERVICE_NAME);
+                    service.Stop();
+                    serviceMessage = "Service stopped Succesfully";
+                }
+                return serviceMessage;
             }
             catch (Exception ex)
             {
                 return ex.Message;
             }
+            
+
             
         }
 
