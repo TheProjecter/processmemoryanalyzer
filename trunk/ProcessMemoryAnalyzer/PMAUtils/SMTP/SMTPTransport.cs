@@ -20,7 +20,6 @@ namespace PMA.Utils.smtp
         MailMessage mail = null;
 
 
-
         //------------------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Send Emails using smtp settings
