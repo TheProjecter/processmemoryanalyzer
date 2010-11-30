@@ -183,7 +183,8 @@ namespace PMA.ConfigManager
                     configManager.SystemAnalyzerInfo.DBUser, configManager.SystemAnalyzerInfo.DBPassword);
             if (dbController.GetDBSize(dbName) > alertLevel)
             {
-                configManager.ErrorMessage.Add("Database " + dbName + " is exceeding alert level of " + alertLevel + " MB");
+                configManager.ErrorMessage.Add("Database Server : " + configManager.SystemAnalyzerInfo.Database + ": Database " + dbName + 
+                    " is exceeding alert level of " + alertLevel + " MB");
                 if (dbName == "ASPState")
                 {
                     if (!configManager.FlagInfo.FlagedASPStateSizeAlert)
