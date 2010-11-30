@@ -67,7 +67,7 @@ namespace PMA.ConfigManager
                     {
                         serviceMessage = "There was an error while starting servcie";
                     }
-                    else serviceMessage = "Service Is Started Successfully";
+                    else serviceMessage = "Service is Started Successfully";
 
                 }
                 else
@@ -107,7 +107,7 @@ namespace PMA.ConfigManager
                     {
                         serviceMessage = "There was an error while stoping servcie";
                     }
-                    else serviceMessage = "Service Is stopped Successfully";
+                    else serviceMessage = "Service is stopped Successfully";
 
                 }
                 else
