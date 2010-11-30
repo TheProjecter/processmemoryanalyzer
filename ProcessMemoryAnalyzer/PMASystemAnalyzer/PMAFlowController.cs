@@ -239,6 +239,8 @@ namespace PMA.ConfigManager
                 configManager.FlagInfo.FlagedDiscAlert = false;
                 configManager.FlagInfo.FlagedPhysicalMemoryAlert = false;
                 configManager.FlagInfo.FlagedServiceAlert = false;
+                configManager.FlagInfo.FlagedASPStateSizeAlert = false;
+                configManager.FlagInfo.FlagedTempDBMemoryAlert = false;
                 configManager.Logger.Error(ex);
             }
             configManager.Logger.Debug(EnumMethod.END);
@@ -253,7 +255,7 @@ namespace PMA.ConfigManager
             configManager.Logger.Debug(EnumMethod.START);
             try
             {
-                string tempFileName = configManager.CurrentAppConfigDir + "\\PMA_ALERTS_" + systemName + ".txt";
+                string tempFileName = configManager.CurrentAppConfigDir + "\\PMA_ALERTS_" + systemName+ "_" + configManager.SystemAnalyzerInfo.ClientInstanceName + ".txt";
                 File.WriteAllText(tempFileName, GenerateMessageBody());
                 FTPTransport ftpTransport = new FTPTransport();
                 List<string> filetoUpload = new List<string>();
@@ -264,9 +266,13 @@ namespace PMA.ConfigManager
             }
             catch(Exception ex)
             {
-                configManager.FlagInfo.FlagedDiscAlert = false;
-                configManager.FlagInfo.FlagedPhysicalMemoryAlert = false;
-                configManager.FlagInfo.FlagedServiceAlert = false;
+                // No Reattempt if FTP upload fail, otherwise it can bombart mails
+                
+                //configManager.FlagInfo.FlagedDiscAlert = false;
+                //configManager.FlagInfo.FlagedPhysicalMemoryAlert = false;
+                //configManager.FlagInfo.FlagedServiceAlert = false;
+                //configManager.FlagInfo.FlagedASPStateSizeAlert = false;
+                //configManager.FlagInfo.FlagedTempDBMemoryAlert = false;
                 configManager.Logger.Error(ex);
             }
             configManager.Logger.Debug(EnumMethod.END);
