@@ -34,7 +34,7 @@ namespace PMASysAlertsUI
         /// </summary>
         public void UpdateUI()
         {
-            textBox_MachineName.Text = configManager.PMAInfoObj.ClientName;
+            textBox_MachineName.Text = configManager.PMAInfoObj.MachineName;
             checkBox_disposeFiles.Checked = configManager.PMAInfoObj.DisposeLogFile ;
             dateTimePicker_MailTime.Value = configManager.PMAInfoObj.MailingTime;
             numericUpDown_Trigger.Value = configManager.PMAInfoObj.TriggerSeed;
@@ -49,7 +49,7 @@ namespace PMASysAlertsUI
         /// </summary>
         public void UpdateConfig()
         {
-            configManager.PMAInfoObj.ClientName = textBox_MachineName.Text;
+            configManager.PMAInfoObj.MachineName = textBox_MachineName.Text;
             configManager.PMAInfoObj.DisposeLogFile = checkBox_disposeFiles.Checked;
             configManager.PMAInfoObj.MailingTime = dateTimePicker_MailTime.Value;
             configManager.PMAInfoObj.TriggerSeed = Decimal.ToInt32(numericUpDown_Trigger.Value);

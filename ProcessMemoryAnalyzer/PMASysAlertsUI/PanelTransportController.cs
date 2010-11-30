@@ -16,8 +16,6 @@ namespace PMASysAlertsUI
 
         private static string REGX_VERIFY_EMAIL = @"^[\w\.=-]+@[\w\.-]+\.[\w]{2,3}$";
 
-        private static string REGX_VERIFY_FTP = @"^[A-Za-z0-9][A-Za-z0-9]*$";
-
         /// <summary>
         /// 
         /// </summary>
@@ -53,22 +51,7 @@ namespace PMASysAlertsUI
                 richTextBox_Emails.Text = sb.ToString();
             }
 
-            sb = new StringBuilder();
-            tempList = configManager.SystemAnalyzerInfo.ListPostFTPMessageOn;
-            if (tempList != null)
-            {
-                for (int index = 0; index < tempList.Count; index++)
-                {
-                    tempString = tempList[index];
-                    sb.Append(tempString);
-                    if (index < tempList.Count - 1)
-                    {
-                        sb.Append(';');
-                    }
-                }
-                richTextBox_FtpFolder.Text = sb.ToString();
-            }
-        
+       
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -82,12 +65,6 @@ namespace PMASysAlertsUI
             {
                 configManager.SystemAnalyzerInfo.ListSendMailTo = richTextBox_Emails.Text.Split(';').ToList<string>();
             }
-            configManager.SystemAnalyzerInfo.ListPostFTPMessageOn.Clear();
-            if (richTextBox_FtpFolder.Text != string.Empty)
-            {
-                configManager.SystemAnalyzerInfo.ListPostFTPMessageOn = richTextBox_FtpFolder.Text.Split(';').ToList<string>();
-            }
-
             configManager.SystemAnalyzerInfo.ClientInstanceName = textBox_ClientInstanceName.Text;
         }
 
@@ -100,9 +77,7 @@ namespace PMASysAlertsUI
         {
             configManager.ClearErrorMessage();
             bool isValidEmail = true;
-            bool isValidFTP = true;
             string[] emails = richTextBox_Emails.Text.Split(';');
-            string[] ftpFolders = richTextBox_FtpFolder.Text.Split(';');
             foreach (string email in emails)
             {
                 if (!Regex.IsMatch(email, REGX_VERIFY_EMAIL))
@@ -111,23 +86,12 @@ namespace PMASysAlertsUI
                     configManager.ErrorMessage.Add("Invalid Email : " + email);
                 }
             }
-            foreach (string ftpFolder in ftpFolders)
-            {
-                if (!Regex.IsMatch(ftpFolder, REGX_VERIFY_FTP))
-                {
-                    isValidFTP = false;
-                    configManager.ErrorMessage.Add("Invalid FTP Folder : " + ftpFolder);
-                }
-            }
-
-            if (isValidEmail && isValidFTP)
+            if (isValidEmail)
             {
                 return true;
             }
             else return false;
-            
-
-            
+          
         }
 
         #endregion

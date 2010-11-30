@@ -451,7 +451,7 @@ namespace PMASysAlertsUI
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             AboutBoxPMAAlerts aboutBox = new AboutBoxPMAAlerts();
-            aboutBox.Show(this);
+            aboutBox.ShowDialog(this);
         }
 
         private void showToolStripMenuItem_Click(object sender, EventArgs e)

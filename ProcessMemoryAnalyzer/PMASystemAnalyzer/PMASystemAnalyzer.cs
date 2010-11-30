@@ -74,6 +74,7 @@ namespace PMA.ConfigManager
                 {
                     service = new ServiceController(SERVICE_NAME);
                     service.Start();
+                    service.WaitForStatus(ServiceControllerStatus.Running,new TimeSpan(0,0,15));
                     serviceMessage = "Service Started Succesfully";    
                 }
                 return serviceMessage;
@@ -113,6 +114,7 @@ namespace PMA.ConfigManager
                 {
                     service = new ServiceController(SERVICE_NAME);
                     service.Stop();
+                    service.WaitForStatus(ServiceControllerStatus.Stopped, new TimeSpan(0, 0, 15));
                     serviceMessage = "Service stopped Succesfully";
                 }
                 return serviceMessage;

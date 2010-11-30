@@ -9,7 +9,7 @@ using System.IO;
 using System.Diagnostics;
 using PMA.ConfigManager;
 using PMA.Info;
-using PMA.ConfigManager;
+
 
 
 namespace PMA.ProcessMemoryAnalyzer
@@ -49,7 +49,7 @@ namespace PMA.ProcessMemoryAnalyzer
             {
                 File.Delete(_reportFileName);
             }
-            return Path.Combine(configManager.PMAApplicationDirectoryMemLog, configManager.PMAInfoObj.ClientName + "_" +
+            return Path.Combine(configManager.PMAApplicationDirectoryMemLog, configManager.PMAInfoObj.MachineName + "_" +
                 DateTime.Now.ToLongDateString() + "_" + DateTime.Now.ToShortTimeString().Replace(':', '-')) + ".txt";
         }
 
@@ -76,6 +76,7 @@ namespace PMA.ProcessMemoryAnalyzer
             }
         }
 
+        //----------------------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Reportings the task.
         /// </summary>
@@ -109,7 +110,7 @@ namespace PMA.ProcessMemoryAnalyzer
                             List<string> attachments = new List<string>();
                             attachments.Add(_reportFileName);
                             smtpTransport.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListSendMailTo, null,
-                                 "PMA Report" + ":" + configManager.PMAInfoObj.ClientName, GenerateMailMessageBody(), attachments);
+                                 "PMA Report" + ":" + configManager.SystemAnalyzerInfo.ClientInstanceName + ":" + configManager.PMAInfoObj.MachineName, GenerateMailMessageBody(), attachments);
 
                         }
                         if (configManager.PMAInfoObj.UseFTP)
@@ -371,7 +372,7 @@ namespace PMA.ProcessMemoryAnalyzer
             builder.Append("\r\n");
             builder.Append("Please find the Process Memory information file attached.");
             builder.Append("\r\n");
-            builder.Append("Please find attached Machine Process Report for " + configManager.PMAInfoObj.ClientName);
+            builder.Append("Please find attached Machine Process Report for " + configManager.PMAInfoObj.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
             builder.Append("\r\n");
             builder.Append("CELL FROMAT");
             builder.Append("\r\n");
