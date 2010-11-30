@@ -107,10 +107,14 @@ namespace PMA.ProcessMemoryAnalyzer
                     {
                         if (configManager.PMAInfoObj.UseSMTP)
                         {
+                            string subject = "PMA Report : " + Environment.MachineName + " : " +
+                            configManager.SystemAnalyzerInfo.ClientInstanceName + " at " +
+                            DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+
                             List<string> attachments = new List<string>();
                             attachments.Add(_reportFileName);
                             smtpTransport.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListSendMailTo, null,
-                                 "PMA Report" + ":" + configManager.SystemAnalyzerInfo.ClientInstanceName + ":" + configManager.PMAInfoObj.MachineName, GenerateMailMessageBody(), attachments);
+                                 subject, GenerateMailMessageBody(), attachments);
 
                         }
                         if (configManager.PMAInfoObj.UseFTP)
