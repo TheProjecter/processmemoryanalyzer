@@ -22,8 +22,6 @@ namespace PMA.Info
 
         private List<string> _listSendMailTo = null;
 
-        private List<string> _listPostFTPMessageOn = null;
-
         private List<PMACrashReportInfo> _listCrashReportInfo = null;
 
         //-------------------------------------------------------------------------------------------------
@@ -168,22 +166,6 @@ namespace PMA.Info
             set
             {
                 _listSendMailTo = value;
-            }
-        }
-
-        public List<string> ListPostFTPMessageOn
-        {
-            get
-            {
-                if (_listPostFTPMessageOn == null)
-                {
-                    _listPostFTPMessageOn = new List<string>();
-                }
-                return _listPostFTPMessageOn;
-            }
-            set
-            {
-                _listPostFTPMessageOn = value;
             }
         }
 

@@ -73,10 +73,9 @@ namespace PMA.Utils.smtp
                     {
                         if (File.Exists(attachment))
                         {
-                            using (updatesAttachement = new Attachment(attachment))
-                            {
-                                mail.Attachments.Add(updatesAttachement);
-                            }
+                            updatesAttachement = new Attachment(attachment);
+                            mail.Attachments.Add(updatesAttachement);
+
                         }
                         else
                         {
@@ -112,6 +111,10 @@ namespace PMA.Utils.smtp
                 if (smtpInfo.ProtectPassword)
                 {
                     smtpInfo.Password = OperationUtils.EncryptDecrypt(smtpInfo.Password);
+                }
+                if (updatesAttachement != null)
+                {
+                    updatesAttachement.Dispose();
                 }
             }
             

@@ -17,7 +17,7 @@ namespace PMA.Info
         
         public int ReportsIntervalHours { get; set; }
         public DateTime MailingTime { get; set; }
-        public string ClientName { get; set; }
+        public string MachineName { get; set; }
         public bool DisposeLogFile { get; set; }
         public int TriggerSeed { get; set; }
         public bool UseFTP { get; set; }

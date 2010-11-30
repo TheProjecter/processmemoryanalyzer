@@ -15,7 +15,7 @@ namespace PMASysAlertsUI
             InitializeComponent();
             this.Text = String.Format("About {0} {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Version {0} {0}", AssemblyVersion);
+            this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;
@@ -81,7 +81,7 @@ namespace PMASysAlertsUI
                 object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
                 if (attributes.Length == 0)
                 {
-                    return "Cosmos Tech";
+                    return "";
                 }
                 return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
             }
