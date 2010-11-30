@@ -133,7 +133,7 @@
             // 
             // dateTimePicker_MailTime
             // 
-            this.dateTimePicker_MailTime.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            this.dateTimePicker_MailTime.CustomFormat = "MM/dd/yyyy HH:mm:ss";
             this.dateTimePicker_MailTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker_MailTime.Location = new System.Drawing.Point(113, 102);
             this.dateTimePicker_MailTime.Name = "dateTimePicker_MailTime";
