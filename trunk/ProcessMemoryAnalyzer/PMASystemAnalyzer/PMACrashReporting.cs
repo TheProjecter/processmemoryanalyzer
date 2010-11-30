@@ -62,18 +62,18 @@ namespace PMA.ConfigManager
         private void SendMail()
         {
             configManager.Logger.Debug();
-            string subject = "PMA System Alert for : " + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName;
+            string subject = "PMA Event Alert for : " + Environment.MachineName + " : " +
+                configManager.SystemAnalyzerInfo.ClientInstanceName + " at " +
+                DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
             SMTPTransport smtp = new SMTPTransport();
             try
             {
                 smtp.SendAsynchronous = true;
                 smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListSendMailTo, null, subject, GenerateMessageBody(), null);
             }
-            catch
+            catch(Exception ex)
             {
-                configManager.FlagInfo.FlagedDiscAlert = false;
-                configManager.FlagInfo.FlagedPhysicalMemoryAlert = false;
-                configManager.FlagInfo.FlagedServiceAlert = false;
+                configManager.Logger.Error(ex);
             }
         }
 
