@@ -46,6 +46,7 @@ namespace PMA.ConfigManager
             return servicenames;
         }
 
+
         //---------------------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Starts the service.
@@ -123,10 +124,18 @@ namespace PMA.ConfigManager
             {
                 return ex.Message;
             }
-            
-
-            
         }
+
+        public static string ServiceStatus
+        {
+            get
+            {
+                ServiceController service = new ServiceController(SERVICE_NAME);
+                return service.Status.ToString();
+            }
+        }
+
+
 
         
         #region DriveAlert 

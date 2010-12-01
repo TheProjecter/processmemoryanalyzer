@@ -20,9 +20,13 @@ namespace PMA.Info
 
         private HashSet<string> _listServiceWatcher = null;
 
-        private List<string> _listSendMailTo = null;
+        private List<string> _listAlertMailSubscription = null;
+
+        private List<string> _listPMAReportSubscription = null;
 
         private List<PMACrashReportInfo> _listCrashReportInfo = null;
+
+        
 
         //-------------------------------------------------------------------------------------------------
 
@@ -152,20 +156,37 @@ namespace PMA.Info
 
 
         #region Transport Server
-        public List<string> ListSendMailTo 
+        public List<string> ListAlertMailSubscription
         {
             get
             {
-                if (_listSendMailTo == null)
+                if (_listAlertMailSubscription == null)
                 {
-                    _listSendMailTo = new List<string>();
+                    _listAlertMailSubscription = new List<string>();
                 }
-                return _listSendMailTo;
+                return _listAlertMailSubscription;
             }
 
             set
             {
-                _listSendMailTo = value;
+                _listAlertMailSubscription = value;
+            }
+        }
+
+        public List<string> ListPMAReportSubscription
+        {
+            get
+            {
+                if (_listPMAReportSubscription == null)
+                {
+                    _listPMAReportSubscription = new List<string>();
+                }
+                return _listPMAReportSubscription;
+            }
+
+            set
+            {
+                _listPMAReportSubscription = value;
             }
         }
 

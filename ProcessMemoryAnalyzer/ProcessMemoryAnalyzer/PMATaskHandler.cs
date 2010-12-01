@@ -113,7 +113,7 @@ namespace PMA.ProcessMemoryAnalyzer
 
                             List<string> attachments = new List<string>();
                             attachments.Add(_reportFileName);
-                            smtpTransport.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListSendMailTo, null,
+                            smtpTransport.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListPMAReportSubscription, null,
                                  subject, GenerateMailMessageBody(), attachments);
 
                         }
