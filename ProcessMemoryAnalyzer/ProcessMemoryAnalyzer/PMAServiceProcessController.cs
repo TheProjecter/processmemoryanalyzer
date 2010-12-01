@@ -78,6 +78,27 @@ namespace PMA.ProcessMemoryAnalyzer
             return process.WorkingSet64/1024;
         }
 
+        /// <summary>
+        /// Gets the CPU usage at moment.
+        /// </summary>
+        /// <returns></returns>
+        public static float CPUPercentageUsageAtMoment
+        {
+            get
+            {
+                PerformanceCounter cpuCounter;
+                cpuCounter = new PerformanceCounter();
+
+                cpuCounter.CategoryName = "Processor";
+                cpuCounter.CounterName = "% Processor Time";
+                cpuCounter.InstanceName = "_Total";
+                cpuCounter.NextValue();
+
+                return cpuCounter.NextValue();
+            }
+
+        }
+
         
         
 
