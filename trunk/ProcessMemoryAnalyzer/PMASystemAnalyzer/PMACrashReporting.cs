@@ -5,6 +5,7 @@ using System.Text;
 using System.Diagnostics;
 using PMA.Utils.smtp;
 using PMA.Info;
+using PMA.ProcessMemoryAnalyzer;
 
 namespace PMA.ConfigManager
 {
@@ -91,10 +92,13 @@ namespace PMA.ConfigManager
             builder.Append("\r\n");
             builder.Append("\r\n");
             builder.Append("Event Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
+            builder.Append("\r\n Available RAM :" + (PMAServiceProcessController.TotalPhysicalMemoryInKB - PMAServiceProcessController.TotalFreePhysicalMemoryInKB));
+            builder.Append("\r\n CPU Usage : " + PMAServiceProcessController.CPUPercentageUsageAtMoment + "%");
             builder.Append("\r\n");
             foreach (EventLogEntry logEntry in listEntryLog)
             {
-                builder.AppendLine(logEntry.EntryType.ToString() + " : " + logEntry.MachineName + " : " + logEntry.TimeGenerated.ToShortDateString() + "  " + logEntry.TimeGenerated.ToShortTimeString() + "\r\n" + logEntry.Message);
+                builder.Append("r\n" + logEntry.Category);
+                builder.Append("\r\n"+logEntry.EntryType.ToString() + " : " + logEntry.MachineName + " : " + logEntry.TimeGenerated.ToShortDateString() + "  " + logEntry.TimeGenerated.ToShortTimeString() + "\r\n" + logEntry.Message);
             }
             builder.Append("\r\n");
             builder.Append("\r\n");
