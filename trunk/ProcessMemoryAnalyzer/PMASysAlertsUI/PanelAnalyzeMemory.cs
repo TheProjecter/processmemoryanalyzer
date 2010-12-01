@@ -33,7 +33,7 @@ namespace PMASysAlertsUI
         {
             configManager.PMAInfoObj.ClientName = textBox_MachineName.Text;
             configManager.PMAInfoObj.DisposeLogFile = checkBox_disposeFiles.Checked;
-            configManager.PMAInfoObj.MailingTime = dateTimePicker_MailTime.Text
+            configManager.PMAInfoObj.MailingTime = dateTimePicker_MailTime.Text;
         }
 
         public bool CauseValidation()

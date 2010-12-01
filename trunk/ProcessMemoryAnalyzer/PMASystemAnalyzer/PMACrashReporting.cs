@@ -70,7 +70,7 @@ namespace PMA.ConfigManager
             try
             {
                 smtp.SendAsynchronous = true;
-                smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListSendMailTo, null, subject, GenerateMessageBody(), null);
+                smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListAlertMailSubscription, null, subject, GenerateMessageBody(), null);
             }
             catch(Exception ex)
             {

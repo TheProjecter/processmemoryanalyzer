@@ -36,7 +36,7 @@ namespace PMASysAlertsUI
             StringBuilder sb = new StringBuilder();
             string tempString = string.Empty;
             textBox_ClientInstanceName.Text = configManager.SystemAnalyzerInfo.ClientInstanceName;
-            List<string> tempList = configManager.SystemAnalyzerInfo.ListSendMailTo;
+            List<string> tempList = configManager.SystemAnalyzerInfo.ListAlertMailSubscription;
             if (tempList != null)
             {
                 for(int index = 0; index <tempList.Count ; index ++)
@@ -48,7 +48,24 @@ namespace PMASysAlertsUI
                         sb.Append(';');
                     }
                 }
-                richTextBox_Emails.Text = sb.ToString();
+                richTextBox_EmailsAlerts.Text = sb.ToString();
+            }
+
+            sb = new StringBuilder();
+            tempString = string.Empty;
+            tempList = configManager.SystemAnalyzerInfo.ListPMAReportSubscription;
+            if (tempList != null)
+            {
+                for (int index = 0; index < tempList.Count; index++)
+                {
+                    tempString = tempList[index];
+                    sb.Append(tempString);
+                    if (index < tempList.Count - 1)
+                    {
+                        sb.Append(';');
+                    }
+                }
+                richTextBox_EmailsAlerts.Text = sb.ToString();
             }
 
        
@@ -60,10 +77,10 @@ namespace PMASysAlertsUI
         /// </summary>
         public void UpdateConfig()
         {
-            configManager.SystemAnalyzerInfo.ListSendMailTo.Clear();
-            if (richTextBox_Emails.Text != string.Empty)
+            configManager.SystemAnalyzerInfo.ListAlertMailSubscription.Clear();
+            if (richTextBox_EmailsAlerts.Text != string.Empty)
             {
-                configManager.SystemAnalyzerInfo.ListSendMailTo = richTextBox_Emails.Text.Split(';').ToList<string>();
+                configManager.SystemAnalyzerInfo.ListAlertMailSubscription = richTextBox_EmailsAlerts.Text.Split(';').ToList<string>();
             }
             configManager.SystemAnalyzerInfo.ClientInstanceName = textBox_ClientInstanceName.Text;
         }
@@ -77,7 +94,7 @@ namespace PMASysAlertsUI
         {
             configManager.ClearErrorMessage();
             bool isValidEmail = true;
-            string[] emails = richTextBox_Emails.Text.Split(';');
+            string[] emails = richTextBox_EmailsAlerts.Text.Split(';');
             foreach (string email in emails)
             {
                 if (!Regex.IsMatch(email, REGX_VERIFY_EMAIL))
@@ -86,6 +103,16 @@ namespace PMASysAlertsUI
                     configManager.ErrorMessage.Add("Invalid Email : " + email);
                 }
             }
+            emails = richTextBox_EmailsPMAReport.Text.Split(';');
+            foreach (string email in emails)
+            {
+                if (!Regex.IsMatch(email, REGX_VERIFY_EMAIL))
+                {
+                    isValidEmail = false;
+                    configManager.ErrorMessage.Add("Invalid Email : " + email);
+                }
+            }
+            
             if (isValidEmail)
             {
                 return true;

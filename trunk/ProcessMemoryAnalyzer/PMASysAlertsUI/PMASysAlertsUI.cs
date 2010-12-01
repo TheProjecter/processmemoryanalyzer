@@ -500,6 +500,11 @@ namespace PMASysAlertsUI
             Environment.Exit(0);
         }
 
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(PMASystemAnalyzer.ServiceStatus);
+        }
+
         
 
         
