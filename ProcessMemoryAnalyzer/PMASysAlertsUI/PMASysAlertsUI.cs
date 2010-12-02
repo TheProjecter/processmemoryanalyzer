@@ -505,15 +505,5 @@ namespace PMASysAlertsUI
             MessageBox.Show(PMASystemAnalyzer.ServiceStatus);
         }
 
-        
-
-        
-        
-
-       
-
-        
-
-
     }
 }

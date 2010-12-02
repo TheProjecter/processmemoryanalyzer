@@ -130,8 +130,15 @@ namespace PMA.ConfigManager
         {
             get
             {
-                ServiceController service = new ServiceController(SERVICE_NAME);
-                return service.Status.ToString();
+                try
+                {
+                    ServiceController service = new ServiceController(SERVICE_NAME);
+                    return service.Status.ToString();
+                }
+                catch(Exception ex)
+                {
+                    return ex.Message;
+                }
             }
         }
 
