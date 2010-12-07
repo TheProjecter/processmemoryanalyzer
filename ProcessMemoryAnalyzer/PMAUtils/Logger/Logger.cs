@@ -11,6 +11,8 @@ namespace PMA.Utils.Logger
     public class Logger
     {
 
+        private static object _lockObject = new object();
+        
         private static Logger _logger = null;
 
         private LoggerInfo _loggerInfo;
@@ -138,15 +140,12 @@ namespace PMA.Utils.Logger
             {
                 
                 string log = ("Debug :" + DateTime.Now.ToShortDateString() + "_" + DateTime.Now.ToShortDateString() + "-->" + whoCalledMe  + position);
-                File.AppendAllText(_loggerInfo.LoggerFile, "\r\n" + log);
+                WriteFile("\r\n" + log);
             }
         }
 
 
-        public void Debug()
-        {
-            Debug(EnumMethod.NONE);
-        }
+       
         //----------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Errors the specified ex.
@@ -160,7 +159,20 @@ namespace PMA.Utils.Logger
                 sb.AppendLine("ERROR :" + DateTime.Now.ToShortDateString() + "_" + DateTime.Now.ToShortDateString() + "-->" + ex.Message);
                 sb.AppendLine("Stack Trace");
                 sb.AppendLine(ex.StackTrace);
-                File.AppendAllText(_loggerInfo.LoggerFile, "\r\n" + sb.ToString());
+                WriteFile("\r\n" + sb.ToString());
+            }
+        }
+
+
+        /// <summary>
+        /// Writes the file.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public void WriteFile(string message)
+        {
+            lock (_lockObject)
+            {
+               File.AppendAllText(_loggerInfo.LoggerFile, message);
             }
         }
 

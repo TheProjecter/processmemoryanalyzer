@@ -62,7 +62,6 @@ namespace PMA.ConfigManager
         /// </summary>
         private void SendMail()
         {
-            configManager.Logger.Debug();
             string subject = "PMA Event Alert for : " + Environment.MachineName + " : " +
                 configManager.SystemAnalyzerInfo.ClientInstanceName + " at " +
                 DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
@@ -121,7 +120,7 @@ namespace PMA.ConfigManager
         public void SystemLogEntryWrittern_event(object args, EntryWrittenEventArgs e)
         {
             EventLogEntry logEntry = e.Entry;
-            if(IsWatcherSet("System", logEntry))
+            if(AddEvent("System", logEntry))
                 listEntryLog.Add(logEntry); 
         }
 
@@ -134,8 +133,8 @@ namespace PMA.ConfigManager
         public void ApplicationLogEntryWrittern_event(object args, EntryWrittenEventArgs e)
         {
             EventLogEntry logEntry = e.Entry;
-            if (IsWatcherSet("Application", logEntry))
-                listEntryLog.Add(logEntry); 
+            AddEvent("Application", logEntry);
+                
         }
 
         //---------------------------------------------------------------------------------------------------------
@@ -147,8 +146,8 @@ namespace PMA.ConfigManager
         public void SecurityLogEntryWrittern_event(object args, EntryWrittenEventArgs e)
         {
             EventLogEntry logEntry = e.Entry;
-            if (IsWatcherSet("Security", logEntry))
-                listEntryLog.Add(logEntry); 
+            AddEvent("Security", logEntry);
+            
         }
 
 
@@ -161,16 +160,34 @@ namespace PMA.ConfigManager
         /// <returns>
         /// 	<c>true</c> if [is watcher set] [the specified log name]; otherwise, <c>false</c>.
         /// </returns>
-        private bool IsWatcherSet(string logName, EventLogEntry logEntry)
+        private bool AddEvent(string logName, EventLogEntry logEntry)
         {
-            int count = (from crashInfo in configManager.SystemAnalyzerInfo.ListCrashReportInfo
-                    where crashInfo.EventType == logEntry.EntryType.ToString() &&
-                    crashInfo.EventSource == logEntry.Source &&
-                    logEntry.Message.Contains(crashInfo.EventMessage)
-                         select crashInfo).ToList<PMACrashReportInfo>().Count;
+
+            int count = 0;
+
+            count = (from crashInfo in configManager.SystemAnalyzerInfo.ListCrashReportInfo
+                     where crashInfo.LogName == logName
+                     select crashInfo).ToList<PMACrashReportInfo>().Count;
 
             if (count > 0)
+            {
+                count = (from crashInfo in configManager.SystemAnalyzerInfo.ListCrashReportInfo
+                         where 
+                         crashInfo.EventType == logEntry.EntryType.ToString()
+                         &&
+                         (crashInfo.EventSource == logEntry.Source || crashInfo.EventSource == "*")
+                         &&
+                         (logEntry.Message.Contains(crashInfo.EventMessage) || crashInfo.EventMessage == "*")
+                         select crashInfo).ToList<PMACrashReportInfo>().Count;
+            }
+
+
+
+            if (count > 0)
+            {
+                listEntryLog.Add(logEntry);
                 return true;
+            }
             else return false;
         }
 

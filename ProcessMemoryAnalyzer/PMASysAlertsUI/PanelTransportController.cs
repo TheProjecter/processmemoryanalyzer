@@ -94,22 +94,30 @@ namespace PMASysAlertsUI
         {
             configManager.ClearErrorMessage();
             bool isValidEmail = true;
-            string[] emails = richTextBox_EmailsAlerts.Text.Split(';');
-            foreach (string email in emails)
+            string[] emails = null;
+
+            if (richTextBox_EmailsAlerts.Text != string.Empty)
             {
-                if (!Regex.IsMatch(email, REGX_VERIFY_EMAIL))
+                emails = richTextBox_EmailsAlerts.Text.Split(';');
+                foreach (string email in emails)
                 {
-                    isValidEmail = false;
-                    configManager.ErrorMessage.Add("Invalid Email : " + email);
+                    if (!Regex.IsMatch(email, REGX_VERIFY_EMAIL))
+                    {
+                        isValidEmail = false;
+                        configManager.ErrorMessage.Add("Invalid Email : " + email);
+                    }
                 }
             }
-            emails = richTextBox_EmailsPMAReport.Text.Split(';');
-            foreach (string email in emails)
+            if (richTextBox_EmailsPMAReport.Text != string.Empty)
             {
-                if (!Regex.IsMatch(email, REGX_VERIFY_EMAIL))
+                emails = richTextBox_EmailsPMAReport.Text.Split(';');
+                foreach (string email in emails)
                 {
-                    isValidEmail = false;
-                    configManager.ErrorMessage.Add("Invalid Email : " + email);
+                    if (!Regex.IsMatch(email, REGX_VERIFY_EMAIL))
+                    {
+                        isValidEmail = false;
+                        configManager.ErrorMessage.Add("Invalid Email : " + email);
+                    }
                 }
             }
             
