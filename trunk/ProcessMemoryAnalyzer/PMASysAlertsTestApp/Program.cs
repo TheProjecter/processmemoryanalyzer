@@ -12,11 +12,25 @@ namespace PMASysAlertsTestApp
         {
             //PMAFlowController flowController = new PMAFlowController();
             //flowController.RunTask();
-            
-            PMACrashReporting crshReporting = new PMACrashReporting();
-            crshReporting.SystemEventListener();
 
-            
+            System.Threading.Thread th = new System.Threading.Thread(EvenLogTask);
+            th.IsBackground = true;
+            th.Name = "EventMonitor";
+            th.Start();
+            th.Join();
+        }
+
+        private static void EvenLogTask()
+        {
+            try
+            {
+                PMACrashReporting crashReporting = new PMACrashReporting();
+                crashReporting.SystemEventListener();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -44,6 +44,7 @@ namespace PMA.PMAService
             //Starting EventLoging Thread - Have to imporve this 
             System.Threading.Thread th = new System.Threading.Thread(EvenLogTask);
             th.IsBackground = true;
+            th.Name = "EventMonitor";
             th.Start();
             
             int logInterval = int.Parse(ConfigurationSettings.AppSettings["interval"]);
