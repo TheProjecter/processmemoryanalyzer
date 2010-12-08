@@ -145,6 +145,24 @@ namespace PMA.Utils.Logger
             }
         }
 
+        //----------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Debugs the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public void Message(string message)
+        {
+            StackTrace st = new StackTrace();
+            string whoCalledMe = st.GetFrame(1).GetMethod().Name;
+            string position = string.Empty;
+            if (_loggerInfo.Level == EnumLogger.DEBUG)
+            {
+
+                string log = ("Message :" + DateTime.Now.ToShortDateString() + "_" + DateTime.Now.ToShortDateString() + "-->" + whoCalledMe + " : " + message);
+                WriteFile("\r\n" + log);
+            }
+        }
+
 
        
         //----------------------------------------------------------------------------------------------------------------
@@ -175,7 +193,11 @@ namespace PMA.Utils.Logger
             string file = _loggerInfo.LoggerFile;
             if (Thread.CurrentThread.IsBackground)
             {
-                file = file + "backgroundThread.txt";
+                if (Thread.CurrentThread.Name == null)
+                {
+                    file = file + "UnknownBackgroundThread" + ".txt";
+                }
+                else file = file + Thread.CurrentThread.Name + ".txt";
             }
             lock (_lockObject)
             {
