@@ -6,6 +6,7 @@ using System.Data.Sql;
 using Microsoft.SqlServer;
 using System.Data.SqlClient;
 using System.Data;
+using PMA.Utils.Logger;
 
 namespace PMA.ConfigManager
 {
@@ -13,6 +14,8 @@ namespace PMA.ConfigManager
     {
         private static string CONNECTION_STRING = "Data Source={0};Initial Catalog=master;User Id={1};Password={2};";
 
+        private PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
+        
         private SqlConnection connection = null;
 
         private string _message = string.Empty;
@@ -48,7 +51,9 @@ namespace PMA.ConfigManager
         /// <param name="password">The password.</param>
         public PMADatabaseController(string database, string user, string password)
         {
+            configManager.Logger.Debug(EnumMethod.START);
             CreateDBConnection(database, user, password);
+            configManager.Logger.Debug(EnumMethod.END);
         }
         
         //-----------------------------------------------------------------------------------------------------------------
@@ -61,6 +66,7 @@ namespace PMA.ConfigManager
         /// <returns></returns>
         public bool CreateDBConnection(string database, string user, string password)
         {
+            configManager.Logger.Debug(EnumMethod.START);
             bool result = false;
             connection = new SqlConnection(String.Format(CONNECTION_STRING,database,user,password));
             try
@@ -72,6 +78,7 @@ namespace PMA.ConfigManager
             }
             catch(SqlException ex)
             {
+                configManager.Logger.Error(ex);
                 _message = ex.Message;
                 result = false;
             }
@@ -82,7 +89,7 @@ namespace PMA.ConfigManager
                     connection.Close();
                 }
             }
-
+            configManager.Logger.Debug(EnumMethod.END);
             return result;
         }
 
@@ -94,6 +101,7 @@ namespace PMA.ConfigManager
         /// <returns></returns>
         public bool TruncateSessionStateDatabase()
         {
+            configManager.Logger.Debug(EnumMethod.START);
             //connection.Open();
             bool result = false;
             SqlCommand query = null;
@@ -118,9 +126,11 @@ namespace PMA.ConfigManager
             }
             catch(SqlException ex)
             {
+                configManager.Logger.Error(ex);
                 _message = ex.Message;
                 result = false;
             }
+            configManager.Logger.Debug(EnumMethod.END);
             return result;
         }
 
@@ -132,10 +142,10 @@ namespace PMA.ConfigManager
         /// <returns></returns>
         public decimal GetDBSize(string dbname)
         {
-            
+            configManager.Logger.Debug(EnumMethod.START);
             SqlDataAdapter dataAdapeter = new SqlDataAdapter("exec sp_databases",connection);
             DataSet dataset = new DataSet();
-         
+
             try
             {
                 dataAdapeter.Fill(dataset);
@@ -143,12 +153,17 @@ namespace PMA.ConfigManager
                 decimal size = (from row in dataset.Tables[0].AsEnumerable()
                                 where row["DATABASE_NAME"].ToString() == dbname
                                 select decimal.Parse(row["DATABASE_SIZE"].ToString())).First<decimal>();
-                return size/1024;
+                return size / 1024;
             }
             catch (Exception ex)
             {
+                configManager.Logger.Error(ex);
                 _message = ex.Message;
                 return 0;
+            }
+            finally
+            {
+                configManager.Logger.Debug(EnumMethod.END);
             }
         }
 

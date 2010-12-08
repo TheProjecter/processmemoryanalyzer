@@ -6,6 +6,7 @@ using System.Diagnostics;
 using PMA.Utils.smtp;
 using PMA.Info;
 using PMA.ProcessMemoryAnalyzer;
+using PMA.Utils.Logger;
 
 namespace PMA.ConfigManager
 {
@@ -23,6 +24,7 @@ namespace PMA.ConfigManager
         /// </summary>
         public void SystemEventListener()
         {
+            configManager.Logger.Debug(EnumMethod.START);
             EventLog eventSystemLog = new EventLog("System", ".");
             eventSystemLog.EntryWritten += new EntryWrittenEventHandler(SystemLogEntryWrittern_event);
             eventSystemLog.EnableRaisingEvents = true;
@@ -49,11 +51,14 @@ namespace PMA.ConfigManager
                     }
                 }
             }
+            configManager.Logger.Debug(EnumMethod.END);
         }
 
         private void PostEventLogs()
         {
+            configManager.Logger.Debug(EnumMethod.START);
             SendMail();
+            configManager.Logger.Debug(EnumMethod.END);
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -62,6 +67,7 @@ namespace PMA.ConfigManager
         /// </summary>
         private void SendMail()
         {
+            configManager.Logger.Debug(EnumMethod.START);
             string subject = "PMA Event Alert for : " + Environment.MachineName + " : " +
                 configManager.SystemAnalyzerInfo.ClientInstanceName + " at " +
                 DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
@@ -75,6 +81,7 @@ namespace PMA.ConfigManager
             {
                 configManager.Logger.Error(ex);
             }
+            configManager.Logger.Debug(EnumMethod.END);
         }
 
 
@@ -85,6 +92,7 @@ namespace PMA.ConfigManager
         /// <returns></returns>
         private string GenerateMessageBody()
         {
+            configManager.Logger.Debug(EnumMethod.START);
             StringBuilder builder = new StringBuilder();
             builder.Append("Hi,");
             builder.Append("\r\n");
@@ -106,6 +114,7 @@ namespace PMA.ConfigManager
             builder.Append("Thanks,");
             builder.Append("\r\n");
             builder.Append("Cosmos Team.");
+            configManager.Logger.Debug(EnumMethod.END);
             return builder.ToString();
         }
 
@@ -119,9 +128,10 @@ namespace PMA.ConfigManager
         /// <param name="e">The <see cref="System.Diagnostics.EntryWrittenEventArgs"/> instance containing the event data.</param>
         public void SystemLogEntryWrittern_event(object args, EntryWrittenEventArgs e)
         {
+            configManager.Logger.Debug(EnumMethod.START);
             EventLogEntry logEntry = e.Entry;
-            if(AddEvent("System", logEntry))
-                listEntryLog.Add(logEntry); 
+            AddEvent("System", logEntry);
+            configManager.Logger.Debug(EnumMethod.END);
         }
 
         //---------------------------------------------------------------------------------------------------------
@@ -132,8 +142,10 @@ namespace PMA.ConfigManager
         /// <param name="e">The <see cref="System.Diagnostics.EntryWrittenEventArgs"/> instance containing the event data.</param>
         public void ApplicationLogEntryWrittern_event(object args, EntryWrittenEventArgs e)
         {
+            configManager.Logger.Debug(EnumMethod.START);
             EventLogEntry logEntry = e.Entry;
             AddEvent("Application", logEntry);
+            configManager.Logger.Debug(EnumMethod.END);
                 
         }
 
@@ -145,8 +157,10 @@ namespace PMA.ConfigManager
         /// <param name="e">The <see cref="System.Diagnostics.EntryWrittenEventArgs"/> instance containing the event data.</param>
         public void SecurityLogEntryWrittern_event(object args, EntryWrittenEventArgs e)
         {
+            configManager.Logger.Debug(EnumMethod.START);
             EventLogEntry logEntry = e.Entry;
             AddEvent("Security", logEntry);
+            configManager.Logger.Debug(EnumMethod.END);
             
         }
 
@@ -162,33 +176,37 @@ namespace PMA.ConfigManager
         /// </returns>
         private bool AddEvent(string logName, EventLogEntry logEntry)
         {
-
-            int count = 0;
-
-            count = (from crashInfo in configManager.SystemAnalyzerInfo.ListCrashReportInfo
-                     where crashInfo.LogName == logName
-                     select crashInfo).ToList<PMACrashReportInfo>().Count;
-
-            if (count > 0)
+            configManager.Logger.Debug(EnumMethod.START);
+            try
             {
+                int count = 0;
+
                 count = (from crashInfo in configManager.SystemAnalyzerInfo.ListCrashReportInfo
-                         where 
-                         crashInfo.EventType == logEntry.EntryType.ToString()
-                         &&
-                         (crashInfo.EventSource == logEntry.Source || crashInfo.EventSource == "*")
-                         &&
-                         (logEntry.Message.Contains(crashInfo.EventMessage) || crashInfo.EventMessage == "*")
+                         where crashInfo.LogName == logName
                          select crashInfo).ToList<PMACrashReportInfo>().Count;
+
+                if (count > 0)
+                {
+                    count = (from crashInfo in configManager.SystemAnalyzerInfo.ListCrashReportInfo
+                             where
+                             crashInfo.EventType == logEntry.EntryType.ToString()
+                             &&
+                             (crashInfo.EventSource == logEntry.Source || crashInfo.EventSource == "*")
+                             &&
+                             (logEntry.Message.Contains(crashInfo.EventMessage) || crashInfo.EventMessage == "*")
+                             select crashInfo).ToList<PMACrashReportInfo>().Count;
+                }
+                if (count > 0)
+                {
+                    listEntryLog.Add(logEntry);
+                    return true;
+                }
+                else return false;
             }
-
-
-
-            if (count > 0)
+            finally
             {
-                listEntryLog.Add(logEntry);
-                return true;
+                configManager.Logger.Debug(EnumMethod.END);
             }
-            else return false;
         }
 
     }
