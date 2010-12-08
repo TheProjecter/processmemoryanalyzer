@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Diagnostics;
+using System.Threading;
 
 namespace PMA.Utils.Logger
 {
@@ -164,15 +165,21 @@ namespace PMA.Utils.Logger
         }
 
 
+        //----------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Writes the file.
         /// </summary>
         /// <param name="message">The message.</param>
         public void WriteFile(string message)
         {
+            string file = _loggerInfo.LoggerFile;
+            if (Thread.CurrentThread.IsBackground)
+            {
+                file = file + "backgroundThread.txt";
+            }
             lock (_lockObject)
             {
-               File.AppendAllText(_loggerInfo.LoggerFile, message);
+               File.AppendAllText(file, message);
             }
         }
 
