@@ -9,6 +9,7 @@ using System.ServiceProcess;
 using PMA.ProcessMemoryAnalyzer;
 using PMA.Utils.ftp;
 using PMA.Utils.smtp;
+using PMA.Utils.Logger;
 
 
 
@@ -21,7 +22,7 @@ namespace PMA.ConfigManager
 
         private const string SERVICE_NAME = "PMAAlertService";
 
-        
+        private static Logger logger = PMAConfigManager.GetConfigManagerInstance.Logger;
         
         //---------------------------------------------------------------------------------------------------------------------------
         /// <summary>
@@ -30,8 +31,10 @@ namespace PMA.ConfigManager
         /// <returns></returns>
         public static DriveInfo[] GetSystemDiscs()
         {
+            logger.Debug(EnumMethod.START);
             DriveInfo[] driveInfo = DriveInfo.GetDrives();
-            return driveInfo;            
+            logger.Debug(EnumMethod.END);
+            return driveInfo;
         }
 
         //---------------------------------------------------------------------------------------------------------------------------
@@ -41,9 +44,12 @@ namespace PMA.ConfigManager
         /// <returns></returns>
         public static List<string> GetAllServicesNames()
         {
+            logger.Debug(EnumMethod.START);
             List<string> servicenames = (from p in ServiceController.GetServices()
                                          select p.ServiceName).ToList<string>();
+            logger.Debug(EnumMethod.END);
             return servicenames;
+            
         }
 
 
@@ -53,6 +59,7 @@ namespace PMA.ConfigManager
         /// </summary>
         public static string StartService()
         {
+            logger.Debug(EnumMethod.START);
             ServiceController service = null;
             Process process = new Process();
             string serviceMessage = string.Empty;
@@ -60,7 +67,7 @@ namespace PMA.ConfigManager
             {
                 if (Environment.OSVersion.Version.Major > 5)
                 {
-                    process.StartInfo = new ProcessStartInfo("net","start PMAAlertService");
+                    process.StartInfo = new ProcessStartInfo("net", "start PMAAlertService");
                     process.StartInfo.Verb = "runas";
                     process.Start();
                     process.WaitForExit();
@@ -75,14 +82,19 @@ namespace PMA.ConfigManager
                 {
                     service = new ServiceController(SERVICE_NAME);
                     service.Start();
-                    service.WaitForStatus(ServiceControllerStatus.Running,new TimeSpan(0,0,15));
-                    serviceMessage = "Service Started Succesfully";    
+                    service.WaitForStatus(ServiceControllerStatus.Running, new TimeSpan(0, 0, 15));
+                    serviceMessage = "Service Started Succesfully";
                 }
                 return serviceMessage;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                logger.Error(ex);
                 return ex.Message;
+            }
+            finally
+            {
+                logger.Debug(EnumMethod.END);
             }
             
         }
@@ -93,6 +105,7 @@ namespace PMA.ConfigManager
         /// </summary>
         public static string StopService()
         {
+            logger.Debug(EnumMethod.START);
             ServiceController service = null;
             Process process = new Process();
             string serviceMessage = string.Empty;
@@ -122,22 +135,39 @@ namespace PMA.ConfigManager
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                logger.Error(ex);
+                serviceMessage = ex.Message;
+                return serviceMessage;
+            }
+            finally
+            {
+                logger.Debug(EnumMethod.END);
             }
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the service status.
+        /// </summary>
+        /// <value>The service status.</value>
         public static string ServiceStatus
         {
             get
             {
+                logger.Debug(EnumMethod.START);
                 try
                 {
                     ServiceController service = new ServiceController(SERVICE_NAME);
                     return service.Status.ToString();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
+                    logger.Error(ex);
                     return ex.Message;
+                }
+                finally
+                {
+                    logger.Debug(EnumMethod.END);
                 }
             }
         }
@@ -156,6 +186,7 @@ namespace PMA.ConfigManager
         /// <returns></returns>
         public static bool GenerateDriveSpaceAlert(List<string> listDriveNames, int alertLevel, out List<string> listMessage)
         {
+            logger.Debug(EnumMethod.START);
             bool flag = false;
             
             DriveInfo driveInfo = null;
@@ -169,7 +200,7 @@ namespace PMA.ConfigManager
                     flag = true;
                 }
             }
-
+            logger.Debug(EnumMethod.END);
             return flag;
         }
 
@@ -182,15 +213,23 @@ namespace PMA.ConfigManager
         /// <returns></returns>
         public static bool GeneratePhyMemAlert(int alertlevel, out string message)
         {
-            if (((decimal)PMAServiceProcessController.TotalFreePhysicalMemoryInKB / (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB) * 100 < alertlevel)
+            logger.Debug(EnumMethod.START);
+            try
             {
-                message = "Physical Memory Free Space is less then " + alertlevel + "%";
-                return true;
+                if (((decimal)PMAServiceProcessController.TotalFreePhysicalMemoryInKB / (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB) * 100 < alertlevel)
+                {
+                    message = "Physical Memory Free Space is less then " + alertlevel + "%";
+                    return true;
+                }
+                else
+                {
+                    message = string.Empty;
+                    return false;
+                }
             }
-            else
+            finally
             {
-                message = string.Empty;
-                return false;
+                logger.Debug(EnumMethod.END);
             }
         }
 
@@ -207,6 +246,7 @@ namespace PMA.ConfigManager
         public static bool GenerateServiceMemoryAlert(List<string> listServicesName, int alertLevel, out List<string> listMessage, bool setStoppedServiceAlert)
         {
 
+            logger.Debug(EnumMethod.START);
             bool flag = false;
             
             ServiceController[] allSystemServices = ServiceController.GetServices();
@@ -230,7 +270,7 @@ namespace PMA.ConfigManager
                     listMessage.Add("Service " + service.ServiceName + " is growing more then " + alertLevel + "% of available physical memory of " + (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB/1024 + " MB");
                 }
             }
-
+            logger.Debug(EnumMethod.END);
             return flag;
             
         }
@@ -241,12 +281,14 @@ namespace PMA.ConfigManager
         /// </summary>
         public static void ResetIIS()
         {
+            logger.Debug(EnumMethod.START);
             ProcessStartInfo pInfo = new ProcessStartInfo(Environment.SystemDirectory + "\\iisreset.exe");
             if (Environment.OSVersion.Version.Major > 5)
             {
                 pInfo.Verb = "runas";
             }
             Process.Start(pInfo);
+            logger.Debug(EnumMethod.END);
         }
         #endregion 
 
