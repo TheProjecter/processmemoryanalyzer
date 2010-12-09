@@ -69,7 +69,7 @@ namespace PMA.ConfigManager
         private void SendMail()
         {
             configManager.Logger.Debug(EnumMethod.START);
-            string subject = "PMA Event Alert for : " + Environment.MachineName + " : " +
+            string subject = "PMA System Alerts : Events : " + Environment.MachineName + " : " +
                 configManager.SystemAnalyzerInfo.ClientInstanceName + " at " +
                 DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
             SMTPTransport smtp = new SMTPTransport();

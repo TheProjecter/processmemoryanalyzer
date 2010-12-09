@@ -226,7 +226,7 @@ namespace PMA.ConfigManager
         private void SendMail()
         {
             configManager.Logger.Debug(EnumMethod.START);
-            string subject = "PMA System Alert for : " + systemName + " : " + 
+            string subject = "PMA System Alerts : General : " + systemName + " : " + 
                 configManager.SystemAnalyzerInfo.ClientInstanceName + " at " + 
                 DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() ;
             SMTPTransport smtp = new SMTPTransport();
