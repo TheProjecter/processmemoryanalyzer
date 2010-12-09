@@ -37,7 +37,7 @@
             this.panel_Transport = new System.Windows.Forms.Panel();
             this.checkBox_UseSMTP = new System.Windows.Forms.CheckBox();
             this.checkBox_UseFTP = new System.Windows.Forms.CheckBox();
-            this.checkBox_CrashReporting = new System.Windows.Forms.CheckBox();
+            this.checkBox_EventReporting = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel_Transport.SuspendLayout();
@@ -54,7 +54,7 @@
             this.tableLayoutPanel1.Controls.Add(this.checkBox_DBOptimizer, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.checkBox_ProcessWatch, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.panel_Transport, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox_CrashReporting, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.checkBox_EventReporting, 1, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(16, 39);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
@@ -145,15 +145,15 @@
             this.checkBox_UseFTP.Text = "Use FTP Transport";
             this.checkBox_UseFTP.UseVisualStyleBackColor = true;
             // 
-            // checkBox_CrashReporting
+            // checkBox_EventReporting
             // 
-            this.checkBox_CrashReporting.AutoSize = true;
-            this.checkBox_CrashReporting.Location = new System.Drawing.Point(206, 103);
-            this.checkBox_CrashReporting.Name = "checkBox_CrashReporting";
-            this.checkBox_CrashReporting.Size = new System.Drawing.Size(102, 17);
-            this.checkBox_CrashReporting.TabIndex = 7;
-            this.checkBox_CrashReporting.Text = "Crash Reporting";
-            this.checkBox_CrashReporting.UseVisualStyleBackColor = true;
+            this.checkBox_EventReporting.AutoSize = true;
+            this.checkBox_EventReporting.Location = new System.Drawing.Point(206, 103);
+            this.checkBox_EventReporting.Name = "checkBox_EventReporting";
+            this.checkBox_EventReporting.Size = new System.Drawing.Size(103, 17);
+            this.checkBox_EventReporting.TabIndex = 7;
+            this.checkBox_EventReporting.Text = "Event Reporting";
+            this.checkBox_EventReporting.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -193,7 +193,7 @@
         private System.Windows.Forms.CheckBox checkBox_UseSMTP;
         private System.Windows.Forms.CheckBox checkBox_UseFTP;
         private System.Windows.Forms.CheckBox checkBox_ProcessWatch;
-        private System.Windows.Forms.CheckBox checkBox_CrashReporting;
+        private System.Windows.Forms.CheckBox checkBox_EventReporting;
         private System.Windows.Forms.Label label1;
     }
 }
