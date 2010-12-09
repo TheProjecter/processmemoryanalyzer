@@ -65,7 +65,7 @@ namespace PMASysAlertsUI
                         sb.Append(';');
                     }
                 }
-                richTextBox_EmailsAlerts.Text = sb.ToString();
+                richTextBox_EmailsPMAReport.Text = sb.ToString();
             }
 
        
@@ -77,12 +77,17 @@ namespace PMASysAlertsUI
         /// </summary>
         public void UpdateConfig()
         {
+            configManager.SystemAnalyzerInfo.ClientInstanceName = textBox_ClientInstanceName.Text;
             configManager.SystemAnalyzerInfo.ListAlertMailSubscription.Clear();
             if (richTextBox_EmailsAlerts.Text != string.Empty)
             {
                 configManager.SystemAnalyzerInfo.ListAlertMailSubscription = richTextBox_EmailsAlerts.Text.Split(';').ToList<string>();
             }
-            configManager.SystemAnalyzerInfo.ClientInstanceName = textBox_ClientInstanceName.Text;
+            configManager.SystemAnalyzerInfo.ListPMAReportSubscription.Clear();
+            if (richTextBox_EmailsPMAReport.Text != string.Empty)
+            {
+                configManager.SystemAnalyzerInfo.ListPMAReportSubscription = richTextBox_EmailsPMAReport.Text.Split(';').ToList<string>();
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------
