@@ -107,7 +107,7 @@ namespace PMA.ProcessMemoryAnalyzer
                     {
                         if (configManager.PMAInfoObj.UseSMTP)
                         {
-                            string subject = "PMA Report : " + Environment.MachineName + " : " +
+                            string subject = "PMA System Alerts : PMA Report : " + Environment.MachineName + " : " +
                             configManager.SystemAnalyzerInfo.ClientInstanceName + " at " +
                             DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
 
