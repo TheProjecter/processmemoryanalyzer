@@ -35,14 +35,14 @@ namespace PMASysAlertsUI
 
         public void UpdateConfig()
         {
-            List<PMACrashReportInfo> tempList = new List<PMACrashReportInfo>();
+            List<PMAEventReportInfo> tempList = new List<PMAEventReportInfo>();
             
-            PMACrashReportInfo crashReportInfo = null;
+            PMAEventReportInfo crashReportInfo = null;
             foreach (DataGridViewRow row in dataGridView_CrashReporting.Rows)
             {
                 if (row.Index != dataGridView_CrashReporting.Rows.Count - 1)
                 {
-                    crashReportInfo = new PMACrashReportInfo();
+                    crashReportInfo = new PMAEventReportInfo();
                     if (row.Cells[0].Value == null)
                     {
                         row.Cells[0].Value = "System";

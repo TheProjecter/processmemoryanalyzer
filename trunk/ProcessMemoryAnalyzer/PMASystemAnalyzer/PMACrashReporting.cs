@@ -174,7 +174,7 @@ namespace PMA.ConfigManager
 
             count = (from crashInfo in configManager.SystemAnalyzerInfo.ListCrashReportInfo
                      where crashInfo.LogName == logName
-                     select crashInfo).ToList<PMACrashReportInfo>().Count;
+                     select crashInfo).ToList<PMAEventReportInfo>().Count;
 
             if (count > 0)
             {
@@ -185,7 +185,7 @@ namespace PMA.ConfigManager
                          (crashInfo.EventSource == logEntry.Source || crashInfo.EventSource == "*")
                          &&
                          (logEntry.Message.Contains(crashInfo.EventMessage) || crashInfo.EventMessage == "*")
-                         select crashInfo).ToList<PMACrashReportInfo>().Count;
+                         select crashInfo).ToList<PMAEventReportInfo>().Count;
             }
             if (count > 0)
             {

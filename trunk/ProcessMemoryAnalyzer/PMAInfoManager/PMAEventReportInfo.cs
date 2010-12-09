@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace PMA.Info
 {
-    public class PMACrashReportInfo
+    public class PMAEventReportInfo
     {
 
         public string LogName { get; set; } 

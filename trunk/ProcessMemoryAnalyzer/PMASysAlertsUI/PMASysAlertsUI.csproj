@@ -56,11 +56,11 @@
     </Compile>
     <Compile Include="ENUMPanel.cs" />
     <Compile Include="IUIConfigManager.cs" />
-    <Compile Include="PanelCrashReporting.cs">
+    <Compile Include="PanelEventReporting.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PanelCrashReporting.Designer.cs">
-      <DependentUpon>PanelCrashReporting.cs</DependentUpon>
+    <Compile Include="PanelEventReporting.Designer.cs">
+      <DependentUpon>PanelEventReporting.cs</DependentUpon>
     </Compile>
     <Compile Include="PanelMemoryAnalyzer.cs">
       <SubType>UserControl</SubType>
@@ -121,8 +121,8 @@
     <EmbeddedResource Include="AboutBoxPMAAlerts.resx">
       <DependentUpon>AboutBoxPMAAlerts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PanelCrashReporting.resx">
-      <DependentUpon>PanelCrashReporting.cs</DependentUpon>
+    <EmbeddedResource Include="PanelEventReporting.resx">
+      <DependentUpon>PanelEventReporting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelMemoryAnalyzer.resx">
       <DependentUpon>PanelMemoryAnalyzer.cs</DependentUpon>
