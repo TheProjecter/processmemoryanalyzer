@@ -298,9 +298,9 @@
             this.label_crash.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_crash.Location = new System.Drawing.Point(3, 198);
             this.label_crash.Name = "label_crash";
-            this.label_crash.Size = new System.Drawing.Size(98, 13);
+            this.label_crash.Size = new System.Drawing.Size(99, 13);
             this.label_crash.TabIndex = 7;
-            this.label_crash.Text = "Crash Reporting";
+            this.label_crash.Text = "Event Reporting";
             this.label_crash.Click += new System.EventHandler(this.label_crash_Click);
             // 
             // notifyIconSystemAnalyzer

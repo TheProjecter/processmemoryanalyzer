@@ -33,7 +33,7 @@ namespace PMASysAlertsUI
         PanelHome panelHome = null;
         PanelLogger panelLogger = null;
         PanelMemoryAnalyzer panelMemoryAnalyzer = null;
-        PanelCrashReporting panelCrashReporting = null;
+        PanelEventReporting panelCrashReporting = null;
         #endregion
 
 
@@ -73,7 +73,7 @@ namespace PMASysAlertsUI
                 case ENUMPanel.PANEL_MEMEORY_ANALYZER :
                     result = panelMemoryAnalyzer.CauseValidation();
                     break;
-                case ENUMPanel.PANEL_CRASH_REPORTING :
+                case ENUMPanel.PANEL_EVENT_REPORTING :
                     result = panelCrashReporting.CauseValidation();
                     break;
                 default:
@@ -118,7 +118,7 @@ namespace PMASysAlertsUI
                 case ENUMPanel.PANEL_MEMEORY_ANALYZER :
                     panelMemoryAnalyzer.UpdateConfig();
                     break;
-                case ENUMPanel.PANEL_CRASH_REPORTING :
+                case ENUMPanel.PANEL_EVENT_REPORTING :
                     panelCrashReporting.UpdateConfig();
                     break;
             }
@@ -170,7 +170,7 @@ namespace PMASysAlertsUI
                     HideAllControls();
                     panelMemoryAnalyzer.Show();
                     break;
-                case ENUMPanel.PANEL_CRASH_REPORTING :
+                case ENUMPanel.PANEL_EVENT_REPORTING :
                     HideAllControls();
                     panelCrashReporting.Show();
                     break;
@@ -223,7 +223,7 @@ namespace PMASysAlertsUI
             panelMemoryAnalyzer = new PanelMemoryAnalyzer();
             panel_MainContainer.Controls.Add(panelMemoryAnalyzer);
 
-            panelCrashReporting = new PanelCrashReporting();
+            panelCrashReporting = new PanelEventReporting();
             panel_MainContainer.Controls.Add(panelCrashReporting);
 
             HideAllControls();
@@ -402,7 +402,7 @@ namespace PMASysAlertsUI
             if (CauseValidation())
             {
                 UpdateConfig(PANEL);
-                ShowPanel(ENUMPanel.PANEL_CRASH_REPORTING);
+                ShowPanel(ENUMPanel.PANEL_EVENT_REPORTING);
             }
             else
             {

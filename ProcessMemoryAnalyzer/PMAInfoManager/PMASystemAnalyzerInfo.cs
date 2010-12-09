@@ -24,7 +24,7 @@ namespace PMA.Info
 
         private List<string> _listPMAReportSubscription = null;
 
-        private List<PMACrashReportInfo> _listCrashReportInfo = null;
+        private List<PMAEventReportInfo> _listCrashReportInfo = null;
 
         
 
@@ -197,13 +197,13 @@ namespace PMA.Info
 
         #region Crash Report
 
-        public List<PMACrashReportInfo> ListCrashReportInfo 
+        public List<PMAEventReportInfo> ListCrashReportInfo 
         {
             get
             {
                 if (_listCrashReportInfo == null)
                 {
-                    _listCrashReportInfo = new List<PMACrashReportInfo>();
+                    _listCrashReportInfo = new List<PMAEventReportInfo>();
                 }
                 return _listCrashReportInfo;
             }
