@@ -13,21 +13,38 @@ namespace PMA.Utils.Logger
 
         private string _loggerFile;
 
-        private static string _defaultLogPath = AppDomain.CurrentDomain.BaseDirectory + "\\" + LOGGER_FILE;
+        private static string _defaultLogPath = AppDomain.CurrentDomain.BaseDirectory + "\\log";
 
+        private static string _defaultLogFile = _defaultLogPath + "\\" + LOGGER_FILE;
+
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoggerInfo"/> class.
+        /// </summary>
         internal LoggerInfo()
         {
-            LoggerFile = _defaultLogPath;
+            LoggerFile = _defaultLogFile;
             Level = EnumLogger.OFF;
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoggerInfo"/> class.
+        /// </summary>
+        /// <param name="logFilePath">The log file path.</param>
+        /// <param name="level">The level.</param>
         internal LoggerInfo(string logFilePath, EnumLogger level)
         {
             _loggerFile = logFilePath;
             Level = level;
         }
 
-        
+
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets or sets the logger file.
+        /// </summary>
+        /// <value>The logger file.</value>
         public string LoggerFile 
         {
             get
@@ -45,8 +62,12 @@ namespace PMA.Utils.Logger
                     }
                     catch
                     {
-                        File.Create(_defaultLogPath);
-                        _loggerFile = value;
+                        if(!Directory.Exists(_defaultLogPath))
+                        {
+                            Directory.CreateDirectory(_defaultLogPath);
+                        }
+                        File.Create(_defaultLogFile);
+                        _loggerFile = _defaultLogFile;
                     }
                 }
                 else
@@ -56,6 +77,11 @@ namespace PMA.Utils.Logger
             }
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets or sets the level.
+        /// </summary>
+        /// <value>The level.</value>
         public EnumLogger Level { get; set; }
 
         internal string Serialize()
