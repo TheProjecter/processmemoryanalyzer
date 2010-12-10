@@ -22,7 +22,7 @@ namespace PMASysAlertsUI
         const string LEVEL_OFF = "OFF";
 
 
-        private string defaultLogPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PMALog.txt");
+        private string defaultLogPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\log", "PMALog.txt");
 
         //----------------------------------------------------------------------------------------------------
         /// <summary>
