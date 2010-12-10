@@ -73,8 +73,9 @@ namespace PMASysAlertsUI
             }
             if (dateTimePicker_MailTime.Value < DateTime.Now)
             {
-                result = false;
-                configManager.ErrorMessage.Add("Please set a time later then now.");
+                dateTimePicker_MailTime.Value = DateTime.Now.AddHours(Double.Parse(numericUpDown_ReportInterval.Value.ToString()));
+                //result = false;
+                //configManager.ErrorMessage.Add("Please set a time later then now.");
             }
 
             return result;
