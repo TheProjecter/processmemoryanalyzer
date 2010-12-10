@@ -84,6 +84,12 @@ namespace PMA.Utils.Logger
         /// <value>The level.</value>
         public EnumLogger Level { get; set; }
 
+
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Serializes this instance.
+        /// </summary>
+        /// <returns></returns>
         internal string Serialize()
         {
             StringWriter sw = new StringWriter();
@@ -92,6 +98,13 @@ namespace PMA.Utils.Logger
             return sw.ToString();
         }
 
+
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Deserializes the specified STR object.
+        /// </summary>
+        /// <param name="strObject">The STR object.</param>
+        /// <returns></returns>
         internal static LoggerInfo Deserialize(string strObject)
         {
             XmlSerializer x = new XmlSerializer(typeof(LoggerInfo));
