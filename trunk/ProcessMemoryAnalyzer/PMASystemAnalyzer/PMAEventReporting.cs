@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace PMA.ConfigManager
 {
-    public class PMACrashReporting
+    public class PMAEventReporting
     {
         
         PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
