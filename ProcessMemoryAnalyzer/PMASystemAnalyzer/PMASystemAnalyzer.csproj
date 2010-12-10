@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PMACrashReporting.cs" />
+    <Compile Include="PMAEventReporting.cs" />
     <Compile Include="PMADatabaseController.cs" />
     <Compile Include="PMAFlowController.cs" />
     <Compile Include="PMASystemAnalyzer.cs" />
