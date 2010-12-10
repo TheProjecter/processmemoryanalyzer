@@ -59,7 +59,7 @@ namespace PMA.PMAService
         /// </summary>
         private void EvenLogTask()
         {
-            PMACrashReporting crashReporting = new PMACrashReporting();
+            PMAEventReporting crashReporting = new PMAEventReporting();
             crashReporting.SystemEventListener();
         }
 

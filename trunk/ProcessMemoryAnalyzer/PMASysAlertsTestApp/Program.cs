@@ -24,7 +24,7 @@ namespace PMASysAlertsTestApp
         {
             try
             {
-                PMACrashReporting crashReporting = new PMACrashReporting();
+                PMAEventReporting crashReporting = new PMAEventReporting();
                 crashReporting.SystemEventListener();
             }
             catch (Exception ex)
