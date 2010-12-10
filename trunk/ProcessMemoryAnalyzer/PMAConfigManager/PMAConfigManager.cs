@@ -27,6 +27,19 @@ namespace PMA.ConfigManager
         private static string PMA_LOG_DIR = "PMALog";
         private static PMAConfigManager pmaConfigManager = null;
 
+        public string PostDir 
+        {
+            get
+            {
+                string postPath = Path.Combine(Environment.CurrentDirectory, "Post");
+                if (!Directory.Exists(postPath))
+                {
+                    Directory.CreateDirectory(postPath);
+                }
+                return postPath;
+            }
+        } 
+
 
         public string PMAApplicationDirectoryMemLog
         {

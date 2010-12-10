@@ -254,7 +254,7 @@ namespace PMA.ConfigManager
             configManager.Logger.Debug(EnumMethod.START);
             try
             {
-                string tempFileName = configManager.CurrentAppConfigDir + "\\PMA_ALERTS_" + systemName+ "_" + configManager.SystemAnalyzerInfo.ClientInstanceName + ".txt";
+                string tempFileName = configManager.PostDir + "\\PMA_ALERTS_" + systemName+ "_" + configManager.SystemAnalyzerInfo.ClientInstanceName + ".txt";
                 File.WriteAllText(tempFileName, GenerateMessageBody());
                 FTPTransport ftpTransport = new FTPTransport();
                 List<string> filetoUpload = new List<string>();
