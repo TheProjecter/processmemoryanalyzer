@@ -15,20 +15,62 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_24C8575309F9155097830C1C54370C6A"
+        "OwnerKey" = "8:_612FEA022ADD62E42E77EA375EB99C12"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_24C8575309F9155097830C1C54370C6A"
+        "OwnerKey" = "8:_800BC5C4928C79DCCF02DE668D0CFE6A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_24C8575309F9155097830C1C54370C6A"
+        "OwnerKey" = "8:_DEC50CB49AF0FD88389675EDE88745B7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_24C8575309F9155097830C1C54370C6A"
+        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_59C286555E2567F672C138D90784DA9F"
+        "MsmKey" = "8:_612FEA022ADD62E42E77EA375EB99C12"
+        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_612FEA022ADD62E42E77EA375EB99C12"
+        "OwnerKey" = "8:_E398E11376684CABBBDC08E0F42C461E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_612FEA022ADD62E42E77EA375EB99C12"
+        "OwnerKey" = "8:_800BC5C4928C79DCCF02DE668D0CFE6A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_612FEA022ADD62E42E77EA375EB99C12"
         "OwnerKey" = "8:_DEC50CB49AF0FD88389675EDE88745B7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_59C286555E2567F672C138D90784DA9F"
-        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
+        "MsmKey" = "8:_800BC5C4928C79DCCF02DE668D0CFE6A"
+        "OwnerKey" = "8:_DEC50CB49AF0FD88389675EDE88745B7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -39,8 +81,26 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_800BC5C4928C79DCCF02DE668D0CFE6A"
+        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_943AB3220ABFE038AE8435E5B24BCBED"
+        "OwnerKey" = "8:_E398E11376684CABBBDC08E0F42C461E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_96C190A7BB2B6F9FF5CF670A8DB21294"
-        "OwnerKey" = "8:_DEC50CB49AF0FD88389675EDE88745B7"
+        "OwnerKey" = "8:_612FEA022ADD62E42E77EA375EB99C12"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_96C190A7BB2B6F9FF5CF670A8DB21294"
+        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -52,13 +112,7 @@
         "Entry"
         {
         "MsmKey" = "8:_96C190A7BB2B6F9FF5CF670A8DB21294"
-        "OwnerKey" = "8:_39B48664893F4161AC2FFFF9673F04C4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_96C190A7BB2B6F9FF5CF670A8DB21294"
-        "OwnerKey" = "8:_59C286555E2567F672C138D90784DA9F"
+        "OwnerKey" = "8:_DEC50CB49AF0FD88389675EDE88745B7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -100,13 +154,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_800BC5C4928C79DCCF02DE668D0CFE6A"
+        "OwnerKey" = "8:_A67D0C64B66C4C41459BF4EB4A2A7698"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A67D0C64B66C4C41459BF4EB4A2A7698"
+        "OwnerKey" = "8:_943AB3220ABFE038AE8435E5B24BCBED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -118,13 +172,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_59C286555E2567F672C138D90784DA9F"
+        "OwnerKey" = "8:_800BC5C4928C79DCCF02DE668D0CFE6A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_612FEA022ADD62E42E77EA375EB99C12"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_96C190A7BB2B6F9FF5CF670A8DB21294"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_24C8575309F9155097830C1C54370C6A"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -260,20 +326,51 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_59C286555E2567F672C138D90784DA9F"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_24C8575309F9155097830C1C54370C6A"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ProcessMemoryAnalyzer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:PMAInfoManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_59C286555E2567F672C138D90784DA9F"
+                    "_24C8575309F9155097830C1C54370C6A"
                     {
-                    "Name" = "8:ProcessMemoryAnalyzer.dll"
+                    "Name" = "8:PMAInfoManager.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:ProcessMemoryAnalyzer.dll"
+            "SourcePath" = "8:PMAInfoManager.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_9F6D78044B0146DCBEEA56C6AA61398C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_612FEA022ADD62E42E77EA375EB99C12"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:PMAConfigManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_612FEA022ADD62E42E77EA375EB99C12"
+                    {
+                    "Name" = "8:PMAConfigManager.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:PMAConfigManager.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9F6D78044B0146DCBEEA56C6AA61398C"
@@ -305,6 +402,37 @@
                     }
                 }
             "SourcePath" = "8:ProcessMemoryAnalyzer.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_9F6D78044B0146DCBEEA56C6AA61398C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_943AB3220ABFE038AE8435E5B24BCBED"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:PMAInfoManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_943AB3220ABFE038AE8435E5B24BCBED"
+                    {
+                    "Name" = "8:PMAInfoManager.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:PMAInfoManager.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9F6D78044B0146DCBEEA56C6AA61398C"
