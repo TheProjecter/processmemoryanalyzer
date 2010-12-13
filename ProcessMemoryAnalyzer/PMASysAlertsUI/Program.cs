@@ -12,28 +12,9 @@ namespace PMASysAlertsUI
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
+        static void Main()
         {
-            if (Environment.OSVersion.Version.Major > 5 && args.Length == 0)
-            {
-                Process uiLuncher = new Process();
-                uiLuncher.StartInfo = new ProcessStartInfo(Environment.CurrentDirectory + "\\PMASysAlertsUI.exe", "userauth");
-                uiLuncher.StartInfo.Verb = "runas";
-                uiLuncher.Start();
-                System.Threading.Thread.Sleep(3000);
-                Environment.Exit(0);
-            }
-            else
-            {
-                LaunchUI();
-            }
-
-            if (Environment.OSVersion.Version.Major > 5 && (args.Length == 1 && args[0] == "userauth"))
-            {
-                LaunchUI();
-            }
-            
-            
+            LaunchUI();
         }
 
         /// <summary>
@@ -41,8 +22,9 @@ namespace PMASysAlertsUI
         /// </summary>
         static void LaunchUI()
         {
+            int numberOfProcess = 1 ;
             Process[] p = Process.GetProcessesByName("PMASysAlertsUI");
-            if (p.Length > 1)
+            if (p.Length > numberOfProcess)
             {
                 System.Threading.Thread.Sleep(3000);
                 Environment.Exit(0);

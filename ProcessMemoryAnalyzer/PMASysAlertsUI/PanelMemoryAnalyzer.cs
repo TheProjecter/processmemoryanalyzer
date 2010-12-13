@@ -39,8 +39,6 @@ namespace PMASysAlertsUI
             dateTimePicker_MailTime.Value = configManager.PMAInfoObj.MailingTime;
             numericUpDown_Trigger.Value = configManager.PMAInfoObj.TriggerSeed;
             numericUpDown_ReportInterval.Value = configManager.PMAInfoObj.ReportsIntervalHours;
-            configManager.SystemAnalyzerInfo.SetPostFTP = configManager.PMAInfoObj.UseFTP;
-            configManager.SystemAnalyzerInfo.SetSendMail = configManager.PMAInfoObj.UseSMTP;
         }
 
         //--------------------------------------------------------------------------------
