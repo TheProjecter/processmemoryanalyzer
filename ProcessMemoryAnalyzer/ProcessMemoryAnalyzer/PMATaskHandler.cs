@@ -9,6 +9,7 @@ using System.IO;
 using System.Diagnostics;
 using PMA.ConfigManager;
 using PMA.Info;
+using PMA.Utils.Logger;
 
 
 
@@ -30,8 +31,10 @@ namespace PMA.ProcessMemoryAnalyzer
         /// </summary>
         public PMATaskHandler()
         {
+            configManager.Logger.Debug(EnumMethod.START);
             DeserilizePMAInfo();
             _fileName = GenerateNewFileName();
+            configManager.Logger.Debug(EnumMethod.END);
         }
 
         //----------------------------------------------------------------------------------------------------------------------------
@@ -41,6 +44,7 @@ namespace PMA.ProcessMemoryAnalyzer
         /// <returns></returns>
         private string GenerateNewFileName()
         {
+            configManager.Logger.Debug(EnumMethod.START);
             if (File.Exists(_fileName) && configManager.PMAInfoObj.DisposeLogFile)
             {
                 File.Delete(_fileName);
@@ -49,6 +53,7 @@ namespace PMA.ProcessMemoryAnalyzer
             {
                 File.Delete(_reportFileName);
             }
+            configManager.Logger.Debug(EnumMethod.END);
             return Path.Combine(configManager.PMAApplicationDirectoryMemLog, configManager.PMAInfoObj.MachineName + "_" +
                 DateTime.Now.ToLongDateString() + "_" + DateTime.Now.ToShortTimeString().Replace(':', '-')) + ".txt";
         }
@@ -59,6 +64,7 @@ namespace PMA.ProcessMemoryAnalyzer
         /// </summary>
         public void RunTask()
         {
+            configManager.Logger.Debug(EnumMethod.START);
             if (configManager.SystemAnalyzerInfo.SetPMA)
             {
                 mailingTime = configManager.PMAInfoObj.MailingTime;
@@ -74,6 +80,7 @@ namespace PMA.ProcessMemoryAnalyzer
                     ReportingTask();
                 }
             }
+            configManager.Logger.Debug(EnumMethod.END);
         }
 
         //----------------------------------------------------------------------------------------------------------------------------
@@ -82,18 +89,15 @@ namespace PMA.ProcessMemoryAnalyzer
         /// </summary>
         public void ReportingTask()
         {
+            configManager.Logger.Debug(EnumMethod.START);
             if (configManager.SystemAnalyzerInfo.SetPMA)
             {
-                string smtpPassword = string.Empty;
-                string ftpPassword = string.Empty;
                 SMTPTransport smtpTransport = new SMTPTransport();
                 FTPTransport ftpTransport = new FTPTransport();
                 try
                 {
 
                     _reportFileName = string.Empty;
-                    smtpPassword = configManager.SmtpInfo.Password;
-                    ftpPassword = configManager.FtpInfo.Password;
                     if (File.Exists(_fileName))
                     {
                         _reportFileName = CreateAllProcessCSVReport(_fileName);
@@ -105,29 +109,48 @@ namespace PMA.ProcessMemoryAnalyzer
                     }
                     if (File.Exists(_fileName))
                     {
+                        
                         if (configManager.PMAInfoObj.UseSMTP)
                         {
-                            string subject = "PMA System Alerts : PMA Report : " + configManager.SystemAnalyzerInfo.ClientInstanceName + " : " + Environment.MachineName + " : " +
-                            " at " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+                            try
+                            {
 
-                            List<string> attachments = new List<string>();
-                            attachments.Add(_reportFileName);
-                            smtpTransport.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListPMAReportSubscription, null,
-                                 subject, GenerateMailMessageBody(), attachments);
+                                string subject = "PMA System Alerts : PMA Report : " + configManager.SystemAnalyzerInfo.ClientInstanceName + " : " + Environment.MachineName + " : " +
+                                " at " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+
+                                List<string> attachments = new List<string>();
+                                attachments.Add(_reportFileName);
+                                smtpTransport.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListPMAReportSubscription, null,
+                                     subject, GenerateMailMessageBody(), attachments);
+                            }
+                            catch (InvalidOperationException ex)
+                            {
+                                configManager.Logger.Message(ex.Message);
+                            }
+                            catch (Exception ex)
+                            {
+                                configManager.Logger.Error(ex);
+                            }
 
                         }
                         if (configManager.PMAInfoObj.UseFTP)
                         {
-                            List<string> ftpFiles = new List<string>();
-                            ftpFiles.Add(_reportFileName);
-                            ftpTransport.FTPSend(configManager.FtpInfo, ftpFiles);
+                            try
+                            {
+                                List<string> ftpFiles = new List<string>();
+                                ftpFiles.Add(_reportFileName);
+                                ftpTransport.FTPSend(configManager.FtpInfo, ftpFiles);
+                            }
+                            catch (Exception ex)
+                            {
+                                configManager.Logger.Error(ex);
+                            }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Exception : " + ex.Message);
-                    // Start New Loging
+                    configManager.Logger.Error(ex);
                 }
                 finally
                 {
@@ -135,10 +158,9 @@ namespace PMA.ProcessMemoryAnalyzer
                     ftpTransport = null;
                     GC.Collect();
                     GC.WaitForPendingFinalizers();
-                    configManager.SmtpInfo.Password = smtpPassword;
-                    configManager.FtpInfo.Password = ftpPassword;
                     _fileName = GenerateNewFileName();
                     SerializedPMAInfo();
+                    configManager.Logger.Debug(EnumMethod.END);
                 }
             }
         }
@@ -369,6 +391,7 @@ namespace PMA.ProcessMemoryAnalyzer
         /// <returns></returns>
         private string GenerateMailMessageBody()
         {
+            configManager.Logger.Debug(EnumMethod.START);
             StringBuilder builder = new StringBuilder();
             builder.Append("Hi,");
             builder.Append("\r\n");
@@ -386,6 +409,7 @@ namespace PMA.ProcessMemoryAnalyzer
             builder.Append("\r\n");
             builder.Append("Cosmos Team.");
             return builder.ToString();
+            configManager.Logger.Debug(EnumMethod.END);
         }
 
 
@@ -395,6 +419,7 @@ namespace PMA.ProcessMemoryAnalyzer
         /// </summary>
         private void DeserilizePMAInfo()
         {
+            configManager.Logger.Debug(EnumMethod.START);
             try
             {
                 configManager.PMAInfoObj = PMAInfo.Deserialize(File.ReadAllText(Path.Combine(configManager.CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE)));
@@ -402,6 +427,10 @@ namespace PMA.ProcessMemoryAnalyzer
             catch (FileNotFoundException ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                configManager.Logger.Debug(EnumMethod.END);
             }
         }
 
@@ -411,7 +440,9 @@ namespace PMA.ProcessMemoryAnalyzer
         /// </summary>
         private void SerializedPMAInfo()
         {
+            configManager.Logger.Debug(EnumMethod.START);
             File.WriteAllText(Path.Combine(configManager.CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE), configManager.PMAInfoObj.Serialize());
+            configManager.Logger.Debug(EnumMethod.END);
         }
 
 
