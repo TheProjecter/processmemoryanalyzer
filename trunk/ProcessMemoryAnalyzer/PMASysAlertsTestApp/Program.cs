@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using PMA.ConfigManager;
+using PMA.ProcessMemoryAnalyzer;
 
 namespace PMASysAlertsTestApp
 {
@@ -10,14 +11,24 @@ namespace PMASysAlertsTestApp
     {
         static void Main(string[] args)
         {
-            //PMAFlowController flowController = new PMAFlowController();
-            //flowController.RunTask();
+            PMAFlowController flowController = new PMAFlowController();
 
-            System.Threading.Thread th = new System.Threading.Thread(EvenLogTask);
-            th.IsBackground = true;
-            th.Name = "EventMonitor";
-            th.Start();
-            th.Join();
+            PMATaskHandler pmaTaskHandler = new PMATaskHandler(); 
+
+            for (int i = 0; i < 5; i++)
+            {
+                pmaTaskHandler.RunTask();
+                //flowController.RunTask();
+                System.Threading.Thread.Sleep(1000);
+            }
+            pmaTaskHandler.ReportingTask();
+
+
+            //System.Threading.Thread th = new System.Threading.Thread(EvenLogTask);
+            //th.IsBackground = true;
+            //th.Name = "EventMonitor";
+            //th.Start();
+            //th.Join();
         }
 
         private static void EvenLogTask()
