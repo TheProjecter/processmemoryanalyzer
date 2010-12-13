@@ -57,6 +57,10 @@
       <Project>{0F7EC0D7-D320-465F-B8F9-400D7E7C8E63}</Project>
       <Name>PMASystemAnalyzer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProcessMemoryAnalyzer\ProcessMemoryAnalyzer.csproj">
+      <Project>{B21E52A2-4719-4636-A389-65997F898C19}</Project>
+      <Name>ProcessMemoryAnalyzer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
