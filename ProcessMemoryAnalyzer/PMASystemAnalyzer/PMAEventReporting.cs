@@ -99,7 +99,8 @@ namespace PMA.ConfigManager
             builder.Append("\r\n");
             builder.Append("\r\n");
             builder.Append("Event Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
-            builder.Append("\r\n Available RAM :" + (PMAServiceProcessController.TotalPhysicalMemoryInKB - PMAServiceProcessController.TotalFreePhysicalMemoryInKB));
+            builder.Append("\r\n Total RAM :" + PMAServiceProcessController.TotalPhysicalMemoryInKB);
+            builder.Append("\r\n Available RAM :" + PMAServiceProcessController.TotalFreePhysicalMemoryInKB);
             builder.Append("\r\n CPU Usage : " + PMAServiceProcessController.CPUPercentageUsageAtMoment + "%");
             builder.Append("\r\n");
             foreach (EventLogEntry logEntry in listEntryLog)
