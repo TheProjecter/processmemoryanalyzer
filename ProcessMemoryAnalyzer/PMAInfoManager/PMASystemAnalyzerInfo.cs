@@ -63,9 +63,6 @@ namespace PMA.Info
         #region DatabaseOptimizer
 
         [DefaultValue(false)]
-        public bool IsWebServer { get; set; }
-
-        [DefaultValue(false)]
         public bool SetSessionStateSizeAlerts { get; set; }
 
         [DefaultValue(false)]
@@ -141,7 +138,12 @@ namespace PMA.Info
             {
                 _listServiceWatcher = value;
             }
-        
+        }
+
+        public bool SetWebProcessWatch
+        {
+            get;
+            set;
         }
 
         [DefaultValue(false)]

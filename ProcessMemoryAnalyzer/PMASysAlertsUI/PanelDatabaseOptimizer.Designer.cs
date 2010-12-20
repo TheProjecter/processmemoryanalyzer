@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.label_Database = new System.Windows.Forms.Label();
-            this.checkBox_IsWebServer = new System.Windows.Forms.CheckBox();
             this.textBox_Database = new System.Windows.Forms.TextBox();
             this.label_User = new System.Windows.Forms.Label();
             this.textBox_DBUser = new System.Windows.Forms.TextBox();
@@ -55,17 +54,6 @@
             this.label_Database.Size = new System.Drawing.Size(53, 13);
             this.label_Database.TabIndex = 0;
             this.label_Database.Text = "Database";
-            // 
-            // checkBox_IsWebServer
-            // 
-            this.checkBox_IsWebServer.AutoSize = true;
-            this.checkBox_IsWebServer.Location = new System.Drawing.Point(28, 127);
-            this.checkBox_IsWebServer.Name = "checkBox_IsWebServer";
-            this.checkBox_IsWebServer.Size = new System.Drawing.Size(94, 17);
-            this.checkBox_IsWebServer.TabIndex = 1;
-            this.checkBox_IsWebServer.Text = "Is Web Server";
-            this.checkBox_IsWebServer.UseVisualStyleBackColor = true;
-            this.checkBox_IsWebServer.CheckedChanged += new System.EventHandler(this.checkBox_IsWebServer_CheckedChanged);
             // 
             // textBox_Database
             // 
@@ -129,7 +117,7 @@
             // checkBox_GenerateSessionStateAlert
             // 
             this.checkBox_GenerateSessionStateAlert.AutoSize = true;
-            this.checkBox_GenerateSessionStateAlert.Location = new System.Drawing.Point(28, 150);
+            this.checkBox_GenerateSessionStateAlert.Location = new System.Drawing.Point(28, 134);
             this.checkBox_GenerateSessionStateAlert.Name = "checkBox_GenerateSessionStateAlert";
             this.checkBox_GenerateSessionStateAlert.Size = new System.Drawing.Size(128, 17);
             this.checkBox_GenerateSessionStateAlert.TabIndex = 9;
@@ -140,7 +128,7 @@
             // checkBox_TempDBAlert
             // 
             this.checkBox_TempDBAlert.AutoSize = true;
-            this.checkBox_TempDBAlert.Location = new System.Drawing.Point(28, 173);
+            this.checkBox_TempDBAlert.Location = new System.Drawing.Point(28, 157);
             this.checkBox_TempDBAlert.Name = "checkBox_TempDBAlert";
             this.checkBox_TempDBAlert.Size = new System.Drawing.Size(108, 17);
             this.checkBox_TempDBAlert.TabIndex = 10;
@@ -150,7 +138,7 @@
             // 
             // numericUpDown_TempTB
             // 
-            this.numericUpDown_TempTB.Location = new System.Drawing.Point(170, 172);
+            this.numericUpDown_TempTB.Location = new System.Drawing.Point(170, 156);
             this.numericUpDown_TempTB.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -163,7 +151,7 @@
             // label_MB2
             // 
             this.label_MB2.AutoSize = true;
-            this.label_MB2.Location = new System.Drawing.Point(264, 174);
+            this.label_MB2.Location = new System.Drawing.Point(264, 158);
             this.label_MB2.Name = "label_MB2";
             this.label_MB2.Size = new System.Drawing.Size(23, 13);
             this.label_MB2.TabIndex = 12;
@@ -171,7 +159,7 @@
             // 
             // numericUpDown_SessionAlert
             // 
-            this.numericUpDown_SessionAlert.Location = new System.Drawing.Point(170, 149);
+            this.numericUpDown_SessionAlert.Location = new System.Drawing.Point(170, 133);
             this.numericUpDown_SessionAlert.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -184,7 +172,7 @@
             // label_MB1
             // 
             this.label_MB1.AutoSize = true;
-            this.label_MB1.Location = new System.Drawing.Point(264, 151);
+            this.label_MB1.Location = new System.Drawing.Point(264, 135);
             this.label_MB1.Name = "label_MB1";
             this.label_MB1.Size = new System.Drawing.Size(23, 13);
             this.label_MB1.TabIndex = 14;
@@ -207,7 +195,6 @@
             this.Controls.Add(this.textBox_DBUser);
             this.Controls.Add(this.label_User);
             this.Controls.Add(this.textBox_Database);
-            this.Controls.Add(this.checkBox_IsWebServer);
             this.Controls.Add(this.label_Database);
             this.Name = "PanelDatabaseOptimizer";
             this.Size = new System.Drawing.Size(440, 260);
@@ -221,7 +208,6 @@
         #endregion
 
         private System.Windows.Forms.Label label_Database;
-        private System.Windows.Forms.CheckBox checkBox_IsWebServer;
         private System.Windows.Forms.TextBox textBox_Database;
         private System.Windows.Forms.Label label_User;
         private System.Windows.Forms.TextBox textBox_DBUser;

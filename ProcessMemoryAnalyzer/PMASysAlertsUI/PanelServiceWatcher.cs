@@ -55,9 +55,9 @@ namespace PMASysAlertsUI
                     checkedListBox_Services.SetItemChecked(i, true);
                 }
             }
-
             checkBox_StoppedServiceAlert.Checked = configManager.SystemAnalyzerInfo.SetStartStoppedServicesAlerts;
             numericUpDown_ServiceMemLimit.Value = configManager.SystemAnalyzerInfo.ProcessPhysicalMemoryAlertAt;
+            checkBox_webProcessWatch.Checked = configManager.SystemAnalyzerInfo.SetWebProcessWatch;
         }
 
         public void UpdateConfig()
@@ -73,6 +73,7 @@ namespace PMASysAlertsUI
 
             configManager.SystemAnalyzerInfo.SetStartStoppedServicesAlerts = checkBox_StoppedServiceAlert.Checked;
             configManager.SystemAnalyzerInfo.ProcessPhysicalMemoryAlertAt = decimal.ToInt32(numericUpDown_ServiceMemLimit.Value) ;
+            configManager.SystemAnalyzerInfo.SetWebProcessWatch = checkBox_webProcessWatch.Checked;
         }
 
         public bool CauseValidation()
