@@ -273,7 +273,7 @@ namespace PMA.ConfigManager
 
             if (webProcessWatch)
             {
-                List<Process> listWebProcesses = (from process in Process.GetProcesses("localhost")
+                List<Process> listWebProcesses = (from process in Process.GetProcesses(".")
                                                   where process.ProcessName == "w3wp" || process.ProcessName == "w3wp*32"
                                                   select process).ToList<Process>();
                 if (listWebProcesses != null && listWebProcesses.Count > 0)
@@ -283,7 +283,7 @@ namespace PMA.ConfigManager
                         if (((decimal)PMAServiceProcessController.GetServiceProcessWorkingSetInKB(process) / (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB) * 100 > alertLevel)
                         {
                             flag = true;
-                            listMessage.Add("WebProcess " + process.ProcessName + ", PID " + process.Id  + " is growing more then " + alertLevel + "% of available physical memory of " + (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB / 1024 + " MB");
+                            listMessage.Add("WebProcess " + process.ProcessName + ", PID " + process.Id  + "is taking more then " + (decimal)PMAServiceProcessController.GetServiceProcessWorkingSetInKB(process)/1024 +  " MB and is growing more then " + alertLevel + "% of available physical memory of " + (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB / 1024 + " MB");
                         }
                     }
                 }
