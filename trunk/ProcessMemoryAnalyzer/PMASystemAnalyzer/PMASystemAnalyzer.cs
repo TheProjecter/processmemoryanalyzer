@@ -283,7 +283,7 @@ namespace PMA.ConfigManager
                         if (((decimal)PMAServiceProcessController.GetServiceProcessWorkingSetInKB(process) / (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB) * 100 > alertLevel)
                         {
                             flag = true;
-                            listMessage.Add("WebProcess " + process.ProcessName + ", PID " + process.Id  + "is taking more then " + (decimal)PMAServiceProcessController.GetServiceProcessWorkingSetInKB(process)/1024 +  " MB and is growing more then " + alertLevel + "% of available physical memory of " + (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB / 1024 + " MB");
+                            listMessage.Add("WebProcess " + process.ProcessName + ", PID " + process.Id  + " is taking more then " + (decimal)PMAServiceProcessController.GetServiceProcessWorkingSetInKB(process)/1024 +  " MB and is growing more then " + alertLevel + "% of available physical memory of " + (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB / 1024 + " MB");
                         }
                     }
                 }
