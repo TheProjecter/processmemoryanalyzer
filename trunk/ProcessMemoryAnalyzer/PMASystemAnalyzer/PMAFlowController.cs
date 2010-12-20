@@ -31,10 +31,6 @@ namespace PMA.ConfigManager
             {
                 RunDiscWatch();
             }
-            if (configManager.SystemAnalyzerInfo.SetOptimizeDB && configManager.SystemAnalyzerInfo.IsWebServer)
-            {
-                RunDBOptimizer();
-            }
             if (configManager.SystemAnalyzerInfo.SetSessionStateSizeAlerts)
             {
                 RunDBSizeWatch("ASPState", configManager.SystemAnalyzerInfo.SessionStateSizeAlertLevel);
@@ -104,7 +100,7 @@ namespace PMA.ConfigManager
         {
             configManager.Logger.Debug(EnumMethod.START);
             List<string> listMessage = new List<string>();
-            if (PMASystemAnalyzer.GenerateServiceMemoryAlert(configManager.SystemAnalyzerInfo.ListServicesNames.ToList<string>(),
+            if (PMASystemAnalyzer.GenerateServiceMemoryAlert(configManager.SystemAnalyzerInfo.ListServicesNames.ToList<string>(),configManager.SystemAnalyzerInfo.SetWebProcessWatch,
                 configManager.SystemAnalyzerInfo.ProcessPhysicalMemoryAlertAt, out listMessage, configManager.SystemAnalyzerInfo.SetStartStoppedServicesAlerts))
             {
                 configManager.ErrorMessage.AddRange(listMessage);
@@ -145,30 +141,6 @@ namespace PMA.ConfigManager
 
         }
 
-        //-------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Runs the DB optimizer.
-        /// </summary>
-        private void RunDBOptimizer()
-        {
-            configManager.Logger.Debug(EnumMethod.START);
-            PMAConfigManager cm = configManager;
-            if (cm.SystemAnalyzerInfo.IsWebServer)
-            {
-                List<Process> proceessList = (from process in Process.GetProcesses()
-                                            where process.ProcessName == "w3wp" || process.ProcessName == "w3wp*32"
-                                             select process).ToList<Process>() ;
-
-                if (proceessList.Count == 0)
-                {
-                    //Implement Later
-                    //PMADatabaseController dbController = new PMADatabaseController(cm.SystemAnalyzerInfo.Database,
-                    //cm.SystemAnalyzerInfo.DBUser, cm.SystemAnalyzerInfo.DBPassword);
-                    //dbController.TruncateSessionStateDatabase();
-                }
-            }
-            configManager.Logger.Debug(EnumMethod.END);
-        }
 
         //-------------------------------------------------------------------------------------------------
         /// <summary>

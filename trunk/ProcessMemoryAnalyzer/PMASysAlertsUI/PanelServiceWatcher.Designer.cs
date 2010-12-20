@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label_ConfigureServices = new System.Windows.Forms.Label();
             this.checkBox_StoppedServiceAlert = new System.Windows.Forms.CheckBox();
+            this.checkBox_webProcessWatch = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ServiceMemLimit)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +60,7 @@
             // label_GeneAlertAt
             // 
             this.label_GeneAlertAt.AutoSize = true;
-            this.label_GeneAlertAt.Location = new System.Drawing.Point(32, 217);
+            this.label_GeneAlertAt.Location = new System.Drawing.Point(32, 228);
             this.label_GeneAlertAt.Name = "label_GeneAlertAt";
             this.label_GeneAlertAt.Size = new System.Drawing.Size(55, 13);
             this.label_GeneAlertAt.TabIndex = 2;
@@ -67,7 +68,7 @@
             // 
             // numericUpDown_ServiceMemLimit
             // 
-            this.numericUpDown_ServiceMemLimit.Location = new System.Drawing.Point(95, 215);
+            this.numericUpDown_ServiceMemLimit.Location = new System.Drawing.Point(93, 226);
             this.numericUpDown_ServiceMemLimit.Name = "numericUpDown_ServiceMemLimit";
             this.numericUpDown_ServiceMemLimit.Size = new System.Drawing.Size(81, 20);
             this.numericUpDown_ServiceMemLimit.TabIndex = 3;
@@ -76,7 +77,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(182, 217);
+            this.label1.Location = new System.Drawing.Point(180, 228);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 13);
             this.label1.TabIndex = 4;
@@ -95,17 +96,28 @@
             // checkBox_StoppedServiceAlert
             // 
             this.checkBox_StoppedServiceAlert.AutoSize = true;
-            this.checkBox_StoppedServiceAlert.Location = new System.Drawing.Point(35, 180);
+            this.checkBox_StoppedServiceAlert.Location = new System.Drawing.Point(35, 203);
             this.checkBox_StoppedServiceAlert.Name = "checkBox_StoppedServiceAlert";
             this.checkBox_StoppedServiceAlert.Size = new System.Drawing.Size(176, 17);
             this.checkBox_StoppedServiceAlert.TabIndex = 6;
             this.checkBox_StoppedServiceAlert.Text = "Generate Stopped Service Alert";
             this.checkBox_StoppedServiceAlert.UseVisualStyleBackColor = true;
             // 
+            // checkBox_webProcessWatch
+            // 
+            this.checkBox_webProcessWatch.AutoSize = true;
+            this.checkBox_webProcessWatch.Location = new System.Drawing.Point(35, 180);
+            this.checkBox_webProcessWatch.Name = "checkBox_webProcessWatch";
+            this.checkBox_webProcessWatch.Size = new System.Drawing.Size(125, 17);
+            this.checkBox_webProcessWatch.TabIndex = 7;
+            this.checkBox_webProcessWatch.Text = "Watch Web Process";
+            this.checkBox_webProcessWatch.UseVisualStyleBackColor = true;
+            // 
             // PanelServiceWatcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.checkBox_webProcessWatch);
             this.Controls.Add(this.checkBox_StoppedServiceAlert);
             this.Controls.Add(this.label_ConfigureServices);
             this.Controls.Add(this.label1);
@@ -130,5 +142,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_ConfigureServices;
         private System.Windows.Forms.CheckBox checkBox_StoppedServiceAlert;
+        private System.Windows.Forms.CheckBox checkBox_webProcessWatch;
     }
 }

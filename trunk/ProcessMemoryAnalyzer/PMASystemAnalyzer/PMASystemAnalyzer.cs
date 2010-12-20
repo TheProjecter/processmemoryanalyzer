@@ -243,7 +243,7 @@ namespace PMA.ConfigManager
         /// <param name="listMessage">The list message.</param>
         /// <param name="setStoppedServiceAlert">if set to <c>true</c> [set stopped service alert].</param>
         /// <returns></returns>
-        public static bool GenerateServiceMemoryAlert(List<string> listServicesName, int alertLevel, out List<string> listMessage, bool setStoppedServiceAlert)
+        public static bool GenerateServiceMemoryAlert(List<string> listServicesName,bool webProcessWatch, int alertLevel, out List<string> listMessage, bool setStoppedServiceAlert)
         {
 
             logger.Debug(EnumMethod.START);
@@ -270,6 +270,25 @@ namespace PMA.ConfigManager
                     listMessage.Add("Service " + service.ServiceName + " is growing more then " + alertLevel + "% of available physical memory of " + (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB/1024 + " MB");
                 }
             }
+
+            if (webProcessWatch)
+            {
+                List<Process> listWebProcesses = (from process in Process.GetProcesses("localhost")
+                                                  where process.ProcessName == "w3wp" || process.ProcessName == "w3wp*32"
+                                                  select process).ToList<Process>();
+                if (listWebProcesses != null && listWebProcesses.Count > 0)
+                {
+                    foreach (Process process in listWebProcesses)
+                    {
+                        if (((decimal)PMAServiceProcessController.GetServiceProcessWorkingSetInKB(process) / (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB) * 100 > alertLevel)
+                        {
+                            flag = true;
+                            listMessage.Add("WebProcess " + process.ProcessName + ", PID " + process.Id  + " is growing more then " + alertLevel + "% of available physical memory of " + (decimal)PMAServiceProcessController.TotalPhysicalMemoryInKB / 1024 + " MB");
+                        }
+                    }
+                }
+            }
+
             logger.Debug(EnumMethod.END);
             return flag;
             

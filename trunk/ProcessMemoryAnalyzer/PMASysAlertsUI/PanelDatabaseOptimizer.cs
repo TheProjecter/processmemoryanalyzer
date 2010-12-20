@@ -18,7 +18,6 @@ namespace PMASysAlertsUI
         public PanelDatabaseOptimizer()
         {
             InitializeComponent();
-            checkBox_IsWebServer.Checked = false;
             label_Wait.Visible = false;
             ToggleTextControls(true);
         }
@@ -51,7 +50,6 @@ namespace PMASysAlertsUI
 
         public void UpdateUI()
         {
-            checkBox_IsWebServer.Checked = configManager.SystemAnalyzerInfo.IsWebServer;
             textBox_Database.Text = configManager.SystemAnalyzerInfo.Database;
             textBox_DBUser.Text = configManager.SystemAnalyzerInfo.DBUser;
             textBox_DBPassword.Text = configManager.SystemAnalyzerInfo.DBPassword;
@@ -63,7 +61,6 @@ namespace PMASysAlertsUI
 
         public void UpdateConfig()
         {
-            configManager.SystemAnalyzerInfo.IsWebServer = checkBox_IsWebServer.Checked;
             configManager.SystemAnalyzerInfo.Database = textBox_Database.Text;
             configManager.SystemAnalyzerInfo.DBUser = textBox_DBUser.Text;
             configManager.SystemAnalyzerInfo.DBPassword = textBox_DBPassword.Text;
