@@ -7,7 +7,7 @@ namespace PMASysAlertsUI
 {
     enum ENUMPanel
     {   
-        PANEL_DATABASE_OPTIMIZER,
+        PANEL_DATABASE_WATCHER,
         PANEL_DRIVE_CONTROLLER,
         PANEL_FTP_SETTINGS,
         PANEL_HOME,
