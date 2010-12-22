@@ -26,7 +26,7 @@ namespace PMASysAlertsUI
         PanelDriveController panelDriveController = null;
         PanelPhyMemWatcher panelPhyMemController = null;
         PanelServiceWatcher panelServiceWatcher = null;
-        PanelDatabaseOptimizer panelDatabaseOptimizer = null;
+        PanelDatabaseWatcher panelDatabaseWatcher = null;
         PanelTransportController panelTransportController = null;
         PanelSMTPSettings panelSMTPSettings = null;
         PanelFTPSettings panelFTPSettings = null;
@@ -43,8 +43,8 @@ namespace PMASysAlertsUI
             configManager.ErrorMessage.Clear();
             switch (PANEL)
             {
-                case ENUMPanel.PANEL_DATABASE_OPTIMIZER:
-                    result = panelDatabaseOptimizer.CauseValidation();
+                case ENUMPanel.PANEL_DATABASE_WATCHER:
+                    result = panelDatabaseWatcher.CauseValidation();
                     break;
                 case ENUMPanel.PANEL_DRIVE_CONTROLLER:
                     result = panelDriveController.CauseValidation();
@@ -88,8 +88,8 @@ namespace PMASysAlertsUI
             
             switch (enumPanel)
             {
-                case ENUMPanel.PANEL_DATABASE_OPTIMIZER:
-                    panelDatabaseOptimizer.UpdateConfig();
+                case ENUMPanel.PANEL_DATABASE_WATCHER:
+                    panelDatabaseWatcher.UpdateConfig();
                     break;
                 case ENUMPanel.PANEL_DRIVE_CONTROLLER:
                     panelDriveController.UpdateConfig();
@@ -130,9 +130,9 @@ namespace PMASysAlertsUI
             PANEL = enumPanel;
             switch (enumPanel)
             {
-                case ENUMPanel.PANEL_DATABASE_OPTIMIZER:
+                case ENUMPanel.PANEL_DATABASE_WATCHER:
                     HideAllControls();
-                    panelDatabaseOptimizer.Show();
+                    panelDatabaseWatcher.Show();
                     break;
                 case ENUMPanel.PANEL_DRIVE_CONTROLLER:
                     HideAllControls();
@@ -205,8 +205,8 @@ namespace PMASysAlertsUI
             panelServiceWatcher = new PanelServiceWatcher();
             panel_MainContainer.Controls.Add(panelServiceWatcher);
 
-            panelDatabaseOptimizer = new PanelDatabaseOptimizer();
-            panel_MainContainer.Controls.Add(panelDatabaseOptimizer);
+            panelDatabaseWatcher = new PanelDatabaseWatcher();
+            panel_MainContainer.Controls.Add(panelDatabaseWatcher);
 
             panelTransportController = new PanelTransportController();
             panel_MainContainer.Controls.Add(panelTransportController);
@@ -239,7 +239,7 @@ namespace PMASysAlertsUI
             panelDriveController.UpdateUI();
             panelPhyMemController.UpdateUI();
             panelServiceWatcher.UpdateUI();
-            panelDatabaseOptimizer.UpdateUI();
+            panelDatabaseWatcher.UpdateUI();
             panelTransportController.UpdateUI();
             panelSMTPSettings.UpdateUI();
             panelFTPSettings.UpdateUI();
@@ -324,12 +324,12 @@ namespace PMASysAlertsUI
                 MessageBox.Show(this, configManager.GetConsolidatedError("Error"));
         }
 
-        private void label_DatabaseOptimizer_Click(object sender, EventArgs e)
+        private void label_DatabaseWatcher_Click(object sender, EventArgs e)
         {
             if (CauseValidation())
             {
                 UpdateConfig(PANEL);
-                ShowPanel(ENUMPanel.PANEL_DATABASE_OPTIMIZER);
+                ShowPanel(ENUMPanel.PANEL_DATABASE_WATCHER);
             }
             else
             {

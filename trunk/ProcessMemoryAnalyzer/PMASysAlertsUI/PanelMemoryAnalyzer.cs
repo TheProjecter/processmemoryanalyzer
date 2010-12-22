@@ -67,7 +67,8 @@ namespace PMASysAlertsUI
             if (textBox_MachineName.Text == string.Empty)
             {
                 result = false;
-                configManager.ErrorMessage.Add("Machine Name can't be empty.");
+                configManager.ErrorMessage.Add("Machine Name can't be empty. Putting Machine Name");
+                textBox_MachineName.Text = Environment.MachineName;
             }
             if (dateTimePicker_MailTime.Value < DateTime.Now)
             {

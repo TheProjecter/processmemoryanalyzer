@@ -11,11 +11,11 @@ using PMA.ConfigManager;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelDatabaseOptimizer : UserControl, IUIConfigManager
+    public partial class PanelDatabaseWatcher : UserControl, IUIConfigManager
     {
         private PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
         
-        public PanelDatabaseOptimizer()
+        public PanelDatabaseWatcher()
         {
             InitializeComponent();
             label_Wait.Visible = false;

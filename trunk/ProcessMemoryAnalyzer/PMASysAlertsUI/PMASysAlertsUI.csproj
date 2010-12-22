@@ -93,11 +93,11 @@
     <Compile Include="PanelServiceWatcher.Designer.cs">
       <DependentUpon>PanelServiceWatcher.cs</DependentUpon>
     </Compile>
-    <Compile Include="PanelDatabaseOptimizer.cs">
+    <Compile Include="PanelDatabaseWatcher.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PanelDatabaseOptimizer.Designer.cs">
-      <DependentUpon>PanelDatabaseOptimizer.cs</DependentUpon>
+    <Compile Include="PanelDatabaseWatcher.Designer.cs">
+      <DependentUpon>PanelDatabaseWatcher.cs</DependentUpon>
     </Compile>
     <Compile Include="PanelSMTPSettings.cs">
       <SubType>UserControl</SubType>
@@ -140,8 +140,8 @@
     <EmbeddedResource Include="PanelServiceWatcher.resx">
       <DependentUpon>PanelServiceWatcher.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PanelDatabaseOptimizer.resx">
-      <DependentUpon>PanelDatabaseOptimizer.cs</DependentUpon>
+    <EmbeddedResource Include="PanelDatabaseWatcher.resx">
+      <DependentUpon>PanelDatabaseWatcher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelSMTPSettings.resx">
       <DependentUpon>PanelSMTPSettings.cs</DependentUpon>

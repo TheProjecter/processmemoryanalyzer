@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label label_DatabaseOptimizer;
+            System.Windows.Forms.Label label_DatabaseWatcher;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PMASysAlertsUI));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,22 +60,22 @@
             this.hideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iISResetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            label_DatabaseOptimizer = new System.Windows.Forms.Label();
+            label_DatabaseWatcher = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel_LeftMenu.SuspendLayout();
             this.contextMenuStripNotifcationIcon.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label_DatabaseOptimizer
+            // label_DatabaseWatcher
             // 
-            label_DatabaseOptimizer.AutoSize = true;
-            label_DatabaseOptimizer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            label_DatabaseOptimizer.Location = new System.Drawing.Point(3, 99);
-            label_DatabaseOptimizer.Name = "label_DatabaseOptimizer";
-            label_DatabaseOptimizer.Size = new System.Drawing.Size(117, 13);
-            label_DatabaseOptimizer.TabIndex = 3;
-            label_DatabaseOptimizer.Text = "Database Optimizer";
-            label_DatabaseOptimizer.Click += new System.EventHandler(this.label_DatabaseOptimizer_Click);
+            label_DatabaseWatcher.AutoSize = true;
+            label_DatabaseWatcher.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            label_DatabaseWatcher.Location = new System.Drawing.Point(3, 99);
+            label_DatabaseWatcher.Name = "label_DatabaseWatcher";
+            label_DatabaseWatcher.Size = new System.Drawing.Size(113, 13);
+            label_DatabaseWatcher.TabIndex = 3;
+            label_DatabaseWatcher.Text = "Database Watcher";
+            label_DatabaseWatcher.Click += new System.EventHandler(this.label_DatabaseWatcher_Click);
             // 
             // menuStrip1
             // 
@@ -205,7 +205,7 @@
             this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_Home, 0, 0);
             this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_Drives, 0, 1);
             this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_Service, 0, 2);
-            this.tableLayoutPanel_LeftMenu.Controls.Add(label_DatabaseOptimizer, 0, 3);
+            this.tableLayoutPanel_LeftMenu.Controls.Add(label_DatabaseWatcher, 0, 3);
             this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_PhysicalMemory, 0, 4);
             this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_PMA, 0, 5);
             this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_Transport, 0, 7);
