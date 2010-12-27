@@ -22,8 +22,9 @@ namespace PMA.ConfigManager
 
         private const string SERVICE_NAME = "PMAAlertService";
 
-        private static Logger logger = PMAConfigManager.GetConfigManagerInstance.Logger;
-        
+        private static PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
+        private static Logger logger = configManager.Logger;
+
         //---------------------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Gets the system discs.
@@ -172,6 +173,36 @@ namespace PMA.ConfigManager
             }
         }
 
+        /// <summary>
+        /// Gets the system information.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetSystemInformation()
+        {
+            logger.Debug(EnumMethod.START);
+            StringBuilder sb = new StringBuilder();
+            DriveInfo driveInfo = null;
+            sb.AppendLine("Machine Name : " +  Environment.MachineName);
+            sb.AppendLine("OS :" + Environment.OSVersion.VersionString);
+            sb.AppendLine("OS Version : " + Environment.OSVersion.Version.Major + "." + Environment.OSVersion.Version.Minor);
+            sb.AppendLine("Domain Name : " + Environment.UserDomainName);
+            sb.AppendLine("Available Drives : ");
+            foreach (string driveName in Environment.GetLogicalDrives())
+            {
+                driveInfo = new DriveInfo(driveName);
+                sb.AppendLine("\tDrive Name " + driveName + " : " + driveInfo.TotalFreeSpace/(1024*1024) + " MB Available on " + driveInfo.TotalSize/(1024*1024) + " MB Drive");
+            }
+            sb.AppendLine("System Directory : " + Environment.SystemDirectory);
+            sb.AppendLine("System Uptime : " + TimeSpan.FromMilliseconds(Environment.TickCount).TotalMinutes.ToString() + " minutes");
+            sb.AppendLine("Physical Memory : " + PMAServiceProcessController.TotalPhysicalMemoryInKB / 1024 + " MB");
+            sb.AppendLine("Available Physical Memory : " + PMAServiceProcessController.TotalFreePhysicalMemoryInKB / 1024 + " MB");
+            sb.AppendLine("Processor Count : " + Environment.ProcessorCount);
+            sb.AppendLine("\r\nRegards");
+            sb.AppendLine("Cosmos Team");
+            logger.Debug(EnumMethod.END);
+            return sb.ToString();
+
+        }
 
 
         
@@ -310,6 +341,37 @@ namespace PMA.ConfigManager
             logger.Debug(EnumMethod.END);
         }
         #endregion 
+
+        /// <summary>
+        /// Sends the mail.
+        /// </summary>
+        /// <param name="subject">The subject.</param>
+        /// <param name="mailBody">The mail body.</param>
+        /// <param name="emails">The emails.</param>
+        /// <param name="attachments">The attachments.</param>
+        /// <returns></returns>
+        public static bool SendMail(string subject, string mailBody, List<string> emails, List<string> attachments)
+        {
+            logger.Debug(EnumMethod.START);
+            SMTPTransport smtpTransport = new SMTPTransport();
+            bool success = false;
+            try
+            {
+                smtpTransport.SmtpSend(configManager.SmtpInfo, emails, null, subject, mailBody, attachments);
+                success = true;
+            }
+            catch(Exception ex)
+            {
+                success = false;
+                logger.Error(ex);
+            }
+            finally
+            {
+                logger.Debug(EnumMethod.END);
+            }
+            return success;
+        }
+    
 
         
 
