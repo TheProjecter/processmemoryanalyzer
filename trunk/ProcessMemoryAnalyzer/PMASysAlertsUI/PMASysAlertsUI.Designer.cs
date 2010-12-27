@@ -42,6 +42,7 @@
             this.fTPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.systemInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -155,7 +156,8 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loggerToolStripMenuItem});
+            this.loggerToolStripMenuItem,
+            this.systemInformationToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -163,9 +165,16 @@
             // loggerToolStripMenuItem
             // 
             this.loggerToolStripMenuItem.Name = "loggerToolStripMenuItem";
-            this.loggerToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.loggerToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.loggerToolStripMenuItem.Text = "Logger";
             this.loggerToolStripMenuItem.Click += new System.EventHandler(this.loggerToolStripMenuItem_Click_1);
+            // 
+            // systemInformationToolStripMenuItem
+            // 
+            this.systemInformationToolStripMenuItem.Name = "systemInformationToolStripMenuItem";
+            this.systemInformationToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.systemInformationToolStripMenuItem.Text = "System Information";
+            this.systemInformationToolStripMenuItem.Click += new System.EventHandler(this.systemInformationToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -410,6 +419,7 @@
         private System.Windows.Forms.Label label_crash;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem systemInformationToolStripMenuItem;
 
     }
 }

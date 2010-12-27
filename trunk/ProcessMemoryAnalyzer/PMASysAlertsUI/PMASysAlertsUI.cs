@@ -34,6 +34,7 @@ namespace PMASysAlertsUI
         PanelLogger panelLogger = null;
         PanelMemoryAnalyzer panelMemoryAnalyzer = null;
         PanelEventReporting panelCrashReporting = null;
+        PanelSystemInformation panelSystemInformation = null;
         #endregion
 
 
@@ -75,6 +76,9 @@ namespace PMASysAlertsUI
                     break;
                 case ENUMPanel.PANEL_EVENT_REPORTING :
                     result = panelCrashReporting.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_SYSTEM_INFORMATION:
+                    result = panelSystemInformation.CauseValidation();
                     break;
                 default:
                     result = false;
@@ -120,6 +124,9 @@ namespace PMASysAlertsUI
                     break;
                 case ENUMPanel.PANEL_EVENT_REPORTING :
                     panelCrashReporting.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_SYSTEM_INFORMATION:
+                    panelSystemInformation.UpdateConfig();
                     break;
             }
 
@@ -174,6 +181,10 @@ namespace PMASysAlertsUI
                     HideAllControls();
                     panelCrashReporting.Show();
                     break;
+                case ENUMPanel.PANEL_SYSTEM_INFORMATION:
+                    HideAllControls();
+                    panelSystemInformation.Show();
+                    break;
             }
 
         }
@@ -226,6 +237,9 @@ namespace PMASysAlertsUI
             panelCrashReporting = new PanelEventReporting();
             panel_MainContainer.Controls.Add(panelCrashReporting);
 
+            panelSystemInformation = new PanelSystemInformation();
+            panel_MainContainer.Controls.Add(panelSystemInformation);
+
             HideAllControls();
 
             LoadConfigs();
@@ -246,6 +260,7 @@ namespace PMASysAlertsUI
             panelLogger.UpdateUI();
             panelMemoryAnalyzer.UpdateUI();
             panelCrashReporting.UpdateUI();
+            panelSystemInformation.UpdateUI();
         }
 
 
@@ -384,6 +399,20 @@ namespace PMASysAlertsUI
             }
         }
 
+        private void systemInformationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CauseValidation())
+            {
+                UpdateConfig(PANEL);
+                ShowPanel(ENUMPanel.PANEL_SYSTEM_INFORMATION);
+            }
+            else
+            {
+                MessageBox.Show(this, configManager.GetConsolidatedError("Error"));
+            }
+        }
+
+
         private void label_PMA_Click(object sender, EventArgs e)
         {
             if (CauseValidation())
@@ -505,5 +534,7 @@ namespace PMASysAlertsUI
             MessageBox.Show(PMASystemAnalyzer.ServiceStatus);
         }
 
+      
+       
     }
 }
