@@ -105,28 +105,28 @@
             // startServiceToolStripMenuItem
             // 
             this.startServiceToolStripMenuItem.Name = "startServiceToolStripMenuItem";
-            this.startServiceToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.startServiceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.startServiceToolStripMenuItem.Text = "Start Service";
             this.startServiceToolStripMenuItem.Click += new System.EventHandler(this.startServiceToolStripMenuItem_Click);
             // 
             // stopServiceToolStripMenuItem1
             // 
             this.stopServiceToolStripMenuItem1.Name = "stopServiceToolStripMenuItem1";
-            this.stopServiceToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
+            this.stopServiceToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.stopServiceToolStripMenuItem1.Text = "Stop Service";
             this.stopServiceToolStripMenuItem1.Click += new System.EventHandler(this.stopServiceToolStripMenuItem1_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem1.Text = "Service Status";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -142,14 +142,14 @@
             // sMTPToolStripMenuItem
             // 
             this.sMTPToolStripMenuItem.Name = "sMTPToolStripMenuItem";
-            this.sMTPToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.sMTPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sMTPToolStripMenuItem.Text = "SMTP";
             this.sMTPToolStripMenuItem.Click += new System.EventHandler(this.sMTPToolStripMenuItem_Click);
             // 
             // fTPToolStripMenuItem
             // 
             this.fTPToolStripMenuItem.Name = "fTPToolStripMenuItem";
-            this.fTPToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.fTPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.fTPToolStripMenuItem.Text = "FTP";
             this.fTPToolStripMenuItem.Click += new System.EventHandler(this.fTPToolStripMenuItem_Click);
             // 

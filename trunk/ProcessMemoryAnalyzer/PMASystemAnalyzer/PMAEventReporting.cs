@@ -8,8 +8,10 @@ using PMA.Info;
 using PMA.ProcessMemoryAnalyzer;
 using PMA.Utils.Logger;
 using System.Threading;
+using PMA.ConfigManager;
 
-namespace PMA.ConfigManager
+
+namespace PMA.SystemAnalyzer
 {
     public class PMAEventReporting
     {

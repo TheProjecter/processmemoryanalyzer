@@ -7,8 +7,10 @@ using Microsoft.SqlServer;
 using System.Data.SqlClient;
 using System.Data;
 using PMA.Utils.Logger;
+using PMA.SystemAnalyzer;
+using PMA.ConfigManager;
 
-namespace PMA.ConfigManager
+namespace PMA.SystemAnalyzer
 {
     public class PMADatabaseController
     {

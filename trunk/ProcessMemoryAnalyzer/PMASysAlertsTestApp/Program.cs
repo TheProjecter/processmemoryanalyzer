@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using PMA.ConfigManager;
 using PMA.ProcessMemoryAnalyzer;
+using PMA.SystemAnalyzer;
 
 namespace PMASysAlertsTestApp
 {

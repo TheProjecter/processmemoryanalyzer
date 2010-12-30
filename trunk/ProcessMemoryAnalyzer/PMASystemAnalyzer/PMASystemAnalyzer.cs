@@ -13,7 +13,7 @@ using PMA.Utils.Logger;
 
 
 
-namespace PMA.ConfigManager
+namespace PMA.SystemAnalyzer
 {
     
     public class PMASystemAnalyzer

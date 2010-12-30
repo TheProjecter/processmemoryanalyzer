@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using PMA.ConfigManager;
 using System.IO;
+using PMA.SystemAnalyzer;
 
 namespace PMASysAlertsUI
 {

@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Timers;
 using PMA.ConfigManager;
 using PMA.ProcessMemoryAnalyzer;
+using PMA.SystemAnalyzer;
 
 namespace PMA.PMAService
 {
