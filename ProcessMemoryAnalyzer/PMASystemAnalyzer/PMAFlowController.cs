@@ -8,6 +8,7 @@ using System.IO;
 using PMA.Utils.ftp;
 using PMA.ConfigManager;
 using PMA.Utils.Logger;
+using PMA.SystemAnalyzer;
 
 namespace PMA.ConfigManager
 {
