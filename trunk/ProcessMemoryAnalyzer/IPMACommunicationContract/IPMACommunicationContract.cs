@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IPMACommunicationContract
+namespace PMA.CommunicationAPI
 {
-    public class IPMACommunicationContract
+    public interface IPMACommunicationContract
     {
     }
 }
