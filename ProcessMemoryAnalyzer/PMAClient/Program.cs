@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace PMAClient
+namespace PMA.Client
 {
     static class Program
     {

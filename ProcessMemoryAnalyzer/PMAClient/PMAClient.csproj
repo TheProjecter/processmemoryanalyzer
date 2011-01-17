@@ -48,6 +48,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumPanel.cs" />
+    <Compile Include="IUIManager.cs" />
+    <Compile Include="PanelExecuteCommand.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelExecuteCommand.Designer.cs">
+      <DependentUpon>PanelExecuteCommand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelSQLClient.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelSQLClient.Designer.cs">
+      <DependentUpon>PanelSQLClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="PMAClientUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,6 +70,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PanelExecuteCommand.resx">
+      <DependentUpon>PanelExecuteCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelSQLClient.resx">
+      <DependentUpon>PanelSQLClient.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PMAClientUI.resx">
       <DependentUpon>PMAClientUI.cs</DependentUpon>
     </EmbeddedResource>

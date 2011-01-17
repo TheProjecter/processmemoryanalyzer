@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace PMA.Client
+namespace PMASysAlertsUI
 {
-    public partial class PMAClientUI : Form
+    public partial class PanelUserControl : UserControl
     {
-        public PMAClientUI()
+        public PanelUserControl()
         {
             InitializeComponent();
         }

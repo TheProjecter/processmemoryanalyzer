@@ -11,7 +11,7 @@ using PMA.Utils;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelFTPSettings : UserControl, IUIConfigManager
+    public partial class PanelFTPSettings : UserControl, IUIManager
     {
 
         private PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;

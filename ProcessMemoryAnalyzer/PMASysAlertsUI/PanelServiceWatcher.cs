@@ -11,7 +11,7 @@ using PMA.SystemAnalyzer;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelServiceWatcher : UserControl, IUIConfigManager
+    public partial class PanelServiceWatcher : UserControl, IUIManager
     {
 
         private PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;

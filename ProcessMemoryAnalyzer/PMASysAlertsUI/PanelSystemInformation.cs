@@ -13,7 +13,7 @@ using PMA.SystemAnalyzer;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelSystemInformation : UserControl, IUIConfigManager
+    public partial class PanelSystemInformation : UserControl, IUIManager
     {
 
         private static string REGX_VERIFY_EMAIL = @"^[\w\.=-]+@[\w\.-]+\.[\w]{2,3}$";

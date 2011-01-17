@@ -12,7 +12,7 @@ using PMA.SystemAnalyzer;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelDriveController : UserControl, IUIConfigManager
+    public partial class PanelDriveController : UserControl, IUIManager
     {
 
         private PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
