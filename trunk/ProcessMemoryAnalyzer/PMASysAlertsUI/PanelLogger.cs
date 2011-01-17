@@ -12,7 +12,7 @@ using System.IO;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelLogger : UserControl, IUIConfigManager
+    public partial class PanelLogger : UserControl, IUIManager
     {
 
         PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;

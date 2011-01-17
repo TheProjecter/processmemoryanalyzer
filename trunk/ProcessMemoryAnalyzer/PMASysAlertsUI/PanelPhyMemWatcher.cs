@@ -10,7 +10,7 @@ using PMA.ConfigManager;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelPhyMemWatcher : UserControl, IUIConfigManager
+    public partial class PanelPhyMemWatcher : UserControl, IUIManager
     {
 
         private PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;

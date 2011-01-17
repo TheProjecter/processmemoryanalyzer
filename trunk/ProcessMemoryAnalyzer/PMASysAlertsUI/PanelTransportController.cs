@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelTransportController : UserControl, IUIConfigManager
+    public partial class PanelTransportController : UserControl, IUIManager
     {
 
         private static string REGX_VERIFY_EMAIL = @"^[\w\.=-]+@[\w\.-]+\.[\w]{2,3}$";

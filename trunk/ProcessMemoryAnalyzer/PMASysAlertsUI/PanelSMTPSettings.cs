@@ -11,7 +11,7 @@ using PMA.Utils;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelSMTPSettings : UserControl, IUIConfigManager
+    public partial class PanelSMTPSettings : UserControl, IUIManager
     {
 
         private PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;

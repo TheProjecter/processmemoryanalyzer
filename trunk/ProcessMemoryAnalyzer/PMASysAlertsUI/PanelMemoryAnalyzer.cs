@@ -12,7 +12,7 @@ using PMA.Info;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelMemoryAnalyzer : UserControl, IUIConfigManager
+    public partial class PanelMemoryAnalyzer : UserControl, IUIManager
     {
 
         PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;

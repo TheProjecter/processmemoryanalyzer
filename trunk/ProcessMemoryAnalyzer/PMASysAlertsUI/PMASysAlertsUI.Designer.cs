@@ -61,10 +61,12 @@
             this.hideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iISResetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel_rightPanel = new System.Windows.Forms.Panel();
             label_DatabaseWatcher = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel_LeftMenu.SuspendLayout();
             this.contextMenuStripNotifcationIcon.SuspendLayout();
+            this.panel_rightPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // label_DatabaseWatcher
@@ -105,28 +107,28 @@
             // startServiceToolStripMenuItem
             // 
             this.startServiceToolStripMenuItem.Name = "startServiceToolStripMenuItem";
-            this.startServiceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.startServiceToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.startServiceToolStripMenuItem.Text = "Start Service";
             this.startServiceToolStripMenuItem.Click += new System.EventHandler(this.startServiceToolStripMenuItem_Click);
             // 
             // stopServiceToolStripMenuItem1
             // 
             this.stopServiceToolStripMenuItem1.Name = "stopServiceToolStripMenuItem1";
-            this.stopServiceToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.stopServiceToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
             this.stopServiceToolStripMenuItem1.Text = "Stop Service";
             this.stopServiceToolStripMenuItem1.Click += new System.EventHandler(this.stopServiceToolStripMenuItem1_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
             this.toolStripMenuItem1.Text = "Service Status";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -142,14 +144,14 @@
             // sMTPToolStripMenuItem
             // 
             this.sMTPToolStripMenuItem.Name = "sMTPToolStripMenuItem";
-            this.sMTPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sMTPToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.sMTPToolStripMenuItem.Text = "SMTP";
             this.sMTPToolStripMenuItem.Click += new System.EventHandler(this.sMTPToolStripMenuItem_Click);
             // 
             // fTPToolStripMenuItem
             // 
             this.fTPToolStripMenuItem.Name = "fTPToolStripMenuItem";
-            this.fTPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fTPToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.fTPToolStripMenuItem.Text = "FTP";
             this.fTPToolStripMenuItem.Click += new System.EventHandler(this.fTPToolStripMenuItem_Click);
             // 
@@ -219,7 +221,7 @@
             this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_PMA, 0, 5);
             this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_Transport, 0, 7);
             this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_crash, 0, 6);
-            this.tableLayoutPanel_LeftMenu.Location = new System.Drawing.Point(13, 40);
+            this.tableLayoutPanel_LeftMenu.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel_LeftMenu.Name = "tableLayoutPanel_LeftMenu";
             this.tableLayoutPanel_LeftMenu.RowCount = 8;
             this.tableLayoutPanel_LeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
@@ -230,7 +232,7 @@
             this.tableLayoutPanel_LeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel_LeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel_LeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel_LeftMenu.Size = new System.Drawing.Size(130, 271);
+            this.tableLayoutPanel_LeftMenu.Size = new System.Drawing.Size(130, 270);
             this.tableLayoutPanel_LeftMenu.TabIndex = 3;
             // 
             // label_Home
@@ -360,13 +362,21 @@
             this.exitToolStripMenuItem1.Text = "Exit";
             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
             // 
+            // panel_rightPanel
+            // 
+            this.panel_rightPanel.Controls.Add(this.tableLayoutPanel_LeftMenu);
+            this.panel_rightPanel.Location = new System.Drawing.Point(23, 41);
+            this.panel_rightPanel.Name = "panel_rightPanel";
+            this.panel_rightPanel.Size = new System.Drawing.Size(130, 270);
+            this.panel_rightPanel.TabIndex = 4;
+            // 
             // PMASysAlertsUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(642, 323);
-            this.Controls.Add(this.tableLayoutPanel_LeftMenu);
+            this.Controls.Add(this.panel_rightPanel);
             this.Controls.Add(this.panel_MainContainer);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -383,6 +393,7 @@
             this.tableLayoutPanel_LeftMenu.ResumeLayout(false);
             this.tableLayoutPanel_LeftMenu.PerformLayout();
             this.contextMenuStripNotifcationIcon.ResumeLayout(false);
+            this.panel_rightPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -420,6 +431,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem systemInformationToolStripMenuItem;
+        private System.Windows.Forms.Panel panel_rightPanel;
 
     }
 }

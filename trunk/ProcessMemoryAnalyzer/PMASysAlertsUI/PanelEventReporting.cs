@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace PMASysAlertsUI
 {
-    public partial class PanelEventReporting : UserControl, IUIConfigManager
+    public partial class PanelEventReporting : UserControl, IUIManager
     {
 
         PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
