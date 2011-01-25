@@ -102,7 +102,7 @@
             this.Controls.Add(this.checkedListBox_Drives);
             this.Controls.Add(this.label_Drives);
             this.Name = "PanelDriveController";
-            this.Size = new System.Drawing.Size(440, 260);
+            this.Size = new System.Drawing.Size(500, 315);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_DriveUse)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

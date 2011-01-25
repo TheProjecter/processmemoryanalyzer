@@ -203,7 +203,7 @@
             this.Controls.Add(this.textBox_FTPServer);
             this.Controls.Add(this.label_FTPServer);
             this.Name = "PanelFTPSettings";
-            this.Size = new System.Drawing.Size(440, 260);
+            this.Size = new System.Drawing.Size(500, 315);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_port)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Timeout)).EndInit();
             this.ResumeLayout(false);

@@ -172,7 +172,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "PanelHome";
-            this.Size = new System.Drawing.Size(440, 260);
+            this.Size = new System.Drawing.Size(500, 315);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel_Transport.ResumeLayout(false);

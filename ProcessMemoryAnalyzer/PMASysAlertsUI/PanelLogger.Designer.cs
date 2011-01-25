@@ -117,7 +117,7 @@
             this.MaximumSize = new System.Drawing.Size(440, 260);
             this.MinimumSize = new System.Drawing.Size(440, 260);
             this.Name = "PanelLogger";
-            this.Size = new System.Drawing.Size(440, 260);
+            this.Size = new System.Drawing.Size(500, 315);
             this.ResumeLayout(false);
             this.PerformLayout();
 
