@@ -80,7 +80,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericUpDown_PhyMemLimit);
             this.Name = "PanelPhyMemWatcher";
-            this.Size = new System.Drawing.Size(440, 260);
+            this.Size = new System.Drawing.Size(500, 315);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_PhyMemLimit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

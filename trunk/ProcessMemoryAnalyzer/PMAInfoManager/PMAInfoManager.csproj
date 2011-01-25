@@ -45,11 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPMAInfo.cs" />
     <Compile Include="PMAEventReportInfo.cs" />
     <Compile Include="PMAFlagInfo.cs" />
     <Compile Include="PMAInfo.cs" />
     <Compile Include="PMAServerManagerInfo.cs" />
     <Compile Include="PMASystemAnalyzerInfo.cs" />
+    <Compile Include="PMAUserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

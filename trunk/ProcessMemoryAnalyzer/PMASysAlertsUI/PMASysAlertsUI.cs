@@ -36,6 +36,11 @@ namespace PMASysAlertsUI
         PanelMemoryAnalyzer panelMemoryAnalyzer = null;
         PanelEventReporting panelCrashReporting = null;
         PanelSystemInformation panelSystemInformation = null;
+        PanelUserControl panelUserController = null;
+        PanelActionController panelActionController = null;
+        PanelSQLController panelSQLContoller = null;
+        PanelServiceController panelServiceController = null;
+
         #endregion
 
 
@@ -80,6 +85,18 @@ namespace PMASysAlertsUI
                     break;
                 case ENUMPanel.PANEL_SYSTEM_INFORMATION:
                     result = panelSystemInformation.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_USER_CONTROLLER :
+                    result = panelUserController.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_ACTION_CONTROLLER :
+                    result = panelActionController.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_SQL_CONTROLLER :
+                    result = panelSQLContoller.CauseValidation();
+                    break;
+                case ENUMPanel.PANEL_SERVICE_CONTROLLER:
+                    result = panelServiceController.CauseValidation();
                     break;
                 default:
                     result = false;
@@ -128,6 +145,18 @@ namespace PMASysAlertsUI
                     break;
                 case ENUMPanel.PANEL_SYSTEM_INFORMATION:
                     panelSystemInformation.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_USER_CONTROLLER:
+                    panelUserController.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_ACTION_CONTROLLER:
+                    panelActionController.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_SQL_CONTROLLER:
+                    panelSQLContoller.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_SERVICE_CONTROLLER:
+                    panelServiceController.UpdateConfig();
                     break;
             }
 
@@ -186,6 +215,23 @@ namespace PMASysAlertsUI
                     HideAllControls();
                     panelSystemInformation.Show();
                     break;
+
+                case ENUMPanel.PANEL_USER_CONTROLLER:
+                    HideAllControls();
+                    panelUserController.Show();
+                    break;
+                case ENUMPanel.PANEL_ACTION_CONTROLLER:
+                    HideAllControls();
+                    panelActionController.Show();
+                    break;
+                case ENUMPanel.PANEL_SQL_CONTROLLER:
+                    HideAllControls();
+                    panelSQLContoller.Show();
+                    break;
+                case ENUMPanel.PANEL_SERVICE_CONTROLLER:
+                    HideAllControls();
+                    panelServiceController.Show();
+                    break;
             }
 
         }
@@ -241,6 +287,18 @@ namespace PMASysAlertsUI
             panelSystemInformation = new PanelSystemInformation();
             panel_MainContainer.Controls.Add(panelSystemInformation);
 
+            panelUserController = new PanelUserControl();
+            panel_MainContainer.Controls.Add(panelUserController);
+
+            panelActionController = new PanelActionController();
+            panel_MainContainer.Controls.Add(panelActionController);
+            
+            panelSQLContoller = new PanelSQLController();
+            panel_MainContainer.Controls.Add(panelSQLContoller);
+            
+            panelServiceController = new PanelServiceController();
+            panel_MainContainer.Controls.Add(panelServiceController);
+
             HideAllControls();
 
             LoadConfigs();
@@ -262,6 +320,12 @@ namespace PMASysAlertsUI
             panelMemoryAnalyzer.UpdateUI();
             panelCrashReporting.UpdateUI();
             panelSystemInformation.UpdateUI();
+
+            panelUserController.UpdateUI();
+            panelActionController.UpdateUI();
+            panelSQLContoller.UpdateUI();
+            panelServiceController.UpdateUI();
+            
         }
 
 
@@ -439,6 +503,58 @@ namespace PMASysAlertsUI
                 MessageBox.Show(this,configManager.GetConsolidatedError("Event Setup Error"));
             }
         }
+
+        private void userControllerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CauseValidation())
+            {
+                UpdateConfig(PANEL);
+                ShowPanel(ENUMPanel.PANEL_USER_CONTROLLER);
+            }
+            else
+            {
+                MessageBox.Show(this, configManager.GetConsolidatedError("Invalid User Info"));
+            }
+        }
+
+        private void actionControllerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CauseValidation())
+            {
+                UpdateConfig(PANEL);
+                ShowPanel(ENUMPanel.PANEL_ACTION_CONTROLLER);
+            }
+            else
+            {
+                MessageBox.Show(this, configManager.GetConsolidatedError("Invalid Action"));
+            }
+        }
+
+        private void sQLContollerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CauseValidation())
+            {
+                UpdateConfig(PANEL);
+                ShowPanel(ENUMPanel.PANEL_SQL_CONTROLLER);
+            }
+            else
+            {
+                MessageBox.Show(this, configManager.GetConsolidatedError("PLEASE Set Correct SQL Controller Information"));
+            }
+        }
+
+        private void serviceContollerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CauseValidation())
+            {
+                UpdateConfig(PANEL);
+                ShowPanel(ENUMPanel.PANEL_SERVICE_CONTROLLER);
+            }
+            else
+            {
+                MessageBox.Show(this, configManager.GetConsolidatedError("Invalid Service Information "));
+            }
+        }
         #endregion
 
         private void stopServiceToolStripMenuItem_Click(object sender, EventArgs e)
@@ -535,6 +651,9 @@ namespace PMASysAlertsUI
             MessageBox.Show(PMASystemAnalyzer.ServiceStatus);
         }
 
+       
+
+       
       
        
     }

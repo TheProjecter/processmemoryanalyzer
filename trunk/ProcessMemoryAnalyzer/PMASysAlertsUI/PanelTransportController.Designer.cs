@@ -34,8 +34,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_ClientInstanceName = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.richTextBox_EmailsPMAReport = new System.Windows.Forms.RichTextBox();
             this.label_emailPMATask = new System.Windows.Forms.Label();
+            this.richTextBox_EmailsPMAReport = new System.Windows.Forms.RichTextBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -103,14 +103,6 @@
             this.splitContainer1.SplitterDistance = 82;
             this.splitContainer1.TabIndex = 4;
             // 
-            // richTextBox_EmailsPMAReport
-            // 
-            this.richTextBox_EmailsPMAReport.Location = new System.Drawing.Point(7, 27);
-            this.richTextBox_EmailsPMAReport.Name = "richTextBox_EmailsPMAReport";
-            this.richTextBox_EmailsPMAReport.Size = new System.Drawing.Size(416, 63);
-            this.richTextBox_EmailsPMAReport.TabIndex = 0;
-            this.richTextBox_EmailsPMAReport.Text = "";
-            // 
             // label_emailPMATask
             // 
             this.label_emailPMATask.AutoSize = true;
@@ -119,6 +111,14 @@
             this.label_emailPMATask.Size = new System.Drawing.Size(165, 13);
             this.label_emailPMATask.TabIndex = 1;
             this.label_emailPMATask.Text = "Emails : PMA Report Subscription";
+            // 
+            // richTextBox_EmailsPMAReport
+            // 
+            this.richTextBox_EmailsPMAReport.Location = new System.Drawing.Point(7, 27);
+            this.richTextBox_EmailsPMAReport.Name = "richTextBox_EmailsPMAReport";
+            this.richTextBox_EmailsPMAReport.Size = new System.Drawing.Size(416, 63);
+            this.richTextBox_EmailsPMAReport.TabIndex = 0;
+            this.richTextBox_EmailsPMAReport.Text = "";
             // 
             // PanelTransportController
             // 
@@ -129,7 +129,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "PanelTransportController";
-            this.Size = new System.Drawing.Size(440, 260);
+            this.Size = new System.Drawing.Size(500, 315);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);

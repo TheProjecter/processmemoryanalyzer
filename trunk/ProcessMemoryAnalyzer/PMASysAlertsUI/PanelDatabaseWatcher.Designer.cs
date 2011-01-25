@@ -197,7 +197,7 @@
             this.Controls.Add(this.textBox_Database);
             this.Controls.Add(this.label_Database);
             this.Name = "PanelDatabaseWatcher";
-            this.Size = new System.Drawing.Size(440, 260);
+            this.Size = new System.Drawing.Size(500, 315);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TempTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_SessionAlert)).EndInit();
             this.ResumeLayout(false);

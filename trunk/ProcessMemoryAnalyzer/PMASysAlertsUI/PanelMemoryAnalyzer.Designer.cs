@@ -207,7 +207,7 @@
             this.Controls.Add(this.label_TriggerSeed);
             this.Controls.Add(this.label_PerformanceWatch);
             this.Name = "PanelMemoryAnalyzer";
-            this.Size = new System.Drawing.Size(440, 260);
+            this.Size = new System.Drawing.Size(500, 315);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Trigger)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_ReportInterval)).EndInit();
             this.ResumeLayout(false);

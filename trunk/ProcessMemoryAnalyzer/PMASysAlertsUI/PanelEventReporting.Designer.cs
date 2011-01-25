@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.dataGridView_CrashReporting = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
             this.Column_LogName = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Column_Type = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Column_Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_CrashReporting)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,16 +49,6 @@
             this.dataGridView_CrashReporting.Name = "dataGridView_CrashReporting";
             this.dataGridView_CrashReporting.Size = new System.Drawing.Size(415, 200);
             this.dataGridView_CrashReporting.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(14, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Crash Monitoring";
             // 
             // Column_LogName
             // 
@@ -96,14 +86,24 @@
             this.Column_Description.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Column_Description.Width = 127;
             // 
-            // PanelCrashReporting
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(14, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Crash Monitoring";
+            // 
+            // PanelEventReporting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView_CrashReporting);
-            this.Name = "PanelCrashReporting";
-            this.Size = new System.Drawing.Size(450, 270);
+            this.Name = "PanelEventReporting";
+            this.Size = new System.Drawing.Size(500, 315);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_CrashReporting)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

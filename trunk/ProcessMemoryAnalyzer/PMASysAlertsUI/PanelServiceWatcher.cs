@@ -83,5 +83,10 @@ namespace PMASysAlertsUI
         }
 
         #endregion
+
+        private void checkedListBox_Services_MouseHover(object sender, EventArgs e)
+        {
+            checkedListBox_Services.Focus();
+        }
     }
 }

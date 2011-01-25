@@ -20,7 +20,9 @@ namespace PMA.ConfigManager
         public PMAFlagInfo FlagInfo { get; set; }
         public PMAInfo PMAInfoObj { get; set; }
         public Logger Logger { get; set; }
+        public PMAServerManagerInfo PMAServerManagerInfo { get; set; }
 
+        public PMAUsers PMAUsers { get; set; }
 
         private List<string> _errorMessage = null;
         private static string CONFIG_DIR = "Config";
@@ -227,6 +229,45 @@ namespace PMA.ConfigManager
                 FlagInfo = new PMAFlagInfo();
             }
         }
+
+        private void InitilizeUsers()
+        {
+            if (PMAUsers == null)
+            {
+                if (File.Exists(Path.Combine(CurrentAppConfigDir, PMAUsers.PMA_USERS_FILE)))
+                {
+                    PMAUsers = PMAUsers.Deserialize(File.ReadAllText(Path.Combine(CurrentAppConfigDir, PMAUsers.PMA_USERS_FILE)));
+                }
+                else
+                {
+                    PMAUsers = new PMAUsers { ListPMAUserInfo = new List<PMAUserInfo>() };
+                }
+            }
+        }
+
+        private void InitilizeServerManagerInfo()
+        {
+            if (PMAServerManagerInfo == null)
+            {
+                if (File.Exists(Path.Combine(CurrentAppConfigDir, PMAServerManagerInfo.PMA_SERVER_MANAGER_INFO)))
+                {
+                    PMAServerManagerInfo = PMAServerManagerInfo.Deserialize(File.ReadAllText(Path.Combine(CurrentAppConfigDir, PMAServerManagerInfo.PMA_SERVER_MANAGER_INFO)));
+                }
+                else
+                {
+                    PMAServerManagerInfo = new PMAServerManagerInfo {
+                        ListActions = new List<string>(),
+                        ListServices = new List<string>(),
+                        DatabaseServer = string.Empty,
+                        DatabaseUser = string.Empty,
+                        DatabaseUserPassword = string.Empty,
+                        SystemUser = string.Empty,
+                        SystemUserPassword = string.Empty
+
+                    };
+                }
+            }
+        }
         #endregion
 
 
@@ -246,6 +287,13 @@ namespace PMA.ConfigManager
             File.WriteAllText(Path.Combine(CurrentAppConfigDir, LoggerInfo.LOGGER_FILE), Logger.SerializedLoggerInstance());
 
             File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE), PMAInfoObj.Serialize());
+
+            if (PMAUsers.ListPMAUserInfo.Count > 0)
+            {
+                File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMAUsers.PMA_USERS_FILE), PMAUsers.Serialize());
+            }
+
+            File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMAServerManagerInfo.PMA_SERVER_MANAGER_INFO), PMAServerManagerInfo.Serialize());
         }
         #endregion
 
@@ -262,6 +310,8 @@ namespace PMA.ConfigManager
             InitilizeFlagInfo();
             InitilizeLoggerObject();
             InitilizePMAObject();
+            InitilizeUsers();
+            InitilizeServerManagerInfo();
         }
 
 

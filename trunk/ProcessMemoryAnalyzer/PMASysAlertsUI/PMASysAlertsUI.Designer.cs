@@ -40,6 +40,11 @@
             this.transportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sMTPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fTPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.remoteConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.userControllerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.actionControllerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sQLContollerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serviceContollerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.systemInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,9 +76,10 @@
             // 
             // label_DatabaseWatcher
             // 
+            label_DatabaseWatcher.Anchor = System.Windows.Forms.AnchorStyles.Left;
             label_DatabaseWatcher.AutoSize = true;
             label_DatabaseWatcher.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            label_DatabaseWatcher.Location = new System.Drawing.Point(3, 99);
+            label_DatabaseWatcher.Location = new System.Drawing.Point(3, 133);
             label_DatabaseWatcher.Name = "label_DatabaseWatcher";
             label_DatabaseWatcher.Size = new System.Drawing.Size(113, 13);
             label_DatabaseWatcher.TabIndex = 3;
@@ -85,11 +91,12 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.transportToolStripMenuItem,
+            this.remoteConfigurationToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(642, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(692, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -155,6 +162,45 @@
             this.fTPToolStripMenuItem.Text = "FTP";
             this.fTPToolStripMenuItem.Click += new System.EventHandler(this.fTPToolStripMenuItem_Click);
             // 
+            // remoteConfigurationToolStripMenuItem
+            // 
+            this.remoteConfigurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.userControllerToolStripMenuItem,
+            this.actionControllerToolStripMenuItem,
+            this.sQLContollerToolStripMenuItem,
+            this.serviceContollerToolStripMenuItem});
+            this.remoteConfigurationToolStripMenuItem.Name = "remoteConfigurationToolStripMenuItem";
+            this.remoteConfigurationToolStripMenuItem.Size = new System.Drawing.Size(124, 20);
+            this.remoteConfigurationToolStripMenuItem.Text = "Remote Configuration";
+            // 
+            // userControllerToolStripMenuItem
+            // 
+            this.userControllerToolStripMenuItem.Name = "userControllerToolStripMenuItem";
+            this.userControllerToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.userControllerToolStripMenuItem.Text = "User Controller";
+            this.userControllerToolStripMenuItem.Click += new System.EventHandler(this.userControllerToolStripMenuItem_Click);
+            // 
+            // actionControllerToolStripMenuItem
+            // 
+            this.actionControllerToolStripMenuItem.Name = "actionControllerToolStripMenuItem";
+            this.actionControllerToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.actionControllerToolStripMenuItem.Text = "Action Controller";
+            this.actionControllerToolStripMenuItem.Click += new System.EventHandler(this.actionControllerToolStripMenuItem_Click);
+            // 
+            // sQLContollerToolStripMenuItem
+            // 
+            this.sQLContollerToolStripMenuItem.Name = "sQLContollerToolStripMenuItem";
+            this.sQLContollerToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.sQLContollerToolStripMenuItem.Text = "SQL Contoller";
+            this.sQLContollerToolStripMenuItem.Click += new System.EventHandler(this.sQLContollerToolStripMenuItem_Click);
+            // 
+            // serviceContollerToolStripMenuItem
+            // 
+            this.serviceContollerToolStripMenuItem.Name = "serviceContollerToolStripMenuItem";
+            this.serviceContollerToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.serviceContollerToolStripMenuItem.Text = "Service Contoller";
+            this.serviceContollerToolStripMenuItem.Click += new System.EventHandler(this.serviceContollerToolStripMenuItem_Click);
+            // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -205,7 +251,7 @@
             this.panel_MainContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel_MainContainer.Location = new System.Drawing.Point(175, 41);
             this.panel_MainContainer.Name = "panel_MainContainer";
-            this.panel_MainContainer.Size = new System.Drawing.Size(450, 270);
+            this.panel_MainContainer.Size = new System.Drawing.Size(505, 320);
             this.panel_MainContainer.TabIndex = 2;
             // 
             // tableLayoutPanel_LeftMenu
@@ -232,15 +278,16 @@
             this.tableLayoutPanel_LeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel_LeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel_LeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel_LeftMenu.Size = new System.Drawing.Size(130, 270);
+            this.tableLayoutPanel_LeftMenu.Size = new System.Drawing.Size(130, 320);
             this.tableLayoutPanel_LeftMenu.TabIndex = 3;
             // 
             // label_Home
             // 
+            this.label_Home.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label_Home.AutoSize = true;
             this.label_Home.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label_Home.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Home.Location = new System.Drawing.Point(3, 0);
+            this.label_Home.Location = new System.Drawing.Point(3, 13);
             this.label_Home.Name = "label_Home";
             this.label_Home.Size = new System.Drawing.Size(39, 13);
             this.label_Home.TabIndex = 0;
@@ -249,9 +296,10 @@
             // 
             // label_Drives
             // 
+            this.label_Drives.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label_Drives.AutoSize = true;
             this.label_Drives.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Drives.Location = new System.Drawing.Point(3, 33);
+            this.label_Drives.Location = new System.Drawing.Point(3, 53);
             this.label_Drives.Name = "label_Drives";
             this.label_Drives.Size = new System.Drawing.Size(43, 13);
             this.label_Drives.TabIndex = 1;
@@ -260,9 +308,10 @@
             // 
             // label_Service
             // 
+            this.label_Service.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label_Service.AutoSize = true;
             this.label_Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Service.Location = new System.Drawing.Point(3, 66);
+            this.label_Service.Location = new System.Drawing.Point(3, 93);
             this.label_Service.Name = "label_Service";
             this.label_Service.Size = new System.Drawing.Size(56, 13);
             this.label_Service.TabIndex = 2;
@@ -271,9 +320,10 @@
             // 
             // label_PhysicalMemory
             // 
+            this.label_PhysicalMemory.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label_PhysicalMemory.AutoSize = true;
             this.label_PhysicalMemory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_PhysicalMemory.Location = new System.Drawing.Point(3, 132);
+            this.label_PhysicalMemory.Location = new System.Drawing.Point(3, 173);
             this.label_PhysicalMemory.Name = "label_PhysicalMemory";
             this.label_PhysicalMemory.Size = new System.Drawing.Size(101, 13);
             this.label_PhysicalMemory.TabIndex = 4;
@@ -282,9 +332,10 @@
             // 
             // label_PMA
             // 
+            this.label_PMA.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label_PMA.AutoSize = true;
             this.label_PMA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_PMA.Location = new System.Drawing.Point(3, 165);
+            this.label_PMA.Location = new System.Drawing.Point(3, 213);
             this.label_PMA.Name = "label_PMA";
             this.label_PMA.Size = new System.Drawing.Size(33, 13);
             this.label_PMA.TabIndex = 6;
@@ -293,9 +344,10 @@
             // 
             // label_Transport
             // 
+            this.label_Transport.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label_Transport.AutoSize = true;
             this.label_Transport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Transport.Location = new System.Drawing.Point(3, 231);
+            this.label_Transport.Location = new System.Drawing.Point(3, 293);
             this.label_Transport.Name = "label_Transport";
             this.label_Transport.Size = new System.Drawing.Size(77, 13);
             this.label_Transport.TabIndex = 5;
@@ -305,9 +357,10 @@
             // 
             // label_crash
             // 
+            this.label_crash.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label_crash.AutoSize = true;
             this.label_crash.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_crash.Location = new System.Drawing.Point(3, 198);
+            this.label_crash.Location = new System.Drawing.Point(3, 253);
             this.label_crash.Name = "label_crash";
             this.label_crash.Size = new System.Drawing.Size(99, 13);
             this.label_crash.TabIndex = 7;
@@ -367,7 +420,7 @@
             this.panel_rightPanel.Controls.Add(this.tableLayoutPanel_LeftMenu);
             this.panel_rightPanel.Location = new System.Drawing.Point(23, 41);
             this.panel_rightPanel.Name = "panel_rightPanel";
-            this.panel_rightPanel.Size = new System.Drawing.Size(130, 270);
+            this.panel_rightPanel.Size = new System.Drawing.Size(130, 320);
             this.panel_rightPanel.TabIndex = 4;
             // 
             // PMASysAlertsUI
@@ -375,16 +428,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(642, 323);
+            this.ClientSize = new System.Drawing.Size(692, 373);
             this.Controls.Add(this.panel_rightPanel);
             this.Controls.Add(this.panel_MainContainer);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(650, 350);
-            this.MinimumSize = new System.Drawing.Size(650, 350);
+            this.MaximumSize = new System.Drawing.Size(700, 400);
+            this.MinimumSize = new System.Drawing.Size(700, 400);
             this.Name = "PMASysAlertsUI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "System Analyzer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PMASysAlertsUI_FormClosing);
             this.Resize += new System.EventHandler(this.PMASysAlertsUI_Resize);
@@ -432,6 +486,11 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem systemInformationToolStripMenuItem;
         private System.Windows.Forms.Panel panel_rightPanel;
+        private System.Windows.Forms.ToolStripMenuItem remoteConfigurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem userControllerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem actionControllerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sQLContollerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem serviceContollerToolStripMenuItem;
 
     }
 }

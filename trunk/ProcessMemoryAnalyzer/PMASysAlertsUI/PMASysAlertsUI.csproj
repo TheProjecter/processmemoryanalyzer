@@ -57,6 +57,12 @@
     </Compile>
     <Compile Include="ENUMPanel.cs" />
     <Compile Include="IUIConfigManager.cs" />
+    <Compile Include="PanelActionController.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelActionController.Designer.cs">
+      <DependentUpon>PanelActionController.cs</DependentUpon>
+    </Compile>
     <Compile Include="PanelEventReporting.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -87,6 +93,12 @@
     <Compile Include="PanelPhyMemWatcher.Designer.cs">
       <DependentUpon>PanelPhyMemWatcher.cs</DependentUpon>
     </Compile>
+    <Compile Include="PanelServiceController.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelServiceController.Designer.cs">
+      <DependentUpon>PanelServiceController.cs</DependentUpon>
+    </Compile>
     <Compile Include="PanelServiceWatcher.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -111,6 +123,12 @@
     <Compile Include="PanelLogger.Designer.cs">
       <DependentUpon>PanelLogger.cs</DependentUpon>
     </Compile>
+    <Compile Include="PanelSQLController.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelSQLController.Designer.cs">
+      <DependentUpon>PanelSQLController.cs</DependentUpon>
+    </Compile>
     <Compile Include="PanelSystemInformation.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -134,6 +152,9 @@
     <EmbeddedResource Include="AboutBoxPMAAlerts.resx">
       <DependentUpon>AboutBoxPMAAlerts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PanelActionController.resx">
+      <DependentUpon>PanelActionController.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PanelEventReporting.resx">
       <DependentUpon>PanelEventReporting.cs</DependentUpon>
     </EmbeddedResource>
@@ -149,6 +170,9 @@
     <EmbeddedResource Include="PanelPhyMemWatcher.resx">
       <DependentUpon>PanelPhyMemWatcher.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PanelServiceController.resx">
+      <DependentUpon>PanelServiceController.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PanelServiceWatcher.resx">
       <DependentUpon>PanelServiceWatcher.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PanelSMTPSettings.resx">
       <DependentUpon>PanelSMTPSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelSQLController.resx">
+      <DependentUpon>PanelSQLController.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelSystemInformation.resx">
       <DependentUpon>PanelSystemInformation.cs</DependentUpon>
