@@ -47,7 +47,7 @@
             this.Column_Description});
             this.dataGridView_CrashReporting.Location = new System.Drawing.Point(17, 47);
             this.dataGridView_CrashReporting.Name = "dataGridView_CrashReporting";
-            this.dataGridView_CrashReporting.Size = new System.Drawing.Size(415, 200);
+            this.dataGridView_CrashReporting.Size = new System.Drawing.Size(470, 249);
             this.dataGridView_CrashReporting.TabIndex = 0;
             // 
             // Column_LogName
