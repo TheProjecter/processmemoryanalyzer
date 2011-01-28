@@ -190,7 +190,11 @@ namespace PMA.SystemAnalyzer
             foreach (string driveName in Environment.GetLogicalDrives())
             {
                 driveInfo = new DriveInfo(driveName);
-                sb.AppendLine("\tDrive Name " + driveName + " : " + driveInfo.TotalFreeSpace/(1024*1024) + " MB Available on " + driveInfo.TotalSize/(1024*1024) + " MB Drive");
+                if (driveInfo.IsReady)
+                {
+                    sb.AppendLine("\tDrive Name " + driveName + " : " + driveInfo.TotalFreeSpace / (1024 * 1024) + " MB Available on " + driveInfo.TotalSize / (1024 * 1024) + " MB Drive");
+
+                }
             }
             sb.AppendLine("System Directory : " + Environment.SystemDirectory);
             sb.AppendLine("System Uptime : " + TimeSpan.FromMilliseconds(Environment.TickCount).TotalMinutes.ToString() + " minutes");
