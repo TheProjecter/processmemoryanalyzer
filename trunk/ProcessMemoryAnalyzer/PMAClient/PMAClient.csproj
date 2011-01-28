@@ -50,6 +50,12 @@
   <ItemGroup>
     <Compile Include="EnumPanel.cs" />
     <Compile Include="IUIManager.cs" />
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PanelExecuteCommand.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -70,6 +76,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PanelExecuteCommand.resx">
       <DependentUpon>PanelExecuteCommand.cs</DependentUpon>
     </EmbeddedResource>
@@ -97,6 +106,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PMAInfoManager\PMAInfoManager.csproj">
+      <Project>{66628469-3255-430A-834D-EB192F32D6C3}</Project>
+      <Name>PMAInfoManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
