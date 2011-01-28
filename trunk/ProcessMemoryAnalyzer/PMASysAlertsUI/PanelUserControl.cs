@@ -23,13 +23,23 @@ namespace PMASysAlertsUI
         Button button_Cancel;
 
         private int rowIndex = 0;
-        
+
+        //---------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PanelUserControl"/> class.
+        /// </summary>
         public PanelUserControl()
         {
             InitializeComponent();
             dataGridView_users.CellContentClick += new DataGridViewCellEventHandler(dataGridView_users_CellContentClick);
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Handles the CellContentClick event of the dataGridView_users control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.Forms.DataGridViewCellEventArgs"/> instance containing the event data.</param>
         void dataGridView_users_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridView_users.Columns["Password"].Index == e.ColumnIndex)
@@ -39,9 +49,15 @@ namespace PMASysAlertsUI
             else if (dataGridView_users.Columns["RemoveUser"].Index == e.ColumnIndex)
             {
                 dataGridView_users.Rows.Remove(dataGridView_users.Rows[e.RowIndex]);
+                UpdateConfig();
             }
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Resets the password.
+        /// </summary>
+        /// <param name="rowIndex">Index of the row.</param>
         private void ResetPassword(int rowIndex)
         {
 
@@ -74,6 +90,12 @@ namespace PMASysAlertsUI
 
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Handles the Click event of the button_ChangePassword control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void button_ChangePassword_Click(object sender, EventArgs e)
         {
             dataGridView_users.Rows[rowIndex].Cells["PasswordString"].Value = textBox_NewPassword.Text;
@@ -82,6 +104,12 @@ namespace PMASysAlertsUI
             MessageBox.Show("Password is changed for user " + dataGridView_users.Rows[rowIndex].Cells["User"].Value.ToString());
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Handles the Click event of the button_Cancel control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void button_Cancel_Click(object sender, EventArgs e)
         {
             PasswordResetForm.Close();
@@ -89,6 +117,12 @@ namespace PMASysAlertsUI
         }
 
 
+        //---------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Handles the Click event of the button_Add control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void button_Add_Click(object sender, EventArgs e)
         {
             bool isCheckedBox = false;
@@ -129,6 +163,14 @@ namespace PMASysAlertsUI
             }
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Determines whether [is user already exist] [the specified user name].
+        /// </summary>
+        /// <param name="userName">Name of the user.</param>
+        /// <returns>
+        /// 	<c>true</c> if [is user already exist] [the specified user name]; otherwise, <c>false</c>.
+        /// </returns>
         private bool IsUserAlreadyExist(string userName)
         {
             int count = (from userinfo in configManager.PMAUsers.ListPMAUserInfo
@@ -144,6 +186,10 @@ namespace PMASysAlertsUI
 
         #region IUIManager Members
 
+        //---------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Updates the UI.
+        /// </summary>
         public void UpdateUI()
         {
             dataGridView_users.Rows.Clear();
@@ -162,6 +208,10 @@ namespace PMASysAlertsUI
             }
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Updates the config.
+        /// </summary>
         public void UpdateConfig()
         {
             PMAUserInfo userInfo = null;
@@ -178,6 +228,11 @@ namespace PMASysAlertsUI
             }
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Causes the validation.
+        /// </summary>
+        /// <returns></returns>
         public bool CauseValidation()
         {
             return true;

@@ -36,6 +36,7 @@
             this.textBox_User = new System.Windows.Forms.TextBox();
             this.textBox_Password = new System.Windows.Forms.TextBox();
             this.button_TestConnection = new System.Windows.Forms.Button();
+            this.label_connection = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label_SQLController
@@ -105,11 +106,22 @@
             this.button_TestConnection.TabIndex = 7;
             this.button_TestConnection.Text = "Test Connection";
             this.button_TestConnection.UseVisualStyleBackColor = true;
+            this.button_TestConnection.Click += new System.EventHandler(this.button_TestConnection_Click);
+            // 
+            // label_connection
+            // 
+            this.label_connection.AutoSize = true;
+            this.label_connection.Location = new System.Drawing.Point(156, 157);
+            this.label_connection.Name = "label_connection";
+            this.label_connection.Size = new System.Drawing.Size(162, 13);
+            this.label_connection.TabIndex = 8;
+            this.label_connection.Text = "Testing Connection Please Wait.";
             // 
             // PanelSQLController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label_connection);
             this.Controls.Add(this.button_TestConnection);
             this.Controls.Add(this.textBox_Password);
             this.Controls.Add(this.textBox_User);
@@ -135,5 +147,6 @@
         private System.Windows.Forms.TextBox textBox_User;
         private System.Windows.Forms.TextBox textBox_Password;
         private System.Windows.Forms.Button button_TestConnection;
+        private System.Windows.Forms.Label label_connection;
     }
 }
