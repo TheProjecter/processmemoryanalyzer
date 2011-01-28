@@ -14,7 +14,7 @@ namespace PMA.SystemAnalyzer
 {
     public class PMADatabaseController
     {
-        private static string CONNECTION_STRING = "Data Source={0};Initial Catalog=master;User Id={1};Password={2};";
+        private string CONNECTION_STRING = "Data Source={0};Initial Catalog=master;User Id={1};Password={2};";
 
         private PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
         
@@ -32,6 +32,43 @@ namespace PMA.SystemAnalyzer
             get
             {
                 return _message;
+            }
+        }
+
+        public bool IsConnectionSet
+        {
+            get
+            {
+                bool result = false;
+                try
+                {
+                    if (connection != null)
+                    {
+                        connection.Open();
+                        result = true;
+                        _message = "Connection is created succesfully";
+                    }
+                    else
+                    {
+                        _message = "Connection object is null";
+                        result = false;
+                    }
+                    
+                }
+                catch (SqlException ex)
+                {
+                    configManager.Logger.Error(ex);
+                    _message = ex.Message;
+                    result = false;
+                }
+                finally
+                {
+                    if (connection != null)
+                    {
+                        connection.Close();
+                    }
+                }
+                return result;
             }
         }
 
@@ -71,10 +108,10 @@ namespace PMA.SystemAnalyzer
             configManager.Logger.Debug(EnumMethod.START);
             bool result = false;
             connection = new SqlConnection(String.Format(CONNECTION_STRING,database,user,password));
+            
             try
             {
                 connection.Open();
-                connection.Close();
                 result = true;
                 _message = "Connection is created succesfully";
             }
@@ -95,47 +132,19 @@ namespace PMA.SystemAnalyzer
             return result;
         }
 
-        
-        //-----------------------------------------------------------------------------------------------------------------
         /// <summary>
-        /// Truncates the session state database.
+        /// Disposes the connection.
         /// </summary>
-        /// <returns></returns>
-        public bool TruncateSessionStateDatabase()
+        public void DisposeConnection()
         {
-            configManager.Logger.Debug(EnumMethod.START);
-            //connection.Open();
-            bool result = false;
-            SqlCommand query = null;
-            try
+            if (connection != null)
             {
-                query = new SqlCommand("ALTER DATABASE [ASPState] SET  SINGLE_USER WITH NO_WAIT",connection);
-                query.ExecuteNonQuery();
-                query = new SqlCommand("ALTER DATABASE [ASPState] SET  SINGLE_USER ", connection);
-                query.ExecuteNonQuery();
-                connection.ChangeDatabase("ASPState");
-                query = new SqlCommand("Truncate TABLE ASPStateTempSessions", connection);
-                query.ExecuteNonQuery();
-                query = new SqlCommand("Truncate TABLE ASPStateTempSessions", connection);
-                query.ExecuteNonQuery();
-                connection.ChangeDatabase("master");
-                query = new SqlCommand("ALTER DATABASE [ASPState] SET  MULTI_USER WITH NO_WAIT", connection);
-                query.ExecuteNonQuery();
-                query = new SqlCommand("ALTER DATABASE [ASPState] SET  MUTI_USER ", connection);
-                query.ExecuteNonQuery();
-                _message = "Session State is truncated succesfully";
-                result = true;
+                connection.Close();
+                connection.Dispose();
             }
-            catch(SqlException ex)
-            {
-                configManager.Logger.Error(ex);
-                _message = ex.Message;
-                result = false;
-            }
-            configManager.Logger.Debug(EnumMethod.END);
-            return result;
         }
 
+        
 
         /// <summary>
         /// Gets the size of the DB.
