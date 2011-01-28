@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Xml.Serialization;
+using System.ServiceModel;
+using System.Runtime.Serialization;
 
 namespace PMA.Info
 {
@@ -46,17 +48,23 @@ namespace PMA.Info
     /// <summary>
     /// UserInfo Class defining attributes of single users
     /// </summary>
+    [DataContract] 
     public class PMAUserInfo
     {
-        
+
+        [DataMember]
         public string UserName { get; set; }
 
+        [DataMember]
         public string UserPassword { get; set; }
 
+        [DataMember]
         public bool IsSQLUser { get; set; }
 
+        [DataMember]
         public bool IsActionUser { get; set; }
 
+        [DataMember]
         public bool IsServiceUser { get; set; }
        
     }
