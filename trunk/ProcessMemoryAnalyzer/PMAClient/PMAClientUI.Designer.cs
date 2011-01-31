@@ -33,9 +33,10 @@
             this.setupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label_SQL = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -78,8 +79,9 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label_SQL, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
@@ -90,25 +92,25 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(122, 369);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // label1
+            // label_SQL
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(43, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.label_SQL.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label_SQL.AutoSize = true;
+            this.label_SQL.Location = new System.Drawing.Point(47, 39);
+            this.label_SQL.Name = "label_SQL";
+            this.label_SQL.Size = new System.Drawing.Size(28, 13);
+            this.label_SQL.TabIndex = 0;
+            this.label_SQL.Text = "SQL";
             // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(43, 131);
+            this.label2.Location = new System.Drawing.Point(37, 131);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(48, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "label2";
+            this.label2.Text = "Services";
             // 
             // panel2
             // 
@@ -117,6 +119,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(650, 375);
             this.panel2.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(42, 223);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Action";
             // 
             // PMAClientUI
             // 
@@ -148,8 +160,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_SQL;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 

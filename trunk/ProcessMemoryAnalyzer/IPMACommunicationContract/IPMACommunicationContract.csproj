@@ -51,6 +51,12 @@
     <Compile Include="IPMACommunicationContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PMAInfoManager\PMAInfoManager.csproj">
+      <Project>{66628469-3255-430A-834D-EB192F32D6C3}</Project>
+      <Name>PMAInfoManager</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

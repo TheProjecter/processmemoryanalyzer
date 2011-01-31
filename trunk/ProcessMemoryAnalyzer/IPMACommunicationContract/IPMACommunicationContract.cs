@@ -5,10 +5,11 @@ using System.Text;
 using System.ServiceModel;
 using System.Runtime.Serialization;
 using System.Data;
+using PMA.Info;
 
 namespace PMA.CommunicationAPI
 {
-    [ServiceContract()]
+    [ServiceContract]
     public interface IPMACommunicationContract
     {
 
@@ -21,6 +22,8 @@ namespace PMA.CommunicationAPI
         [OperationContract]
         List<string> GetAvailableCommands();
 
+        [OperationContract]
+        PMAUserInfo GetUserInfo(string username, string password);
 
     }
 }

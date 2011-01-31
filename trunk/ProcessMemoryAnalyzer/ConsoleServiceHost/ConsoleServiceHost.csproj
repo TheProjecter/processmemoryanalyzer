@@ -35,6 +35,9 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -47,6 +50,19 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IPMACommunicationContract\IPMACommunicationContract.csproj">
+      <Project>{4AECDCCA-6913-4108-85E1-E4EB29FE3747}</Project>
+      <Name>IPMACommunicationContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PMACommunicationAPI\PMACommunicationAPI.csproj">
+      <Project>{D504CDB8-2777-4F59-A870-A27592471482}</Project>
+      <Name>PMACommunicationAPI %28PMACommunicationAPI\PMACommunicationAPI%29</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
