@@ -53,6 +53,14 @@
       <Project>{4AECDCCA-6913-4108-85E1-E4EB29FE3747}</Project>
       <Name>IPMACommunicationContract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PMAInfoManager\PMAInfoManager.csproj">
+      <Project>{66628469-3255-430A-834D-EB192F32D6C3}</Project>
+      <Name>PMAInfoManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PMASystemAnalyzer\PMASystemAnalyzer.csproj">
+      <Project>{0F7EC0D7-D320-465F-B8F9-400D7E7C8E63}</Project>
+      <Name>PMASystemAnalyzer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

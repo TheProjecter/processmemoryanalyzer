@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PMA.Info;
+using PMA.SystemAnalyzer;
 
 namespace PMA.CommunicationAPI
 {
@@ -24,6 +26,13 @@ namespace PMA.CommunicationAPI
         {
             throw new NotImplementedException();
         }
+
+        public PMAUserInfo GetUserInfo(string username, string password)
+        {
+            return PMAUserManager.GetUserInfo(username, password);
+        }
+
+        
 
         #endregion
     }
