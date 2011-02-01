@@ -15,5 +15,10 @@ namespace PMA.Client
         {
             InitializeComponent();
         }
+
+        private void button_Login_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

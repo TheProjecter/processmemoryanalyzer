@@ -21,9 +21,17 @@ namespace PMA.Client
 
         private void OpenLoginWindow()
         {
-            LoginForm loginForm = new LoginForm();
-
-            loginForm.Show();
+            
         }
+
+        private void PMAClientUI_Shown(object sender, EventArgs e)
+        {
+            LoginForm loginForm = new LoginForm();
+            loginForm.ShowDialog(this);
+        }
+
+     
+
+        
     }
 }
