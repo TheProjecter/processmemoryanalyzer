@@ -35,8 +35,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label_SQL = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -112,14 +112,6 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Services";
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel2.Location = new System.Drawing.Point(181, 46);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(650, 375);
-            this.panel2.TabIndex = 2;
-            // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -129,6 +121,14 @@
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Action";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel2.Location = new System.Drawing.Point(181, 46);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(650, 375);
+            this.panel2.TabIndex = 2;
             // 
             // PMAClientUI
             // 
@@ -142,6 +142,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "PMAClientUI";
             this.Text = "PMAClient";
+            this.Shown += new System.EventHandler(this.PMAClientUI_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);

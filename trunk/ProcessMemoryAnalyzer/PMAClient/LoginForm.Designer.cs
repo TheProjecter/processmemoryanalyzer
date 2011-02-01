@@ -76,8 +76,9 @@
             this.button_Login.TabIndex = 4;
             this.button_Login.Text = "Login";
             this.button_Login.UseVisualStyleBackColor = true;
+            this.button_Login.Click += new System.EventHandler(this.button_Login_Click);
             // 
-            // Login
+            // LoginForm
             // 
             this.AcceptButton = this.button_Login;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -90,7 +91,8 @@
             this.Controls.Add(this.label_user);
             this.MaximumSize = new System.Drawing.Size(240, 125);
             this.MinimumSize = new System.Drawing.Size(240, 125);
-            this.Name = "Login";
+            this.Name = "LoginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Login";
             this.ResumeLayout(false);
             this.PerformLayout();

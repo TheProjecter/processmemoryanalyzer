@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using PMA.Info;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 
 namespace PMA.ConfigManager.Client
 {
@@ -17,6 +19,24 @@ namespace PMA.ConfigManager.Client
         public PMAClientRuntimeInfo clientRuntimeInfo { get; set; }
 
 
+        //public MyContractClient GetConnectionPorxy
+        //{
+        //    get
+        //    {
+        //        //Binding wsBinding = new WSHttpBinding();
+        //        ////EndpointAddress endpointAddress = new
+        //        ////   EndpointAddress("http://localhost:8000/MyService/");
+        //        //MyContractClient proxy =
+        //        //   new MyContractClient(wsBinding, endpointAddress);
+        //        //proxy.MyMethod();
+        //        //proxy.Close();
+
+        //    }
+
+
+
+        //}
+        
         private PMAClientConfigManager()
         {
             InitilizeClientInfo();
@@ -37,6 +57,8 @@ namespace PMA.ConfigManager.Client
             //    }
             //}
         }
+
+        
 
         private void InitilizeClientRuntimeInfo()
         {
@@ -65,6 +87,8 @@ namespace PMA.ConfigManager.Client
         {
           //  File.WriteAllText(Path.Combine(CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE), FtpInfo.Serialize());
         }
+
+        
 
 
 

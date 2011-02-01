@@ -97,6 +97,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -108,6 +109,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IPMACommunicationContract\IPMACommunicationContract.csproj">
+      <Project>{4AECDCCA-6913-4108-85E1-E4EB29FE3747}</Project>
+      <Name>IPMACommunicationContract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PMAInfoManager\PMAInfoManager.csproj">
       <Project>{66628469-3255-430A-834D-EB192F32D6C3}</Project>
       <Name>PMAInfoManager</Name>

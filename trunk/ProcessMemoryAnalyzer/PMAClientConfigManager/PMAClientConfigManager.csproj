@@ -35,6 +35,9 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -49,6 +52,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IPMACommunicationContract\IPMACommunicationContract.csproj">
+      <Project>{4AECDCCA-6913-4108-85E1-E4EB29FE3747}</Project>
+      <Name>IPMACommunicationContract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PMAInfoManager\PMAInfoManager.csproj">
       <Project>{66628469-3255-430A-834D-EB192F32D6C3}</Project>
       <Name>PMAInfoManager</Name>
