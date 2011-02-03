@@ -20,17 +20,17 @@ namespace PMA.Client
 
         public void UpdateUI()
         {
-            throw new NotImplementedException();
+            
         }
 
         public void UpdateConfig()
         {
-            throw new NotImplementedException();
+            
         }
 
         public bool CauseValidation()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         #endregion

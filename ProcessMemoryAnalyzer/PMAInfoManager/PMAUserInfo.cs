@@ -55,7 +55,6 @@ namespace PMA.Info
         [DataMember]
         public string UserName { get; set; }
 
-        [DataMember]
         public string UserPassword { get; set; }
 
         [DataMember]
@@ -66,6 +65,9 @@ namespace PMA.Info
 
         [DataMember]
         public bool IsServiceUser { get; set; }
+
+        
+
        
     }
 }

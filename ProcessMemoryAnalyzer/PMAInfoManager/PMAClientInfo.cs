@@ -36,8 +36,16 @@ namespace PMA.Info
     
     public class PMAClientRuntimeInfo
     {
+
+        public PMAClientRuntimeInfo()
+        {
+            UserInfo = new PMAUserInfo();
+        }
+        
+        
         public bool IsUserLoggedIn { get; set; }
 
         public PMAUserInfo UserInfo { get; set; }
+        
     }
 }

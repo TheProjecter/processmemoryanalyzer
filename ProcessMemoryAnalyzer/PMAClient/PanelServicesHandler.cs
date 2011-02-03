@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+
 namespace PMA.Client
 {
-    public partial class PanelSQLClient : UserControl, IUIManager
+    public partial class PanelServicesHandler : UserControl, IUIManager
     {
-        public PanelSQLClient()
+        public PanelServicesHandler()
         {
             InitializeComponent();
         }

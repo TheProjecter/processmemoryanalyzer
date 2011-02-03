@@ -5,8 +5,10 @@ using System.Text;
 
 namespace PMA.Client
 {
-    class EnumPanel
+    enum ENUMPanel
     {
-
+        PANEL_EXECUTE_COMMAND,
+        PANEL_SERVICES_HANDLER,
+        PANEL_SQL_CLIENT
     }
 }

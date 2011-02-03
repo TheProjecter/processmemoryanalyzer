@@ -10,7 +10,12 @@ namespace PMA.SystemAnalyzer
     public class PMAUserManager 
     {
 
-        public static Dictionary<string, bool> UsersLoggedIn { get; set; }
+        public static Dictionary<string, string> UsersLoggedIn { get; set; }
+
+        static PMAUserManager()
+        {
+            UsersLoggedIn = new Dictionary<string, string>();
+        }
 
         public static PMAUserInfo GetUserInfo(string username, string password)
         {
@@ -20,10 +25,23 @@ namespace PMA.SystemAnalyzer
 
             if (userInfo != null)
             {
-                UsersLoggedIn.Add(userInfo.UserName, true);
+                if (!UsersLoggedIn.ContainsKey(userInfo.UserName))
+                {
+                    UsersLoggedIn.Add(GenerateId(),userInfo.UserName );
+                }
             }
             
             return userInfo;
+        }
+
+        private static string GenerateId()
+        {
+            long i = 1;
+            foreach (byte b in Guid.NewGuid().ToByteArray())
+            {
+                i *= ((int)b + 1);
+            }
+            return string.Format("{0:x}", i - DateTime.Now.Ticks);
         }
 
     }
