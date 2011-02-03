@@ -31,7 +31,7 @@
             this.label_user = new System.Windows.Forms.Label();
             this.textBox_User = new System.Windows.Forms.TextBox();
             this.label_Password = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox_Password = new System.Windows.Forms.TextBox();
             this.button_Login = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -60,13 +60,13 @@
             this.label_Password.TabIndex = 2;
             this.label_Password.Text = "Password";
             // 
-            // textBox2
+            // textBox_Password
             // 
-            this.textBox2.Location = new System.Drawing.Point(68, 41);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(148, 20);
-            this.textBox2.TabIndex = 3;
+            this.textBox_Password.Location = new System.Drawing.Point(68, 41);
+            this.textBox_Password.Name = "textBox_Password";
+            this.textBox_Password.PasswordChar = '*';
+            this.textBox_Password.Size = new System.Drawing.Size(148, 20);
+            this.textBox_Password.TabIndex = 3;
             // 
             // button_Login
             // 
@@ -85,7 +85,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(232, 98);
             this.Controls.Add(this.button_Login);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox_Password);
             this.Controls.Add(this.label_Password);
             this.Controls.Add(this.textBox_User);
             this.Controls.Add(this.label_user);
@@ -104,7 +104,7 @@
         private System.Windows.Forms.Label label_user;
         private System.Windows.Forms.TextBox textBox_User;
         private System.Windows.Forms.Label label_Password;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox_Password;
         private System.Windows.Forms.Button button_Login;
     }
 }

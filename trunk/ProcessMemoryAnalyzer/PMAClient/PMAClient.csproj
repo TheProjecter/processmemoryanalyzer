@@ -62,6 +62,12 @@
     <Compile Include="PanelExecuteCommand.Designer.cs">
       <DependentUpon>PanelExecuteCommand.cs</DependentUpon>
     </Compile>
+    <Compile Include="PanelServicesHandler.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelServicesHandler.Designer.cs">
+      <DependentUpon>PanelServicesHandler.cs</DependentUpon>
+    </Compile>
     <Compile Include="PanelSQLClient.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -81,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PanelExecuteCommand.resx">
       <DependentUpon>PanelExecuteCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelServicesHandler.resx">
+      <DependentUpon>PanelServicesHandler.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelSQLClient.resx">
       <DependentUpon>PanelSQLClient.cs</DependentUpon>
@@ -112,6 +121,10 @@
     <ProjectReference Include="..\IPMACommunicationContract\IPMACommunicationContract.csproj">
       <Project>{4AECDCCA-6913-4108-85E1-E4EB29FE3747}</Project>
       <Name>IPMACommunicationContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PMAClientConfigManager\PMAClientConfigManager.csproj">
+      <Project>{84123767-1230-4EA3-9291-1E3647EDF2F1}</Project>
+      <Name>PMAClientConfigManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\PMAInfoManager\PMAInfoManager.csproj">
       <Project>{66628469-3255-430A-834D-EB192F32D6C3}</Project>

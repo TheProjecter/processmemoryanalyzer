@@ -29,6 +29,7 @@ namespace PMA.CommunicationAPI
 
         public PMAUserInfo GetUserInfo(string username, string password)
         {
+            
             return PMAUserManager.GetUserInfo(username, password);
         }
 
