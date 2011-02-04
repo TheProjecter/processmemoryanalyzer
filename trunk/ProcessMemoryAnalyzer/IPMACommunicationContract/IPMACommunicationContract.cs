@@ -14,16 +14,30 @@ namespace PMA.CommunicationAPI
     {
 
         [OperationContract]
-        DataSet ExecuteQuery(string query);
+        DataSet ExecuteQuery(string query,string sessionID);
 
         [OperationContract]
-        string ExecuteCommand(string command);
+        string ExecuteCommand(string command, string sessionID);
 
         [OperationContract]
-        List<string> GetAvailableCommands();
+        List<string> GetAvailableCommands(string sessionID);
 
         [OperationContract]
-        PMAUserInfo GetUserInfo(string username, string password);
+        string GetSessionID(string username, string password);
 
+        [OperationContract]
+        PMAUserInfo GetUserInfo(string sessionID);
+
+        [OperationContract]
+        void LogoutSession(string sessionID);
+
+        [OperationContract]
+        string ServiceAction(string serviceName, string action, string sessionID);
+
+        [OperationContract]
+        DataSet ExcuteQuery(string query, string sessionID);
+
+        [OperationContract]
+        string ExcuteNonQuery(string query, string sessionID);
     }
 }

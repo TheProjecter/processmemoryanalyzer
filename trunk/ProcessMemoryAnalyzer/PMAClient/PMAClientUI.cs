@@ -23,13 +23,15 @@ namespace PMA.Client
         PanelSQLClient panelSQLClient = null;
         PanelServicesHandler panelServiceHandler = null;
 
+        LoginForm loginForm;
+
         private bool CauseValidation()
         {
             bool result = false;
             configManager.ErrorMessage.Clear();
             switch (PANEL)
             {
-                case ENUMPanel.PANEL_EXECUTE_COMMAND:
+                case ENUMPanel.PANEL_ACTION_HANDLER:
                     result = panelExecuteCommand.CauseValidation();
                     break;
                 case ENUMPanel.PANEL_SERVICES_HANDLER:
@@ -50,7 +52,7 @@ namespace PMA.Client
 
             switch (enumPanel)
             {
-                case ENUMPanel.PANEL_EXECUTE_COMMAND:
+                case ENUMPanel.PANEL_ACTION_HANDLER:
                     panelExecuteCommand.UpdateConfig();
                     break;
                 case ENUMPanel.PANEL_SERVICES_HANDLER:
@@ -68,7 +70,7 @@ namespace PMA.Client
             PANEL = enumPanel;
             switch (enumPanel)
             {
-                case ENUMPanel.PANEL_EXECUTE_COMMAND:
+                case ENUMPanel.PANEL_ACTION_HANDLER:
                     HideAllControls();
                     panelExecuteCommand.Show();
                     break;
@@ -85,6 +87,18 @@ namespace PMA.Client
         }
 
         
+        private void SetAccessibilityForUser()
+        {
+            if (configManager.clientRuntimeInfo.UserInfo != null)
+            {
+                label_Actions.Enabled = configManager.clientRuntimeInfo.UserInfo.IsActionUser;
+                label_Services.Enabled = configManager.clientRuntimeInfo.UserInfo.IsServiceUser;
+                label_SQL.Enabled = configManager.clientRuntimeInfo.UserInfo.IsSQLUser;
+            }
+        }
+
+      
+        
         public PMAClientUI()
         {
             InitializeComponent();
@@ -92,7 +106,8 @@ namespace PMA.Client
             HideAllControls();
             LoadConfigs();
             ChangeCursorStyle();
-            ShowPanel(ENUMPanel.PANEL_EXECUTE_COMMAND);
+            DisableLeftMenu();
+            ShowPanel(ENUMPanel.PANEL_ACTION_HANDLER);
         }
 
         private void InitializeAllPanels()
@@ -125,9 +140,18 @@ namespace PMA.Client
 
         private void PMAClientUI_Shown(object sender, EventArgs e)
         {
-            LoginForm loginForm = new LoginForm();
-            loginForm.ShowDialog(this);
+            ShowLoginForm();
+        }
 
+        private void ShowLoginForm()
+        {
+            loginForm = new LoginForm();
+            loginForm.ShowDialog(this);
+            if (configManager.clientRuntimeInfo.sessionID != null)
+            {
+                SetAccessibilityForUser();
+            }
+            loginForm.Dispose();
         }
 
 
@@ -139,6 +163,18 @@ namespace PMA.Client
                 {
                     Label label = control as Label;
                     label.Cursor = Cursors.Hand;
+                }
+            }
+        }
+
+        private void DisableLeftMenu()
+        {
+            foreach (Control control in tableLayoutPanel_LeftMenu.Controls)
+            {
+                if (control is Label)
+                {
+                    Label label = control as Label;
+                    label.Enabled = false;
                 }
             }
         }
@@ -155,7 +191,7 @@ namespace PMA.Client
 
         private void label_Actions_Click(object sender, EventArgs e)
         {
-            ChangePanel(ENUMPanel.PANEL_EXECUTE_COMMAND);
+            ChangePanel(ENUMPanel.PANEL_ACTION_HANDLER);
         }
 
         private void ChangePanel(ENUMPanel panel)
@@ -169,6 +205,18 @@ namespace PMA.Client
             {
                 MessageBox.Show(this, configManager.GetConsolidatedError("Error"));
             }
+        }
+
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowLoginForm();
+        }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            configManager.GetConnectionChannel.LogoutSession(configManager.clientRuntimeInfo.sessionID);
+            DisableLeftMenu();
+            ShowLoginForm();
         }
       
         

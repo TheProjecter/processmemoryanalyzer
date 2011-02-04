@@ -52,7 +52,7 @@
             this.setupToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(844, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1047, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -68,14 +68,16 @@
             // loginToolStripMenuItem
             // 
             this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
-            this.loginToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loginToolStripMenuItem.Text = "Login";
+            this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.logoutToolStripMenuItem.Text = "Logout";
+            this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
             // setupToolStripMenuItem
             // 
@@ -97,7 +99,7 @@
             this.panel1.Controls.Add(this.tableLayoutPanel_LeftMenu);
             this.panel1.Location = new System.Drawing.Point(13, 46);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(128, 375);
+            this.panel1.Size = new System.Drawing.Size(146, 460);
             this.panel1.TabIndex = 1;
             // 
             // tableLayoutPanel_LeftMenu
@@ -115,7 +117,7 @@
             this.tableLayoutPanel_LeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel_LeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel_LeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel_LeftMenu.Size = new System.Drawing.Size(122, 369);
+            this.tableLayoutPanel_LeftMenu.Size = new System.Drawing.Size(140, 454);
             this.tableLayoutPanel_LeftMenu.TabIndex = 0;
             // 
             // label_SQL
@@ -123,7 +125,7 @@
             this.label_SQL.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_SQL.AutoSize = true;
             this.label_SQL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_SQL.Location = new System.Drawing.Point(45, 39);
+            this.label_SQL.Location = new System.Drawing.Point(54, 50);
             this.label_SQL.Name = "label_SQL";
             this.label_SQL.Size = new System.Drawing.Size(31, 13);
             this.label_SQL.TabIndex = 0;
@@ -135,7 +137,7 @@
             this.label_Services.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_Services.AutoSize = true;
             this.label_Services.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Services.Location = new System.Drawing.Point(33, 131);
+            this.label_Services.Location = new System.Drawing.Point(42, 163);
             this.label_Services.Name = "label_Services";
             this.label_Services.Size = new System.Drawing.Size(56, 13);
             this.label_Services.TabIndex = 1;
@@ -147,7 +149,7 @@
             this.label_Actions.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_Actions.AutoSize = true;
             this.label_Actions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Actions.Location = new System.Drawing.Point(39, 223);
+            this.label_Actions.Location = new System.Drawing.Point(48, 276);
             this.label_Actions.Name = "label_Actions";
             this.label_Actions.Size = new System.Drawing.Size(43, 13);
             this.label_Actions.TabIndex = 2;
@@ -159,7 +161,7 @@
             this.panel_MainContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel_MainContainer.Location = new System.Drawing.Point(181, 46);
             this.panel_MainContainer.Name = "panel_MainContainer";
-            this.panel_MainContainer.Size = new System.Drawing.Size(650, 375);
+            this.panel_MainContainer.Size = new System.Drawing.Size(852, 460);
             this.panel_MainContainer.TabIndex = 2;
             // 
             // PMAClientUI
@@ -167,7 +169,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GrayText;
-            this.ClientSize = new System.Drawing.Size(844, 433);
+            this.ClientSize = new System.Drawing.Size(1047, 527);
             this.Controls.Add(this.panel_MainContainer);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);

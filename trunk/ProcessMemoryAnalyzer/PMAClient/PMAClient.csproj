@@ -56,11 +56,11 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PanelExecuteCommand.cs">
+    <Compile Include="PanelActionHandler.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PanelExecuteCommand.Designer.cs">
-      <DependentUpon>PanelExecuteCommand.cs</DependentUpon>
+    <Compile Include="PanelActionHandler.Designer.cs">
+      <DependentUpon>PanelActionHandler.cs</DependentUpon>
     </Compile>
     <Compile Include="PanelServicesHandler.cs">
       <SubType>UserControl</SubType>
@@ -85,8 +85,8 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PanelExecuteCommand.resx">
-      <DependentUpon>PanelExecuteCommand.cs</DependentUpon>
+    <EmbeddedResource Include="PanelActionHandler.resx">
+      <DependentUpon>PanelActionHandler.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelServicesHandler.resx">
       <DependentUpon>PanelServicesHandler.cs</DependentUpon>

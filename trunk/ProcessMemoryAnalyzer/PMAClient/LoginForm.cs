@@ -24,13 +24,25 @@ namespace PMA.Client
 
         private void button_Login_Click(object sender, EventArgs e)
         {
-            IPMACommunicationContract proxy = configManager.GetConnectionChannel;
+            Login();
+        }
 
-            PMAUserInfo userInfo = null;
+        private void Login()
+        {
+            IPMACommunicationContract proxy = configManager.GetConnectionChannel;
 
             try
             {
-                userInfo = proxy.GetUserInfo(textBox_User.Text, textBox_Password.Text);
+                configManager.clientRuntimeInfo.sessionID = proxy.GetSessionID(textBox_User.Text, textBox_Password.Text);
+                if (configManager.clientRuntimeInfo.sessionID != string.Empty)
+                {
+                    configManager.clientRuntimeInfo.UserInfo = proxy.GetUserInfo(configManager.clientRuntimeInfo.sessionID);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("User Information does not matched");
+                }
             }
             catch (Exception ex)
             {
@@ -42,17 +54,11 @@ namespace PMA.Client
                 configManager.CloseConnectionChannel();
             }
 
+        }
 
-            if (userInfo != null)
-            {
-                configManager.clientRuntimeInfo.UserInfo = userInfo;
-                configManager.clientRuntimeInfo.IsUserLoggedIn = true;
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("User Information does not matched");
-            }
+        private void LoginForm_Enter(object sender, EventArgs e)
+        {
+            Login();
         }
     }
 }

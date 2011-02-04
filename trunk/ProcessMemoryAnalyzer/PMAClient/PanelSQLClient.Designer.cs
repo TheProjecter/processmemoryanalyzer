@@ -28,79 +28,91 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dataGridView_SQLResults = new System.Windows.Forms.DataGridView();
+            this.richTextBox_Query = new System.Windows.Forms.RichTextBox();
+            this.comboBox_Databases = new System.Windows.Forms.ComboBox();
+            this.label_Databases = new System.Windows.Forms.Label();
+            this.label_SQLClientScreen = new System.Windows.Forms.Label();
+            this.label_Query = new System.Windows.Forms.Label();
+            this.button_Execute = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_SQLResults)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridView_SQLResults
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(18, 169);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(758, 260);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridView_SQLResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_SQLResults.Location = new System.Drawing.Point(18, 170);
+            this.dataGridView_SQLResults.Name = "dataGridView_SQLResults";
+            this.dataGridView_SQLResults.Size = new System.Drawing.Size(815, 259);
+            this.dataGridView_SQLResults.TabIndex = 0;
             // 
-            // richTextBox1
+            // richTextBox_Query
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(18, 88);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(758, 62);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
+            this.richTextBox_Query.Location = new System.Drawing.Point(18, 88);
+            this.richTextBox_Query.Name = "richTextBox_Query";
+            this.richTextBox_Query.Size = new System.Drawing.Size(815, 62);
+            this.richTextBox_Query.TabIndex = 1;
+            this.richTextBox_Query.Text = "";
             // 
-            // comboBox1
+            // comboBox_Databases
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(72, 44);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(211, 21);
-            this.comboBox1.TabIndex = 2;
+            this.comboBox_Databases.FormattingEnabled = true;
+            this.comboBox_Databases.Location = new System.Drawing.Point(74, 44);
+            this.comboBox_Databases.Name = "comboBox_Databases";
+            this.comboBox_Databases.Size = new System.Drawing.Size(211, 21);
+            this.comboBox_Databases.TabIndex = 2;
             // 
-            // label1
+            // label_Databases
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 47);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "label1";
+            this.label_Databases.AutoSize = true;
+            this.label_Databases.Location = new System.Drawing.Point(15, 47);
+            this.label_Databases.Name = "label_Databases";
+            this.label_Databases.Size = new System.Drawing.Size(53, 13);
+            this.label_Databases.TabIndex = 3;
+            this.label_Databases.Text = "Database";
             // 
-            // label2
+            // label_SQLClientScreen
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "label2";
+            this.label_SQLClientScreen.AutoSize = true;
+            this.label_SQLClientScreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_SQLClientScreen.Location = new System.Drawing.Point(15, 10);
+            this.label_SQLClientScreen.Name = "label_SQLClientScreen";
+            this.label_SQLClientScreen.Size = new System.Drawing.Size(67, 13);
+            this.label_SQLClientScreen.TabIndex = 4;
+            this.label_SQLClientScreen.Text = "SQL Client";
             // 
-            // label3
+            // label_Query
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 72);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "label3";
+            this.label_Query.AutoSize = true;
+            this.label_Query.Location = new System.Drawing.Point(15, 72);
+            this.label_Query.Name = "label_Query";
+            this.label_Query.Size = new System.Drawing.Size(35, 13);
+            this.label_Query.TabIndex = 5;
+            this.label_Query.Text = "Query";
+            // 
+            // button_Execute
+            // 
+            this.button_Execute.Location = new System.Drawing.Point(758, 47);
+            this.button_Execute.Name = "button_Execute";
+            this.button_Execute.Size = new System.Drawing.Size(75, 23);
+            this.button_Execute.TabIndex = 6;
+            this.button_Execute.Text = "Execute";
+            this.button_Execute.UseVisualStyleBackColor = true;
             // 
             // PanelSQLClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.button_Execute);
+            this.Controls.Add(this.label_Query);
+            this.Controls.Add(this.label_SQLClientScreen);
+            this.Controls.Add(this.label_Databases);
+            this.Controls.Add(this.comboBox_Databases);
+            this.Controls.Add(this.richTextBox_Query);
+            this.Controls.Add(this.dataGridView_SQLResults);
             this.Name = "PanelSQLClient";
-            this.Size = new System.Drawing.Size(800, 450);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Size = new System.Drawing.Size(850, 450);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_SQLResults)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -108,11 +120,12 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridView dataGridView_SQLResults;
+        private System.Windows.Forms.RichTextBox richTextBox_Query;
+        private System.Windows.Forms.ComboBox comboBox_Databases;
+        private System.Windows.Forms.Label label_Databases;
+        private System.Windows.Forms.Label label_SQLClientScreen;
+        private System.Windows.Forms.Label label_Query;
+        private System.Windows.Forms.Button button_Execute;
     }
 }

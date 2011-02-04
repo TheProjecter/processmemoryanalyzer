@@ -89,11 +89,14 @@
             this.Controls.Add(this.label_Password);
             this.Controls.Add(this.textBox_User);
             this.Controls.Add(this.label_user);
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(240, 125);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(240, 125);
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Login";
+            this.Enter += new System.EventHandler(this.LoginForm_Enter);
             this.ResumeLayout(false);
             this.PerformLayout();
 
