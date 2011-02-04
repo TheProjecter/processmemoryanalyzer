@@ -10,31 +10,66 @@ namespace PMA.SystemAnalyzer
     public class PMAUserManager 
     {
 
-        public static Dictionary<string, string> UsersLoggedIn { get; set; }
+        private static Dictionary<string, PMAUserInfo> UsersLoggedIn { get; set; }
 
-        static PMAUserManager()
+        private static PMAUserManager _userManager;
+        
+        private PMAUserManager()
         {
-            UsersLoggedIn = new Dictionary<string, string>();
+            UsersLoggedIn = new Dictionary<string, PMAUserInfo>();
         }
 
-        public static PMAUserInfo GetUserInfo(string username, string password)
+        public static PMAUserManager GetUserManagerInstance
+        {
+            get
+            {
+                if (_userManager == null)
+                {
+                    _userManager = new PMAUserManager();
+                }
+                return _userManager;
+            }
+        }
+
+
+        
+        public string GetSessionID(string username, string password)
         {
             PMAUserInfo userInfo = (from info in PMAConfigManager.GetConfigManagerInstance.PMAUsers.ListPMAUserInfo
                                     where info.UserName == username && info.UserPassword == password
                                     select info).SingleOrDefault<PMAUserInfo>();
-
+            string sessionID = string.Empty;
             if (userInfo != null)
             {
-                if (!UsersLoggedIn.ContainsKey(userInfo.UserName))
-                {
-                    UsersLoggedIn.Add(GenerateId(),userInfo.UserName );
-                }
+                UsersLoggedIn.Add(sessionID = GenerateUniqueId(), userInfo);
             }
+            return sessionID;
             
-            return userInfo;
         }
 
-        private static string GenerateId()
+        public PMAUserInfo GetUserInfo(string sessionID)
+        {
+            if (UsersLoggedIn.Keys.Contains<string>(sessionID))
+            {
+                return UsersLoggedIn[sessionID];
+            }
+            else return null;
+
+        }
+
+        public void LogoutSession(string sessionID)
+        {
+            if (UsersLoggedIn.Keys.Contains<string>(sessionID))
+            {
+                UsersLoggedIn.Remove(sessionID);
+            }
+        }
+
+
+
+        
+        
+        private string GenerateUniqueId()
         {
             long i = 1;
             foreach (byte b in Guid.NewGuid().ToByteArray())

@@ -41,7 +41,8 @@ namespace PMA.Info
         {
             UserInfo = new PMAUserInfo();
         }
-        
+
+        public string sessionID { get; set; }
         
         public bool IsUserLoggedIn { get; set; }
 

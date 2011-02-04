@@ -7,7 +7,7 @@ namespace PMA.Client
 {
     enum ENUMPanel
     {
-        PANEL_EXECUTE_COMMAND,
+        PANEL_ACTION_HANDLER,
         PANEL_SERVICES_HANDLER,
         PANEL_SQL_CLIENT
     }
