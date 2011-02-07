@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Runtime.Serialization;
 using System.Data;
 using PMA.Info;
+using System.ServiceProcess;
 
 namespace PMA.CommunicationAPI
 {
@@ -14,13 +15,19 @@ namespace PMA.CommunicationAPI
     {
 
         [OperationContract]
+        bool VerfiyConnection();
+        
+        [OperationContract]
         DataSet ExecuteQuery(string query,string sessionID);
 
         [OperationContract]
-        string ExecuteCommand(string command, string sessionID);
+        string ExecuteActions(List<string> actions, string sessionID);
 
         [OperationContract]
-        List<string> GetAvailableCommands(string sessionID);
+        List<string> GetAvailableActions(string sessionID);
+
+        [OperationContract]
+        List<string> GetAvailableServices(string sessionID);
 
         [OperationContract]
         string GetSessionID(string username, string password);
@@ -32,7 +39,7 @@ namespace PMA.CommunicationAPI
         void LogoutSession(string sessionID);
 
         [OperationContract]
-        string ServiceAction(string serviceName, string action, string sessionID);
+        string ServiceActions(Dictionary<string,EnumServiceAction> servicesActions, string sessionID);
 
         [OperationContract]
         DataSet ExcuteQuery(string query, string sessionID);

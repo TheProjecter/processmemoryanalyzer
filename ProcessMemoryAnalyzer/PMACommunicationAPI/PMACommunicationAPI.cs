@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using PMA.Info;
 using PMA.SystemAnalyzer;
+using PMA.ConfigManager;
+
 
 namespace PMA.CommunicationAPI
 {
@@ -12,24 +14,43 @@ namespace PMA.CommunicationAPI
 
         PMAUserManager userManager = PMAUserManager.GetUserManagerInstance;
 
+        PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
+
         #region IPMACommunicationContract Members
 
-        public System.Data.DataSet ExecuteQuery(string query, string sessionID)
+        public bool VerfiyConnection()
+        {
+            return true;
+        }
+
+
+
+        #region Actions
+        public string ExecuteActions(List<string> actions, string sessionID)
         {
             throw new NotImplementedException();
         }
 
-        public string ExecuteCommand(string command, string sessionID)
+        public List<string> GetAvailableActions(string sessionID)
+        {
+            return PMAServerManager.GetAvailableActionsForSession(sessionID);
+        }
+        #endregion 
+
+
+        #region Services
+        public List<string> GetAvailableServices(string sessionID)
+        {
+            return PMAServerManager.GetAvailableServicesForSession(sessionID);
+        }
+
+        public string ServiceActions(Dictionary<string, EnumServiceAction> servicesActions, string sessionID)
         {
             throw new NotImplementedException();
         }
+        #endregion 
 
-        public List<string> GetAvailableCommands(string sessionID)
-        {
-            throw new NotImplementedException();
-        }
-
-      
+        #region UserManagement
         public string GetSessionID(string username, string password)
         {
             return userManager.GetSessionID(username, password);
@@ -44,13 +65,11 @@ namespace PMA.CommunicationAPI
         {
             userManager.LogoutSession(sessionID);
         }
+        #endregion
 
-        public string ServiceAction(string serviceName, string action, string sessionID)
-        {
-            throw new NotImplementedException();
-        }
 
-        public System.Data.DataSet ExcuteQuery(string query, string sessionID)
+        #region SQL
+        public System.Data.DataSet ExecuteQuery(string query, string sessionID)
         {
             throw new NotImplementedException();
         }
@@ -60,6 +79,9 @@ namespace PMA.CommunicationAPI
             throw new NotImplementedException();
         }
 
+        #endregion 
+
         #endregion
+
     }
 }

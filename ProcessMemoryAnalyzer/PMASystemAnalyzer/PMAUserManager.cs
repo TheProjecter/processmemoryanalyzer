@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using PMA.Info;
 using PMA.ConfigManager;
+using System.Threading;
 
 namespace PMA.SystemAnalyzer
 {
@@ -13,12 +14,24 @@ namespace PMA.SystemAnalyzer
         private static Dictionary<string, PMAUserInfo> UsersLoggedIn { get; set; }
 
         private static PMAUserManager _userManager;
-        
+
+
+        #region Contructor
         private PMAUserManager()
         {
             UsersLoggedIn = new Dictionary<string, PMAUserInfo>();
+            
+            // Stating Thread to remove expired Sessions
+            Thread sessionRemoveThread = new Thread(RemoveExpiredSession);
+            sessionRemoveThread.IsBackground = true;
+            sessionRemoveThread.Name = "RemoveExpiredSessions";
+            sessionRemoveThread.Start();
         }
+        #endregion 
 
+        
+      
+        #region Public Methods and Properties
         public static PMAUserManager GetUserManagerInstance
         {
             get
@@ -41,10 +54,13 @@ namespace PMA.SystemAnalyzer
             string sessionID = string.Empty;
             if (userInfo != null)
             {
-                UsersLoggedIn.Add(sessionID = GenerateUniqueId(), userInfo);
+                lock (UsersLoggedIn)
+                {
+                    sessionID = CreateSessionID(userInfo);
+                    userInfo.LastLoginTime = DateTime.Now;
+                }
             }
             return sessionID;
-            
         }
 
         public PMAUserInfo GetUserInfo(string sessionID)
@@ -59,15 +75,56 @@ namespace PMA.SystemAnalyzer
 
         public void LogoutSession(string sessionID)
         {
+            RemoveSessionID(sessionID);
+        }
+
+        #endregion 
+
+
+
+        #region PrivateMethods
+        private void RemoveExpiredSession()
+        {
+            PMAUserInfo userInfo = null;
+            List<string> expiredSessions = new List<string>();
+            foreach (string sessionID in UsersLoggedIn.Keys)
+            {
+                userInfo = UsersLoggedIn[sessionID];
+                if ((userInfo.LastLoginTime - DateTime.Now).Hours > 6)
+                {
+                    expiredSessions.Add(sessionID);
+                }
+            }
+
+            foreach (string sessionID in expiredSessions)
+            {
+                RemoveSessionID(sessionID);
+            }
+            Thread.Sleep(60000);
+        }
+
+        private string CreateSessionID(PMAUserInfo userInfo)
+        {
+            string sessionID = string.Empty;
+            lock (UsersLoggedIn)
+            {
+                UsersLoggedIn.Add(sessionID = GenerateUniqueId(), userInfo);
+            }
+            return sessionID;
+        }
+
+        private void RemoveSessionID(string sessionID)
+        {
             if (UsersLoggedIn.Keys.Contains<string>(sessionID))
             {
-                UsersLoggedIn.Remove(sessionID);
+                lock (UsersLoggedIn)
+                {
+                    UsersLoggedIn.Remove(sessionID);
+                }
             }
         }
 
-
-
-        
+      
         
         private string GenerateUniqueId()
         {
@@ -78,6 +135,7 @@ namespace PMA.SystemAnalyzer
             }
             return string.Format("{0:x}", i - DateTime.Now.Ticks);
         }
+        #endregion 
 
     }
 }
