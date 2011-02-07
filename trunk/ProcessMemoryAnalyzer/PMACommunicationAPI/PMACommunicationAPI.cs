@@ -69,7 +69,7 @@ namespace PMA.CommunicationAPI
 
 
         #region SQL
-        public System.Data.DataSet ExecuteQuery(string query, string sessionID)
+        public System.Data.DataSet ExcuteQuery(string query, string sessionID)
         {
             throw new NotImplementedException();
         }
@@ -82,6 +82,6 @@ namespace PMA.CommunicationAPI
         #endregion 
 
         #endregion
-
+      
     }
 }

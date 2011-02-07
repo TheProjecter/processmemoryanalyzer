@@ -16,9 +16,6 @@ namespace PMA.CommunicationAPI
 
         [OperationContract]
         bool VerfiyConnection();
-        
-        [OperationContract]
-        DataSet ExecuteQuery(string query,string sessionID);
 
         [OperationContract]
         string ExecuteActions(List<string> actions, string sessionID);

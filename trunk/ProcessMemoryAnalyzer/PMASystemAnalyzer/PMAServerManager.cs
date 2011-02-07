@@ -70,6 +70,7 @@ namespace PMA.SystemAnalyzer
                         break;
                 }
             }
+            return result;
 
         }
         
