@@ -66,8 +66,8 @@ namespace PMA.Info
         [DataMember]
         public bool IsServiceUser { get; set; }
 
-        
-
+        [DataMember]
+        public DateTime LastLoginTime { get; set; }
        
     }
 }
