@@ -102,6 +102,10 @@ namespace PMA.Client
         public PMAClientUI()
         {
             InitializeComponent();
+        }
+
+        private void InitilizeUI()
+        {
             InitializeAllPanels();
             HideAllControls();
             LoadConfigs();

@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnumServiceAction.cs" />
     <Compile Include="IPMAInfo.cs" />
     <Compile Include="PMAClientInfo.cs" />
     <Compile Include="PMAEventReportInfo.cs" />

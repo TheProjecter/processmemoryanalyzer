@@ -24,7 +24,7 @@ namespace PMA.CommunicationAPI
         List<string> GetAvailableActions(string sessionID);
 
         [OperationContract]
-        List<string> GetAvailableServices(string sessionID);
+        Dictionary<string, ServiceControllerStatus> GetAvailableServices(string sessionID);
 
         [OperationContract]
         string GetSessionID(string username, string password);
@@ -36,7 +36,7 @@ namespace PMA.CommunicationAPI
         void LogoutSession(string sessionID);
 
         [OperationContract]
-        string ServiceActions(Dictionary<string,EnumServiceAction> servicesActions, string sessionID);
+        string ServiceActions(Dictionary<string,string> servicesActions, string sessionID);
 
         [OperationContract]
         DataSet ExcuteQuery(string query, string sessionID);

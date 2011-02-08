@@ -28,22 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox_AvailableServices = new System.Windows.Forms.ListBox();
             this.label_ServicesScreen = new System.Windows.Forms.Label();
             this.label_Results = new System.Windows.Forms.Label();
             this.richTextBox_ResultServices = new System.Windows.Forms.RichTextBox();
-            this.button_Start = new System.Windows.Forms.Button();
-            this.button_Stop = new System.Windows.Forms.Button();
-            this.button_Restart = new System.Windows.Forms.Button();
+            this.button_Execute = new System.Windows.Forms.Button();
+            this.dataGridView_Services = new System.Windows.Forms.DataGridView();
+            this.button_Refresh = new System.Windows.Forms.Button();
+            this.selectService = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.serviceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serviceStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serviceAction = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Services)).BeginInit();
             this.SuspendLayout();
-            // 
-            // listBox_AvailableServices
-            // 
-            this.listBox_AvailableServices.FormattingEnabled = true;
-            this.listBox_AvailableServices.Location = new System.Drawing.Point(16, 60);
-            this.listBox_AvailableServices.Name = "listBox_AvailableServices";
-            this.listBox_AvailableServices.Size = new System.Drawing.Size(809, 186);
-            this.listBox_AvailableServices.TabIndex = 0;
             // 
             // label_ServicesScreen
             // 
@@ -73,46 +69,79 @@
             this.richTextBox_ResultServices.TabIndex = 4;
             this.richTextBox_ResultServices.Text = "";
             // 
-            // button_Start
+            // button_Execute
             // 
-            this.button_Start.Location = new System.Drawing.Point(588, 252);
-            this.button_Start.Name = "button_Start";
-            this.button_Start.Size = new System.Drawing.Size(75, 23);
-            this.button_Start.TabIndex = 5;
-            this.button_Start.Text = "Start";
-            this.button_Start.UseVisualStyleBackColor = true;
+            this.button_Execute.Location = new System.Drawing.Point(750, 253);
+            this.button_Execute.Name = "button_Execute";
+            this.button_Execute.Size = new System.Drawing.Size(75, 23);
+            this.button_Execute.TabIndex = 5;
+            this.button_Execute.Text = "Execute";
+            this.button_Execute.UseVisualStyleBackColor = true;
             // 
-            // button_Stop
+            // dataGridView_Services
             // 
-            this.button_Stop.Location = new System.Drawing.Point(669, 252);
-            this.button_Stop.Name = "button_Stop";
-            this.button_Stop.Size = new System.Drawing.Size(75, 23);
-            this.button_Stop.TabIndex = 6;
-            this.button_Stop.Text = "Stop";
-            this.button_Stop.UseVisualStyleBackColor = true;
+            this.dataGridView_Services.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Services.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.selectService,
+            this.serviceName,
+            this.serviceStatus,
+            this.serviceAction});
+            this.dataGridView_Services.Location = new System.Drawing.Point(16, 43);
+            this.dataGridView_Services.Name = "dataGridView_Services";
+            this.dataGridView_Services.Size = new System.Drawing.Size(809, 204);
+            this.dataGridView_Services.TabIndex = 6;
+            this.dataGridView_Services.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView_Services_RowsAdded);
             // 
-            // button_Restart
+            // button_Refresh
             // 
-            this.button_Restart.Location = new System.Drawing.Point(750, 252);
-            this.button_Restart.Name = "button_Restart";
-            this.button_Restart.Size = new System.Drawing.Size(75, 23);
-            this.button_Restart.TabIndex = 7;
-            this.button_Restart.Text = "Restart";
-            this.button_Restart.UseVisualStyleBackColor = true;
+            this.button_Refresh.Location = new System.Drawing.Point(669, 253);
+            this.button_Refresh.Name = "button_Refresh";
+            this.button_Refresh.Size = new System.Drawing.Size(75, 23);
+            this.button_Refresh.TabIndex = 7;
+            this.button_Refresh.Text = "Refresh";
+            this.button_Refresh.UseVisualStyleBackColor = true;
+            // 
+            // selectService
+            // 
+            this.selectService.HeaderText = "Select";
+            this.selectService.Name = "selectService";
+            this.selectService.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.selectService.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.selectService.Width = 50;
+            // 
+            // serviceName
+            // 
+            this.serviceName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.serviceName.HeaderText = "Service";
+            this.serviceName.Name = "serviceName";
+            this.serviceName.ReadOnly = true;
+            // 
+            // serviceStatus
+            // 
+            this.serviceStatus.HeaderText = "Status";
+            this.serviceStatus.Name = "serviceStatus";
+            this.serviceStatus.ReadOnly = true;
+            // 
+            // serviceAction
+            // 
+            this.serviceAction.HeaderText = "Action";
+            this.serviceAction.Name = "serviceAction";
+            this.serviceAction.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.serviceAction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // PanelServicesHandler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button_Restart);
-            this.Controls.Add(this.button_Stop);
-            this.Controls.Add(this.button_Start);
+            this.Controls.Add(this.button_Refresh);
+            this.Controls.Add(this.dataGridView_Services);
+            this.Controls.Add(this.button_Execute);
             this.Controls.Add(this.richTextBox_ResultServices);
             this.Controls.Add(this.label_Results);
             this.Controls.Add(this.label_ServicesScreen);
-            this.Controls.Add(this.listBox_AvailableServices);
             this.Name = "PanelServicesHandler";
             this.Size = new System.Drawing.Size(850, 450);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Services)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,12 +149,15 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox_AvailableServices;
         private System.Windows.Forms.Label label_ServicesScreen;
         private System.Windows.Forms.Label label_Results;
         private System.Windows.Forms.RichTextBox richTextBox_ResultServices;
-        private System.Windows.Forms.Button button_Start;
-        private System.Windows.Forms.Button button_Stop;
-        private System.Windows.Forms.Button button_Restart;
+        private System.Windows.Forms.Button button_Execute;
+        private System.Windows.Forms.DataGridView dataGridView_Services;
+        private System.Windows.Forms.Button button_Refresh;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn selectService;
+        private System.Windows.Forms.DataGridViewTextBoxColumn serviceName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn serviceStatus;
+        private System.Windows.Forms.DataGridViewComboBoxColumn serviceAction;
     }
 }
