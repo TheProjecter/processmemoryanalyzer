@@ -5,6 +5,7 @@ using System.Text;
 using PMA.Info;
 using PMA.SystemAnalyzer;
 using PMA.ConfigManager;
+using System.ServiceProcess;
 
 
 namespace PMA.CommunicationAPI
@@ -39,12 +40,12 @@ namespace PMA.CommunicationAPI
 
 
         #region Services
-        public List<string> GetAvailableServices(string sessionID)
+        public Dictionary<string,ServiceControllerStatus> GetAvailableServices(string sessionID)
         {
             return PMAServerManager.GetAvailableServicesForSession(sessionID);
         }
 
-        public string ServiceActions(Dictionary<string, EnumServiceAction> servicesActions, string sessionID)
+        public string ServiceActions(Dictionary<string, string> servicesActions, string sessionID)
         {
             throw new NotImplementedException();
         }
