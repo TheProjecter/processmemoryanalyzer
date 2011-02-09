@@ -61,6 +61,7 @@
             this.button_Execute.TabIndex = 2;
             this.button_Execute.Text = "Execute";
             this.button_Execute.UseVisualStyleBackColor = true;
+            this.button_Execute.Click += new System.EventHandler(this.button_Execute_Click);
             // 
             // label_Results
             // 

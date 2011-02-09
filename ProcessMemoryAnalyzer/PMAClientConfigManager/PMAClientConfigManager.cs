@@ -29,7 +29,6 @@ namespace PMA.ConfigManager.Client
             get
             {
                 string baseAddress = "http://localhost:8585/PMA.CommunicationAPI.PMACommunicationAPI";
-                
                 try
                 {
                     ChannelFactory<IPMACommunicationContract> factory = new ChannelFactory<IPMACommunicationContract>

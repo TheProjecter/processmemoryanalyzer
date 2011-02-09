@@ -111,6 +111,7 @@ namespace PMA.Client
             LoadConfigs();
             ChangeCursorStyle();
             DisableLeftMenu();
+            SetAccessibilityForUser();
             ShowPanel(ENUMPanel.PANEL_ACTION_HANDLER);
         }
 
@@ -153,7 +154,7 @@ namespace PMA.Client
             loginForm.ShowDialog(this);
             if (configManager.clientRuntimeInfo.sessionID != null)
             {
-                SetAccessibilityForUser();
+                InitilizeUI();
             }
             loginForm.Dispose();
         }

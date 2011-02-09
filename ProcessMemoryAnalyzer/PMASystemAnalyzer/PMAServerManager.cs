@@ -55,18 +55,18 @@ namespace PMA.SystemAnalyzer
             else return null;
         }
 
-        public static Dictionary<string,string> ExecuteActions(List<string> actions, string sessionID)
+        public static string ExecuteActions(List<string> actions, string sessionID)
         {
-            Dictionary<string, string> actionMessages = new Dictionary<string, string>();
+            StringBuilder actionMessages = new StringBuilder();
             if (VerifySessionPrivileges(sessionID, PRIVILEGE_ACTION))
             {
                 foreach (string action in actions)
                 {
-                    actionMessages.Add(action, ExecuteAction(action));
+                    actionMessages.AppendLine(action + " : " + ExecuteAction(action));
                 }
             }
             else return null;
-            return actionMessages;
+            return actionMessages.ToString() ;
         }
 
         private static string ExecuteAction(string action)
@@ -98,18 +98,18 @@ namespace PMA.SystemAnalyzer
             return result;
         }
 
-        public static Dictionary<string, string> ServicesActions(Dictionary<string,string> servicesActions, string sessionID)
+        public static string ServicesActions(Dictionary<string,string> servicesActions, string sessionID)
         {
-            Dictionary<string, string> serviceMessages = new Dictionary<string, string>();
+            StringBuilder serviceMessages = new StringBuilder();
             if (VerifySessionPrivileges(sessionID, PRIVILEGE_SERVICE))
             {
                 foreach (string service in servicesActions.Keys)
                 {
-                    serviceMessages.Add(service, ServiceAction(service, servicesActions[service]));
+                    serviceMessages.AppendLine(service + " : " + ServiceAction(service, servicesActions[service]));
                 }
             }
             else return null;
-            return serviceMessages;
+            return serviceMessages.ToString();
         }
 
         private static string ServiceAction(string serviceName, string serviceAction)
