@@ -29,7 +29,7 @@ namespace PMA.CommunicationAPI
         #region Actions
         public string ExecuteActions(List<string> actions, string sessionID)
         {
-            throw new NotImplementedException();
+            return PMAServerManager.ExecuteActions(actions, sessionID);
         }
 
         public List<string> GetAvailableActions(string sessionID)
@@ -47,7 +47,7 @@ namespace PMA.CommunicationAPI
 
         public string ServiceActions(Dictionary<string, string> servicesActions, string sessionID)
         {
-            throw new NotImplementedException();
+            return PMAServerManager.ServicesActions(servicesActions, sessionID);
         }
         #endregion 
 
