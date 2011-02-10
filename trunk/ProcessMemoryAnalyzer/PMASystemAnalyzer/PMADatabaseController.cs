@@ -10,9 +10,10 @@ using PMA.Utils.Logger;
 using PMA.SystemAnalyzer;
 using PMA.ConfigManager;
 
+
 namespace PMA.SystemAnalyzer
 {
-    public class PMADatabaseController
+    public class PMADatabaseController : IDisposable
     {
         private string CONNECTION_STRING = "Data Source={0};Initial Catalog=master;User Id={1};Password={2};";
 
@@ -35,6 +36,13 @@ namespace PMA.SystemAnalyzer
             }
         }
 
+        //-----------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets a value indicating whether this instance is connection set.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance is connection set; otherwise, <c>false</c>.
+        /// </value>
         public bool IsConnectionSet
         {
             get
@@ -132,6 +140,8 @@ namespace PMA.SystemAnalyzer
             return result;
         }
 
+
+        //-----------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Disposes the connection.
         /// </summary>
@@ -178,6 +188,122 @@ namespace PMA.SystemAnalyzer
             }
         }
 
+        //----------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Executes the query.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <returns></returns>
+        public DataSet ExecuteQuery(string query, string database)
+        {
+            configManager.Logger.Debug(EnumMethod.START);
+            DataSet dataset = new DataSet();
+            try
+            {
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
+                connection.ChangeDatabase(database);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connection);
+                dataAdapter.Fill(dataset);
+            }
+            catch(Exception ex)
+            {
+                dataset = null;
+                configManager.Logger.Error(ex);
+            }
+            finally
+            {
+                connection.Close();
+                configManager.Logger.Debug(EnumMethod.END);
+            }
+            return dataset;
+        }
 
+        //----------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Executes the non query.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <returns></returns>
+        public string ExecuteNonQuery(string query,string database)
+        {
+            configManager.Logger.Debug(EnumMethod.START);
+            string result = string.Empty;
+            try
+            {
+                connection.ChangeDatabase(database);
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                result = command.ExecuteNonQuery().ToString() ;
+            }
+            catch(Exception ex)
+            {
+                result = ex.Message;
+            }
+            finally
+            {
+                connection.Close();
+                configManager.Logger.Debug(EnumMethod.END);
+            }
+            return result;
+        }
+
+        //----------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the database names.
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetDatabaseNames()
+        {
+            configManager.Logger.Debug(EnumMethod.START);
+            List<string> databaseNames = new List<string>();
+            DataSet dataset = new DataSet();
+            try
+            {
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("SELECT name FROM sys.databases", connection);
+                dataAdapter.Fill(dataset);
+                databaseNames = (from row in dataset.Tables[0].AsEnumerable()
+                                 select row["name"].ToString()).ToList<string>();
+                
+    
+            }
+            catch
+            {
+                databaseNames = null;
+            }
+            finally
+            {
+                configManager.Logger.Debug(EnumMethod.END);
+            }
+            return databaseNames;
+        }
+
+
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            configManager.Logger.Debug(EnumMethod.START);
+            try
+            {
+                if (connection != null)
+                {
+                    connection.Close();
+                    connection.Dispose();
+                    connection = null;
+                }
+                configManager = null;
+            }
+            finally
+            {
+                GC.Collect();
+            }
+
+        }
+
+        #endregion
     }
 }
