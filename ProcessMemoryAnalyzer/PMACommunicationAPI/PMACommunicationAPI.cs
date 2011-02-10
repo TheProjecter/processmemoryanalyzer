@@ -70,14 +70,20 @@ namespace PMA.CommunicationAPI
 
 
         #region SQL
-        public System.Data.DataSet ExcuteQuery(string query, string sessionID)
+        public System.Data.DataSet ExcuteQuery(string query,string database, string sessionID)
         {
-            throw new NotImplementedException();
+            return PMAServerManager.ExcuteQuery(query,database,sessionID);
         }
 
-        string IPMACommunicationContract.ExcuteNonQuery(string query, string sessionID)
+        public string ExcuteNonQuery(string query,string database, string sessionID)
         {
-            throw new NotImplementedException();
+            return PMAServerManager.ExcuteNonQuery(query, database, sessionID);
+        }
+
+
+        public List<string> GetDatabasesNames(string sessionID)
+        {
+            return PMAServerManager.GetDatabaseNames(sessionID);
         }
 
         #endregion 

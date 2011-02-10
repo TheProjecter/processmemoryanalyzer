@@ -28,19 +28,23 @@ namespace PMA.ConfigManager.Client
         {
             get
             {
-                string baseAddress = "http://localhost:8585/PMA.CommunicationAPI.PMACommunicationAPI";
-                try
+                if (_proxy == null || !_proxy.VerfiyConnection())
                 {
-                    ChannelFactory<IPMACommunicationContract> factory = new ChannelFactory<IPMACommunicationContract>
-                        (new BasicHttpBinding(),
-                        new EndpointAddress(baseAddress));
-                    _proxy = factory.CreateChannel();
+                    string baseAddress = "http://localhost:8585/PMA.CommunicationAPI.PMACommunicationAPI";
+                    try
+                    {
+                        ChannelFactory<IPMACommunicationContract> factory = new ChannelFactory<IPMACommunicationContract>
+                            (new BasicHttpBinding(),
+                            new EndpointAddress(baseAddress));
+                        _proxy = factory.CreateChannel();
+                    }
+                    catch (Exception ex)
+                    {
+                        _errorMessage.Add(ex.Message);
+                    }
+                    return _proxy;
                 }
-                catch (Exception ex)
-                {
-                    _errorMessage.Add(ex.Message);
-                }
-                return _proxy;
+                else return _proxy;
             }
         }
 

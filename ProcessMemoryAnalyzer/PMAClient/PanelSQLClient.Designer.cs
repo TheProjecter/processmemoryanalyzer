@@ -35,6 +35,8 @@
             this.label_SQLClientScreen = new System.Windows.Forms.Label();
             this.label_Query = new System.Windows.Forms.Label();
             this.button_Execute = new System.Windows.Forms.Button();
+            this.comboBox_queryType = new System.Windows.Forms.ComboBox();
+            this.label_queryType = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_SQLResults)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,11 +100,34 @@
             this.button_Execute.TabIndex = 6;
             this.button_Execute.Text = "Execute";
             this.button_Execute.UseVisualStyleBackColor = true;
+            this.button_Execute.Click += new System.EventHandler(this.button_Execute_Click);
+            // 
+            // comboBox_queryType
+            // 
+            this.comboBox_queryType.FormattingEnabled = true;
+            this.comboBox_queryType.Items.AddRange(new object[] {
+            "SelectQuery",
+            "NonQuery"});
+            this.comboBox_queryType.Location = new System.Drawing.Point(388, 44);
+            this.comboBox_queryType.Name = "comboBox_queryType";
+            this.comboBox_queryType.Size = new System.Drawing.Size(121, 21);
+            this.comboBox_queryType.TabIndex = 7;
+            // 
+            // label_queryType
+            // 
+            this.label_queryType.AutoSize = true;
+            this.label_queryType.Location = new System.Drawing.Point(323, 47);
+            this.label_queryType.Name = "label_queryType";
+            this.label_queryType.Size = new System.Drawing.Size(59, 13);
+            this.label_queryType.TabIndex = 8;
+            this.label_queryType.Text = "QueryType";
             // 
             // PanelSQLClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label_queryType);
+            this.Controls.Add(this.comboBox_queryType);
             this.Controls.Add(this.button_Execute);
             this.Controls.Add(this.label_Query);
             this.Controls.Add(this.label_SQLClientScreen);
@@ -127,5 +152,7 @@
         private System.Windows.Forms.Label label_SQLClientScreen;
         private System.Windows.Forms.Label label_Query;
         private System.Windows.Forms.Button button_Execute;
+        private System.Windows.Forms.ComboBox comboBox_queryType;
+        private System.Windows.Forms.Label label_queryType;
     }
 }

@@ -6,6 +6,7 @@ using PMA.Info;
 using PMA.ConfigManager;
 using System.Diagnostics;
 using System.ServiceProcess;
+using System.Data;
 
 namespace PMA.SystemAnalyzer
 {
@@ -78,8 +79,11 @@ namespace PMA.SystemAnalyzer
             {
                 if (action != string.Empty)
                 {
-                    actionArg = action.Substring(action.IndexOf(' '));
-                    action = action.Split(' ')[0];
+                    if (action.Split(' ').Length > 1)
+                    {
+                        actionArg = action.Substring(action.IndexOf(' '));
+                        action = action.Split(' ')[0];
+                    }
                 }
 
                 Process p = new Process();
@@ -88,6 +92,7 @@ namespace PMA.SystemAnalyzer
                 p.StartInfo.Arguments = actionArg;
 
                 p.Start();
+                p.WaitForExit();
 
                 result = p.StandardOutput.ReadToEnd();
             }
@@ -152,6 +157,67 @@ namespace PMA.SystemAnalyzer
 
         }
 
+        public static DataSet ExcuteQuery(string query, string database, string sessionID)
+        {
+            PMADatabaseController databaseController = null;
+
+            try
+            {
+                databaseController = new PMADatabaseController(configManager.SystemAnalyzerInfo.Database, configManager.SystemAnalyzerInfo.DBUser, configManager.SystemAnalyzerInfo.DBPassword);
+                if (VerifySessionPrivileges(sessionID, PRIVILEGE_SQL))
+                {
+                    return databaseController.ExecuteQuery(query, database);
+                }
+                else return null;
+            }
+            finally
+            {
+                if (databaseController != null)
+                    databaseController.Dispose();
+            }
+
+        }
+
+        public static string ExcuteNonQuery(string query, string database, string sessionID)
+        {
+            PMADatabaseController databaseController = null;
+
+            try
+            {
+                databaseController = new PMADatabaseController(configManager.SystemAnalyzerInfo.Database, configManager.SystemAnalyzerInfo.DBUser, configManager.SystemAnalyzerInfo.DBPassword);
+                if (VerifySessionPrivileges(sessionID, PRIVILEGE_SQL))
+                {
+                    return databaseController.ExecuteNonQuery(query, database);
+                }
+                else return null;
+            }
+            finally
+            {
+                if (databaseController != null)
+                    databaseController.Dispose();
+            }
+        }
+
+        public static List<string> GetDatabaseNames(string sessionID)
+        {
+             PMADatabaseController databaseController = null;
+
+             try
+             {
+                 databaseController = new PMADatabaseController(configManager.SystemAnalyzerInfo.Database, configManager.SystemAnalyzerInfo.DBUser, configManager.SystemAnalyzerInfo.DBPassword);
+                 if (VerifySessionPrivileges(sessionID, PRIVILEGE_SQL))
+                 {
+                     return databaseController.GetDatabaseNames();
+                 }
+                 else return null;
+             }
+             finally
+             {
+                 if (databaseController != null)
+                     databaseController.Dispose();
+             }
+
+        }
         
 
         private static bool VerifySessionPrivileges(string sessionID, string priviledge)
@@ -179,6 +245,9 @@ namespace PMA.SystemAnalyzer
             return result;
 
         }
+
+
+       
         
         
 
