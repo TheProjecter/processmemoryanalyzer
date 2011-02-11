@@ -33,10 +33,12 @@
             this.button_Execute = new System.Windows.Forms.Button();
             this.label_Results = new System.Windows.Forms.Label();
             this.richTextBox_ActionResults = new System.Windows.Forms.RichTextBox();
+            this.button_Refresh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // checkedListBox_AvailableActions
             // 
+            this.checkedListBox_AvailableActions.CheckOnClick = true;
             this.checkedListBox_AvailableActions.FormattingEnabled = true;
             this.checkedListBox_AvailableActions.Location = new System.Drawing.Point(18, 60);
             this.checkedListBox_AvailableActions.Name = "checkedListBox_AvailableActions";
@@ -81,10 +83,21 @@
             this.richTextBox_ActionResults.TabIndex = 4;
             this.richTextBox_ActionResults.Text = "";
             // 
+            // button_Refresh
+            // 
+            this.button_Refresh.Location = new System.Drawing.Point(663, 250);
+            this.button_Refresh.Name = "button_Refresh";
+            this.button_Refresh.Size = new System.Drawing.Size(75, 23);
+            this.button_Refresh.TabIndex = 5;
+            this.button_Refresh.Text = "Refresh";
+            this.button_Refresh.UseVisualStyleBackColor = true;
+            this.button_Refresh.Click += new System.EventHandler(this.button_Refresh_Click);
+            // 
             // PanelExecuteCommand
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button_Refresh);
             this.Controls.Add(this.richTextBox_ActionResults);
             this.Controls.Add(this.label_Results);
             this.Controls.Add(this.button_Execute);
@@ -104,5 +117,6 @@
         private System.Windows.Forms.Button button_Execute;
         private System.Windows.Forms.Label label_Results;
         private System.Windows.Forms.RichTextBox richTextBox_ActionResults;
+        private System.Windows.Forms.Button button_Refresh;
     }
 }

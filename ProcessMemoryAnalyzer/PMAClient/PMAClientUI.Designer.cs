@@ -32,14 +32,13 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.setupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.connectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel_LeftMenu = new System.Windows.Forms.TableLayoutPanel();
             this.label_SQL = new System.Windows.Forms.Label();
             this.label_Services = new System.Windows.Forms.Label();
             this.label_Actions = new System.Windows.Forms.Label();
             this.panel_MainContainer = new System.Windows.Forms.Panel();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel_LeftMenu.SuspendLayout();
@@ -48,8 +47,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.setupToolStripMenuItem});
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1047, 24);
@@ -60,38 +58,25 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loginToolStripMenuItem,
-            this.logoutToolStripMenuItem});
+            this.logoutToolStripMenuItem,
+            this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.fileToolStripMenuItem.Text = "System";
             // 
             // loginToolStripMenuItem
             // 
             this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
-            this.loginToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.loginToolStripMenuItem.Text = "Login";
             this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
-            // 
-            // setupToolStripMenuItem
-            // 
-            this.setupToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.connectionToolStripMenuItem});
-            this.setupToolStripMenuItem.Name = "setupToolStripMenuItem";
-            this.setupToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.setupToolStripMenuItem.Text = "Setup";
-            // 
-            // connectionToolStripMenuItem
-            // 
-            this.connectionToolStripMenuItem.Name = "connectionToolStripMenuItem";
-            this.connectionToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            this.connectionToolStripMenuItem.Text = "Connection";
             // 
             // panel1
             // 
@@ -124,10 +109,10 @@
             // 
             this.label_SQL.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_SQL.AutoSize = true;
-            this.label_SQL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_SQL.Location = new System.Drawing.Point(54, 50);
+            this.label_SQL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_SQL.Location = new System.Drawing.Point(48, 46);
             this.label_SQL.Name = "label_SQL";
-            this.label_SQL.Size = new System.Drawing.Size(31, 13);
+            this.label_SQL.Size = new System.Drawing.Size(44, 20);
             this.label_SQL.TabIndex = 0;
             this.label_SQL.Text = "SQL";
             this.label_SQL.Click += new System.EventHandler(this.label_SQL_Click);
@@ -136,10 +121,10 @@
             // 
             this.label_Services.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_Services.AutoSize = true;
-            this.label_Services.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Services.Location = new System.Drawing.Point(42, 163);
+            this.label_Services.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Services.Location = new System.Drawing.Point(31, 159);
             this.label_Services.Name = "label_Services";
-            this.label_Services.Size = new System.Drawing.Size(56, 13);
+            this.label_Services.Size = new System.Drawing.Size(77, 20);
             this.label_Services.TabIndex = 1;
             this.label_Services.Text = "Services";
             this.label_Services.Click += new System.EventHandler(this.label_Services_Click);
@@ -148,12 +133,12 @@
             // 
             this.label_Actions.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_Actions.AutoSize = true;
-            this.label_Actions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Actions.Location = new System.Drawing.Point(48, 276);
+            this.label_Actions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Actions.Location = new System.Drawing.Point(35, 272);
             this.label_Actions.Name = "label_Actions";
-            this.label_Actions.Size = new System.Drawing.Size(43, 13);
+            this.label_Actions.Size = new System.Drawing.Size(69, 20);
             this.label_Actions.TabIndex = 2;
-            this.label_Actions.Text = "Action";
+            this.label_Actions.Text = "Actions";
             this.label_Actions.Click += new System.EventHandler(this.label_Actions_Click);
             // 
             // panel_MainContainer
@@ -163,6 +148,13 @@
             this.panel_MainContainer.Name = "panel_MainContainer";
             this.panel_MainContainer.Size = new System.Drawing.Size(852, 460);
             this.panel_MainContainer.TabIndex = 2;
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // PMAClientUI
             // 
@@ -191,7 +183,6 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem setupToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel_MainContainer;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel_LeftMenu;
@@ -200,7 +191,7 @@
         private System.Windows.Forms.Label label_Actions;
         private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem connectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }
 

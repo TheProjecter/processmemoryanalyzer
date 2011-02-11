@@ -38,6 +38,9 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Management" />
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -73,6 +76,14 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IPMACommunicationContract\IPMACommunicationContract.csproj">
+      <Project>{4AECDCCA-6913-4108-85E1-E4EB29FE3747}</Project>
+      <Name>IPMACommunicationContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PMACommunicationAPI\PMACommunicationAPI.csproj">
+      <Project>{D504CDB8-2777-4F59-A870-A27592471482}</Project>
+      <Name>PMACommunicationAPI %28PMACommunicationAPI\PMACommunicationAPI%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PMAConfigManager\PMAConfigManager.csproj">
       <Project>{954AA129-AB47-4E49-B739-174AC64B7770}</Project>
       <Name>PMAConfigManager</Name>
@@ -87,7 +98,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

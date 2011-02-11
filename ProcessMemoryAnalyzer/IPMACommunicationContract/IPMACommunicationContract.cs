@@ -39,7 +39,7 @@ namespace PMA.CommunicationAPI
         string ServiceActions(Dictionary<string,string> servicesActions, string sessionID);
 
         [OperationContract]
-        DataSet ExcuteQuery(string query,string database, string sessionID);
+        DataSet ExcuteQuery(string query,string database,int numberOfRecords, string sessionID);
 
         [OperationContract]
         string ExcuteNonQuery(string query, string database, string sessionID);

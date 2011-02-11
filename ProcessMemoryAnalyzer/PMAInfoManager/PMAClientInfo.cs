@@ -13,8 +13,19 @@ namespace PMA.Info
 
         public static string PMA_CLIENT_INFO = "PMAClientInfo.xml";
 
+        public string Server { get; set; }
+
+        public string Port { get; set; }
+
+        public PMAClientInfo()
+        {
+            Server = "localhost";
+            Port = "8585";
+        }
 
         #region Serializing Class
+
+        
         
         public string Serialize()
         {

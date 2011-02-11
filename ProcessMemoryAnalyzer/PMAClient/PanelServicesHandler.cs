@@ -42,13 +42,17 @@ namespace PMA.Client
             Dictionary<string, ServiceControllerStatus> availableService = proxy.GetAvailableServices(sessionID);
             dataGridView_Services.Rows.Clear();
             DataGridViewRow row = null;
+            DataGridViewComboBoxColumn comboboxColumn = new DataGridViewComboBoxColumn ();
             //int rowCount;
-            foreach (string service in availableService.Keys)
+            if (availableService != null)
             {
-                row = dataGridView_Services.Rows[dataGridView_Services.Rows.Add()];
-                row.Cells["serviceName"].Value = service;
-                row.Cells["serviceStatus"].Value = availableService[service].ToString();
-                //row.Cells["serviceAction"].Value = new List<string> { "START", "STOP", "RESTART" };
+                foreach (string service in availableService.Keys)
+                {
+                    row = dataGridView_Services.Rows[dataGridView_Services.Rows.Add()];
+                    row.Cells["serviceName"].Value = service;
+                    row.Cells["serviceStatus"].Value = availableService[service].ToString();
+                    row.Cells["serviceAction"].Value = "START";
+                }
             }
         }
 
@@ -73,12 +77,18 @@ namespace PMA.Client
         private void button_Execute_Click(object sender, EventArgs e)
         {
             Dictionary<string, string> dicServiceActions = new Dictionary<string, string>();
+            DataGridViewCheckBoxCell checkBoxCell;
             foreach (DataGridViewRow row in dataGridView_Services.Rows)
             {
-                if (bool.Parse(row.Cells["selectService"].Value.ToString()) == true)
+
+                checkBoxCell = row.Cells["selectService"] as DataGridViewCheckBoxCell;
+
+                if (Convert.ToBoolean(checkBoxCell.Value))
                 {
                     dicServiceActions.Add(row.Cells["serviceName"].Value.ToString(), row.Cells["serviceAction"].Value.ToString());
                 }
+                
+
             }
             if (dicServiceActions.Count > 0)
             {

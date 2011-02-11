@@ -37,11 +37,16 @@
             this.button_Execute = new System.Windows.Forms.Button();
             this.comboBox_queryType = new System.Windows.Forms.ComboBox();
             this.label_queryType = new System.Windows.Forms.Label();
+            this.numericUpDown_Records = new System.Windows.Forms.NumericUpDown();
+            this.label_NumberOfRecords = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_SQLResults)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Records)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView_SQLResults
             // 
+            this.dataGridView_SQLResults.AllowUserToAddRows = false;
+            this.dataGridView_SQLResults.AllowUserToDeleteRows = false;
             this.dataGridView_SQLResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_SQLResults.Location = new System.Drawing.Point(18, 170);
             this.dataGridView_SQLResults.Name = "dataGridView_SQLResults";
@@ -55,6 +60,7 @@
             this.richTextBox_Query.Size = new System.Drawing.Size(815, 62);
             this.richTextBox_Query.TabIndex = 1;
             this.richTextBox_Query.Text = "";
+            this.richTextBox_Query.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox_Query_KeyUp);
             // 
             // comboBox_Databases
             // 
@@ -94,7 +100,7 @@
             // 
             // button_Execute
             // 
-            this.button_Execute.Location = new System.Drawing.Point(758, 47);
+            this.button_Execute.Location = new System.Drawing.Point(758, 42);
             this.button_Execute.Name = "button_Execute";
             this.button_Execute.Size = new System.Drawing.Size(75, 23);
             this.button_Execute.TabIndex = 6;
@@ -112,6 +118,7 @@
             this.comboBox_queryType.Name = "comboBox_queryType";
             this.comboBox_queryType.Size = new System.Drawing.Size(121, 21);
             this.comboBox_queryType.TabIndex = 7;
+            this.comboBox_queryType.SelectedIndexChanged += new System.EventHandler(this.comboBox_queryType_SelectedIndexChanged);
             // 
             // label_queryType
             // 
@@ -122,10 +129,33 @@
             this.label_queryType.TabIndex = 8;
             this.label_queryType.Text = "QueryType";
             // 
+            // numericUpDown_Records
+            // 
+            this.numericUpDown_Records.Location = new System.Drawing.Point(636, 45);
+            this.numericUpDown_Records.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+            this.numericUpDown_Records.Name = "numericUpDown_Records";
+            this.numericUpDown_Records.Size = new System.Drawing.Size(85, 20);
+            this.numericUpDown_Records.TabIndex = 9;
+            // 
+            // label_NumberOfRecords
+            // 
+            this.label_NumberOfRecords.AutoSize = true;
+            this.label_NumberOfRecords.Location = new System.Drawing.Point(560, 47);
+            this.label_NumberOfRecords.Name = "label_NumberOfRecords";
+            this.label_NumberOfRecords.Size = new System.Drawing.Size(70, 13);
+            this.label_NumberOfRecords.TabIndex = 10;
+            this.label_NumberOfRecords.Text = "Max Records";
+            // 
             // PanelSQLClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label_NumberOfRecords);
+            this.Controls.Add(this.numericUpDown_Records);
             this.Controls.Add(this.label_queryType);
             this.Controls.Add(this.comboBox_queryType);
             this.Controls.Add(this.button_Execute);
@@ -138,6 +168,7 @@
             this.Name = "PanelSQLClient";
             this.Size = new System.Drawing.Size(850, 450);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_SQLResults)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Records)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,5 +185,7 @@
         private System.Windows.Forms.Button button_Execute;
         private System.Windows.Forms.ComboBox comboBox_queryType;
         private System.Windows.Forms.Label label_queryType;
+        private System.Windows.Forms.NumericUpDown numericUpDown_Records;
+        private System.Windows.Forms.Label label_NumberOfRecords;
     }
 }

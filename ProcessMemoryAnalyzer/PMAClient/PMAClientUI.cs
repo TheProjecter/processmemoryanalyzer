@@ -223,6 +223,12 @@ namespace PMA.Client
             DisableLeftMenu();
             ShowLoginForm();
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            configManager.SaveConfiguration();
+            this.Close();
+        }
       
         
         

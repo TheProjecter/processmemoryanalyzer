@@ -53,12 +53,16 @@ namespace PMA.Client
 
         private void button_Execute_Click(object sender, EventArgs e)
         {
-            //dataGridView_SQLResults.Rows.Clear();
+            ExcuteScript();
+        }
+
+        private void ExcuteScript()
+        {
             try
             {
                 if (comboBox_queryType.SelectedItem.ToString() == "SelectQuery")
                 {
-                    dataGridView_SQLResults.DataSource = proxy.ExcuteQuery(richTextBox_Query.Text, comboBox_Databases.SelectedValue.ToString(), sessionID).Tables[0];
+                    dataGridView_SQLResults.DataSource = proxy.ExcuteQuery(richTextBox_Query.Text, comboBox_Databases.SelectedValue.ToString(), decimal.ToInt32(numericUpDown_Records.Value), sessionID).Tables[0];
                 }
                 if (comboBox_queryType.SelectedItem.ToString() == "NonQuery")
                 {
@@ -72,9 +76,26 @@ namespace PMA.Client
                     dataGridView_SQLResults.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void comboBox_queryType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox_queryType.SelectedItem.ToString() == "NonQuery")
+            {
+                numericUpDown_Records.Enabled = false;
+            }
+            else numericUpDown_Records.Enabled = true;
+        }
+
+        private void richTextBox_Query_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                ExcuteScript();
             }
         }
 

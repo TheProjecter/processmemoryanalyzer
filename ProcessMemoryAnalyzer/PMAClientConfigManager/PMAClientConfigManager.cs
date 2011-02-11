@@ -15,6 +15,14 @@ namespace PMA.ConfigManager.Client
 
         private static PMAClientConfigManager _clientConfigurationManager;
 
+        private static string BASE_ADDRESS = "net.tcp://{0}:{1}/PMA.CommunicationAPI.PMACommunicationAPI";
+
+        private static string CONFIG_DIR = "Config";
+        private static string PMA_LOG_DIR = "PMALog";
+
+        private string _serverName = string.Empty;
+        private int _port = 0;
+
         public PMAClientInfo clientInfo { get; set; }
 
         public PMAClientRuntimeInfo clientRuntimeInfo { get; set; }
@@ -24,93 +32,21 @@ namespace PMA.ConfigManager.Client
         private IPMACommunicationContract _proxy = null;
 
 
-        public IPMACommunicationContract GetConnectionChannel
+
+        public String CurrentAppConfigDir
         {
             get
             {
-                if (_proxy == null || !_proxy.VerfiyConnection())
+                string configDir = AppDomain.CurrentDomain.BaseDirectory + "\\" + CONFIG_DIR;
+                if (!Directory.Exists(configDir))
                 {
-                    string baseAddress = "http://localhost:8585/PMA.CommunicationAPI.PMACommunicationAPI";
-                    try
-                    {
-                        ChannelFactory<IPMACommunicationContract> factory = new ChannelFactory<IPMACommunicationContract>
-                            (new BasicHttpBinding(),
-                            new EndpointAddress(baseAddress));
-                        _proxy = factory.CreateChannel();
-                    }
-                    catch (Exception ex)
-                    {
-                        _errorMessage.Add(ex.Message);
-                    }
-                    return _proxy;
+                    Directory.CreateDirectory(configDir);
                 }
-                else return _proxy;
-            }
-        }
-
-        public void CloseConnectionChannel()
-        {
-            if (_proxy != null)
-            {
-                ((IClientChannel)_proxy).Close();
-                ((IClientChannel)_proxy).Dispose();
-                _proxy = null;
+                return configDir;
             }
         }
         
-        private PMAClientConfigManager()
-        {
-            InitilizeClientInfo();
-            InitilizeClientRuntimeInfo();
-        }
-
-        private void InitilizeClientInfo()
-        {
-            //if (clientInfo == null)
-            //{
-            //    if (File.Exists(Path.Combine(CurrentAppConfigDir, PMAUsers.PMA_USERS_FILE)))
-            //    {
-            //        PMAUsers = PMAUsers.Deserialize(File.ReadAllText(Path.Combine(CurrentAppConfigDir, PMAUsers.PMA_USERS_FILE)));
-            //    }
-            //    else
-            //    {
-            //        PMAUsers = new PMAUsers { ListPMAUserInfo = new List<PMAUserInfo>() };
-            //    }
-            //}
-        }
-
         
-
-        private void InitilizeClientRuntimeInfo()
-        {
-            clientRuntimeInfo = new PMAClientRuntimeInfo();
-            clientRuntimeInfo.UserInfo = new PMAUserInfo();
-        }
-
-        /// <summary>
-        /// Gets the get client configuration instance.
-        /// </summary>
-        /// <value>The get client configuration instance.</value>
-        public static PMAClientConfigManager GetClientConfigurationInstance
-        {
-            get
-            {
-                if (_clientConfigurationManager == null)
-                {
-                    _clientConfigurationManager = new PMAClientConfigManager();
-                    return _clientConfigurationManager;
-                }
-                else return _clientConfigurationManager;
-            }          
-        }
-
-
-        public void SaveConfiguration()
-        {
-          //  File.WriteAllText(Path.Combine(CurrentAppConfigDir, FTPInfo.FTP_INFO_FILE), FtpInfo.Serialize());
-        }
-
-
         //--------------------------------------------------------------------------------------------
         /// <summary>
         /// Gets or sets the error message.
@@ -164,6 +100,133 @@ namespace PMA.ConfigManager.Client
             }
             return sb.ToString();
         }
+
+
+        /// <summary>
+        /// Gets the get client configuration instance.
+        /// </summary>
+        /// <value>The get client configuration instance.</value>
+        public static PMAClientConfigManager GetClientConfigurationInstance
+        {
+            get
+            {
+                if (_clientConfigurationManager == null)
+                {
+                    _clientConfigurationManager = new PMAClientConfigManager();
+                    return _clientConfigurationManager;
+                }
+                else return _clientConfigurationManager;
+            }
+        }
+
+        /// <summary>
+        /// Gets the get connection channel.
+        /// </summary>
+        /// <value>The get connection channel.</value>
+        public IPMACommunicationContract GetConnectionChannel
+        {
+            get
+            {
+                if (_proxy == null || !_proxy.VerfiyConnection())
+                {
+                    
+                    try
+                    {
+                        if (_serverName == string.Empty || _port == 0)
+                        {
+                            throw new Exception("ServerName or port is not Specified");
+                        }
+                        string baseAddress = String.Format(BASE_ADDRESS, _serverName, _port.ToString());
+                        //string baseAddress = "net.tcp://localhost:8085/PMA.CommunicationAPI.PMACommunicationAPI";
+                        ChannelFactory<IPMACommunicationContract> factory = new ChannelFactory<IPMACommunicationContract>
+                            (new NetTcpBinding(),
+                            new EndpointAddress(baseAddress));
+                        _proxy = factory.CreateChannel();
+                    }
+                    catch (Exception ex)
+                    {
+                        _errorMessage.Add(ex.Message);
+                    }
+                    return _proxy;
+                }
+                else return _proxy;
+            }
+        }
+
+        /// <summary>
+        /// Creates the connection channel.
+        /// </summary>
+        /// <param name="serverName">Name of the server.</param>
+        /// <param name="port">The port.</param>
+        /// <returns></returns>
+        public IPMACommunicationContract CreateConnectionChannel(string serverName, int port)
+        {
+            _serverName = serverName;
+            _port = port;
+            return GetConnectionChannel;
+        }
+
+        /// <summary>
+        /// Closes the connection channel.
+        /// </summary>
+        public void CloseConnectionChannel()
+        {
+            if (_proxy != null)
+            {
+                IClientChannel channel = _proxy as IClientChannel;
+                
+                if (channel.State == CommunicationState.Faulted)
+                {
+                    channel.Abort();
+                    channel.Dispose();
+                }
+                else 
+                {
+                    channel.Close();
+                    channel.Dispose();
+                }
+                
+                _proxy = null;
+            }
+        }
+        
+        private PMAClientConfigManager()
+        {
+            InitilizeClientInfo();
+            InitilizeClientRuntimeInfo();
+        }
+
+        private void InitilizeClientInfo()
+        {
+            if (clientInfo == null)
+            {
+                if (File.Exists(Path.Combine(CurrentAppConfigDir, PMAClientInfo.PMA_CLIENT_INFO)))
+                {
+                    clientInfo = PMAClientInfo.Deserialize(File.ReadAllText(Path.Combine(CurrentAppConfigDir, PMAClientInfo.PMA_CLIENT_INFO)));
+                }
+                else clientInfo = new PMAClientInfo();
+            }
+        }
+
+        
+
+        private void InitilizeClientRuntimeInfo()
+        {
+            clientRuntimeInfo = new PMAClientRuntimeInfo();
+            clientRuntimeInfo.UserInfo = new PMAUserInfo();
+        }
+
+       
+
+
+        public void SaveConfiguration()
+        {
+            if(clientInfo != null)
+                File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMAClientInfo.PMA_CLIENT_INFO), clientInfo.Serialize());
+        }
+
+
+      
 
     }
 }

@@ -11,6 +11,9 @@ using System.Timers;
 using PMA.ConfigManager;
 using PMA.ProcessMemoryAnalyzer;
 using PMA.SystemAnalyzer;
+using System.ServiceModel;
+using PMA.CommunicationAPI;
+using System.IO;
 
 namespace PMA.PMAService
 {
@@ -22,6 +25,7 @@ namespace PMA.PMAService
         PMAFlowController flowController = null;
         PMATaskHandler pmaTaskHandler;
 
+        ServiceHost serviceHost = null;
 
         private static bool is_lock = false;
 
@@ -43,15 +47,41 @@ namespace PMA.PMAService
         {
 
             //Starting EventLoging Thread - Have to imporve this 
-            System.Threading.Thread th = new System.Threading.Thread(EvenLogTask);
-            th.IsBackground = true;
-            th.Name = "EventMonitor";
-            th.Start();
+            System.Threading.Thread threadEventMonitor = new System.Threading.Thread(EvenLogTask);
+            threadEventMonitor.IsBackground = true;
+            threadEventMonitor.Name = "EventMonitor";
+            threadEventMonitor.Start();
+
+            System.Threading.Thread threadEventWCFHost = new System.Threading.Thread(WCFHost);
+            threadEventWCFHost.IsBackground = true;
+            threadEventWCFHost.Name = "WCFHost";
+            threadEventWCFHost.Start();
             
             int logInterval = int.Parse(ConfigurationSettings.AppSettings["interval"]);
             mTimer = new System.Timers.Timer(logInterval);
             mTimer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             mTimer.Start();
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Host For WCF Service.
+        /// </summary>
+        private void WCFHost()
+        {
+            try
+            {
+                if (serviceHost != null)
+                {
+                    serviceHost.Close();
+                }
+                serviceHost = new ServiceHost(typeof(PMACommunicationAPI));
+                serviceHost.Open();
+            }
+            catch(Exception ex)
+            {
+                File.WriteAllText(Environment.CurrentDirectory + "\\ServiceError.log", ex.Message + "\r\n"+ ex.StackTrace);
+            }
         }
 
         //-----------------------------------------------------------------------------------------------------------------------
@@ -77,6 +107,11 @@ namespace PMA.PMAService
             if (pmaTaskHandler != null)
             {
                 pmaTaskHandler.ReportingTask();
+            }
+            if (serviceHost != null)
+            {
+                serviceHost.Close();
+                serviceHost = null;
             }
             is_lock = false;
         }
