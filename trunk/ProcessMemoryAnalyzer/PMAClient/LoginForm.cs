@@ -20,6 +20,8 @@ namespace PMA.Client
         public LoginForm()
         {
             InitializeComponent();
+            textBox_Server.Text = configManager.clientInfo.Server;
+            numericUpDown_port.Value = decimal.Parse(configManager.clientInfo.Port);
         }
 
         private void button_Login_Click(object sender, EventArgs e)
@@ -29,14 +31,14 @@ namespace PMA.Client
 
         private void Login()
         {
-            IPMACommunicationContract proxy = configManager.GetConnectionChannel;
-
             try
             {
+                IPMACommunicationContract proxy = configManager.CreateConnectionChannel(textBox_Server.Text, decimal.ToInt32(numericUpDown_port.Value));
                 configManager.clientRuntimeInfo.sessionID = proxy.GetSessionID(textBox_User.Text, textBox_Password.Text);
                 if (configManager.clientRuntimeInfo.sessionID != string.Empty)
                 {
                     configManager.clientRuntimeInfo.UserInfo = proxy.GetUserInfo(configManager.clientRuntimeInfo.sessionID);
+                    configManager.SaveConfiguration();
                     this.Close();
                 }
                 else
@@ -60,5 +62,9 @@ namespace PMA.Client
         {
             Login();
         }
+
+       
+
+        
     }
 }

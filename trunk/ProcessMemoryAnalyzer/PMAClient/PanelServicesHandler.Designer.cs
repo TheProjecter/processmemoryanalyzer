@@ -33,11 +33,11 @@
             this.richTextBox_ResultServices = new System.Windows.Forms.RichTextBox();
             this.button_Execute = new System.Windows.Forms.Button();
             this.dataGridView_Services = new System.Windows.Forms.DataGridView();
+            this.button_Refresh = new System.Windows.Forms.Button();
             this.selectService = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.serviceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.serviceStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.serviceAction = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.button_Refresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Services)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,6 +81,9 @@
             // 
             // dataGridView_Services
             // 
+            this.dataGridView_Services.AllowUserToAddRows = false;
+            this.dataGridView_Services.AllowUserToDeleteRows = false;
+            this.dataGridView_Services.AllowUserToOrderColumns = true;
             this.dataGridView_Services.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Services.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.selectService,
@@ -91,6 +94,16 @@
             this.dataGridView_Services.Name = "dataGridView_Services";
             this.dataGridView_Services.Size = new System.Drawing.Size(809, 204);
             this.dataGridView_Services.TabIndex = 6;
+            // 
+            // button_Refresh
+            // 
+            this.button_Refresh.Location = new System.Drawing.Point(669, 253);
+            this.button_Refresh.Name = "button_Refresh";
+            this.button_Refresh.Size = new System.Drawing.Size(75, 23);
+            this.button_Refresh.TabIndex = 7;
+            this.button_Refresh.Text = "Refresh";
+            this.button_Refresh.UseVisualStyleBackColor = true;
+            this.button_Refresh.Click += new System.EventHandler(this.button_Refresh_Click);
             // 
             // selectService
             // 
@@ -115,20 +128,15 @@
             // 
             // serviceAction
             // 
+            this.serviceAction.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
             this.serviceAction.HeaderText = "Action";
+            this.serviceAction.Items.AddRange(new object[] {
+            "START",
+            "STOP",
+            "RESTART"});
             this.serviceAction.Name = "serviceAction";
             this.serviceAction.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.serviceAction.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // button_Refresh
-            // 
-            this.button_Refresh.Location = new System.Drawing.Point(669, 253);
-            this.button_Refresh.Name = "button_Refresh";
-            this.button_Refresh.Size = new System.Drawing.Size(75, 23);
-            this.button_Refresh.TabIndex = 7;
-            this.button_Refresh.Text = "Refresh";
-            this.button_Refresh.UseVisualStyleBackColor = true;
-            this.button_Refresh.Click += new System.EventHandler(this.button_Refresh_Click);
             // 
             // PanelServicesHandler
             // 

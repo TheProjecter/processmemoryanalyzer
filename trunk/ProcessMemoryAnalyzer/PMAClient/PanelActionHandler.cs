@@ -66,6 +66,11 @@ namespace PMA.Client
             else richTextBox_ActionResults.Text = "No action is selected";
         }
 
+        private void button_Refresh_Click(object sender, EventArgs e)
+        {
+            BindActionList();
+        }
+
        
     }
 }

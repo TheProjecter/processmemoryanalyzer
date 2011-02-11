@@ -70,9 +70,9 @@ namespace PMA.CommunicationAPI
 
 
         #region SQL
-        public System.Data.DataSet ExcuteQuery(string query,string database, string sessionID)
+        public System.Data.DataSet ExcuteQuery(string query,string database,int numberOfRecords, string sessionID)
         {
-            return PMAServerManager.ExcuteQuery(query,database,sessionID);
+            return PMAServerManager.ExcuteQuery(query, database, numberOfRecords,sessionID);
         }
 
         public string ExcuteNonQuery(string query,string database, string sessionID)

@@ -7,6 +7,7 @@ using PMA.ConfigManager;
 using System.Diagnostics;
 using System.ServiceProcess;
 using System.Data;
+using PMA.Utils.Logger;
 
 namespace PMA.SystemAnalyzer
 {
@@ -18,11 +19,20 @@ namespace PMA.SystemAnalyzer
         private const string PRIVILEGE_SERVICE = "SERVICE_PRIVILEDGE";
        
         private static PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
+        private static Logger logger = configManager.Logger;
 
         private static PMAUserManager userManager = PMAUserManager.GetUserManagerInstance;
+        
 
+        //------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the available services for session.
+        /// </summary>
+        /// <param name="sessionID">The session ID.</param>
+        /// <returns></returns>
         public static Dictionary<string,ServiceControllerStatus> GetAvailableServicesForSession(string sessionID)
         {
+            logger.Debug(EnumMethod.START);
             Dictionary<string, ServiceControllerStatus> availableServices = new Dictionary<string, ServiceControllerStatus>();
             if (VerifySessionPrivileges(sessionID, PRIVILEGE_SERVICE))
             {
@@ -39,7 +49,11 @@ namespace PMA.SystemAnalyzer
                     }
                     catch (Exception ex)
                     {
-
+                        logger.Error(ex);
+                    }
+                    finally
+                    {
+                        logger.Debug(EnumMethod.END);
                     }
                 }
                 return availableServices;
@@ -47,17 +61,40 @@ namespace PMA.SystemAnalyzer
             else return null;
         }
 
+        //------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the available actions for session.
+        /// </summary>
+        /// <param name="sessionID">The session ID.</param>
+        /// <returns></returns>
         public static List<string> GetAvailableActionsForSession(string sessionID)
         {
-            if (VerifySessionPrivileges(sessionID,PRIVILEGE_ACTION))
+            logger.Debug(EnumMethod.START);
+            try
             {
-                return configManager.PMAServerManagerInfo.ListActions;
+                if (VerifySessionPrivileges(sessionID, PRIVILEGE_ACTION))
+                {
+                    return configManager.PMAServerManagerInfo.ListActions;
+                }
+
+                else return null;
             }
-            else return null;
+            finally
+            {
+                logger.Debug(EnumMethod.END); 
+            }
         }
 
+        //------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Executes the actions.
+        /// </summary>
+        /// <param name="actions">The actions.</param>
+        /// <param name="sessionID">The session ID.</param>
+        /// <returns></returns>
         public static string ExecuteActions(List<string> actions, string sessionID)
         {
+            logger.Debug(EnumMethod.START);
             StringBuilder actionMessages = new StringBuilder();
             if (VerifySessionPrivileges(sessionID, PRIVILEGE_ACTION))
             {
@@ -66,12 +103,24 @@ namespace PMA.SystemAnalyzer
                     actionMessages.AppendLine(action + " : " + ExecuteAction(action));
                 }
             }
-            else return null;
+            else
+            {
+                logger.Debug(EnumMethod.END);
+                return null;
+            }
+            logger.Debug(EnumMethod.END);
             return actionMessages.ToString() ;
         }
 
+        //------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Executes the action.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <returns></returns>
         private static string ExecuteAction(string action)
         {
+            logger.Debug(EnumMethod.START);
             string actionArg = string.Empty;
             string result = string.Empty;
 
@@ -90,21 +139,44 @@ namespace PMA.SystemAnalyzer
                 p.StartInfo.FileName = action;
                 p.StartInfo.CreateNoWindow = true;
                 p.StartInfo.Arguments = actionArg;
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardInput = true;
+                p.StartInfo.RedirectStandardOutput = true;
 
                 p.Start();
-                p.WaitForExit();
+                while (!p.HasExited)
+                {
+                    result += p.StandardOutput.ReadToEnd();
+                }
 
-                result = p.StandardOutput.ReadToEnd();
+                if (p.ExitCode != 0)
+                {
+                    result += p.StandardError.ReadToEnd();
+                }
+                else
+                {
+                    result += p.StandardOutput.ReadToEnd();                    
+                }
             }
             catch (Exception ex)
             {
+                logger.Error(ex);
                 result = ex.Message;
             }
+            logger.Debug(EnumMethod.END);
             return result;
         }
 
+        //------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Serviceses the actions.
+        /// </summary>
+        /// <param name="servicesActions">The services actions.</param>
+        /// <param name="sessionID">The session ID.</param>
+        /// <returns></returns>
         public static string ServicesActions(Dictionary<string,string> servicesActions, string sessionID)
         {
+            logger.Debug(EnumMethod.START);
             StringBuilder serviceMessages = new StringBuilder();
             if (VerifySessionPrivileges(sessionID, PRIVILEGE_SERVICE))
             {
@@ -113,12 +185,25 @@ namespace PMA.SystemAnalyzer
                     serviceMessages.AppendLine(service + " : " + ServiceAction(service, servicesActions[service]));
                 }
             }
-            else return null;
+            else
+            {
+                logger.Debug(EnumMethod.END);
+                return null;
+            }
+            logger.Debug(EnumMethod.END);
             return serviceMessages.ToString();
         }
 
+        //------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Services the action.
+        /// </summary>
+        /// <param name="serviceName">Name of the service.</param>
+        /// <param name="serviceAction">The service action.</param>
+        /// <returns></returns>
         private static string ServiceAction(string serviceName, string serviceAction)
         {
+            logger.Debug(EnumMethod.START);
             string result = string.Empty;
             try
             {
@@ -149,37 +234,57 @@ namespace PMA.SystemAnalyzer
             }
             catch (Exception ex)
             {
+                logger.Error(ex) ;
                 result = ex.Message;
             }
-
+            logger.Debug(EnumMethod.END);
             return result;
 
 
         }
 
-        public static DataSet ExcuteQuery(string query, string database, string sessionID)
+        //------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Excutes the query.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="database">The database.</param>
+        /// <param name="sessionID">The session ID.</param>
+        /// <returns></returns>
+        public static DataSet ExcuteQuery(string query, string database,int numberOfRows, string sessionID)
         {
+            logger.Debug(EnumMethod.START);
             PMADatabaseController databaseController = null;
-
+            
             try
             {
                 databaseController = new PMADatabaseController(configManager.SystemAnalyzerInfo.Database, configManager.SystemAnalyzerInfo.DBUser, configManager.SystemAnalyzerInfo.DBPassword);
                 if (VerifySessionPrivileges(sessionID, PRIVILEGE_SQL))
                 {
-                    return databaseController.ExecuteQuery(query, database);
+                    return databaseController.ExecuteQuery(query, database, numberOfRows);
                 }
                 else return null;
             }
             finally
             {
+                logger.Debug(EnumMethod.END);
                 if (databaseController != null)
                     databaseController.Dispose();
             }
 
         }
 
+        //------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Excutes the non query.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="database">The database.</param>
+        /// <param name="sessionID">The session ID.</param>
+        /// <returns></returns>
         public static string ExcuteNonQuery(string query, string database, string sessionID)
         {
+            logger.Debug(EnumMethod.START);
             PMADatabaseController databaseController = null;
 
             try
@@ -195,12 +300,20 @@ namespace PMA.SystemAnalyzer
             {
                 if (databaseController != null)
                     databaseController.Dispose();
+                logger.Debug(EnumMethod.END);
             }
         }
 
+        //------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the database names.
+        /// </summary>
+        /// <param name="sessionID">The session ID.</param>
+        /// <returns></returns>
         public static List<string> GetDatabaseNames(string sessionID)
         {
-             PMADatabaseController databaseController = null;
+            logger.Debug(EnumMethod.START); 
+            PMADatabaseController databaseController = null;
 
              try
              {
@@ -215,13 +328,22 @@ namespace PMA.SystemAnalyzer
              {
                  if (databaseController != null)
                      databaseController.Dispose();
+                 logger.Debug(EnumMethod.END);
              }
 
         }
-        
 
+
+        //------------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Verifies the session privileges.
+        /// </summary>
+        /// <param name="sessionID">The session ID.</param>
+        /// <param name="priviledge">The priviledge.</param>
+        /// <returns></returns>
         private static bool VerifySessionPrivileges(string sessionID, string priviledge)
         {
+            logger.Debug(EnumMethod.START);
             PMAUserInfo userInfo = null;
             bool result = false;
             if((userInfo = userManager.GetUserInfo(sessionID))!= null)
@@ -242,6 +364,7 @@ namespace PMA.SystemAnalyzer
                         break;
                 }
             }
+            logger.Debug(EnumMethod.END);
             return result;
 
         }

@@ -194,7 +194,7 @@ namespace PMA.SystemAnalyzer
         /// </summary>
         /// <param name="query">The query.</param>
         /// <returns></returns>
-        public DataSet ExecuteQuery(string query, string database)
+        public DataSet ExecuteQuery(string query, string database,int numberOfResults)
         {
             configManager.Logger.Debug(EnumMethod.START);
             DataSet dataset = new DataSet();
@@ -206,7 +206,17 @@ namespace PMA.SystemAnalyzer
                 }
                 connection.ChangeDatabase(database);
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connection);
-                dataAdapter.Fill(dataset);
+                if (numberOfResults == 0)
+                {
+                    dataAdapter.Fill(dataset);
+                }
+                else
+                {
+                    DataTable dt = dataset.Tables.Add();
+                    dataAdapter.Fill(dataset);
+                }
+                
+                return dataset;
             }
             catch(Exception ex)
             {
