@@ -47,7 +47,7 @@ namespace PMASysAlertsUI
         private bool CauseValidation()
         {
             bool result = false;
-            configManager.ErrorMessage.Clear();
+            configManager.Message.Clear();
             switch (PANEL)
             {
                 case ENUMPanel.PANEL_DATABASE_WATCHER:

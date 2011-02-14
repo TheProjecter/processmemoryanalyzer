@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.ServiceProcess;
 using System.Data;
 using PMA.Utils.Logger;
+using PMA.Utils.smtp;
 
 namespace PMA.SystemAnalyzer
 {
@@ -368,6 +369,56 @@ namespace PMA.SystemAnalyzer
             return result;
 
         }
+
+
+        //-------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Sends the mail.
+        /// </summary>
+        private void SendMail(string alertType, string alertMessage)
+        {
+            configManager.Logger.Debug(EnumMethod.START);
+            string subject = "PMA System Alerts : "+  alertType + ": " + configManager.SystemAnalyzerInfo.ClientInstanceName + " : " + Environment.MachineName + " : " + " at " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+            SMTPTransport smtp = new SMTPTransport();
+            try
+            {
+                smtp.SendAsynchronous = false;
+                smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListAlertMailSubscription, null, subject, alertMessage, null);
+            }
+            catch (Exception ex)
+            {
+                configManager.Logger.Error(ex);
+            }
+            configManager.Logger.Debug(EnumMethod.END);
+        }
+
+        //-------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Generates the message body.
+        /// </summary>
+        /// <returns></returns>
+        private string GenerateMessageBody(string message)
+        {
+            configManager.Logger.Debug(EnumMethod.START);
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Hi,");
+            builder.Append("\r\n");
+            builder.Append("\r\n");
+            builder.Append("\r\n");
+            builder.Append("Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
+            builder.Append("\r\n");
+            builder.Append(message);
+            builder.Append("\r\n");
+            builder.Append("\r\n");
+            builder.Append("\r\n");
+            builder.Append("\r\n");
+            builder.Append("Thanks,");
+            builder.Append("\r\n");
+            builder.Append("Cosmos Team.");
+            configManager.Logger.Debug(EnumMethod.END);
+            return builder.ToString();
+        }
+
 
 
        

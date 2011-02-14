@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using PMA.ConfigManager.Client;
 using PMA.CommunicationAPI;
 using PMA.Info;
+using PMA.Utils;
 
 namespace PMA.Client
 {
@@ -34,7 +35,8 @@ namespace PMA.Client
             try
             {
                 IPMACommunicationContract proxy = configManager.CreateConnectionChannel(textBox_Server.Text, decimal.ToInt32(numericUpDown_port.Value));
-                configManager.clientRuntimeInfo.sessionID = proxy.GetSessionID(textBox_User.Text, textBox_Password.Text);
+                string md5Password = PMAUserInfo.EncodePasswordToMD5(textBox_Password.Text);
+                configManager.clientRuntimeInfo.sessionID = proxy.GetSessionID(textBox_User.Text, md5Password);
                 if (configManager.clientRuntimeInfo.sessionID != string.Empty)
                 {
                     configManager.clientRuntimeInfo.UserInfo = proxy.GetUserInfo(configManager.clientRuntimeInfo.sessionID);

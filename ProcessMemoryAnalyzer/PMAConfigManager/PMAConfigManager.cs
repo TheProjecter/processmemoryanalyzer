@@ -24,7 +24,7 @@ namespace PMA.ConfigManager
 
         public PMAUsers PMAUsers { get; set; }
 
-        private List<string> _errorMessage = null;
+        private List<string> _Message = null;
         private static string CONFIG_DIR = "Config";
         private static string PMA_LOG_DIR = "PMALog";
         private static PMAConfigManager pmaConfigManager = null;
@@ -62,23 +62,23 @@ namespace PMA.ConfigManager
         /// Gets or sets the error message.
         /// </summary>
         /// <value>The error message.</value>
-        public List<string> ErrorMessage
+        public List<string> Message
         {
             get
             {
-                if (_errorMessage == null)
+                if (_Message == null)
                 {
-                    _errorMessage = new List<string>();
+                    _Message = new List<string>();
                 }
-                return _errorMessage;
+                return _Message;
             }
             set
             {
-                if (_errorMessage == null)
+                if (_Message == null)
                 {
-                    _errorMessage = new List<string>();
+                    _Message = new List<string>();
                 }
-                _errorMessage = value;
+                _Message = value;
             }
         }
 
@@ -87,9 +87,9 @@ namespace PMA.ConfigManager
         /// <summary>
         /// Clears the error message.
         /// </summary>
-        public void ClearErrorMessage()
+        public void ClearMessageList()
         {
-            ErrorMessage.Clear();
+            Message.Clear();
         }
 
         //--------------------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ namespace PMA.ConfigManager
             StringBuilder sb = new StringBuilder();
             sb.Append(caption);
             sb.AppendLine();
-            foreach (string message in ErrorMessage)
+            foreach (string message in Message)
             {
                 sb.AppendLine(message);
             }

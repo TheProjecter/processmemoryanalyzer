@@ -27,7 +27,7 @@ namespace PMA.CommunicationAPI
         Dictionary<string, ServiceControllerStatus> GetAvailableServices(string sessionID);
 
         [OperationContract]
-        string GetSessionID(string username, string password);
+        string GetSessionID(string username, string passwordMD5);
 
         [OperationContract]
         PMAUserInfo GetUserInfo(string sessionID);
