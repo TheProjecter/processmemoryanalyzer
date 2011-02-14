@@ -26,7 +26,7 @@ namespace PMA.SystemAnalyzer
         public void RunTask()
         {
             configManager.Logger.Debug(EnumMethod.START);
-            configManager.ClearErrorMessage();
+            configManager.ClearMessageList();
             postAlert = false;
             if (configManager.SystemAnalyzerInfo.SetDiscWatch)
             {
@@ -79,7 +79,7 @@ namespace PMA.SystemAnalyzer
             if (PMASystemAnalyzer.GenerateDriveSpaceAlert(cm.SystemAnalyzerInfo.ListDrivesToWatch.ToList<string>(),
                 cm.SystemAnalyzerInfo.LowDiscAlertAt, out listMessage))
             {
-                cm.ErrorMessage.AddRange(listMessage);
+                cm.Message.AddRange(listMessage);
                 if (!cm.FlagInfo.FlagedDiscAlert)
                 {
                     postAlert = true;
@@ -104,7 +104,7 @@ namespace PMA.SystemAnalyzer
             if (PMASystemAnalyzer.GenerateServiceMemoryAlert(configManager.SystemAnalyzerInfo.ListServicesNames.ToList<string>(),configManager.SystemAnalyzerInfo.SetWebProcessWatch,
                 configManager.SystemAnalyzerInfo.ProcessPhysicalMemoryAlertAt, out listMessage, configManager.SystemAnalyzerInfo.SetStartStoppedServicesAlerts))
             {
-                configManager.ErrorMessage.AddRange(listMessage);
+                configManager.Message.AddRange(listMessage);
                 if (!configManager.FlagInfo.FlagedServiceAlert)
                 {
                     postAlert = true;
@@ -129,7 +129,7 @@ namespace PMA.SystemAnalyzer
             string message = string.Empty;
             if (PMASystemAnalyzer.GeneratePhyMemAlert(cm.SystemAnalyzerInfo.SystemPhysicalMemoryAlertAt, out message))
             {
-                cm.ErrorMessage.Add(message);
+                cm.Message.Add(message);
                 if (!cm.FlagInfo.FlagedPhysicalMemoryAlert)
                 {
                     postAlert = true;
@@ -156,7 +156,7 @@ namespace PMA.SystemAnalyzer
                     configManager.SystemAnalyzerInfo.DBUser, configManager.SystemAnalyzerInfo.DBPassword);
             if (dbController.GetDBSize(dbName) > alertLevel)
             {
-                configManager.ErrorMessage.Add("Database Server : " + configManager.SystemAnalyzerInfo.Database + ": Database " + dbName + 
+                configManager.Message.Add("Database Server : " + configManager.SystemAnalyzerInfo.Database + ": Database " + dbName + 
                     " is exceeding alert level of " + alertLevel + " MB");
                 if (dbName == "ASPState")
                 {

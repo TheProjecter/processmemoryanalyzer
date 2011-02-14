@@ -118,7 +118,7 @@ namespace PMASysAlertsUI
                 }
                 catch(Exception ex)
                 {
-                    configManager.ErrorMessage.Add(ex.Message);
+                    configManager.Message.Add(ex.Message);
                     result = false;
                 }
             }

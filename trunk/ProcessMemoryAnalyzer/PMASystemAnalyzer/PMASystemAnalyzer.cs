@@ -201,8 +201,6 @@ namespace PMA.SystemAnalyzer
             sb.AppendLine("Physical Memory : " + PMAServiceProcessController.TotalPhysicalMemoryInKB / 1024 + " MB");
             sb.AppendLine("Available Physical Memory : " + PMAServiceProcessController.TotalFreePhysicalMemoryInKB / 1024 + " MB");
             sb.AppendLine("Processor Count : " + Environment.ProcessorCount);
-            sb.AppendLine("\r\nRegards");
-            sb.AppendLine("Cosmos Team");
             logger.Debug(EnumMethod.END);
             return sb.ToString();
 

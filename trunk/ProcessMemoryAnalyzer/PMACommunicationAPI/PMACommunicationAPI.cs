@@ -52,9 +52,9 @@ namespace PMA.CommunicationAPI
         #endregion 
 
         #region UserManagement
-        public string GetSessionID(string username, string password)
+        public string GetSessionID(string username, string passwordMD5)
         {
-            return userManager.GetSessionID(username, password);
+            return userManager.GetSessionID(username, passwordMD5);
         }
 
         public PMAUserInfo GetUserInfo(string sessionID)

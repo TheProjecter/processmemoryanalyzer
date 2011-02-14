@@ -73,13 +73,13 @@ namespace PMASysAlertsUI
 
         public bool CauseValidation()
         {
-            configManager.ClearErrorMessage();
+            configManager.ClearMessageList();
             label_Wait.Visible = true;
             bool result = false;
             PMADatabaseController dbController = new PMADatabaseController();
             if (textBox_Database.Text != string.Empty && !dbController.CreateDBConnection(textBox_Database.Text, textBox_DBUser.Text, textBox_DBPassword.Text))
             {
-                configManager.ErrorMessage.Add(dbController.Message);
+                configManager.Message.Add(dbController.Message);
                 result = false;
             }
             else result = true;

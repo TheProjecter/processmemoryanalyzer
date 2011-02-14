@@ -6,6 +6,8 @@ using System.IO;
 using System.Xml.Serialization;
 using System.ServiceModel;
 using System.Runtime.Serialization;
+using System.Security.Cryptography;
+
 
 namespace PMA.Info
 {
@@ -52,10 +54,23 @@ namespace PMA.Info
     public class PMAUserInfo
     {
 
+        private string _userPassword;
+
         [DataMember]
         public string UserName { get; set; }
 
-        public string UserPassword { get; set; }
+        public string UserPassword 
+        {
+            set
+            {
+                _userPassword = EncodePasswordToMD5(value);
+            }
+            get
+            {
+                return _userPassword;
+            }
+              
+        }
 
         [DataMember]
         public bool IsSQLUser { get; set; }
@@ -68,6 +83,30 @@ namespace PMA.Info
 
         [DataMember]
         public DateTime LastLoginTime { get; set; }
+
+        
+        /// <summary>
+        /// Encodes the password to md5.
+        /// </summary>
+        /// <param name="originalPassword">The original password.</param>
+        /// <returns></returns>
+        public static string EncodePasswordToMD5(string originalPassword)
+        {
+            //Declarations
+            Byte[] originalBytes;
+            Byte[] encodedBytes;
+            MD5 md5;
+
+            //Instantiate MD5CryptoServiceProvider, get bytes for original password and compute hash (encoded password)
+            md5 = new MD5CryptoServiceProvider();
+            originalBytes = ASCIIEncoding.Default.GetBytes(originalPassword);
+            encodedBytes = md5.ComputeHash(originalBytes);
+
+            //Convert encoded bytes back to a 'readable' string
+            return BitConverter.ToString(encodedBytes);
+        }
        
     }
+
+
 }

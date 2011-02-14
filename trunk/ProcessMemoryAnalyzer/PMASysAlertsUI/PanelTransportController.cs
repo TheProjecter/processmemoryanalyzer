@@ -97,7 +97,7 @@ namespace PMASysAlertsUI
         /// <returns></returns>
         public bool CauseValidation()
         {
-            configManager.ClearErrorMessage();
+            configManager.ClearMessageList();
             bool isValidEmail = true;
             string[] emails = null;
 
@@ -109,7 +109,7 @@ namespace PMASysAlertsUI
                     if (!Regex.IsMatch(email, REGX_VERIFY_EMAIL))
                     {
                         isValidEmail = false;
-                        configManager.ErrorMessage.Add("Invalid Email : " + email);
+                        configManager.Message.Add("Invalid Email : " + email);
                     }
                 }
             }
@@ -121,7 +121,7 @@ namespace PMASysAlertsUI
                     if (!Regex.IsMatch(email, REGX_VERIFY_EMAIL))
                     {
                         isValidEmail = false;
-                        configManager.ErrorMessage.Add("Invalid Email : " + email);
+                        configManager.Message.Add("Invalid Email : " + email);
                     }
                 }
             }
