@@ -202,9 +202,7 @@ namespace PMASysAlertsUI
                 row.Cells["Action"].Value = userInfo.IsActionUser;
                 row.Cells["Services"].Value = userInfo.IsServiceUser;
                 row.Cells["Password"].Value = "Reset";
-                //(row.Cells["Password"]. as Control).Click += new EventHandler(button_PasswordReset_Click);
                 row.Cells["RemoveUser"].Value = "Remove";
-                //(row.Cells["RemoveUser"] as Control).Click += new EventHandler(button_RemoveUser_Click);
             }
         }
 
@@ -220,7 +218,7 @@ namespace PMASysAlertsUI
             {
                 userInfo = new PMAUserInfo();
                 userInfo.UserName = row.Cells["User"].Value.ToString();
-                userInfo.UserPassword = row.Cells["PasswordString"].Value.ToString() ;
+                userInfo.UserPassword = row.Cells["PasswordString"].Value.ToString();
                 userInfo.IsActionUser = bool.Parse( row.Cells["Action"].Value.ToString());
                 userInfo.IsServiceUser = bool.Parse(row.Cells["Services"].Value.ToString());
                 userInfo.IsSQLUser = bool.Parse(row.Cells["SQL"].Value.ToString());

@@ -288,7 +288,7 @@ namespace PMA.ConfigManager
 
             File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE), PMAInfoObj.Serialize());
 
-            if (PMAUsers.ListPMAUserInfo.Count > 0)
+            if (PMAUsers.ListPMAUserInfo != null)
             {
                 File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMAUsers.PMA_USERS_FILE), PMAUsers.Serialize());
             }

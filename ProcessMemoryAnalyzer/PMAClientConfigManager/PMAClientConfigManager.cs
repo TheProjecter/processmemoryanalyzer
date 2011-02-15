@@ -137,10 +137,10 @@ namespace PMA.ConfigManager.Client
                             throw new Exception("ServerName or port is not Specified");
                         }
                         string baseAddress = String.Format(BASE_ADDRESS, _serverName, _port.ToString());
-                        //string baseAddress = "net.tcp://localhost:8085/PMA.CommunicationAPI.PMACommunicationAPI";
-                        ChannelFactory<IPMACommunicationContract> factory = new ChannelFactory<IPMACommunicationContract>
-                            (new NetTcpBinding(),
-                            new EndpointAddress(baseAddress));
+                        NetTcpBinding netTcpBinding = new NetTcpBinding();
+                        netTcpBinding.MaxBufferPoolSize = 524288;
+                        netTcpBinding.MaxReceivedMessageSize = 2147483600;
+                        ChannelFactory<IPMACommunicationContract> factory = new ChannelFactory<IPMACommunicationContract>(netTcpBinding, new EndpointAddress(baseAddress));
                         _proxy = factory.CreateChannel();
                     }
                     catch (Exception ex)

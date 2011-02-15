@@ -80,7 +80,7 @@ namespace PMA.PMAService
             }
             catch(Exception ex)
             {
-                File.WriteAllText(Environment.CurrentDirectory + "\\ServiceError.log", ex.Message + "\r\n"+ ex.StackTrace);
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "\\ServiceError.log", ex.Message + "\r\n" + ex.StackTrace);
             }
         }
 

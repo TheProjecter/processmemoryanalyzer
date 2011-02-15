@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using PMA.ConfigManager.Client;
 using PMA.CommunicationAPI;
 using PMA.Info;
-using PMA.Utils;
 
 namespace PMA.Client
 {
