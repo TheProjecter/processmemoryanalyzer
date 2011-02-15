@@ -200,6 +200,7 @@ namespace PMA.SystemAnalyzer
             DataSet dataset = new DataSet();
             try
             {
+                DataTable dt = null;
                 if (connection.State == ConnectionState.Closed)
                 {
                     connection.Open();
@@ -212,8 +213,8 @@ namespace PMA.SystemAnalyzer
                 }
                 else
                 {
-                    DataTable dt = dataset.Tables.Add();
-                    dataAdapter.Fill(dataset);
+                    dt = dataset.Tables.Add();
+                    dataAdapter.Fill(0, numberOfResults, dt);
                 }
                 
                 return dataset;

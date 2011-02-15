@@ -63,10 +63,17 @@ namespace PMA.Info
         {
             set
             {
-                _userPassword = EncodePasswordToMD5(value);
+                if (value != null && value != string.Empty && !value.Contains('Ω'))
+                {
+                    _userPassword = "Ω" + EncodePasswordToMD5(value);
+                }
             }
             get
             {
+                if (_userPassword != null && _userPassword.Length > 1 && _userPassword.IndexOf('Ω') == 0)
+                {
+                    return _userPassword.Substring(1);
+                }
                 return _userPassword;
             }
               
