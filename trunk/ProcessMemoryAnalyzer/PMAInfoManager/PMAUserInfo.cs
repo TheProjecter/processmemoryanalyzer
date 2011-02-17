@@ -54,30 +54,10 @@ namespace PMA.Info
     public class PMAUserInfo
     {
 
-        private string _userPassword;
-
         [DataMember]
         public string UserName { get; set; }
 
-        public string UserPassword 
-        {
-            set
-            {
-                if (value != null && value != string.Empty && !value.Contains('Ω'))
-                {
-                    _userPassword = "Ω" + EncodePasswordToMD5(value);
-                }
-            }
-            get
-            {
-                if (_userPassword != null && _userPassword.Length > 1 && _userPassword.IndexOf('Ω') == 0)
-                {
-                    return _userPassword.Substring(1);
-                }
-                return _userPassword;
-            }
-              
-        }
+        public string UserPassword { get; set; }
 
         [DataMember]
         public bool IsSQLUser { get; set; }
@@ -92,26 +72,7 @@ namespace PMA.Info
         public DateTime LastLoginTime { get; set; }
 
         
-        /// <summary>
-        /// Encodes the password to md5.
-        /// </summary>
-        /// <param name="originalPassword">The original password.</param>
-        /// <returns></returns>
-        public static string EncodePasswordToMD5(string originalPassword)
-        {
-            //Declarations
-            Byte[] originalBytes;
-            Byte[] encodedBytes;
-            MD5 md5;
-
-            //Instantiate MD5CryptoServiceProvider, get bytes for original password and compute hash (encoded password)
-            md5 = new MD5CryptoServiceProvider();
-            originalBytes = ASCIIEncoding.Default.GetBytes(originalPassword);
-            encodedBytes = md5.ComputeHash(originalBytes);
-
-            //Convert encoded bytes back to a 'readable' string
-            return BitConverter.ToString(encodedBytes);
-        }
+       
        
     }
 

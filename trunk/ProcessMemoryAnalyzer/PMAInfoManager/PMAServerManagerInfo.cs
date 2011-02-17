@@ -22,6 +22,10 @@ namespace PMA.Info
         public List<string> ListServices { get; set; }
         public List<string> ListActions { get; set; }
 
+        public List<string> EmailSqlRemoteActivitySubscribers { get; set; }
+        public List<string> EmailActionServicesSubsubscribers { get; set; }
+
+
 
         public string Serialize()
         {

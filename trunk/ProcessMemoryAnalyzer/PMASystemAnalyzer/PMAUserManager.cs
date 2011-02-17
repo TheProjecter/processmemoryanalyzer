@@ -73,9 +73,20 @@ namespace PMA.SystemAnalyzer
         public string GetSessionID(string username, string password)
         {
             logger.Debug(EnumMethod.START);
-            PMAUserInfo userInfo = (from info in PMAConfigManager.GetConfigManagerInstance.PMAUsers.ListPMAUserInfo
-                                    where info.UserName == username && info.UserPassword == password
-                                    select info).SingleOrDefault<PMAUserInfo>();
+            //PMAUserInfo userInfo = (from info in PMAConfigManager.GetConfigManagerInstance.PMAUsers.ListPMAUserInfo
+            //                        where info.UserName == username && info.UserPassword == password
+            //                        select info).SingleOrDefault<PMAUserInfo>();
+
+            PMAUserInfo userInfo = null;
+            foreach (PMAUserInfo tempUserInfo in configManager.PMAUsers.ListPMAUserInfo)
+            {
+                if (tempUserInfo.UserName == username && tempUserInfo.UserPassword == password)
+                {
+                    userInfo = tempUserInfo;
+                    break;
+                }
+            }
+            
             string sessionID = string.Empty;
             if (userInfo != null)
             {
@@ -83,6 +94,7 @@ namespace PMA.SystemAnalyzer
                 {
                     sessionID = CreateSessionID(userInfo);
                     userInfo.LastLoginTime = DateTime.Now;
+                    configManager.UpdateUserInformation();
                 }
             }
             logger.Debug(EnumMethod.END);

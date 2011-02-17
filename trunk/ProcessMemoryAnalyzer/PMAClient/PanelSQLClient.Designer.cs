@@ -39,6 +39,7 @@
             this.label_queryType = new System.Windows.Forms.Label();
             this.numericUpDown_Records = new System.Windows.Forms.NumericUpDown();
             this.label_NumberOfRecords = new System.Windows.Forms.Label();
+            this.label_sqlServerName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_SQLResults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Records)).BeginInit();
             this.SuspendLayout();
@@ -85,9 +86,9 @@
             this.label_SQLClientScreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_SQLClientScreen.Location = new System.Drawing.Point(15, 10);
             this.label_SQLClientScreen.Name = "label_SQLClientScreen";
-            this.label_SQLClientScreen.Size = new System.Drawing.Size(67, 13);
+            this.label_SQLClientScreen.Size = new System.Drawing.Size(159, 13);
             this.label_SQLClientScreen.TabIndex = 4;
-            this.label_SQLClientScreen.Text = "SQL Client";
+            this.label_SQLClientScreen.Text = "SQL Client Connected to : ";
             // 
             // label_Query
             // 
@@ -150,10 +151,20 @@
             this.label_NumberOfRecords.TabIndex = 10;
             this.label_NumberOfRecords.Text = "Max Records";
             // 
+            // label_sqlServerName
+            // 
+            this.label_sqlServerName.AutoSize = true;
+            this.label_sqlServerName.Location = new System.Drawing.Point(180, 10);
+            this.label_sqlServerName.Name = "label_sqlServerName";
+            this.label_sqlServerName.Size = new System.Drawing.Size(76, 13);
+            this.label_sqlServerName.TabIndex = 11;
+            this.label_sqlServerName.Text = "<serverName>";
+            // 
             // PanelSQLClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label_sqlServerName);
             this.Controls.Add(this.label_NumberOfRecords);
             this.Controls.Add(this.numericUpDown_Records);
             this.Controls.Add(this.label_queryType);
@@ -187,5 +198,6 @@
         private System.Windows.Forms.Label label_queryType;
         private System.Windows.Forms.NumericUpDown numericUpDown_Records;
         private System.Windows.Forms.Label label_NumberOfRecords;
+        private System.Windows.Forms.Label label_sqlServerName;
     }
 }

@@ -101,7 +101,11 @@ namespace PMA.SystemAnalyzer
             {
                 foreach (string action in actions)
                 {
-                    actionMessages.AppendLine(action + " : " + ExecuteAction(action));
+                    if (configManager.PMAServerManagerInfo.ListActions.Contains(action))
+                    {
+                        actionMessages.AppendLine(action + " : " + ExecuteAction(action));
+                    }
+                    else return action + " Does not exist on PMA server action definetion";
                 }
             }
             else
@@ -183,7 +187,11 @@ namespace PMA.SystemAnalyzer
             {
                 foreach (string service in servicesActions.Keys)
                 {
-                    serviceMessages.AppendLine(service + " : " + ServiceAction(service, servicesActions[service]));
+                    if (configManager.PMAServerManagerInfo.ListServices.Contains(service))
+                    {
+                        serviceMessages.AppendLine(service + " : " + ServiceAction(service, servicesActions[service]));
+                    }
+                    else return service + " Does not exist on PMA server service definetion";
                 }
             }
             else
@@ -259,7 +267,7 @@ namespace PMA.SystemAnalyzer
             
             try
             {
-                databaseController = new PMADatabaseController(configManager.SystemAnalyzerInfo.Database, configManager.SystemAnalyzerInfo.DBUser, configManager.SystemAnalyzerInfo.DBPassword);
+                databaseController = new PMADatabaseController(configManager.PMAServerManagerInfo.DatabaseServer, configManager.PMAServerManagerInfo.DatabaseUser, configManager.PMAServerManagerInfo.DatabaseUserPassword);
                 if (VerifySessionPrivileges(sessionID, PRIVILEGE_SQL))
                 {
                     return databaseController.ExecuteQuery(query, database, numberOfRows);
@@ -290,7 +298,7 @@ namespace PMA.SystemAnalyzer
 
             try
             {
-                databaseController = new PMADatabaseController(configManager.SystemAnalyzerInfo.Database, configManager.SystemAnalyzerInfo.DBUser, configManager.SystemAnalyzerInfo.DBPassword);
+                databaseController = new PMADatabaseController(configManager.PMAServerManagerInfo.DatabaseServer, configManager.PMAServerManagerInfo.DatabaseUser, configManager.PMAServerManagerInfo.DatabaseUserPassword);
                 if (VerifySessionPrivileges(sessionID, PRIVILEGE_SQL))
                 {
                     return databaseController.ExecuteNonQuery(query, database);
@@ -318,7 +326,7 @@ namespace PMA.SystemAnalyzer
 
              try
              {
-                 databaseController = new PMADatabaseController(configManager.SystemAnalyzerInfo.Database, configManager.SystemAnalyzerInfo.DBUser, configManager.SystemAnalyzerInfo.DBPassword);
+                 databaseController = new PMADatabaseController(configManager.PMAServerManagerInfo.DatabaseServer, configManager.PMAServerManagerInfo.DatabaseUser, configManager.PMAServerManagerInfo.DatabaseUserPassword);
                  if (VerifySessionPrivileges(sessionID, PRIVILEGE_SQL))
                  {
                      return databaseController.GetDatabaseNames();
@@ -332,6 +340,15 @@ namespace PMA.SystemAnalyzer
                  logger.Debug(EnumMethod.END);
              }
 
+        }
+
+        public static string GetSQLServerName(string sessionID)
+        {
+            if (VerifySessionPrivileges(sessionID, PRIVILEGE_SQL))
+            {
+                return configManager.PMAServerManagerInfo.DatabaseServer + " on " + Environment.MachineName;
+            }
+            else return string.Empty;
         }
 
 
@@ -375,7 +392,7 @@ namespace PMA.SystemAnalyzer
         /// <summary>
         /// Sends the mail.
         /// </summary>
-        private void SendMail(string alertType, string alertMessage)
+        private void SendMail(string alertType, string alertMessage, string userName)
         {
             configManager.Logger.Debug(EnumMethod.START);
             string subject = "PMA System Alerts : "+  alertType + ": " + configManager.SystemAnalyzerInfo.ClientInstanceName + " : " + Environment.MachineName + " : " + " at " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
@@ -383,7 +400,7 @@ namespace PMA.SystemAnalyzer
             try
             {
                 smtp.SendAsynchronous = false;
-                smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListAlertMailSubscription, null, subject, alertMessage, null);
+                smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListAlertMailSubscription, null, subject, GenerateMessageBody(alertMessage,userName), null);
             }
             catch (Exception ex)
             {
@@ -397,7 +414,7 @@ namespace PMA.SystemAnalyzer
         /// Generates the message body.
         /// </summary>
         /// <returns></returns>
-        private string GenerateMessageBody(string message)
+        private string GenerateMessageBody(string message,string forUser)
         {
             configManager.Logger.Debug(EnumMethod.START);
             StringBuilder builder = new StringBuilder();
@@ -408,6 +425,8 @@ namespace PMA.SystemAnalyzer
             builder.Append("Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
             builder.Append("\r\n");
             builder.Append(message);
+            builder.Append("\r\n");
+            builder.Append("Alert Is Generated by : " + forUser);
             builder.Append("\r\n");
             builder.Append("\r\n");
             builder.Append("\r\n");

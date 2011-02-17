@@ -32,13 +32,13 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel_LeftMenu = new System.Windows.Forms.TableLayoutPanel();
             this.label_SQL = new System.Windows.Forms.Label();
             this.label_Services = new System.Windows.Forms.Label();
             this.label_Actions = new System.Windows.Forms.Label();
             this.panel_MainContainer = new System.Windows.Forms.Panel();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel_LeftMenu.SuspendLayout();
@@ -77,6 +77,13 @@
             this.logoutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -149,13 +156,6 @@
             this.panel_MainContainer.Size = new System.Drawing.Size(852, 460);
             this.panel_MainContainer.TabIndex = 2;
             // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
             // PMAClientUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -169,6 +169,7 @@
             this.Name = "PMAClientUI";
             this.Text = "PMAClient";
             this.Shown += new System.EventHandler(this.PMAClientUI_Shown);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PMAClientUI_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);

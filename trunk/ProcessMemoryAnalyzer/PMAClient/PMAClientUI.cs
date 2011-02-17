@@ -219,14 +219,27 @@ namespace PMA.Client
 
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            configManager.GetConnectionChannel.LogoutSession(configManager.clientRuntimeInfo.sessionID);
+            Logout();
             DisableLeftMenu();
             ShowLoginForm();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Logout();
+            this.Close();
+        }
+
+        private void Logout()
+        {
             configManager.SaveConfiguration();
+            configManager.GetConnectionChannel.LogoutSession(configManager.clientRuntimeInfo.sessionID);
+            configManager.CloseConnectionChannel();
+        }
+
+        private void PMAClientUI_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Logout();
             this.Close();
         }
       
