@@ -37,6 +37,7 @@ namespace PMA.Client
             {
                 comboBox_Databases.SelectedIndex = 0;
             }
+            label_sqlServerName.Text = proxy.GetSQLServerName(sessionID);
         }
 
         public void UpdateConfig()
@@ -99,6 +100,7 @@ namespace PMA.Client
             }
         }
 
+       
         
     }
 }

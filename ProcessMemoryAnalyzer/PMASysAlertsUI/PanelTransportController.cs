@@ -67,8 +67,7 @@ namespace PMASysAlertsUI
                 }
                 richTextBox_EmailsPMAReport.Text = sb.ToString();
             }
-
-       
+      
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -87,6 +86,16 @@ namespace PMASysAlertsUI
             if (richTextBox_EmailsPMAReport.Text != string.Empty)
             {
                 configManager.SystemAnalyzerInfo.ListPMAReportSubscription = richTextBox_EmailsPMAReport.Text.Split(';').ToList<string>();
+            }
+
+            if (richTextBox_sqlSubscibtion.Text != string.Empty)
+            {
+                configManager.PMAServerManagerInfo.EmailSqlRemoteActivitySubscribers= richTextBox_EmailsPMAReport.Text.Split(';').ToList<string>();
+            }
+
+            if (richTextBox_ActionServices.Text != string.Empty)
+            {
+                configManager.PMAServerManagerInfo.EmailActionServicesSubsubscribers = richTextBox_EmailsPMAReport.Text.Split(';').ToList<string>();
             }
         }
 

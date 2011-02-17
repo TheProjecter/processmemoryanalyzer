@@ -36,7 +36,11 @@ namespace PMASysAlertsUI
         {
             textBox_MachineName.Text = configManager.PMAInfoObj.MachineName;
             checkBox_disposeFiles.Checked = configManager.PMAInfoObj.DisposeLogFile ;
-            dateTimePicker_MailTime.Value = configManager.PMAInfoObj.MailingTime;
+            if (configManager.PMAInfoObj.MailingTime < DateTime.Now)
+            {
+                dateTimePicker_MailTime.Value = DateTime.Now;
+            }
+            else dateTimePicker_MailTime.Value = configManager.PMAInfoObj.MailingTime;
             numericUpDown_Trigger.Value = configManager.PMAInfoObj.TriggerSeed;
             numericUpDown_ReportInterval.Value = configManager.PMAInfoObj.ReportsIntervalHours;
         }

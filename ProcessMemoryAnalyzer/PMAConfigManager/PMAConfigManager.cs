@@ -295,6 +295,17 @@ namespace PMA.ConfigManager
 
             File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMAServerManagerInfo.PMA_SERVER_MANAGER_INFO), PMAServerManagerInfo.Serialize());
         }
+
+        /// <summary>
+        /// Updates the user information.
+        /// </summary>
+        public void UpdateUserInformation()
+        {
+            if (PMAUsers.ListPMAUserInfo != null)
+            {
+                File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMAUsers.PMA_USERS_FILE), PMAUsers.Serialize());
+            }
+        }
         #endregion
 
 

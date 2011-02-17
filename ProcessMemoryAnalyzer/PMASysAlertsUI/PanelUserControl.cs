@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using PMA.ConfigManager;
 using PMA.Info;
+using PMA.Utils;
 
 namespace PMASysAlertsUI
 {
@@ -98,7 +99,7 @@ namespace PMASysAlertsUI
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void button_ChangePassword_Click(object sender, EventArgs e)
         {
-            dataGridView_users.Rows[rowIndex].Cells["PasswordString"].Value = textBox_NewPassword.Text;
+            dataGridView_users.Rows[rowIndex].Cells["PasswordString"].Value = OperationUtils.EncodePasswordToMD5(textBox_NewPassword.Text);
             PasswordResetForm.Close();
             PasswordResetForm.Dispose();
             MessageBox.Show("Password is changed for user " + dataGridView_users.Rows[rowIndex].Cells["User"].Value.ToString());
@@ -138,7 +139,7 @@ namespace PMASysAlertsUI
             {
                 DataGridViewRow row = dataGridView_users.Rows[dataGridView_users.Rows.Add()];
                 row.Cells["User"].Value = textBox_User.Text;
-                row.Cells["PasswordString"].Value = textBox_Password.Text;
+                row.Cells["PasswordString"].Value = OperationUtils.EncodePasswordToMD5(textBox_Password.Text);
                 row.Cells["SQL"].Value = checkBox_SQL.Checked;
                 row.Cells["Action"].Value = checkBox_Action.Checked;
                 row.Cells["Services"].Value = checkBox_Services.Checked;

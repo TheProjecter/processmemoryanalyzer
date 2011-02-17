@@ -86,6 +86,11 @@ namespace PMA.CommunicationAPI
             return PMAServerManager.GetDatabaseNames(sessionID);
         }
 
+        public string GetSQLServerName(string sessionID)
+        {
+            return PMAServerManager.GetSQLServerName(sessionID);
+        }
+
         #endregion 
 
         #endregion

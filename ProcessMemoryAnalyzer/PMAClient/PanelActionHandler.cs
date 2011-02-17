@@ -36,7 +36,10 @@ namespace PMA.Client
         {
             List<string> availableActions = proxy.GetAvailableActions(sessionID);
             checkedListBox_AvailableActions.Items.Clear();
-            checkedListBox_AvailableActions.Items.AddRange(proxy.GetAvailableActions(sessionID).ToArray());
+            if (availableActions != null && availableActions.Count > 0)
+            {
+                checkedListBox_AvailableActions.Items.AddRange(proxy.GetAvailableActions(sessionID).ToArray());
+            }
         }
 
 

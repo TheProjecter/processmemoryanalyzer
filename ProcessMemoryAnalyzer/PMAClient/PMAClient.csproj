@@ -12,6 +12,7 @@
     <AssemblyName>PMAClient</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -139,8 +140,13 @@
       <Project>{66628469-3255-430A-834D-EB192F32D6C3}</Project>
       <Name>PMAInfoManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PMAUtils\PMAUtils.csproj">
+      <Project>{3AD8D720-A6E4-4D4B-B94D-4E78BE843520}</Project>
+      <Name>PMAUtils</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.manifest" />
     <None Include="Resources\loadingAnimation.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

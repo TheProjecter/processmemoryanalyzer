@@ -32,8 +32,33 @@ namespace PMA.Utils
                 return outSb.ToString();
             }
             else return null;
+       
         }
 
-        
+        /// <summary>
+        /// Encodes the password to md5.
+        /// </summary>
+        /// <param name="originalPassword">The original password.</param>
+        /// <returns></returns>
+        public static string EncodePasswordToMD5(string originalPassword)
+        {
+            //Declarations
+            Byte[] originalBytes;
+            Byte[] encodedBytes;
+            MD5 md5;
+
+            //Instantiate MD5CryptoServiceProvider, get bytes for original password and compute hash (encoded password)
+            md5 = new MD5CryptoServiceProvider();
+            originalBytes = ASCIIEncoding.Default.GetBytes(originalPassword);
+            encodedBytes = md5.ComputeHash(originalBytes);
+
+            //Convert encoded bytes back to a 'readable' string
+            return BitConverter.ToString(encodedBytes);
+        }
+
+
+
+
+
     }
 }

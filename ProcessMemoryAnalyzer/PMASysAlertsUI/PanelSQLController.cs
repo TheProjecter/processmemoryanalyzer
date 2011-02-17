@@ -68,12 +68,16 @@ namespace PMASysAlertsUI
         /// <returns></returns>
         public bool CauseValidation()
         {
-            TestConnection();
-            if (isConnectionSet)
+            if (textBox_Database.Text != string.Empty)
             {
-                return true;
+                TestConnection();
+                if (isConnectionSet)
+                {
+                    return true;
+                }
+                else return false;
             }
-            else return false;
+            else return true;
 
         }
 

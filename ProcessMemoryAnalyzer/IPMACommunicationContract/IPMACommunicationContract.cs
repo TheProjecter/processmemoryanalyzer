@@ -46,5 +46,8 @@ namespace PMA.CommunicationAPI
 
         [OperationContract]
         List<string> GetDatabasesNames(string sessionID);
+
+        [OperationContract]
+        string GetSQLServerName(string sessionID);
     }
 }

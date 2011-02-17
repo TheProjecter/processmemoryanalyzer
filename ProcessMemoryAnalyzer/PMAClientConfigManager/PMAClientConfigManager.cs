@@ -127,29 +127,36 @@ namespace PMA.ConfigManager.Client
         {
             get
             {
-                if (_proxy == null || !_proxy.VerfiyConnection())
+                try
                 {
-                    
-                    try
+                    if (_proxy == null || !_proxy.VerfiyConnection())
                     {
-                        if (_serverName == string.Empty || _port == 0)
+
+                        try
                         {
-                            throw new Exception("ServerName or port is not Specified");
+                            if (_serverName == string.Empty || _port == 0)
+                            {
+                                throw new Exception("ServerName or port is not Specified");
+                            }
+                            string baseAddress = String.Format(BASE_ADDRESS, _serverName, _port.ToString());
+                            NetTcpBinding netTcpBinding = new NetTcpBinding();
+                            netTcpBinding.MaxBufferPoolSize = 524288;
+                            netTcpBinding.MaxReceivedMessageSize = 2147483600;
+                            ChannelFactory<IPMACommunicationContract> factory = new ChannelFactory<IPMACommunicationContract>(netTcpBinding, new EndpointAddress(baseAddress));
+                            _proxy = factory.CreateChannel();
                         }
-                        string baseAddress = String.Format(BASE_ADDRESS, _serverName, _port.ToString());
-                        NetTcpBinding netTcpBinding = new NetTcpBinding();
-                        netTcpBinding.MaxBufferPoolSize = 524288;
-                        netTcpBinding.MaxReceivedMessageSize = 2147483600;
-                        ChannelFactory<IPMACommunicationContract> factory = new ChannelFactory<IPMACommunicationContract>(netTcpBinding, new EndpointAddress(baseAddress));
-                        _proxy = factory.CreateChannel();
+                        catch (Exception ex)
+                        {
+                            _errorMessage.Add(ex.Message);
+                        }
+                        return _proxy;
                     }
-                    catch (Exception ex)
-                    {
-                        _errorMessage.Add(ex.Message);
-                    }
-                    return _proxy;
+                    else return _proxy;
                 }
-                else return _proxy;
+                catch 
+                {
+                    return null;
+                }
             }
         }
 
