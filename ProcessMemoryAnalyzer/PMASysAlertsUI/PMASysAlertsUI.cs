@@ -10,6 +10,8 @@ using PMA.Utils.ftp;
 using PMA.Utils.smtp;
 using PMA.ConfigManager;
 using PMA.SystemAnalyzer;
+using PMA.ProcessMemoryAnalyzer;
+
 
 namespace PMASysAlertsUI
 {
@@ -28,7 +30,7 @@ namespace PMASysAlertsUI
         PanelPhyMemWatcher panelPhyMemController = null;
         PanelServiceWatcher panelServiceWatcher = null;
         PanelDatabaseWatcher panelDatabaseWatcher = null;
-        PanelTransportController panelTransportController = null;
+        PanelSubscriptionController panelTransportController = null;
         PanelSMTPSettings panelSMTPSettings = null;
         PanelFTPSettings panelFTPSettings = null;
         PanelHome panelHome = null;
@@ -71,7 +73,7 @@ namespace PMASysAlertsUI
                 case ENUMPanel.PANEL_SMTP_SETTINGS:
                     result = panelSMTPSettings.CauseValidation();
                     break;
-                case ENUMPanel.PANEL_TRANSPORT_CONTROLLER:
+                case ENUMPanel.PANEL_SUBSCRIPTION_CONTROLLER:
                     result = panelTransportController.CauseValidation();
                     break;
                 case ENUMPanel.PANEL_LOGGER :
@@ -131,7 +133,7 @@ namespace PMASysAlertsUI
                 case ENUMPanel.PANEL_SMTP_SETTINGS:
                     panelSMTPSettings.UpdateConfig();
                     break;
-                case ENUMPanel.PANEL_TRANSPORT_CONTROLLER:
+                case ENUMPanel.PANEL_SUBSCRIPTION_CONTROLLER:
                     panelTransportController.UpdateConfig();
                     break;
                 case ENUMPanel.PANEL_LOGGER:
@@ -195,7 +197,7 @@ namespace PMASysAlertsUI
                     HideAllControls();
                     panelSMTPSettings.Show();
                     break;
-                case ENUMPanel.PANEL_TRANSPORT_CONTROLLER:
+                case ENUMPanel.PANEL_SUBSCRIPTION_CONTROLLER:
                     HideAllControls();
                     panelTransportController.Show();
                     break;
@@ -266,7 +268,7 @@ namespace PMASysAlertsUI
             panelDatabaseWatcher = new PanelDatabaseWatcher();
             panel_MainContainer.Controls.Add(panelDatabaseWatcher);
 
-            panelTransportController = new PanelTransportController();
+            panelTransportController = new PanelSubscriptionController();
             panel_MainContainer.Controls.Add(panelTransportController);
 
             panelSMTPSettings = new PanelSMTPSettings();
@@ -423,7 +425,7 @@ namespace PMASysAlertsUI
             if (CauseValidation())
             {
                 UpdateConfig(PANEL);
-                ShowPanel(ENUMPanel.PANEL_TRANSPORT_CONTROLLER);
+                ShowPanel(ENUMPanel.PANEL_SUBSCRIPTION_CONTROLLER);
             }
             else
                 MessageBox.Show(this, configManager.GetConsolidatedError("Error"));

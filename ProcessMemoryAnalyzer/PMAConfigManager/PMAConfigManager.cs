@@ -262,8 +262,9 @@ namespace PMA.ConfigManager
                         DatabaseUser = string.Empty,
                         DatabaseUserPassword = string.Empty,
                         SystemUser = string.Empty,
-                        SystemUserPassword = string.Empty
-
+                        SystemUserPassword = string.Empty,
+                        EmailActionServicesSubsubscribers = new List<string>(),
+                        EmailSqlRemoteActivitySubscribers = new List<string>()
                     };
                 }
             }
