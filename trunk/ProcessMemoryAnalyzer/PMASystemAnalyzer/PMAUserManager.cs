@@ -98,6 +98,12 @@ namespace PMA.SystemAnalyzer
                 }
             }
             logger.Debug(EnumMethod.END);
+            if (sessionID != null && sessionID != string.Empty)
+            {
+                string message = "User " + userInfo.UserName + " Has Logged into system";
+                PMAMailController mailController = new PMAMailController(message, AlertType.USER_ALERT, userInfo.UserName);
+                mailController.SendMail();
+            }
             return sessionID;
         }
 

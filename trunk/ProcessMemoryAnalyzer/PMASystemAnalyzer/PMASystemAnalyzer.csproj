@@ -52,6 +52,7 @@
     <Compile Include="PMAEventReporting.cs" />
     <Compile Include="PMADatabaseController.cs" />
     <Compile Include="PMAFlowController.cs" />
+    <Compile Include="PMAMailController.cs" />
     <Compile Include="PMAServerManager.cs" />
     <Compile Include="PMASystemAnalyzer.cs" />
     <Compile Include="PMAUserManager.cs" />

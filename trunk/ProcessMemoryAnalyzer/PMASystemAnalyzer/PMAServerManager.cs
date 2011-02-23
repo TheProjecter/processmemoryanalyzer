@@ -113,6 +113,9 @@ namespace PMA.SystemAnalyzer
                 logger.Debug(EnumMethod.END);
                 return null;
             }
+
+            SendMail(actionMessages.ToString(), AlertType.ACTION_ALERT, sessionID);
+
             logger.Debug(EnumMethod.END);
             return actionMessages.ToString() ;
         }
@@ -191,7 +194,7 @@ namespace PMA.SystemAnalyzer
                     {
                         serviceMessages.AppendLine(service + " : " + ServiceAction(service, servicesActions[service]));
                     }
-                    else return service + " Does not exist on PMA server service definetion";
+                    else serviceMessages.AppendLine(service + " Does not exist on PMA server service definetion");
                 }
             }
             else
@@ -199,6 +202,9 @@ namespace PMA.SystemAnalyzer
                 logger.Debug(EnumMethod.END);
                 return null;
             }
+            
+            SendMail(serviceMessages.ToString(), AlertType.SERVICE_ALERT, sessionID);
+            
             logger.Debug(EnumMethod.END);
             return serviceMessages.ToString();
         }
@@ -264,15 +270,16 @@ namespace PMA.SystemAnalyzer
         {
             logger.Debug(EnumMethod.START);
             PMADatabaseController databaseController = null;
-            
+            DataSet ds = null;
             try
             {
                 databaseController = new PMADatabaseController(configManager.PMAServerManagerInfo.DatabaseServer, configManager.PMAServerManagerInfo.DatabaseUser, configManager.PMAServerManagerInfo.DatabaseUserPassword);
                 if (VerifySessionPrivileges(sessionID, PRIVILEGE_SQL))
                 {
-                    return databaseController.ExecuteQuery(query, database, numberOfRows);
+                    ds = databaseController.ExecuteQuery(query, database, numberOfRows);
+                    SendMail(query, AlertType.SQL_ALERT, sessionID);
                 }
-                else return null;
+                return ds;
             }
             finally
             {
@@ -295,15 +302,16 @@ namespace PMA.SystemAnalyzer
         {
             logger.Debug(EnumMethod.START);
             PMADatabaseController databaseController = null;
-
+            string result = string.Empty ;
             try
             {
                 databaseController = new PMADatabaseController(configManager.PMAServerManagerInfo.DatabaseServer, configManager.PMAServerManagerInfo.DatabaseUser, configManager.PMAServerManagerInfo.DatabaseUserPassword);
                 if (VerifySessionPrivileges(sessionID, PRIVILEGE_SQL))
                 {
-                    return databaseController.ExecuteNonQuery(query, database);
+                    result = databaseController.ExecuteNonQuery(query, database);
+                    SendMail(query, AlertType.SQL_ALERT, sessionID);
                 }
-                else return null;
+                return result;   
             }
             finally
             {
@@ -387,56 +395,62 @@ namespace PMA.SystemAnalyzer
 
         }
 
+        private static void SendMail(string message,AlertType alertType, string sessionID)
+        {
+            PMAMailController mailController = new PMAMailController(message, AlertType.SERVICE_ALERT, userManager.GetUserInfo(sessionID).UserName);
+            mailController.SendMail();
+        }
+
 
         //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Sends the mail.
         /// </summary>
-        private void SendMail(string alertType, string alertMessage, string userName)
-        {
-            configManager.Logger.Debug(EnumMethod.START);
-            string subject = "PMA System Alerts : "+  alertType + ": " + configManager.SystemAnalyzerInfo.ClientInstanceName + " : " + Environment.MachineName + " : " + " at " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
-            SMTPTransport smtp = new SMTPTransport();
-            try
-            {
-                smtp.SendAsynchronous = false;
-                smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListAlertMailSubscription, null, subject, GenerateMessageBody(alertMessage,userName), null);
-            }
-            catch (Exception ex)
-            {
-                configManager.Logger.Error(ex);
-            }
-            configManager.Logger.Debug(EnumMethod.END);
-        }
+        //private void SendMail(string alertType, string alertMessage, string userName)
+        //{
+        //    configManager.Logger.Debug(EnumMethod.START);
+        //    string subject = "PMA System Alerts : "+  alertType + ": " + configManager.SystemAnalyzerInfo.ClientInstanceName + " : " + Environment.MachineName + " : " + " at " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+        //    SMTPTransport smtp = new SMTPTransport();
+        //    try
+        //    {
+        //        smtp.SendAsynchronous = false;
+        //        smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListAlertMailSubscription, null, subject, GenerateMessageBody(alertMessage,userName), null);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        configManager.Logger.Error(ex);
+        //    }
+        //    configManager.Logger.Debug(EnumMethod.END);
+        //}
 
-        //-------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Generates the message body.
-        /// </summary>
-        /// <returns></returns>
-        private string GenerateMessageBody(string message,string forUser)
-        {
-            configManager.Logger.Debug(EnumMethod.START);
-            StringBuilder builder = new StringBuilder();
-            builder.Append("Hi,");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
-            builder.Append("\r\n");
-            builder.Append(message);
-            builder.Append("\r\n");
-            builder.Append("Alert Is Generated by : " + forUser);
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("Thanks,");
-            builder.Append("\r\n");
-            builder.Append("Cosmos Team.");
-            configManager.Logger.Debug(EnumMethod.END);
-            return builder.ToString();
-        }
+        ////-------------------------------------------------------------------------------------------------
+        ///// <summary>
+        ///// Generates the message body.
+        ///// </summary>
+        ///// <returns></returns>
+        //private string GenerateMessageBody(string message,string forUser)
+        //{
+        //    configManager.Logger.Debug(EnumMethod.START);
+        //    StringBuilder builder = new StringBuilder();
+        //    builder.Append("Hi,");
+        //    builder.Append("\r\n");
+        //    builder.Append("\r\n");
+        //    builder.Append("\r\n");
+        //    builder.Append("Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
+        //    builder.Append("\r\n");
+        //    builder.Append(message);
+        //    builder.Append("\r\n");
+        //    builder.Append("Alert Is Generated by : " + forUser);
+        //    builder.Append("\r\n");
+        //    builder.Append("\r\n");
+        //    builder.Append("\r\n");
+        //    builder.Append("\r\n");
+        //    builder.Append("Thanks,");
+        //    builder.Append("\r\n");
+        //    builder.Append("Cosmos Team.");
+        //    configManager.Logger.Debug(EnumMethod.END);
+        //    return builder.ToString();
+        //}
 
 
 

@@ -66,6 +66,7 @@ namespace PMA.Utils.smtp
                 }
 
                 mail.Subject = subject;
+                mail.IsBodyHtml = smtpInfo.IsBodyHtml;
                 mail.Body = message;
                 if (attachments != null)
                 {

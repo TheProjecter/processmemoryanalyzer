@@ -199,12 +199,14 @@ namespace PMA.SystemAnalyzer
         private void SendMail()
         {
             configManager.Logger.Debug(EnumMethod.START);
-            string subject = "PMA System Alerts : General : " + configManager.SystemAnalyzerInfo.ClientInstanceName + " : " + systemName + " : " + " at " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() ;
+            //string subject = "PMA System Alerts : General : " + configManager.SystemAnalyzerInfo.ClientInstanceName + " : " + systemName + " : " + " at " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() ;
             SMTPTransport smtp = new SMTPTransport();
             try
             {
-                smtp.SendAsynchronous = false;
-                smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListAlertMailSubscription, null, subject, GenerateMessageBody(), null);
+                //smtp.SendAsynchronous = false;
+                //smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListAlertMailSubscription, null, subject, GenerateMessageBody(), null);
+                PMAMailController mailer = new PMAMailController(configManager.GetConsolidatedError("System Alert"), AlertType.GENERAL_ALERT, null);
+                mailer.SendMail();
             }
             catch(Exception ex)
             {
@@ -228,7 +230,8 @@ namespace PMA.SystemAnalyzer
             try
             {
                 string tempFileName = configManager.PostDir + "\\PMA_ALERTS_" + systemName+ "_" + configManager.SystemAnalyzerInfo.ClientInstanceName + ".txt";
-                File.WriteAllText(tempFileName, GenerateMessageBody());
+                PMAMailController mailer = new PMAMailController(configManager.GetConsolidatedError("System Alert"), AlertType.GENERAL_ALERT, null);
+                File.WriteAllText(tempFileName, mailer.GenerateMessageBody());
                 FTPTransport ftpTransport = new FTPTransport();
                 List<string> filetoUpload = new List<string>();
                 filetoUpload.Add(tempFileName);
@@ -250,31 +253,31 @@ namespace PMA.SystemAnalyzer
             configManager.Logger.Debug(EnumMethod.END);
         }
 
-        //-------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Generates the message body.
-        /// </summary>
-        /// <returns></returns>
-        private string GenerateMessageBody()
-        {
-            configManager.Logger.Debug(EnumMethod.START);
-            StringBuilder builder = new StringBuilder();
-            builder.Append("Hi,");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("Alert Generated For machine :" + systemName +" : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
-            builder.Append("\r\n");
-            builder.Append(configManager.GetConsolidatedError("System Alert"));
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("Thanks,");
-            builder.Append("\r\n");
-            builder.Append("Cosmos Team.");
-            configManager.Logger.Debug(EnumMethod.END);
-            return builder.ToString();
-        }
+        ////-------------------------------------------------------------------------------------------------
+        ///// <summary>
+        ///// Generates the message body.
+        ///// </summary>
+        ///// <returns></returns>
+        //private string GenerateMessageBody()
+        //{
+        //    configManager.Logger.Debug(EnumMethod.START);
+        //    StringBuilder builder = new StringBuilder();
+        //    builder.Append("Hi,");
+        //    builder.Append("\r\n");
+        //    builder.Append("\r\n");
+        //    builder.Append("\r\n");
+        //    builder.Append("Alert Generated For machine :" + systemName +" : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
+        //    builder.Append("\r\n");
+        //    builder.Append(configManager.GetConsolidatedError("System Alert"));
+        //    builder.Append("\r\n");
+        //    builder.Append("\r\n");
+        //    builder.Append("\r\n");
+        //    builder.Append("\r\n");
+        //    builder.Append("Thanks,");
+        //    builder.Append("\r\n");
+        //    builder.Append("Cosmos Team.");
+        //    configManager.Logger.Debug(EnumMethod.END);
+        //    return builder.ToString();
+        //}
     }
 }

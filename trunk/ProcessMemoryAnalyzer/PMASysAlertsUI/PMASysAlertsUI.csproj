@@ -188,8 +188,8 @@
     <EmbeddedResource Include="PanelSystemInformation.resx">
       <DependentUpon>PanelSystemInformation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PanelTransportController.resx">
-      <DependentUpon>PanelTransportController.cs</DependentUpon>
+    <EmbeddedResource Include="PanelSubscriptionController.resx">
+      <DependentUpon>PanelSubscriptionController.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelLogger.resx">
       <DependentUpon>PanelLogger.cs</DependentUpon>
@@ -229,11 +229,11 @@
     <Compile Include="PanelDriveController.Designer.cs">
       <DependentUpon>PanelDriveController.cs</DependentUpon>
     </Compile>
-    <Compile Include="PanelTransportController.cs">
+    <Compile Include="PanelSubscriptionController.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PanelTransportController.Designer.cs">
-      <DependentUpon>PanelTransportController.cs</DependentUpon>
+    <Compile Include="PanelSubscriptionController.Designer.cs">
+      <DependentUpon>PanelSubscriptionController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -71,55 +71,64 @@ namespace PMA.SystemAnalyzer
         private void SendMail()
         {
             configManager.Logger.Debug(EnumMethod.START);
-            string subject = "PMA System Alerts : Events : " + configManager.SystemAnalyzerInfo.ClientInstanceName + " : " + Environment.MachineName + " : " +
-                " at " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
-            SMTPTransport smtp = new SMTPTransport();
-            try
-            {
-                smtp.SendAsynchronous = true;
-                smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListAlertMailSubscription, null, subject, GenerateMessageBody(), null);
-            }
-            catch(Exception ex)
-            {
-                configManager.Logger.Error(ex);
-            }
-            configManager.Logger.Debug(EnumMethod.END);
-        }
-
-
-        //-------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Generates the message body.
-        /// </summary>
-        /// <returns></returns>
-        private string GenerateMessageBody()
-        {
-            configManager.Logger.Debug(EnumMethod.START);
-            StringBuilder builder = new StringBuilder();
-            builder.Append("Hi,");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("Event Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
-            builder.Append("\r\n Total RAM :" + PMAServiceProcessController.TotalPhysicalMemoryInKB);
-            builder.Append("\r\n Available RAM :" + PMAServiceProcessController.TotalFreePhysicalMemoryInKB);
-            builder.Append("\r\n CPU Usage : " + PMAServiceProcessController.CPUPercentageUsageAtMoment + "%");
-            builder.Append("\r\n");
+            //string subject = "PMA System Alerts : Events : " + configManager.SystemAnalyzerInfo.ClientInstanceName + " : " + Environment.MachineName + " : " +
+            //    " at " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+            //SMTPTransport smtp = new SMTPTransport();
+            //try
+            //{
+            //    smtp.SendAsynchronous = true;
+            //    smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListAlertMailSubscription, null, subject, GenerateMessageBody(), null);
+            //}
+            //catch(Exception ex)
+            //{
+            //    configManager.Logger.Error(ex);
+            //}
+            StringBuilder messageBuilder = new StringBuilder();
             foreach (EventLogEntry logEntry in listEntryLog)
             {
-                builder.Append("r\n" + logEntry.Category);
-                builder.Append("\r\n"+logEntry.EntryType.ToString() + " : " + logEntry.MachineName + " : " + logEntry.TimeGenerated.ToShortDateString() + "  " + logEntry.TimeGenerated.ToShortTimeString() + "\r\n" + logEntry.Message);
+                messageBuilder.Append("r\n" + logEntry.Category);
+                messageBuilder.Append("\r\n"+logEntry.EntryType.ToString() + " : " + logEntry.MachineName + " : " + logEntry.TimeGenerated.ToShortDateString() + "  " + logEntry.TimeGenerated.ToShortTimeString() + "\r\n" + logEntry.Message);
             }
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("Thanks,");
-            builder.Append("\r\n");
-            builder.Append("Cosmos Team.");
+            
+            PMAMailController mailController = new PMAMailController(messageBuilder.ToString(), AlertType.EVENT_ALERT, null);
+            mailController.SendMail();
             configManager.Logger.Debug(EnumMethod.END);
-            return builder.ToString();
         }
+
+
+        ////-------------------------------------------------------------------------------------------------
+        ///// <summary>
+        ///// Generates the message body.
+        ///// </summary>
+        ///// <returns></returns>
+        //private string GenerateMessageBody()
+        //{
+        //    configManager.Logger.Debug(EnumMethod.START);
+        //    StringBuilder builder = new StringBuilder();
+        //    builder.Append("Hi,");
+        //    builder.Append("\r\n");
+        //    builder.Append("\r\n");
+        //    builder.Append("\r\n");
+        //    builder.Append("Event Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
+        //    builder.Append("\r\n Total RAM :" + PMAServiceProcessController.TotalPhysicalMemoryInKB);
+        //    builder.Append("\r\n Available RAM :" + PMAServiceProcessController.TotalFreePhysicalMemoryInKB);
+        //    builder.Append("\r\n CPU Usage : " + PMAServiceProcessController.CPUPercentageUsageAtMoment + "%");
+        //    builder.Append("\r\n");
+        //    foreach (EventLogEntry logEntry in listEntryLog)
+        //    {
+        //        builder.Append("r\n" + logEntry.Category);
+        //        builder.Append("\r\n"+logEntry.EntryType.ToString() + " : " + logEntry.MachineName + " : " + logEntry.TimeGenerated.ToShortDateString() + "  " + logEntry.TimeGenerated.ToShortTimeString() + "\r\n" + logEntry.Message);
+        //    }
+        //    builder.Append("\r\n");
+        //    builder.Append("\r\n");
+        //    builder.Append("\r\n");
+        //    builder.Append("\r\n");
+        //    builder.Append("Thanks,");
+        //    builder.Append("\r\n");
+        //    builder.Append("Cosmos Team.");
+        //    configManager.Logger.Debug(EnumMethod.END);
+        //    return builder.ToString();
+        //}
 
 
 
