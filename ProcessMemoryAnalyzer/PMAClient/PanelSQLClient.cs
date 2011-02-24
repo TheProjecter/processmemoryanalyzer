@@ -100,6 +100,11 @@ namespace PMA.Client
             }
         }
 
+        private void tabPage_SQL_Click(object sender, EventArgs e)
+        {
+
+        }
+
        
         
     }
