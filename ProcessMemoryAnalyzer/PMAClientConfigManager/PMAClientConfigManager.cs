@@ -17,8 +17,9 @@ namespace PMA.ConfigManager.Client
 
         private static string BASE_ADDRESS = "net.tcp://{0}:{1}/PMA.CommunicationAPI.PMACommunicationAPI";
 
-        private static string CONFIG_DIR = "Config";
-        private static string PMA_LOG_DIR = "PMALog";
+        private const string CONFIG_DIR = "Config";
+        private const string PMA_LOG_DIR = "PMALog";
+        private const string PRE_LOADED_SCRITPS = "PreScripts";
 
         private string _serverName = string.Empty;
         private int _port = 0;
@@ -31,7 +32,7 @@ namespace PMA.ConfigManager.Client
 
         private IPMACommunicationContract _proxy = null;
 
-
+        public Dictionary<string,string> DicPreLoadedScripts { get; set; } 
 
         public String CurrentAppConfigDir
         {
@@ -43,6 +44,19 @@ namespace PMA.ConfigManager.Client
                     Directory.CreateDirectory(configDir);
                 }
                 return configDir;
+            }
+        }
+
+        public String PreLoadedScriptsDir
+        {
+            get
+            {
+                string scriptDir = AppDomain.CurrentDomain.BaseDirectory + "\\" + PRE_LOADED_SCRITPS;
+                if (!Directory.Exists(scriptDir))
+                {
+                    Directory.CreateDirectory(scriptDir);
+                }
+                return scriptDir;
             }
         }
         
@@ -201,7 +215,28 @@ namespace PMA.ConfigManager.Client
         {
             InitilizeClientInfo();
             InitilizeClientRuntimeInfo();
+
+            LoadPreLoadedScripts();
         }
+
+        
+        private void LoadPreLoadedScripts()
+        {
+            DicPreLoadedScripts = new Dictionary<string, string>();
+            try
+            {
+                DicPreLoadedScripts.Add("--Select--", string.Empty);
+                foreach (string script in Directory.GetFiles(PreLoadedScriptsDir))
+                {
+                    DicPreLoadedScripts.Add(Path.GetFileNameWithoutExtension(script), script);
+                }
+            }
+            catch (Exception e)
+            {
+                DicPreLoadedScripts = new Dictionary<string, string>();
+            }
+        }
+
 
         private void InitilizeClientInfo()
         {
@@ -228,8 +263,10 @@ namespace PMA.ConfigManager.Client
 
         public void SaveConfiguration()
         {
-            if(clientInfo != null)
+            if (clientInfo != null)
+            {
                 File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMAClientInfo.PMA_CLIENT_INFO), clientInfo.Serialize());
+            }
         }
 
 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using PMA.ConfigManager.Client;
 using PMA.CommunicationAPI;
+using System.IO;
 
 namespace PMA.Client
 {
@@ -38,6 +39,14 @@ namespace PMA.Client
                 comboBox_Databases.SelectedIndex = 0;
             }
             label_sqlServerName.Text = proxy.GetSQLServerName(sessionID);
+            LoadPreScripts();
+        }
+
+        private void LoadPreScripts()
+        {
+            comboBox_PreScripts.DataSource = new BindingSource(configManager.DicPreLoadedScripts, null);
+            comboBox_PreScripts.DisplayMember = "Key";
+            comboBox_PreScripts.ValueMember = "Value";
         }
 
         public void UpdateConfig()
@@ -100,8 +109,23 @@ namespace PMA.Client
             }
         }
 
-        private void tabPage_SQL_Click(object sender, EventArgs e)
+       
+        private void comboBox_PreScripts_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (comboBox_PreScripts.SelectedIndex != 0)
+            {
+                try
+                {
+                    comboBox_queryType.SelectedIndex = 0;
+                    richTextBox_Query.Text = File.ReadAllText(comboBox_PreScripts.SelectedValue.ToString());
+                    ExcuteScript();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
 
         }
 
