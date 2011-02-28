@@ -8,6 +8,7 @@ using PMA.Utils.smtp;
 using PMA.SystemAnalyzer;
 using PMA.ProcessMemoryAnalyzer;
 using System.Diagnostics;
+using System.IO;
 
 
 namespace PMA.SystemAnalyzer
@@ -26,6 +27,7 @@ namespace PMA.SystemAnalyzer
         private string _alertType;
         private List<string> _emailSubscribers;
         private AlertType alertType;
+        private bool _isGeneratingLog;
 
         public PMAMailController(string message, AlertType alertType, string user)
         {
@@ -77,6 +79,7 @@ namespace PMA.SystemAnalyzer
             try
             {
                 smtp.SendAsynchronous = true;
+                SaveLog();
                 smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListAlertMailSubscription, null, subject, GenerateMessageBody(), null);
             }
             catch (Exception ex)
@@ -84,6 +87,31 @@ namespace PMA.SystemAnalyzer
                 configManager.Logger.Error(ex);
             }
             configManager.Logger.Debug(EnumMethod.END);
+        }
+
+        public void SaveLog()
+        {
+            configManager.Logger.Debug(EnumMethod.START);
+            _isGeneratingLog = true;
+            try
+            {
+                lock (new object())
+                {
+                    if (!File.Exists(configManager.GetFileNameForRemoteAction(_subject)))
+                    {
+                        File.WriteAllText(configManager.GetFileNameForRemoteAction(_subject), GenerateMessageBody());
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                configManager.Logger.Error(ex);
+            }
+            finally
+            {
+                _isGeneratingLog = false;
+                configManager.Logger.Debug(EnumMethod.END);
+            }
         }
 
 
@@ -96,58 +124,112 @@ namespace PMA.SystemAnalyzer
         {
             configManager.Logger.Debug(EnumMethod.START);
             StringBuilder builder = new StringBuilder();
+            string lineSeprator = string.Empty;
+            bool isHTMLMessage = false;
+            if (!_isGeneratingLog)
+            {
+                if (configManager.SmtpInfo.IsBodyHtml)
+                {
+                    isHTMLMessage = true;
+                    lineSeprator = "</br>";
+                }
+                else lineSeprator = "\r\n";
+            }
+            else
+            {
+                isHTMLMessage = false;
+                lineSeprator = "\r\n";
+            }
+
             builder.Append("Hi,");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
+            builder.Append(lineSeprator);
+            builder.Append(lineSeprator);
+            builder.Append(lineSeprator);
             if (alertType == AlertType.EVENT_ALERT)
             {
+                if (isHTMLMessage)
+                {
+                    builder.Append("<div style=\"COLOR:RED");
+                }
                 builder.Append("Event Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
-                builder.Append("\r\n Total RAM :" + PMAServiceProcessController.TotalPhysicalMemoryInKB);
-                builder.Append("\r\n Available RAM :" + PMAServiceProcessController.TotalFreePhysicalMemoryInKB);
-                builder.Append("\r\n CPU Usage : " + PMAServiceProcessController.CPUPercentageUsageAtMoment + "%");
-                builder.Append("\r\n");
+                builder.Append(lineSeprator + " Total RAM :" + PMAServiceProcessController.TotalPhysicalMemoryInKB);
+                builder.Append(lineSeprator + " Available RAM :" + PMAServiceProcessController.TotalFreePhysicalMemoryInKB);
+                builder.Append(lineSeprator + " CPU Usage : " + PMAServiceProcessController.CPUPercentageUsageAtMoment + "%");
+                builder.Append(lineSeprator);
                 builder.Append(_message);
             }
             else if (alertType == AlertType.GENERAL_ALERT)
             {
+                if (isHTMLMessage)
+                {
+                    builder.Append("<div style=\"COLOR:RED");
+                }
                 builder.Append("Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
-                builder.Append("\r\n");
+                builder.Append(lineSeprator);
                 builder.Append(configManager.GetConsolidatedError("System Alert"));
             }
             else if (alertType == AlertType.SQL_ALERT)
             {
+                if (isHTMLMessage)
+                {
+                    builder.Append("<div style=\"COLOR:GREEN");
+                }
                 builder.Append("SQL Action On :" + configManager.PMAServerManagerInfo.DatabaseServer) ;
-                builder.Append("\r\n");
+                builder.Append(lineSeprator);
                 builder.Append("Query : " + _message);
             }
             else if (alertType == AlertType.SERVICE_ALERT)
             {
+                if (isHTMLMessage)
+                {
+                    builder.Append("<div style=\"COLOR:GREEN");
+                }
                 builder.Append("Service Action On :" + configManager.PMAServerManagerInfo.DatabaseServer);
-                builder.Append("\r\n");
+                builder.Append(lineSeprator);
                 builder.Append("Services Effected ");
-                builder.Append("\r\n");
+                builder.Append(lineSeprator);
                 builder.Append(_message); 
             }
             else if (alertType == AlertType.ACTION_ALERT)
             {
+                if (isHTMLMessage)
+                {
+                    builder.Append("<div style=\"COLOR:GREEN");
+                }
                 builder.Append("Command Action On : " + Environment.MachineName + ":" + configManager.SystemAnalyzerInfo.ClientInstanceName);
-                builder.Append("\r\n");
+                builder.Append(lineSeprator);
                 builder.Append("Actions Performed Are :");
-                builder.Append("\r\n");
+                builder.Append(lineSeprator);
                 builder.Append(_message);
             }
             else if (alertType == AlertType.USER_ALERT)
             {
+                if (isHTMLMessage)
+                {
+                    builder.Append("<div style=\"COLOR:GREEN");
+                }
                 builder.Append("User :" + _user + " login on : "  + Environment.MachineName + ":" + configManager.SystemAnalyzerInfo.ClientInstanceName);
             }
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
-            builder.Append("\r\n");
+            if (isHTMLMessage)
+            {
+                builder.Append("</div>");
+            }
+            builder.Append(lineSeprator);
+            builder.Append(lineSeprator);
+            builder.Append(lineSeprator);
+            builder.Append(lineSeprator);
+            if (isHTMLMessage)
+            {
+                builder.Append("<h4>");
+
+            }
             builder.Append("Thanks,");
-            builder.Append("\r\n");
+            builder.Append(lineSeprator);
             builder.Append("Cosmos Team.");
+            if (isHTMLMessage)
+            {
+                builder.Append("</h4>");
+            }
             configManager.Logger.Debug(EnumMethod.END);
             return builder.ToString();
         }

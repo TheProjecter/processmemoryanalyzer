@@ -40,6 +40,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.numericUpDown_port = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_PollingTimeout = new System.Windows.Forms.NumericUpDown();
+            this.checkBox_HTMLMode = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_port)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_PollingTimeout)).BeginInit();
             this.SuspendLayout();
@@ -82,7 +83,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 133);
+            this.label3.Location = new System.Drawing.Point(25, 154);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 13);
             this.label3.TabIndex = 5;
@@ -91,7 +92,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 159);
+            this.label4.Location = new System.Drawing.Point(25, 180);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 6;
@@ -99,14 +100,14 @@
             // 
             // textBox_UserName
             // 
-            this.textBox_UserName.Location = new System.Drawing.Point(115, 130);
+            this.textBox_UserName.Location = new System.Drawing.Point(115, 151);
             this.textBox_UserName.Name = "textBox_UserName";
             this.textBox_UserName.Size = new System.Drawing.Size(177, 20);
             this.textBox_UserName.TabIndex = 7;
             // 
             // textBox_Password
             // 
-            this.textBox_Password.Location = new System.Drawing.Point(115, 156);
+            this.textBox_Password.Location = new System.Drawing.Point(115, 177);
             this.textBox_Password.Name = "textBox_Password";
             this.textBox_Password.PasswordChar = '*';
             this.textBox_Password.Size = new System.Drawing.Size(177, 20);
@@ -166,10 +167,21 @@
             this.numericUpDown_PollingTimeout.Size = new System.Drawing.Size(97, 20);
             this.numericUpDown_PollingTimeout.TabIndex = 13;
             // 
+            // checkBox_HTMLMode
+            // 
+            this.checkBox_HTMLMode.AutoSize = true;
+            this.checkBox_HTMLMode.Location = new System.Drawing.Point(28, 122);
+            this.checkBox_HTMLMode.Name = "checkBox_HTMLMode";
+            this.checkBox_HTMLMode.Size = new System.Drawing.Size(122, 17);
+            this.checkBox_HTMLMode.TabIndex = 14;
+            this.checkBox_HTMLMode.Text = "Enable HTML Mode";
+            this.checkBox_HTMLMode.UseVisualStyleBackColor = true;
+            // 
             // PanelSMTPSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.checkBox_HTMLMode);
             this.Controls.Add(this.numericUpDown_PollingTimeout);
             this.Controls.Add(this.numericUpDown_port);
             this.Controls.Add(this.label6);
@@ -205,5 +217,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericUpDown_port;
         private System.Windows.Forms.NumericUpDown numericUpDown_PollingTimeout;
+        private System.Windows.Forms.CheckBox checkBox_HTMLMode;
     }
 }
