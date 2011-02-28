@@ -27,6 +27,7 @@ namespace PMA.ConfigManager
         private List<string> _Message = null;
         private static string CONFIG_DIR = "Config";
         private static string PMA_LOG_DIR = "PMALog";
+        private static string REMOTE_ACTION_LOG = "RemoteActionLog";
         private static PMAConfigManager pmaConfigManager = null;
 
         public string PostDir 
@@ -54,6 +55,22 @@ namespace PMA.ConfigManager
                 }
                 return path;
             }
+        }
+
+        public string GetFileNameForRemoteAction(string preText)
+        {
+
+            if (preText == null)
+            {
+                preText = string.Empty;
+            }
+            string path = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "\\" + REMOTE_ACTION_LOG;
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            string file = Path.Combine(path, preText + "_" + DateTime.Now.Date.ToShortDateString().Replace('/', '-') + "_" + DateTime.Now.ToLongTimeString().Replace(':', '-'));
+            return file;   
         }
 
 

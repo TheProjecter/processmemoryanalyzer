@@ -231,9 +231,12 @@ namespace PMA.Client
 
         private void Logout()
         {
-            configManager.GetConnectionChannel.LogoutSession(configManager.clientRuntimeInfo.sessionID);
-            configManager.CloseConnectionChannel();
-            configManager.SaveConfiguration();
+            if (configManager.GetConnectionChannel != null)
+            {
+                configManager.GetConnectionChannel.LogoutSession(configManager.clientRuntimeInfo.sessionID);
+                configManager.CloseConnectionChannel();
+                configManager.SaveConfiguration();
+            }
         }
 
        

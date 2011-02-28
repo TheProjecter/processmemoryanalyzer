@@ -150,8 +150,11 @@
     <None Include="Resources\loadingAnimation.gif" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="PreScripts\ShowDBSize.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="PreScripts\ShowObjectLocks.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

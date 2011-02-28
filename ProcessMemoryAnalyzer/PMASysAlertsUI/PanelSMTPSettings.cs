@@ -37,6 +37,7 @@ namespace PMASysAlertsUI
             numericUpDown_PollingTimeout.Value = configManager.SmtpInfo.TimeOut;
             numericUpDown_port.Value = configManager.SmtpInfo.Port;
             checkBox_EnableSSL.Checked = configManager.SmtpInfo.SSL;
+            checkBox_HTMLMode.Checked = configManager.SmtpInfo.IsBodyHtml;
         }
 
         public void UpdateConfig()
@@ -47,7 +48,7 @@ namespace PMASysAlertsUI
             configManager.SmtpInfo.TimeOut = decimal.ToInt32(numericUpDown_PollingTimeout.Value);
             configManager.SmtpInfo.Port = decimal.ToInt32(numericUpDown_port.Value);
             configManager.SmtpInfo.SSL = checkBox_EnableSSL.Checked;
-            
+            configManager.SmtpInfo.IsBodyHtml = checkBox_HTMLMode.Checked;
 
             configManager.SmtpInfo.ProtectPassword = true;
         }
