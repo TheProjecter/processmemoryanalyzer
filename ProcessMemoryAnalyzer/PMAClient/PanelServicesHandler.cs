@@ -39,21 +39,29 @@ namespace PMA.Client
 
         private void BindGrid()
         {
-            Dictionary<string, ServiceControllerStatus> availableService = proxy.GetAvailableServices(sessionID);
-            dataGridView_Services.Rows.Clear();
-            DataGridViewRow row = null;
-            DataGridViewComboBoxColumn comboboxColumn = new DataGridViewComboBoxColumn ();
-            //int rowCount;
-            if (availableService != null)
+            try
             {
-                foreach (string service in availableService.Keys)
+                Dictionary<string, ServiceControllerStatus> availableService = proxy.GetAvailableServices(sessionID);
+                dataGridView_Services.Rows.Clear();
+                DataGridViewRow row = null;
+                DataGridViewComboBoxColumn comboboxColumn = new DataGridViewComboBoxColumn();
+                //int rowCount;
+                if (availableService != null)
                 {
-                    row = dataGridView_Services.Rows[dataGridView_Services.Rows.Add()];
-                    row.Cells["serviceName"].Value = service;
-                    row.Cells["serviceStatus"].Value = availableService[service].ToString();
-                    row.Cells["serviceAction"].Value = "START";
+                    foreach (string service in availableService.Keys)
+                    {
+                        row = dataGridView_Services.Rows[dataGridView_Services.Rows.Add()];
+                        row.Cells["serviceName"].Value = service;
+                        row.Cells["serviceStatus"].Value = availableService[service].ToString();
+                        row.Cells["serviceAction"].Value = "START";
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         public void UpdateConfig()
