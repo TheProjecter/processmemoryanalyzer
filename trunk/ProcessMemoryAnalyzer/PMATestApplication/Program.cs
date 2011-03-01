@@ -14,8 +14,8 @@ namespace PMATestApplication
         {
             EventLog e = new EventLog();
             e.EntryWritten += new EntryWrittenEventHandler(entryHandler);
-            
-            
+
+            SendMail();
         }
 
         private static void entryHandler(object sender, EntryWrittenEventArgs e)
