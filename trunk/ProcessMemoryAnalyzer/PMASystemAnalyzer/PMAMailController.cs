@@ -170,7 +170,11 @@ namespace PMA.SystemAnalyzer
                 }
                 builder.Append("Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
                 builder.Append(lineSeprator);
-                builder.Append(configManager.GetConsolidatedError("System Alert"));
+                if (isHTMLMessage)
+                {
+                    builder.Append(configManager.GetConsolidatedError("System Alert").Replace("\r\n", "<br/>"));
+                }
+                else builder.Append(configManager.GetConsolidatedError("System Alert"));
             }
             else if (alertType == AlertType.SQL_ALERT)
             {
