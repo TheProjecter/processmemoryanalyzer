@@ -39,6 +39,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_269AE7E1365E44169E371749F73AD217"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_37801CA0228B4C05A714E72E0E23C1DF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_83ED5E8B52E19FD63E857FBFC71E4A53"
         "OwnerKey" = "8:_0B751EE0954F4B59A6BF2445E1A84309"
         "MsmSig" = "8:_UNDEFINED"
@@ -153,6 +165,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5.SP1"
+                    {
+                    "Name" = "8:.NET Framework 3.5 SP1"
+                    "ProductCode" = "8:Microsoft.Net.Framework.3.5.SP1"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
     }
@@ -212,6 +237,46 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_269AE7E1365E44169E371749F73AD217"
+            {
+            "SourcePath" = "8:..\\PMAClient\\PreScripts\\ShowDBSize.sql"
+            "TargetName" = "8:ShowDBSize.sql"
+            "Tag" = "8:"
+            "Folder" = "8:_07709AE427964D31918694B141C4C694"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_37801CA0228B4C05A714E72E0E23C1DF"
+            {
+            "SourcePath" = "8:..\\PMAClient\\PreScripts\\ShowObjectLocks.sql"
+            "TargetName" = "8:ShowObjectLocks.sql"
+            "Tag" = "8:"
+            "Folder" = "8:_07709AE427964D31918694B141C4C694"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_83ED5E8B52E19FD63E857FBFC71E4A53"
@@ -323,6 +388,17 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_07709AE427964D31918694B141C4C694"
+                    {
+                    "Name" = "8:PreScripts"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_F6BDDA8FF3CF44BFA00E7FC3C45A2B3E"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_68A8194B88C9481EA3DBF819863120DA"
@@ -375,22 +451,22 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:PMAClientSetup"
         "ProductCode" = "8:{FC18910C-F609-4714-8FE8-9B29C246A47D}"
-        "PackageCode" = "8:{64A307E9-92CE-40E7-B19B-8B1482EF4A5C}"
+        "PackageCode" = "8:{BCCCD5C7-B128-4B62-8234-4AB8AB0708A0}"
         "UpgradeCode" = "8:{6C492254-0F39-4A47-B2F4-B1B7E4FB56C6}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Cosmos Technologies"
+        "Manufacturer" = "8:CosmosTech"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:PMAClientSetup"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Cosmos Technologies"
+        "ARPCONTACT" = "8:Manasvi Sareen"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
-        "ARPURLINFOABOUT" = "8:"
+        "ARPURLINFOABOUT" = "8:www.cosmostech.in"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"

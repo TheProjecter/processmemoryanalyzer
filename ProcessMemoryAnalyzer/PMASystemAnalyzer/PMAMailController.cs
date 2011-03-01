@@ -22,6 +22,7 @@ namespace PMA.SystemAnalyzer
         private string _subject = "PMA System Alerts : {0} : {1} : " + Environment.MachineName + " : For {2} User  " +
                 " at " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
 
+
         private string _message;
         private string _user;
         private string _alertType;
@@ -31,7 +32,6 @@ namespace PMA.SystemAnalyzer
 
         public PMAMailController(string message, AlertType alertType, string user)
         {
-            string messageBody;
             this.alertType = alertType;
             _emailSubscribers = new List<string>();
             switch (alertType)
@@ -93,13 +93,14 @@ namespace PMA.SystemAnalyzer
         {
             configManager.Logger.Debug(EnumMethod.START);
             _isGeneratingLog = true;
+            string fileName = DateTime.Now.ToShortDateString().Replace('/', '-') + "_" + DateTime.Now.ToLongTimeString().Replace(':', '-') + "_" + _alertType + "_" + _user + ".log";
             try
             {
                 lock (new object())
                 {
-                    if (!File.Exists(configManager.GetFileNameForRemoteAction(_subject)))
+                    if (!File.Exists(configManager.GetFileNameForRemoteAction(fileName)))
                     {
-                        File.WriteAllText(configManager.GetFileNameForRemoteAction(_subject), GenerateMessageBody());
+                        File.WriteAllText(configManager.GetFileNameForRemoteAction(fileName), GenerateMessageBody());
                     }
                 }
             }
@@ -131,7 +132,7 @@ namespace PMA.SystemAnalyzer
                 if (configManager.SmtpInfo.IsBodyHtml)
                 {
                     isHTMLMessage = true;
-                    lineSeprator = "</br>";
+                    lineSeprator = "<br/>";
                 }
                 else lineSeprator = "\r\n";
             }
@@ -141,15 +142,18 @@ namespace PMA.SystemAnalyzer
                 lineSeprator = "\r\n";
             }
 
-            builder.Append("Hi,");
-            builder.Append(lineSeprator);
-            builder.Append(lineSeprator);
-            builder.Append(lineSeprator);
+            if (!_isGeneratingLog)
+            {
+                builder.Append("Hi,");
+                builder.Append(lineSeprator);
+                builder.Append(lineSeprator);
+                builder.Append(lineSeprator);
+            }
             if (alertType == AlertType.EVENT_ALERT)
             {
                 if (isHTMLMessage)
                 {
-                    builder.Append("<div style=\"COLOR:RED");
+                    builder.Append("<div style=\"COLOR:RED\">");
                 }
                 builder.Append("Event Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
                 builder.Append(lineSeprator + " Total RAM :" + PMAServiceProcessController.TotalPhysicalMemoryInKB);
@@ -162,7 +166,7 @@ namespace PMA.SystemAnalyzer
             {
                 if (isHTMLMessage)
                 {
-                    builder.Append("<div style=\"COLOR:RED");
+                    builder.Append("<div style=\"COLOR:RED\">");
                 }
                 builder.Append("Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
                 builder.Append(lineSeprator);
@@ -172,7 +176,7 @@ namespace PMA.SystemAnalyzer
             {
                 if (isHTMLMessage)
                 {
-                    builder.Append("<div style=\"COLOR:GREEN");
+                    builder.Append("<div style=\"COLOR:GREEN\">");
                 }
                 builder.Append("SQL Action On :" + configManager.PMAServerManagerInfo.DatabaseServer) ;
                 builder.Append(lineSeprator);
@@ -182,7 +186,7 @@ namespace PMA.SystemAnalyzer
             {
                 if (isHTMLMessage)
                 {
-                    builder.Append("<div style=\"COLOR:GREEN");
+                    builder.Append("<div style=\"COLOR:GREEN\">");
                 }
                 builder.Append("Service Action On :" + configManager.PMAServerManagerInfo.DatabaseServer);
                 builder.Append(lineSeprator);
@@ -194,7 +198,7 @@ namespace PMA.SystemAnalyzer
             {
                 if (isHTMLMessage)
                 {
-                    builder.Append("<div style=\"COLOR:GREEN");
+                    builder.Append("<div style=\"COLOR:GREEN\">");
                 }
                 builder.Append("Command Action On : " + Environment.MachineName + ":" + configManager.SystemAnalyzerInfo.ClientInstanceName);
                 builder.Append(lineSeprator);
@@ -206,7 +210,7 @@ namespace PMA.SystemAnalyzer
             {
                 if (isHTMLMessage)
                 {
-                    builder.Append("<div style=\"COLOR:GREEN");
+                    builder.Append("<div style=\"COLOR:GREEN\">");
                 }
                 builder.Append("User :" + _user + " login on : "  + Environment.MachineName + ":" + configManager.SystemAnalyzerInfo.ClientInstanceName);
             }
@@ -214,21 +218,23 @@ namespace PMA.SystemAnalyzer
             {
                 builder.Append("</div>");
             }
-            builder.Append(lineSeprator);
-            builder.Append(lineSeprator);
-            builder.Append(lineSeprator);
-            builder.Append(lineSeprator);
-            if (isHTMLMessage)
+            if (!_isGeneratingLog)
             {
-                builder.Append("<h4>");
-
-            }
-            builder.Append("Thanks,");
-            builder.Append(lineSeprator);
-            builder.Append("Cosmos Team.");
-            if (isHTMLMessage)
-            {
-                builder.Append("</h4>");
+                builder.Append(lineSeprator);
+                builder.Append(lineSeprator);
+                builder.Append(lineSeprator);
+                builder.Append(lineSeprator);
+                if (isHTMLMessage)
+                {
+                    builder.Append("<h4>");
+                }
+                builder.Append("Thanks,");
+                builder.Append(lineSeprator);
+                builder.Append("Cosmos Team.");
+                if (isHTMLMessage)
+                {
+                    builder.Append("</h4>");
+                }
             }
             configManager.Logger.Debug(EnumMethod.END);
             return builder.ToString();
