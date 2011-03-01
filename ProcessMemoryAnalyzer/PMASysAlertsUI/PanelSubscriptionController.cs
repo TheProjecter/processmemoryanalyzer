@@ -33,6 +33,7 @@ namespace PMASysAlertsUI
         /// </summary>
         public void UpdateUI()
         {
+            //General subscription
             StringBuilder sb = new StringBuilder();
             string tempString = string.Empty;
             textBox_ClientInstanceName.Text = configManager.SystemAnalyzerInfo.ClientInstanceName;
@@ -51,6 +52,7 @@ namespace PMASysAlertsUI
                 richTextBox_EmailsAlerts.Text = sb.ToString();
             }
 
+            //PMA Report Subscription
             sb = new StringBuilder();
             tempString = string.Empty;
             tempList = configManager.SystemAnalyzerInfo.ListPMAReportSubscription;
@@ -66,6 +68,40 @@ namespace PMASysAlertsUI
                     }
                 }
                 richTextBox_EmailsPMAReport.Text = sb.ToString();
+            }
+
+            //Action and servcie subscription
+            tempString = string.Empty;
+            tempList = configManager.PMAServerManagerInfo.EmailActionServicesSubsubscribers;
+            if (tempList != null)
+            {
+                for (int index = 0; index < tempList.Count; index++)
+                {
+                    tempString = tempList[index];
+                    sb.Append(tempString);
+                    if (index < tempList.Count - 1)
+                    {
+                        sb.Append(';');
+                    }
+                }
+                richTextBox_ActionServices.Text = sb.ToString();
+            }
+
+            //SQL subscription
+            tempString = string.Empty;
+            tempList = configManager.PMAServerManagerInfo.EmailSqlRemoteActivitySubscribers;
+            if (tempList != null)
+            {
+                for (int index = 0; index < tempList.Count; index++)
+                {
+                    tempString = tempList[index];
+                    sb.Append(tempString);
+                    if (index < tempList.Count - 1)
+                    {
+                        sb.Append(';');
+                    }
+                }
+                richTextBox_sqlSubscibtion.Text = sb.ToString();
             }
       
         }
