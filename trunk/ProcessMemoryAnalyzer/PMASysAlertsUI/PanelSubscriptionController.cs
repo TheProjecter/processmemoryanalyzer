@@ -124,11 +124,13 @@ namespace PMASysAlertsUI
                 configManager.SystemAnalyzerInfo.ListPMAReportSubscription = richTextBox_EmailsPMAReport.Text.Split(';').ToList<string>();
             }
 
+            configManager.PMAServerManagerInfo.EmailSqlRemoteActivitySubscribers.Clear();
             if (richTextBox_sqlSubscibtion.Text != string.Empty)
             {
-                configManager.PMAServerManagerInfo.EmailSqlRemoteActivitySubscribers= richTextBox_sqlSubscibtion.Text.Split(';').ToList<string>();
+                configManager.PMAServerManagerInfo.EmailSqlRemoteActivitySubscribers = richTextBox_sqlSubscibtion.Text.Split(';').ToList<string>();
             }
 
+            configManager.PMAServerManagerInfo.EmailActionServicesSubsubscribers.Clear();
             if (richTextBox_ActionServices.Text != string.Empty)
             {
                 configManager.PMAServerManagerInfo.EmailActionServicesSubsubscribers = richTextBox_ActionServices.Text.Split(';').ToList<string>();
