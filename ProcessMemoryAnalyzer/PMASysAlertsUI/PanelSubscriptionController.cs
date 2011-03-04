@@ -73,6 +73,7 @@ namespace PMASysAlertsUI
             //Action and servcie subscription
             tempString = string.Empty;
             tempList = configManager.PMAServerManagerInfo.EmailActionServicesSubsubscribers;
+            sb = new StringBuilder();
             if (tempList != null)
             {
                 for (int index = 0; index < tempList.Count; index++)
@@ -90,6 +91,7 @@ namespace PMASysAlertsUI
             //SQL subscription
             tempString = string.Empty;
             tempList = configManager.PMAServerManagerInfo.EmailSqlRemoteActivitySubscribers;
+            sb = new StringBuilder();
             if (tempList != null)
             {
                 for (int index = 0; index < tempList.Count; index++)
@@ -113,24 +115,21 @@ namespace PMASysAlertsUI
         public void UpdateConfig()
         {
             configManager.SystemAnalyzerInfo.ClientInstanceName = textBox_ClientInstanceName.Text;
-            configManager.SystemAnalyzerInfo.ListAlertMailSubscription.Clear();
             if (richTextBox_EmailsAlerts.Text != string.Empty)
             {
                 configManager.SystemAnalyzerInfo.ListAlertMailSubscription = richTextBox_EmailsAlerts.Text.Split(';').ToList<string>();
             }
-            configManager.SystemAnalyzerInfo.ListPMAReportSubscription.Clear();
+            
             if (richTextBox_EmailsPMAReport.Text != string.Empty)
             {
                 configManager.SystemAnalyzerInfo.ListPMAReportSubscription = richTextBox_EmailsPMAReport.Text.Split(';').ToList<string>();
             }
 
-            configManager.PMAServerManagerInfo.EmailSqlRemoteActivitySubscribers.Clear();
             if (richTextBox_sqlSubscibtion.Text != string.Empty)
             {
                 configManager.PMAServerManagerInfo.EmailSqlRemoteActivitySubscribers = richTextBox_sqlSubscibtion.Text.Split(';').ToList<string>();
             }
-
-            configManager.PMAServerManagerInfo.EmailActionServicesSubsubscribers.Clear();
+                        
             if (richTextBox_ActionServices.Text != string.Empty)
             {
                 configManager.PMAServerManagerInfo.EmailActionServicesSubsubscribers = richTextBox_ActionServices.Text.Split(';').ToList<string>();
