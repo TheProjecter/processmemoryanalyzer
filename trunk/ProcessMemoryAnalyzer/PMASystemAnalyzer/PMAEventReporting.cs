@@ -201,7 +201,7 @@ namespace PMA.SystemAnalyzer
             if (count > 0)
             {
                 configManager.Logger.Debug(EnumMethod.START);
-                configManager.Logger.Message("Logname : " + logName + " : " + logEntry.EntryType + " : " + logEntry.Source + " : \r\n" + logEntry.Message);
+                configManager.Logger.Message("Event ID :" + logEntry.EventID + "\r\n" +  "Logname : " + logName + " : " + logEntry.EntryType + " : " + logEntry.Source + " : \r\n" + logEntry.Message);
                 listEntryLog.Add(logEntry);
                 configManager.Logger.Debug(EnumMethod.END);
                 return true;

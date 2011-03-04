@@ -5,6 +5,8 @@ using System.Text;
 using PMA.Utils.smtp;
 using System.IO;
 using System.Diagnostics;
+using PMA.ConfigManager;
+using PMA.SystemAnalyzer;
 
 namespace PMATestApplication
 {
@@ -15,7 +17,11 @@ namespace PMATestApplication
             EventLog e = new EventLog();
             e.EntryWritten += new EntryWrittenEventHandler(entryHandler);
 
-            SendMail();
+            //SendMail();
+
+            PMADatabaseController dbController = new PMADatabaseController("localhost", "sa", "sa@123");
+
+            
         }
 
         private static void entryHandler(object sender, EntryWrittenEventArgs e)
