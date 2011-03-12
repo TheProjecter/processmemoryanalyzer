@@ -25,7 +25,6 @@ namespace PMA.CommunicationAPI
         }
 
 
-
         #region Actions
         public string ExecuteActions(List<string> actions, string sessionID)
         {
@@ -37,7 +36,6 @@ namespace PMA.CommunicationAPI
             return PMAServerManager.GetAvailableActionsForSession(sessionID);
         }
         #endregion 
-
 
         #region Services
         public Dictionary<string,ServiceControllerStatus> GetAvailableServices(string sessionID)
@@ -67,7 +65,6 @@ namespace PMA.CommunicationAPI
             userManager.LogoutSession(sessionID);
         }
         #endregion
-
 
         #region SQL
         public System.Data.DataSet ExcuteQuery(string query,string database,int numberOfRecords, string sessionID)
