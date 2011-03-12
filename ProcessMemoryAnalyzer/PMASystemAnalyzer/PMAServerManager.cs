@@ -397,7 +397,7 @@ namespace PMA.SystemAnalyzer
 
         private static void SendMail(string message,AlertType alertType, string sessionID)
         {
-            PMAMailController mailController = new PMAMailController(message, AlertType.SERVICE_ALERT, userManager.GetUserInfo(sessionID).UserName);
+            PMAMailController mailController = new PMAMailController(message, alertType, userManager.GetUserInfo(sessionID).UserName);
             mailController.SendMail();
         }
 
