@@ -22,6 +22,7 @@ namespace PMA.Client
         PanelExecuteCommand panelExecuteCommand = null;
         PanelSQLClient panelSQLClient = null;
         PanelServicesHandler panelServiceHandler = null;
+        PanelTaskManager panelTaskManager = null;
 
         LoginForm loginForm;
 
@@ -32,13 +33,16 @@ namespace PMA.Client
             switch (PANEL)
             {
                 case ENUMPanel.PANEL_ACTION_HANDLER:
-                    result = panelExecuteCommand.CauseValidation();
+                    result = panelExecuteCommand.ChangeView();
                     break;
                 case ENUMPanel.PANEL_SERVICES_HANDLER:
-                    result = panelServiceHandler.CauseValidation();
+                    result = panelServiceHandler.ChangeView();
                     break;
                 case ENUMPanel.PANEL_SQL_CLIENT:
-                    result = panelSQLClient.CauseValidation();
+                    result = panelSQLClient.ChangeView();
+                    break;
+                case ENUMPanel.PANEL_TASK_MANAGER:
+                    result = panelTaskManager.ChangeView();
                     break;
                 default:
                     result = false;
@@ -61,6 +65,9 @@ namespace PMA.Client
                 case ENUMPanel.PANEL_SQL_CLIENT:
                     panelSQLClient.UpdateConfig();
                     break;
+                case ENUMPanel.PANEL_TASK_MANAGER:
+                    panelTaskManager.UpdateConfig();
+                    break;
             }
 
         }
@@ -82,6 +89,10 @@ namespace PMA.Client
                     HideAllControls();
                     panelSQLClient.Show();
                     break;
+                case ENUMPanel.PANEL_TASK_MANAGER:
+                    HideAllControls();
+                    panelTaskManager.Show();
+                    break;
             }
 
         }
@@ -94,6 +105,7 @@ namespace PMA.Client
                 label_Actions.Enabled = configManager.clientRuntimeInfo.UserInfo.IsActionUser;
                 label_Services.Enabled = configManager.clientRuntimeInfo.UserInfo.IsServiceUser;
                 label_SQL.Enabled = configManager.clientRuntimeInfo.UserInfo.IsSQLUser;
+                label_TaskManager.Enabled = true;
             }
         }
 
@@ -112,7 +124,7 @@ namespace PMA.Client
             ChangeCursorStyle();
             DisableLeftMenu();
             SetAccessibilityForUser();
-            ShowPanel(ENUMPanel.PANEL_ACTION_HANDLER);
+            ShowPanel(ENUMPanel.PANEL_TASK_MANAGER);
         }
 
         private void InitializeAllPanels()
@@ -125,6 +137,9 @@ namespace PMA.Client
 
             panelServiceHandler = new PanelServicesHandler();
             panel_MainContainer.Controls.Add(panelServiceHandler);
+
+            panelTaskManager = new PanelTaskManager();
+            panel_MainContainer.Controls.Add(panelTaskManager);
         }
 
         private void LoadConfigs()
@@ -132,6 +147,7 @@ namespace PMA.Client
             panelServiceHandler.UpdateUI();
             panelExecuteCommand.UpdateUI();
             panelSQLClient.UpdateUI();
+            panelTaskManager.UpdateUI();
         }
 
         private void HideAllControls()
@@ -199,6 +215,11 @@ namespace PMA.Client
             ChangePanel(ENUMPanel.PANEL_ACTION_HANDLER);
         }
 
+        private void label_TaskManager_Click(object sender, EventArgs e)
+        {
+            ChangePanel(ENUMPanel.PANEL_TASK_MANAGER);
+        }
+
         private void ChangePanel(ENUMPanel panel)
         {
             if (CauseValidation())
@@ -244,6 +265,8 @@ namespace PMA.Client
         {
             Logout();
         }
+
+        
       
         
         

@@ -39,6 +39,7 @@
             this.label_Services = new System.Windows.Forms.Label();
             this.label_Actions = new System.Windows.Forms.Label();
             this.panel_MainContainer = new System.Windows.Forms.Panel();
+            this.label_TaskManager = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel_LeftMenu.SuspendLayout();
@@ -99,9 +100,10 @@
             this.tableLayoutPanel_LeftMenu.ColumnCount = 1;
             this.tableLayoutPanel_LeftMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel_LeftMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_SQL, 0, 0);
-            this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_Services, 0, 1);
-            this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_Actions, 0, 2);
+            this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_Actions, 0, 3);
+            this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_Services, 0, 2);
+            this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_SQL, 0, 1);
+            this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_TaskManager, 0, 0);
             this.tableLayoutPanel_LeftMenu.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel_LeftMenu.Name = "tableLayoutPanel_LeftMenu";
             this.tableLayoutPanel_LeftMenu.RowCount = 4;
@@ -117,7 +119,7 @@
             this.label_SQL.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_SQL.AutoSize = true;
             this.label_SQL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_SQL.Location = new System.Drawing.Point(48, 46);
+            this.label_SQL.Location = new System.Drawing.Point(48, 159);
             this.label_SQL.Name = "label_SQL";
             this.label_SQL.Size = new System.Drawing.Size(44, 20);
             this.label_SQL.TabIndex = 0;
@@ -129,7 +131,7 @@
             this.label_Services.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_Services.AutoSize = true;
             this.label_Services.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Services.Location = new System.Drawing.Point(31, 159);
+            this.label_Services.Location = new System.Drawing.Point(31, 272);
             this.label_Services.Name = "label_Services";
             this.label_Services.Size = new System.Drawing.Size(77, 20);
             this.label_Services.TabIndex = 1;
@@ -141,7 +143,7 @@
             this.label_Actions.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_Actions.AutoSize = true;
             this.label_Actions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Actions.Location = new System.Drawing.Point(35, 272);
+            this.label_Actions.Location = new System.Drawing.Point(35, 386);
             this.label_Actions.Name = "label_Actions";
             this.label_Actions.Size = new System.Drawing.Size(69, 20);
             this.label_Actions.TabIndex = 2;
@@ -155,6 +157,18 @@
             this.panel_MainContainer.Name = "panel_MainContainer";
             this.panel_MainContainer.Size = new System.Drawing.Size(852, 460);
             this.panel_MainContainer.TabIndex = 2;
+            // 
+            // label_TaskManager
+            // 
+            this.label_TaskManager.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label_TaskManager.AutoSize = true;
+            this.label_TaskManager.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_TaskManager.Location = new System.Drawing.Point(9, 46);
+            this.label_TaskManager.Name = "label_TaskManager";
+            this.label_TaskManager.Size = new System.Drawing.Size(122, 20);
+            this.label_TaskManager.TabIndex = 3;
+            this.label_TaskManager.Text = "Task Manager";
+            this.label_TaskManager.Click += new System.EventHandler(this.label_TaskManager_Click);
             // 
             // PMAClientUI
             // 
@@ -193,6 +207,7 @@
         private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.Label label_TaskManager;
     }
 }
 

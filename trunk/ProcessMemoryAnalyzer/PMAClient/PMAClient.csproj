@@ -76,6 +76,12 @@
     <Compile Include="PanelSQLClient.Designer.cs">
       <DependentUpon>PanelSQLClient.cs</DependentUpon>
     </Compile>
+    <Compile Include="PanelTaskManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelTaskManager.Designer.cs">
+      <DependentUpon>PanelTaskManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="PMAClientUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PanelSQLClient.resx">
       <DependentUpon>PanelSQLClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelTaskManager.resx">
+      <DependentUpon>PanelTaskManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PMAClientUI.resx">
       <DependentUpon>PMAClientUI.cs</DependentUpon>

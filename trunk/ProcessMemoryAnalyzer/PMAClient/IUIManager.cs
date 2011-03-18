@@ -11,6 +11,6 @@ namespace PMA.Client
 
         void UpdateConfig();
 
-        bool CauseValidation();
+        bool ChangeView();
     }
 }

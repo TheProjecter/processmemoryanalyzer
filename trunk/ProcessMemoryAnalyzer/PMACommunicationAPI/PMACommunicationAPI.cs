@@ -90,7 +90,24 @@ namespace PMA.CommunicationAPI
 
         #endregion 
 
+       
+        #region TaskManager
+        public List<PMAProcessInfo> GetAllProcessesInfo(string sessionID)
+        {
+            return PMAServerManager.GetAllProcessInformation(sessionID);
+        }
+
+        public PMAServerInfo GetServerInfo(string sessionID)
+        {
+            return PMAServerManager.GetServerInfo(sessionID);
+        }
+
+        public string KillProces(int pid, string sessionID)
+        {
+            return PMAServerManager.KillProcess(pid, sessionID);
+        }
         #endregion
-      
+
+        #endregion
     }
 }
