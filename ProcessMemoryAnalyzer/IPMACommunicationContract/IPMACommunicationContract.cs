@@ -49,5 +49,16 @@ namespace PMA.CommunicationAPI
 
         [OperationContract]
         string GetSQLServerName(string sessionID);
+
+        [OperationContract]
+        List<PMAProcessInfo> GetAllProcessesInfo(string sessionID);
+
+        [OperationContract]
+        PMAServerInfo GetServerInfo(string sessionID);
+
+        [OperationContract]
+        string KillProces(int pid, string sessionID);
+
+
     }
 }

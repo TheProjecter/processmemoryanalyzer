@@ -57,8 +57,10 @@
     <Compile Include="PMAEventReportInfo.cs" />
     <Compile Include="PMAFlagInfo.cs" />
     <Compile Include="PMAInfo.cs" />
+    <Compile Include="PMAServerInfo.cs" />
     <Compile Include="PMAServerManagerInfo.cs" />
     <Compile Include="PMASystemAnalyzerInfo.cs" />
+    <Compile Include="PMAProcessInfo.cs" />
     <Compile Include="PMAUserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -18,6 +18,9 @@ namespace PMA.SystemAnalyzer
         private const string PRIVILEGE_SQL = "SQL_PRIVILEDGE";
         private const string PRIVILEGE_ACTION = "ACTION_PRIVILEDGE";
         private const string PRIVILEGE_SERVICE = "SERVICE_PRIVILEDGE";
+        private const string PRIVILEGE_TASK_MANAGER_VIEW = "TASK_MANAGER_VIEW_PRIVILEDGE";
+        private const string PRIVILEGE_TASK_MANAGER_ADMIN = "TASK_MANAGER_ADMIN_PRIVILEDGE";
+        
        
         private static PMAConfigManager configManager = PMAConfigManager.GetConfigManagerInstance;
         private static Logger logger = configManager.Logger;
@@ -60,6 +63,83 @@ namespace PMA.SystemAnalyzer
                 return availableServices;
             }
             else return null;
+        }
+
+
+        /// <summary>
+        /// Gets all process information.
+        /// </summary>
+        /// <returns></returns>
+        public static List<PMAProcessInfo> GetAllProcessInformation(string sessionID)
+        {
+            if (VerifySessionPrivileges(sessionID, PRIVILEGE_TASK_MANAGER_VIEW))
+            {
+                List<PMAProcessInfo> listPorcessInformation = new List<PMAProcessInfo>();
+                Process[] processes = Process.GetProcesses();
+                listPorcessInformation.Clear();
+                foreach (Process process in processes)
+                {
+                    listPorcessInformation.Add(new PMAProcessInfo(process.Id));
+                }
+                return listPorcessInformation;
+            }
+            else return null;
+            
+        }
+
+        /// <summary>
+        /// Gets the system information.
+        /// </summary>
+        /// <param name="sessionID">The session ID.</param>
+        /// <returns></returns>
+        public static PMAServerInfo GetServerInfo(string sessionID)
+        {
+            if (VerifySessionPrivileges(sessionID, PRIVILEGE_TASK_MANAGER_VIEW))
+            {
+                PMAServerInfo serverInfo = new PMAServerInfo();
+                serverInfo.CPUUsage = ProcessMemoryAnalyzer.PMAServiceProcessController.CPUPercentageUsageAtMoment;
+                serverInfo.TotalMemory = (ProcessMemoryAnalyzer.PMAServiceProcessController.TotalPhysicalMemoryInKB) / 1024;
+                serverInfo.FreeMemory = ProcessMemoryAnalyzer.PMAServiceProcessController.TotalFreePhysicalMemoryInKB / 1024;
+                return serverInfo;
+            }
+            else return null;
+
+        }
+
+        /// <summary>
+        /// Gets all process information.
+        /// </summary>
+        /// <returns></returns>
+        public static string KillProcess(int pid, string sessionID)
+        {
+            logger.Debug(EnumMethod.START);
+            string result = string.Empty;
+            string processName = string.Empty;
+            try
+            {
+                if (VerifySessionPrivileges(sessionID, PRIVILEGE_TASK_MANAGER_ADMIN))
+                {
+                    Process process = Process.GetProcessById(pid);
+                    if (process != null)
+                    {
+                        processName = process.ProcessName;
+                        process.Kill();
+                        result = "Process : " + processName + " having PID : " + pid + " killed successfully";
+                    }
+                }
+                else result = "Insufficient privileges to kill process";
+
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                result = ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.TargetSite;
+            }
+            finally
+            {
+                logger.Debug(EnumMethod.END);
+            }
+            return result;
         }
 
         //------------------------------------------------------------------------------------------------------------------------
@@ -385,6 +465,12 @@ namespace PMA.SystemAnalyzer
                     case PRIVILEGE_SQL:
                         result = userInfo.IsSQLUser;
                         break;
+                    case PRIVILEGE_TASK_MANAGER_VIEW :
+                        result = true;
+                        break;
+                    case PRIVILEGE_TASK_MANAGER_ADMIN :
+                        result = userInfo.IsTaskManagerAdminUser;
+                        break;
                     default:
                         result = false;
                         break;
@@ -401,62 +487,6 @@ namespace PMA.SystemAnalyzer
             mailController.SendMail();
         }
 
-
-        //-------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Sends the mail.
-        /// </summary>
-        //private void SendMail(string alertType, string alertMessage, string userName)
-        //{
-        //    configManager.Logger.Debug(EnumMethod.START);
-        //    string subject = "PMA System Alerts : "+  alertType + ": " + configManager.SystemAnalyzerInfo.ClientInstanceName + " : " + Environment.MachineName + " : " + " at " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
-        //    SMTPTransport smtp = new SMTPTransport();
-        //    try
-        //    {
-        //        smtp.SendAsynchronous = false;
-        //        smtp.SmtpSend(configManager.SmtpInfo, configManager.SystemAnalyzerInfo.ListAlertMailSubscription, null, subject, GenerateMessageBody(alertMessage,userName), null);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        configManager.Logger.Error(ex);
-        //    }
-        //    configManager.Logger.Debug(EnumMethod.END);
-        //}
-
-        ////-------------------------------------------------------------------------------------------------
-        ///// <summary>
-        ///// Generates the message body.
-        ///// </summary>
-        ///// <returns></returns>
-        //private string GenerateMessageBody(string message,string forUser)
-        //{
-        //    configManager.Logger.Debug(EnumMethod.START);
-        //    StringBuilder builder = new StringBuilder();
-        //    builder.Append("Hi,");
-        //    builder.Append("\r\n");
-        //    builder.Append("\r\n");
-        //    builder.Append("\r\n");
-        //    builder.Append("Alert Generated For machine :" + Environment.MachineName + " : " + configManager.SystemAnalyzerInfo.ClientInstanceName);
-        //    builder.Append("\r\n");
-        //    builder.Append(message);
-        //    builder.Append("\r\n");
-        //    builder.Append("Alert Is Generated by : " + forUser);
-        //    builder.Append("\r\n");
-        //    builder.Append("\r\n");
-        //    builder.Append("\r\n");
-        //    builder.Append("\r\n");
-        //    builder.Append("Thanks,");
-        //    builder.Append("\r\n");
-        //    builder.Append("Cosmos Team.");
-        //    configManager.Logger.Debug(EnumMethod.END);
-        //    return builder.ToString();
-        //}
-
-
-
-       
-        
-        
 
     }
 }

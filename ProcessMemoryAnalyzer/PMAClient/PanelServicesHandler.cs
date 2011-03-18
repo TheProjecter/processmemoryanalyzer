@@ -69,7 +69,7 @@ namespace PMA.Client
             // no use here            
         }
 
-        public bool CauseValidation()
+        public bool ChangeView()
         {
             return true;
         }
