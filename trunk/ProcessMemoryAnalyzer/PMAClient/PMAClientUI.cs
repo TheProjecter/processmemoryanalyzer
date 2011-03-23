@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using PMA.Info;
 using PMA.ConfigManager.Client;
+using PMA.CommunicationAPI;
 
 
 namespace PMA.Client
@@ -23,8 +24,19 @@ namespace PMA.Client
         PanelSQLClient panelSQLClient = null;
         PanelServicesHandler panelServiceHandler = null;
         PanelTaskManager panelTaskManager = null;
+        PanelDateTime panelDateTime = null;
+
+        string sessionID;
+
+        IPMACommunicationContract proxy;
+
+        System.Timers.Timer timer;
 
         LoginForm loginForm;
+
+        delegate void ServerClock();
+
+        ServerClock serverClock;
 
         private bool CauseValidation()
         {
@@ -44,6 +56,9 @@ namespace PMA.Client
                 case ENUMPanel.PANEL_TASK_MANAGER:
                     result = panelTaskManager.ChangeView();
                     break;
+                case ENUMPanel.PANEL_DATE_TIME:
+                    result = panelDateTime.ChangeView();
+                    break;    
                 default:
                     result = false;
                     break;
@@ -67,6 +82,9 @@ namespace PMA.Client
                     break;
                 case ENUMPanel.PANEL_TASK_MANAGER:
                     panelTaskManager.UpdateConfig();
+                    break;
+                case ENUMPanel.PANEL_DATE_TIME :
+                    panelDateTime.UpdateConfig();
                     break;
             }
 
@@ -93,6 +111,10 @@ namespace PMA.Client
                     HideAllControls();
                     panelTaskManager.Show();
                     break;
+                case ENUMPanel.PANEL_DATE_TIME :
+                    HideAllControls();
+                    panelDateTime.Show();
+                    break;
             }
 
         }
@@ -103,6 +125,7 @@ namespace PMA.Client
             if (configManager.clientRuntimeInfo.UserInfo != null)
             {
                 label_Actions.Enabled = configManager.clientRuntimeInfo.UserInfo.IsActionUser;
+                label_DateTime.Enabled = configManager.clientRuntimeInfo.UserInfo.IsActionUser;
                 label_Services.Enabled = configManager.clientRuntimeInfo.UserInfo.IsServiceUser;
                 label_SQL.Enabled = configManager.clientRuntimeInfo.UserInfo.IsSQLUser;
                 label_TaskManager.Enabled = true;
@@ -116,14 +139,41 @@ namespace PMA.Client
             InitializeComponent();
         }
 
+        private void InitializeServerClock()
+        {
+            GetDateTime();
+            serverClock = new ServerClock(GetDateTime);
+            timer = new System.Timers.Timer();
+            timer.Interval = 10000;
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Elapsed);
+            timer.Start();
+        }
+
+      
+
+        void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            label_DateTime.Invoke(serverClock);
+        }
+
+        private void GetDateTime()
+        {
+            DateTime dateTime = proxy.GetServerDateTime(sessionID);
+            label_DateTime.Text = " " + dateTime.ToShortTimeString() + "\r\n" + dateTime.ToShortDateString();
+        }
+
+
         private void InitilizeUI()
         {
+            proxy = configManager.GetConnectionChannel;
+            sessionID = configManager.clientRuntimeInfo.sessionID;
             InitializeAllPanels();
             HideAllControls();
             LoadConfigs();
             ChangeCursorStyle();
             DisableLeftMenu();
             SetAccessibilityForUser();
+            InitializeServerClock();
             ShowPanel(ENUMPanel.PANEL_TASK_MANAGER);
         }
 
@@ -140,6 +190,9 @@ namespace PMA.Client
 
             panelTaskManager = new PanelTaskManager();
             panel_MainContainer.Controls.Add(panelTaskManager);
+
+            panelDateTime = new PanelDateTime();
+            panel_MainContainer.Controls.Add(panelDateTime);
         }
 
         private void LoadConfigs()
@@ -220,6 +273,11 @@ namespace PMA.Client
             ChangePanel(ENUMPanel.PANEL_TASK_MANAGER);
         }
 
+        private void label_DateTime_Click(object sender, EventArgs e)
+        {
+            ChangePanel(ENUMPanel.PANEL_DATE_TIME);
+        }
+
         private void ChangePanel(ENUMPanel panel)
         {
             if (CauseValidation())
@@ -267,7 +325,8 @@ namespace PMA.Client
         }
 
         
-      
+
+          
         
         
     }

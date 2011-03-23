@@ -57,7 +57,7 @@ namespace PMA.CommunicationAPI
         PMAServerInfo GetServerInfo(string sessionID);
 
         [OperationContract]
-        string KillProces(int pid, string sessionID);
+        List<string> KillProcesses(List<int> lsitPID, string sessionID);
 
         [OperationContract]
         DateTime GetServerDateTime(string sessionID);

@@ -9,6 +9,7 @@ using System.ServiceProcess;
 using System.Data;
 using PMA.Utils.Logger;
 using PMA.Utils.smtp;
+using System.Runtime.InteropServices;
 
 namespace PMA.SystemAnalyzer
 {
@@ -110,36 +111,45 @@ namespace PMA.SystemAnalyzer
         /// Gets all process information.
         /// </summary>
         /// <returns></returns>
-        public static string KillProcess(int pid, string sessionID)
+        public static List<string> KillProcess(List<int> listPIDs, string sessionID)
         {
             logger.Debug(EnumMethod.START);
-            string result = string.Empty;
+            List<string> listResult = new List<string>();
             string processName = string.Empty;
             try
             {
                 if (VerifySessionPrivileges(sessionID, PRIVILEGE_TASK_MANAGER_ADMIN))
                 {
-                    Process process = Process.GetProcessById(pid);
-                    if (process != null)
+                    foreach (int pid in listPIDs)
                     {
-                        processName = process.ProcessName;
-                        process.Kill();
-                        result = "Process : " + processName + " having PID : " + pid + " killed successfully";
+                        Process process = Process.GetProcessById(pid);
+                        if (process != null)
+                        {
+                            processName = process.ProcessName;
+                            process.Kill();
+                            listResult.Add("Process : " + processName + " having PID : " + pid + " killed successfully");
+                        }
                     }
                 }
-                else result = "Insufficient privileges to kill process";
-
+                else listResult.Add("Insufficient privileges to kill process or process does not exist");
             }
             catch (Exception ex)
             {
                 logger.Error(ex);
-                result = ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.TargetSite;
+                listResult.Add(ex.Message + "\r\n" + ex.StackTrace + "\r\n" + ex.TargetSite);
             }
             finally
             {
                 logger.Debug(EnumMethod.END);
             }
-            return result;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (string str in listResult)
+            {
+                sb.AppendLine(str);
+            }
+            SendMail(sb.ToString(), AlertType.ACTION_ALERT, sessionID);
+            return listResult;
         }
 
         //------------------------------------------------------------------------------------------------------------------------
@@ -439,6 +449,48 @@ namespace PMA.SystemAnalyzer
             else return string.Empty;
         }
 
+
+        public static bool SetServerDateTime(DateTime datetime, string sessionID)
+        {
+            if (VerifySessionPrivileges(sessionID, PRIVILEGE_ACTION))
+            {
+                SystemTime newTime = new SystemTime();
+                newTime.Year = (ushort)datetime.Year;
+                newTime.Month = (ushort)datetime.Month;
+                newTime.DayOfWeek = (ushort)datetime.DayOfWeek;
+                newTime.Day = (ushort)datetime.Day;
+                newTime.Hour = (ushort)datetime.Hour;
+                newTime.Minute = (ushort)datetime.Minute;
+                newTime.Millisecond = (ushort)datetime.Millisecond;
+                try
+                {
+                    Win32SetSystemTime(ref newTime);
+                    SendMail("Time is set to : " + datetime.ToShortDateString() + "  " + datetime.ToShortTimeString(), AlertType.ACTION_ALERT, sessionID); 
+                }
+                catch
+                {
+                    return false;
+                }
+                return true;
+            }
+            else return false;
+        }
+
+        [DllImport("kernel32.dll", EntryPoint = "SetSystemTime", SetLastError = true)]
+        public extern static bool Win32SetSystemTime(ref SystemTime sysTime);
+
+
+        public  struct SystemTime
+        {
+            public ushort Year;
+            public ushort Month;
+            public ushort DayOfWeek;
+            public ushort Day;
+            public ushort Hour;
+            public ushort Minute;
+            public ushort Second;
+            public ushort Millisecond;
+        };
 
         //------------------------------------------------------------------------------------------------------------------------
         /// <summary>
