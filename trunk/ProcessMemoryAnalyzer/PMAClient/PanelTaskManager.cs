@@ -19,29 +19,56 @@ namespace PMA.Client
 
         PMAClientConfigManager configManager = PMAClientConfigManager.GetClientConfigurationInstance;
 
+        List<PMAProcessInfo> listProcessInfoCached = null;
+        
+        List<PMAProcessInfo> listProcessInfo = null;
+
         IPMACommunicationContract proxy;
         string sessionID;
 
         System.Timers.Timer timer;
 
+        delegate void delegateRefreshControls();
+
         public PanelTaskManager()
         {
             InitializeComponent();
+            timer = new System.Timers.Timer(10000);
             sessionID = configManager.clientRuntimeInfo.sessionID;
             proxy = configManager.GetConnectionChannel;
-            //GridRefreshTimer();
+
+            if (configManager.clientRuntimeInfo.UserInfo.IsTaskManagerAdminUser)
+            {
+                dataGridView_TaskManager.ContextMenuStrip = new ContextMenuStrip();
+                dataGridView_TaskManager.ContextMenuStrip.Items.Add("Kill Process");
+                dataGridView_TaskManager.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataGridView_TaskManager_RowHeaderMouseClick);
+            }
         }
 
+        void dataGridView_TaskManager_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+            if (e.Button == MouseButtons.Right)
+            {
+                dataGridView_TaskManager.ContextMenuStrip.Show(e.X, e.Y);
+            }
+        }
+
+     
+       
         private void GridRefreshTimer()
         {
-            timer = new System.Timers.Timer(10000);
-            timer.Elapsed += new System.Timers.ElapsedEventHandler(RefreshGridTimerEvent);
-            timer.Start();
+            if (!timer.Enabled)
+            {
+                timer.Elapsed += new System.Timers.ElapsedEventHandler(RefreshGridTimerEvent);
+                timer.Start();
+            }
         }
 
         void RefreshGridTimerEvent(object sender, System.Timers.ElapsedEventArgs e)
         {
-            BindGrid();
+            delegateRefreshControls refreshGrid = new delegateRefreshControls(BindGrid);
+            dataGridView_TaskManager.BeginInvoke(refreshGrid);
         }
 
         #region IUIManager Members
@@ -55,19 +82,24 @@ namespace PMA.Client
         private void BindData()
         {
             PMAServerInfo serverInfo = proxy.GetServerInfo(sessionID);
-            textBox_CPU.Enabled = false;
-            textBox_TotalMemory.Enabled = false;
-            textBox_FreeMemory.Enabled = false;
-
-            textBox_CPU.Text = serverInfo.CPUUsage.ToString() + "%";
-            textBox_TotalMemory.Text = serverInfo.TotalMemory.ToString() + " MB" ;
-            textBox_FreeMemory.Text = serverInfo.FreeMemory.ToString() + " MB";
+           
+            label_CPUUsageValue.Text = serverInfo.CPUUsage.ToString() + "%";
+            label_MemoryValue.Text = serverInfo.TotalMemory.ToString() + " MB" ;
+            label_FreeMemoryValue.Text = serverInfo.FreeMemory.ToString() + " MB";
             
         }
 
         private void BindGrid()
         {
-            dataGridView_TaskManager.DataSource = proxy.GetAllProcessesInfo(sessionID);
+            listProcessInfoCached = proxy.GetAllProcessesInfo(sessionID);
+            if (textBox_Search.Text.Trim() == string.Empty)
+            {
+                listProcessInfo = (from processInfo in listProcessInfoCached
+                                   where processInfo.ProcessName.Contains(textBox_Search.Text)
+                                   select processInfo).ToList<PMAProcessInfo>();
+            }
+
+            dataGridView_TaskManager.DataSource = listProcessInfo;
             dataGridView_TaskManager.AutoSize = true;
         }
 
@@ -78,10 +110,50 @@ namespace PMA.Client
 
         public bool ChangeView()
         {
+            if (timer != null)
+            {
+                timer.Stop();
+            }
             return true;
         }
 
         #endregion
+
+        private void textBox_Search_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox_Search.Text.Trim() != string.Empty)
+            {
+                listProcessInfo = (from processInfo in listProcessInfoCached
+                                   where processInfo.ProcessName.ToLower().Contains(textBox_Search.Text.ToLower())
+                                   select processInfo).ToList<PMAProcessInfo>();
+               
+            }
+            else
+            {
+                listProcessInfo = proxy.GetAllProcessesInfo(sessionID);
+            }
+            dataGridView_TaskManager.DataSource = listProcessInfo;
+          
+        }
+
+        
+        private void checkBox_Refresh_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_Refresh.Checked)
+            {
+                if (!timer.Enabled)
+                {
+                    timer.Start();
+                }
+            }
+            else
+            {
+                if (timer.Enabled)
+                {
+                    timer.Stop();
+                }
+            }
+        }
 
         
     }

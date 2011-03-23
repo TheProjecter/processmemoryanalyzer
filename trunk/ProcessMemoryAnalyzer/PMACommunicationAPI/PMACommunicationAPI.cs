@@ -108,6 +108,18 @@ namespace PMA.CommunicationAPI
         }
         #endregion
 
+        
+
+        public DateTime GetServerDateTime(string sessionID)
+        {
+            return DateTime.Now;
+        }
+
+        public bool SetServerDateTime(DateTime dateTime, string sessionID)
+        {
+            return true;
+        }
+
         #endregion
     }
 }

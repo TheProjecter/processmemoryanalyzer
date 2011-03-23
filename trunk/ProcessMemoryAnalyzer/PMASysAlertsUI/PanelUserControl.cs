@@ -143,6 +143,7 @@ namespace PMASysAlertsUI
                 row.Cells["SQL"].Value = checkBox_SQL.Checked;
                 row.Cells["Action"].Value = checkBox_Action.Checked;
                 row.Cells["Services"].Value = checkBox_Services.Checked;
+                row.Cells["TaskManagerAdmin"].Value = checkBox_TaskManagerAdmin.Checked;
                 row.Cells["Password"].Value = "Reset";
                 row.Cells["RemoveUser"].Value = "Remove";
                 UpdateConfig();
@@ -202,6 +203,7 @@ namespace PMASysAlertsUI
                 row.Cells["SQL"].Value = userInfo.IsSQLUser;
                 row.Cells["Action"].Value = userInfo.IsActionUser;
                 row.Cells["Services"].Value = userInfo.IsServiceUser;
+                row.Cells["TaskManagerAdmin"].Value = userInfo.IsTaskManagerAdminUser;
                 row.Cells["Password"].Value = "Reset";
                 row.Cells["RemoveUser"].Value = "Remove";
             }
@@ -223,6 +225,7 @@ namespace PMASysAlertsUI
                 userInfo.IsActionUser = bool.Parse( row.Cells["Action"].Value.ToString());
                 userInfo.IsServiceUser = bool.Parse(row.Cells["Services"].Value.ToString());
                 userInfo.IsSQLUser = bool.Parse(row.Cells["SQL"].Value.ToString());
+                userInfo.IsTaskManagerAdminUser = bool.Parse(row.Cells["TaskManagerAdmin"].Value.ToString());
                 configManager.PMAUsers.ListPMAUserInfo.Add(userInfo);               
             }
         }
