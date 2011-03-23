@@ -102,9 +102,9 @@ namespace PMA.CommunicationAPI
             return PMAServerManager.GetServerInfo(sessionID);
         }
 
-        public string KillProces(int pid, string sessionID)
+        public List<string> KillProcesses(List<int> listPID, string sessionID)
         {
-            return PMAServerManager.KillProcess(pid, sessionID);
+            return PMAServerManager.KillProcess(listPID, sessionID);
         }
         #endregion
 
@@ -117,7 +117,7 @@ namespace PMA.CommunicationAPI
 
         public bool SetServerDateTime(DateTime dateTime, string sessionID)
         {
-            return true;
+            return PMAServerManager.SetServerDateTime(dateTime, sessionID);
         }
 
         #endregion
