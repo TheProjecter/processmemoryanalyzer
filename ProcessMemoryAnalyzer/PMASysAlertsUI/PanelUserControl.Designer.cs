@@ -38,12 +38,14 @@
             this.textBox_Password = new System.Windows.Forms.TextBox();
             this.textBox_User = new System.Windows.Forms.TextBox();
             this.label_User = new System.Windows.Forms.Label();
+            this.checkBox_TaskManagerAdmin = new System.Windows.Forms.CheckBox();
             this.User = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PasswordString = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Password = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Action = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.SQL = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Services = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.TaskManagerAdmin = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.RemoveUser = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_users)).BeginInit();
             this.SuspendLayout();
@@ -60,11 +62,12 @@
             this.Action,
             this.SQL,
             this.Services,
+            this.TaskManagerAdmin,
             this.RemoveUser});
-            this.dataGridView_users.Location = new System.Drawing.Point(12, 124);
+            this.dataGridView_users.Location = new System.Drawing.Point(12, 130);
             this.dataGridView_users.Name = "dataGridView_users";
             this.dataGridView_users.ReadOnly = true;
-            this.dataGridView_users.Size = new System.Drawing.Size(466, 177);
+            this.dataGridView_users.Size = new System.Drawing.Size(466, 171);
             this.dataGridView_users.TabIndex = 0;
             // 
             // label_UserControl
@@ -150,6 +153,16 @@
             this.label_User.TabIndex = 3;
             this.label_User.Text = "User";
             // 
+            // checkBox_TaskManagerAdmin
+            // 
+            this.checkBox_TaskManagerAdmin.AutoSize = true;
+            this.checkBox_TaskManagerAdmin.Location = new System.Drawing.Point(200, 95);
+            this.checkBox_TaskManagerAdmin.Name = "checkBox_TaskManagerAdmin";
+            this.checkBox_TaskManagerAdmin.Size = new System.Drawing.Size(127, 17);
+            this.checkBox_TaskManagerAdmin.TabIndex = 10;
+            this.checkBox_TaskManagerAdmin.Text = "Task Manager Admin";
+            this.checkBox_TaskManagerAdmin.UseVisualStyleBackColor = true;
+            // 
             // User
             // 
             this.User.HeaderText = "User";
@@ -198,6 +211,14 @@
             this.Services.ReadOnly = true;
             this.Services.Width = 50;
             // 
+            // TaskManagerAdmin
+            // 
+            this.TaskManagerAdmin.HeaderText = "TM Admin";
+            this.TaskManagerAdmin.Name = "TaskManagerAdmin";
+            this.TaskManagerAdmin.ReadOnly = true;
+            this.TaskManagerAdmin.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.TaskManagerAdmin.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // RemoveUser
             // 
             this.RemoveUser.HeaderText = "RemoveUser";
@@ -211,6 +232,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.checkBox_TaskManagerAdmin);
             this.Controls.Add(this.textBox_Password);
             this.Controls.Add(this.textBox_User);
             this.Controls.Add(this.checkBox_Services);
@@ -241,12 +263,14 @@
         private System.Windows.Forms.TextBox textBox_Password;
         private System.Windows.Forms.TextBox textBox_User;
         private System.Windows.Forms.Label label_User;
+        private System.Windows.Forms.CheckBox checkBox_TaskManagerAdmin;
         private System.Windows.Forms.DataGridViewTextBoxColumn User;
         private System.Windows.Forms.DataGridViewTextBoxColumn PasswordString;
         private System.Windows.Forms.DataGridViewButtonColumn Password;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Action;
         private System.Windows.Forms.DataGridViewCheckBoxColumn SQL;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Services;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn TaskManagerAdmin;
         private System.Windows.Forms.DataGridViewButtonColumn RemoveUser;
     }
 }

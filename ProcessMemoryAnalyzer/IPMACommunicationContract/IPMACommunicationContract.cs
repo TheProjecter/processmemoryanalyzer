@@ -59,6 +59,12 @@ namespace PMA.CommunicationAPI
         [OperationContract]
         string KillProces(int pid, string sessionID);
 
+        [OperationContract]
+        DateTime GetServerDateTime(string sessionID);
+
+        [OperationContract]
+        bool SetServerDateTime(DateTime dateTime, string sessionID);
+
 
     }
 }
