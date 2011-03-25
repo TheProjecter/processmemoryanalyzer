@@ -24,7 +24,7 @@ namespace PMA.Info
                 PID = pid;
                 ProcessName = process.ProcessName;
                 ThreadCount = process.Threads.Count;
-                Memory = process.WorkingSet64;
+                MemoryKB = process.WorkingSet64 / 1024;
             }
             else
             {
@@ -32,19 +32,18 @@ namespace PMA.Info
             }
 
         }
-        
-        [DataMember]
-        public int PID { get; set; }
 
         [DataMember]
         public string ProcessName { get; set; }
 
         [DataMember]
-        public int ThreadCount { get; set; }
+        public long MemoryKB { get; set; }
+        
+        [DataMember]
+        public int PID { get; set; }
 
         [DataMember]
-        public long Memory { get; set; }
-
+        public int ThreadCount { get; set; }
 
     }
 }

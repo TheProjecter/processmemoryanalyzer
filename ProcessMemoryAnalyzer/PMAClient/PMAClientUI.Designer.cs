@@ -35,15 +35,18 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel_LeftMenu = new System.Windows.Forms.TableLayoutPanel();
-            this.label_DateTime = new System.Windows.Forms.Label();
-            this.label_Actions = new System.Windows.Forms.Label();
+            this.dateTimePicker_ServerTime = new System.Windows.Forms.DateTimePicker();
             this.label_Services = new System.Windows.Forms.Label();
             this.label_SQL = new System.Windows.Forms.Label();
             this.label_TaskManager = new System.Windows.Forms.Label();
+            this.label_Actions = new System.Windows.Forms.Label();
             this.panel_MainContainer = new System.Windows.Forms.Panel();
+            this.button_SetServerTime = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel_LeftMenu.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -100,11 +103,11 @@
             // 
             this.tableLayoutPanel_LeftMenu.ColumnCount = 1;
             this.tableLayoutPanel_LeftMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_Actions, 0, 3);
             this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_Services, 0, 2);
             this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_SQL, 0, 1);
             this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_TaskManager, 0, 0);
-            this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_DateTime, 0, 4);
+            this.tableLayoutPanel_LeftMenu.Controls.Add(this.label_Actions, 0, 3);
+            this.tableLayoutPanel_LeftMenu.Controls.Add(this.panel2, 0, 4);
             this.tableLayoutPanel_LeftMenu.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel_LeftMenu.Name = "tableLayoutPanel_LeftMenu";
             this.tableLayoutPanel_LeftMenu.RowCount = 5;
@@ -116,29 +119,15 @@
             this.tableLayoutPanel_LeftMenu.Size = new System.Drawing.Size(140, 454);
             this.tableLayoutPanel_LeftMenu.TabIndex = 0;
             // 
-            // label_DateTime
+            // dateTimePicker_ServerTime
             // 
-            this.label_DateTime.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label_DateTime.AutoSize = true;
-            this.label_DateTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_DateTime.Location = new System.Drawing.Point(30, 400);
-            this.label_DateTime.Name = "label_DateTime";
-            this.label_DateTime.Size = new System.Drawing.Size(80, 13);
-            this.label_DateTime.TabIndex = 0;
-            this.label_DateTime.Text = "Server Clock";
-            this.label_DateTime.Click += new System.EventHandler(this.label_DateTime_Click);
-            // 
-            // label_Actions
-            // 
-            this.label_Actions.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label_Actions.AutoSize = true;
-            this.label_Actions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Actions.Location = new System.Drawing.Point(35, 305);
-            this.label_Actions.Name = "label_Actions";
-            this.label_Actions.Size = new System.Drawing.Size(69, 20);
-            this.label_Actions.TabIndex = 2;
-            this.label_Actions.Text = "Actions";
-            this.label_Actions.Click += new System.EventHandler(this.label_Actions_Click);
+            this.dateTimePicker_ServerTime.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dateTimePicker_ServerTime.CustomFormat = "hh:mm tt";
+            this.dateTimePicker_ServerTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker_ServerTime.Location = new System.Drawing.Point(32, 15);
+            this.dateTimePicker_ServerTime.Name = "dateTimePicker_ServerTime";
+            this.dateTimePicker_ServerTime.Size = new System.Drawing.Size(79, 20);
+            this.dateTimePicker_ServerTime.TabIndex = 0;
             // 
             // label_Services
             // 
@@ -176,6 +165,18 @@
             this.label_TaskManager.Text = "Task Manager";
             this.label_TaskManager.Click += new System.EventHandler(this.label_TaskManager_Click);
             // 
+            // label_Actions
+            // 
+            this.label_Actions.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label_Actions.AutoSize = true;
+            this.label_Actions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Actions.Location = new System.Drawing.Point(35, 305);
+            this.label_Actions.Name = "label_Actions";
+            this.label_Actions.Size = new System.Drawing.Size(69, 20);
+            this.label_Actions.TabIndex = 2;
+            this.label_Actions.Text = "Actions";
+            this.label_Actions.Click += new System.EventHandler(this.label_Actions_Click);
+            // 
             // panel_MainContainer
             // 
             this.panel_MainContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -183,6 +184,26 @@
             this.panel_MainContainer.Name = "panel_MainContainer";
             this.panel_MainContainer.Size = new System.Drawing.Size(852, 460);
             this.panel_MainContainer.TabIndex = 2;
+            // 
+            // button_SetServerTime
+            // 
+            this.button_SetServerTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_SetServerTime.Location = new System.Drawing.Point(49, 41);
+            this.button_SetServerTime.Name = "button_SetServerTime";
+            this.button_SetServerTime.Size = new System.Drawing.Size(36, 20);
+            this.button_SetServerTime.TabIndex = 0;
+            this.button_SetServerTime.Text = "Set";
+            this.button_SetServerTime.UseVisualStyleBackColor = true;
+            this.button_SetServerTime.Click += new System.EventHandler(this.button_SetServerTime_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.dateTimePicker_ServerTime);
+            this.panel2.Controls.Add(this.button_SetServerTime);
+            this.panel2.Location = new System.Drawing.Point(3, 363);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(134, 88);
+            this.panel2.TabIndex = 4;
             // 
             // PMAClientUI
             // 
@@ -203,6 +224,7 @@
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel_LeftMenu.ResumeLayout(false);
             this.tableLayoutPanel_LeftMenu.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,7 +244,9 @@
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Label label_TaskManager;
-        private System.Windows.Forms.Label label_DateTime;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_ServerTime;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button button_SetServerTime;
     }
 }
 

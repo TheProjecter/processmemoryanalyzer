@@ -38,7 +38,7 @@
             this.label_CPUUsageValue = new System.Windows.Forms.Label();
             this.textBox_Search = new System.Windows.Forms.TextBox();
             this.label_Search = new System.Windows.Forms.Label();
-            this.checkBox_Refresh = new System.Windows.Forms.CheckBox();
+            this.button_Refresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_TaskManager)).BeginInit();
             this.SuspendLayout();
             // 
@@ -142,22 +142,21 @@
             this.label_Search.TabIndex = 12;
             this.label_Search.Text = "Search";
             // 
-            // checkBox_Refresh
+            // button_Refresh
             // 
-            this.checkBox_Refresh.AutoSize = true;
-            this.checkBox_Refresh.Location = new System.Drawing.Point(22, 46);
-            this.checkBox_Refresh.Name = "checkBox_Refresh";
-            this.checkBox_Refresh.Size = new System.Drawing.Size(128, 17);
-            this.checkBox_Refresh.TabIndex = 13;
-            this.checkBox_Refresh.Text = "Refresh Automatically";
-            this.checkBox_Refresh.UseVisualStyleBackColor = true;
-            this.checkBox_Refresh.CheckedChanged += new System.EventHandler(this.checkBox_Refresh_CheckedChanged);
+            this.button_Refresh.Location = new System.Drawing.Point(757, 35);
+            this.button_Refresh.Name = "button_Refresh";
+            this.button_Refresh.Size = new System.Drawing.Size(65, 23);
+            this.button_Refresh.TabIndex = 13;
+            this.button_Refresh.Text = "Refresh";
+            this.button_Refresh.UseVisualStyleBackColor = true;
+            this.button_Refresh.Click += new System.EventHandler(this.button_Refresh_Click);
             // 
             // PanelTaskManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.checkBox_Refresh);
+            this.Controls.Add(this.button_Refresh);
             this.Controls.Add(this.label_Search);
             this.Controls.Add(this.textBox_Search);
             this.Controls.Add(this.label_CPUUsageValue);
@@ -188,6 +187,6 @@
         private System.Windows.Forms.Label label_CPUUsageValue;
         private System.Windows.Forms.TextBox textBox_Search;
         private System.Windows.Forms.Label label_Search;
-        private System.Windows.Forms.CheckBox checkBox_Refresh;
+        private System.Windows.Forms.Button button_Refresh;
     }
 }

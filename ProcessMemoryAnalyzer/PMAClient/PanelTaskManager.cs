@@ -26,14 +26,10 @@ namespace PMA.Client
         IPMACommunicationContract proxy;
         string sessionID;
 
-        System.Timers.Timer timer;
-
-        delegate void delegateRefreshControls();
 
         public PanelTaskManager()
         {
             InitializeComponent();
-            timer = new System.Timers.Timer(10000);
             sessionID = configManager.clientRuntimeInfo.sessionID;
             proxy = configManager.GetConnectionChannel;
             dataGridView_TaskManager.RowHeadersVisible = false;
@@ -63,7 +59,7 @@ namespace PMA.Client
             {
                 foreach (DataGridViewRow row in dataGridView_TaskManager.SelectedRows)
                 {
-                    listPID.Add(int.Parse(row.Cells["PID"].ToString()));
+                    listPID.Add(int.Parse(row.Cells["PID"].Value.ToString()));
                 }
                 listResults = proxy.KillProcesses(listPID, sessionID);
             }
@@ -78,6 +74,7 @@ namespace PMA.Client
                     }
                 }
                 MessageBox.Show(sb.ToString());
+                UpdateUI();
             }
 
         }
@@ -95,22 +92,8 @@ namespace PMA.Client
             }
         }
 
-     
-       
-        private void GridRefreshTimer()
-        {
-            if (!timer.Enabled)
-            {
-                timer.Elapsed += new System.Timers.ElapsedEventHandler(RefreshGridTimerEvent);
-                timer.Start();
-            }
-        }
-
-        void RefreshGridTimerEvent(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            delegateRefreshControls refreshGrid = new delegateRefreshControls(BindGrid);
-            dataGridView_TaskManager.BeginInvoke(refreshGrid);
-        }
+   
+        
 
         #region IUIManager Members
 
@@ -133,12 +116,10 @@ namespace PMA.Client
         private void BindGrid()
         {
             listProcessInfoCached = proxy.GetAllProcessesInfo(sessionID);
-            if (textBox_Search.Text.Trim() == string.Empty)
-            {
-                listProcessInfo = (from processInfo in listProcessInfoCached
+            listProcessInfo = (from processInfo in listProcessInfoCached
                                    where processInfo.ProcessName.Contains(textBox_Search.Text)
+                                   orderby processInfo.ProcessName
                                    select processInfo).ToList<PMAProcessInfo>();
-            }
 
             dataGridView_TaskManager.DataSource = listProcessInfo;
             dataGridView_TaskManager.AutoSize = true;
@@ -151,10 +132,6 @@ namespace PMA.Client
 
         public bool ChangeView()
         {
-            if (timer != null)
-            {
-                timer.Stop();
-            }
             return true;
         }
 
@@ -166,6 +143,7 @@ namespace PMA.Client
             {
                 listProcessInfo = (from processInfo in listProcessInfoCached
                                    where processInfo.ProcessName.ToLower().Contains(textBox_Search.Text.ToLower())
+                                   orderby processInfo.ProcessName
                                    select processInfo).ToList<PMAProcessInfo>();
                
             }
@@ -177,23 +155,9 @@ namespace PMA.Client
           
         }
 
-        
-        private void checkBox_Refresh_CheckedChanged(object sender, EventArgs e)
+        private void button_Refresh_Click(object sender, EventArgs e)
         {
-            if (checkBox_Refresh.Checked)
-            {
-                if (!timer.Enabled)
-                {
-                    timer.Start();
-                }
-            }
-            else
-            {
-                if (timer.Enabled)
-                {
-                    timer.Stop();
-                }
-            }
+            UpdateUI();
         }
 
         
