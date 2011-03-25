@@ -24,7 +24,6 @@ namespace PMA.Client
         PanelSQLClient panelSQLClient = null;
         PanelServicesHandler panelServiceHandler = null;
         PanelTaskManager panelTaskManager = null;
-        PanelDateTime panelDateTime = null;
 
         string sessionID;
 
@@ -37,6 +36,11 @@ namespace PMA.Client
         delegate void ServerClock();
 
         ServerClock serverClock;
+
+        public PMAClientUI()
+        {
+            InitializeComponent();
+        }
 
         private bool CauseValidation()
         {
@@ -56,9 +60,6 @@ namespace PMA.Client
                 case ENUMPanel.PANEL_TASK_MANAGER:
                     result = panelTaskManager.ChangeView();
                     break;
-                case ENUMPanel.PANEL_DATE_TIME:
-                    result = panelDateTime.ChangeView();
-                    break;    
                 default:
                     result = false;
                     break;
@@ -82,9 +83,6 @@ namespace PMA.Client
                     break;
                 case ENUMPanel.PANEL_TASK_MANAGER:
                     panelTaskManager.UpdateConfig();
-                    break;
-                case ENUMPanel.PANEL_DATE_TIME :
-                    panelDateTime.UpdateConfig();
                     break;
             }
 
@@ -111,55 +109,8 @@ namespace PMA.Client
                     HideAllControls();
                     panelTaskManager.Show();
                     break;
-                case ENUMPanel.PANEL_DATE_TIME :
-                    HideAllControls();
-                    panelDateTime.Show();
-                    break;
             }
 
-        }
-
-        
-        private void SetAccessibilityForUser()
-        {
-            if (configManager.clientRuntimeInfo.UserInfo != null)
-            {
-                label_Actions.Enabled = configManager.clientRuntimeInfo.UserInfo.IsActionUser;
-                label_DateTime.Enabled = configManager.clientRuntimeInfo.UserInfo.IsActionUser;
-                label_Services.Enabled = configManager.clientRuntimeInfo.UserInfo.IsServiceUser;
-                label_SQL.Enabled = configManager.clientRuntimeInfo.UserInfo.IsSQLUser;
-                label_TaskManager.Enabled = true;
-            }
-        }
-
-      
-        
-        public PMAClientUI()
-        {
-            InitializeComponent();
-        }
-
-        private void InitializeServerClock()
-        {
-            GetDateTime();
-            serverClock = new ServerClock(GetDateTime);
-            timer = new System.Timers.Timer();
-            timer.Interval = 10000;
-            timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Elapsed);
-            timer.Start();
-        }
-
-      
-
-        void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            label_DateTime.Invoke(serverClock);
-        }
-
-        private void GetDateTime()
-        {
-            DateTime dateTime = proxy.GetServerDateTime(sessionID);
-            label_DateTime.Text = " " + dateTime.ToShortTimeString() + "\r\n" + dateTime.ToShortDateString();
         }
 
 
@@ -177,6 +128,20 @@ namespace PMA.Client
             ShowPanel(ENUMPanel.PANEL_TASK_MANAGER);
         }
 
+        
+        private void SetAccessibilityForUser()
+        {
+            if (configManager.clientRuntimeInfo.UserInfo != null)
+            {
+                label_Actions.Enabled = configManager.clientRuntimeInfo.UserInfo.IsActionUser;
+                dateTimePicker_ServerTime.Enabled = configManager.clientRuntimeInfo.UserInfo.IsActionUser;
+                button_SetServerTime.Enabled = configManager.clientRuntimeInfo.UserInfo.IsActionUser;
+                label_Services.Enabled = configManager.clientRuntimeInfo.UserInfo.IsServiceUser;
+                label_SQL.Enabled = configManager.clientRuntimeInfo.UserInfo.IsSQLUser;
+                label_TaskManager.Enabled = true;
+            }
+        }
+
         private void InitializeAllPanels()
         {
             panelExecuteCommand = new PanelExecuteCommand();
@@ -191,9 +156,32 @@ namespace PMA.Client
             panelTaskManager = new PanelTaskManager();
             panel_MainContainer.Controls.Add(panelTaskManager);
 
-            panelDateTime = new PanelDateTime();
-            panel_MainContainer.Controls.Add(panelDateTime);
         }
+
+      
+        private void InitializeServerClock()
+        {
+            GetDateTime();
+            serverClock = new ServerClock(GetDateTime);
+            timer = new System.Timers.Timer();
+            timer.Interval = 10000;
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Elapsed);
+            timer.Start();
+        }
+
+        void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            dateTimePicker_ServerTime.Invoke(serverClock);
+        }
+
+        private void GetDateTime()
+        {
+            DateTime dateTime = proxy.GetServerDateTime(sessionID);
+            dateTimePicker_ServerTime.Value = dateTime;
+        }
+
+
+      
 
         private void LoadConfigs()
         {
@@ -250,6 +238,11 @@ namespace PMA.Client
                     Label label = control as Label;
                     label.Enabled = false;
                 }
+                else if (control is Button)
+                {
+                    Button button = control as Button;
+                    button.Enabled = false;
+                }
             }
         }
 
@@ -271,11 +264,6 @@ namespace PMA.Client
         private void label_TaskManager_Click(object sender, EventArgs e)
         {
             ChangePanel(ENUMPanel.PANEL_TASK_MANAGER);
-        }
-
-        private void label_DateTime_Click(object sender, EventArgs e)
-        {
-            ChangePanel(ENUMPanel.PANEL_DATE_TIME);
         }
 
         private void ChangePanel(ENUMPanel panel)
@@ -322,6 +310,17 @@ namespace PMA.Client
         private void PMAClientUI_FormClosing(object sender, FormClosingEventArgs e)
         {
             Logout();
+        }
+
+        private void button_SetServerTime_Click(object sender, EventArgs e)
+        {
+            if (sessionID != null)
+            {
+                if (proxy.SetServerDateTime(dateTimePicker_ServerTime.Value, sessionID))
+                {
+                    MessageBox.Show(this,"Server time is setted succesfully");
+                }
+            }
         }
 
         

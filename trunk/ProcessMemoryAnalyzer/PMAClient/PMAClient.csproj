@@ -64,12 +64,6 @@
     <Compile Include="PanelActionHandler.Designer.cs">
       <DependentUpon>PanelActionHandler.cs</DependentUpon>
     </Compile>
-    <Compile Include="PanelDateTime.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PanelDateTime.Designer.cs">
-      <DependentUpon>PanelDateTime.cs</DependentUpon>
-    </Compile>
     <Compile Include="PanelServicesHandler.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -101,9 +95,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PanelActionHandler.resx">
       <DependentUpon>PanelActionHandler.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PanelDateTime.resx">
-      <DependentUpon>PanelDateTime.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PanelServicesHandler.resx">
       <DependentUpon>PanelServicesHandler.cs</DependentUpon>
