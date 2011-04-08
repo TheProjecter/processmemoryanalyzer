@@ -13,6 +13,8 @@ namespace PMA.Utils.Logger
 
         private string _loggerFile;
 
+        private EnumLogger _enumLogger;
+
         private static string _defaultLogPath = AppDomain.CurrentDomain.BaseDirectory + "\\log";
 
         private static string _defaultLogFile = _defaultLogPath + "\\" + LOGGER_FILE;
@@ -82,7 +84,21 @@ namespace PMA.Utils.Logger
         /// Gets or sets the level.
         /// </summary>
         /// <value>The level.</value>
-        public EnumLogger Level { get; set; }
+        public EnumLogger Level 
+        {
+            get
+            {
+                if (_enumLogger == null)
+                {
+                    _enumLogger = EnumLogger.OFF;
+                }
+                return _enumLogger;
+            }
+            set
+            {
+                _enumLogger = value;
+            }
+        }
 
 
         //-------------------------------------------------------------------------------------
