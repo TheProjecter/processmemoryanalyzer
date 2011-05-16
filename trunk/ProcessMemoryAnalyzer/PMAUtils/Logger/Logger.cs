@@ -188,7 +188,7 @@ namespace PMA.Utils.Logger
         /// Writes the file.
         /// </summary>
         /// <param name="message">The message.</param>
-        public void WriteFile(string message)
+        private void WriteFile(string message)
         {
             string file = _loggerInfo.LoggerFile;
             if (Thread.CurrentThread.IsBackground)
