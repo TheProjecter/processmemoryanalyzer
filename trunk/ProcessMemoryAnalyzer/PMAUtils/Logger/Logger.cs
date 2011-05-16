@@ -61,9 +61,8 @@ namespace PMA.Utils.Logger
               if (_logger == null)
               {
                   _logger = new Logger();
-                }
-                return _logger;
-
+              }
+              return _logger;
         }
 
         //----------------------------------------------------------------------------------------------------------------
@@ -201,7 +200,19 @@ namespace PMA.Utils.Logger
             }
             lock (_lockObject)
             {
-               File.AppendAllText(file, message);
+                if (!File.Exists(file))
+                {
+                    try
+                    {
+                        FileStream fs = File.Create(file);
+                        fs.Dispose();
+                    }
+                    catch (Exception ex)
+                    {
+                        EventLog.WriteEntry("PMALogger", ex.Message);
+                    }
+                }
+                File.AppendAllText(file, message);
             }
         }
 
