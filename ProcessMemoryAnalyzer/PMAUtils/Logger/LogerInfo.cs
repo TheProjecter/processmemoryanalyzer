@@ -9,7 +9,7 @@ namespace PMA.Utils.Logger
 {
     public class LoggerInfo
     {
-        public const string LOGGER_FILE = "logger.xml";
+        public const string LOGGER_CONFIG_FILE = "logger.xml";
 
         private string _loggerFile;
 
@@ -17,7 +17,7 @@ namespace PMA.Utils.Logger
 
         private static string _defaultLogPath = AppDomain.CurrentDomain.BaseDirectory + "\\log";
 
-        private static string _defaultLogFile = _defaultLogPath + "\\" + LOGGER_FILE;
+        private static string _defaultLogFile = _defaultLogPath + "\\" + DateTime.Now.ToShortDateString().Replace('/', '-') + "_" + DateTime.Now.ToLongTimeString().Replace(':', '-') + ".log";
 
         //-------------------------------------------------------------------------------------
         /// <summary>
@@ -59,7 +59,6 @@ namespace PMA.Utils.Logger
                 {
                     try
                     {
-                        File.Create(value);
                         _loggerFile = value;
                     }
                     catch
@@ -68,7 +67,6 @@ namespace PMA.Utils.Logger
                         {
                             Directory.CreateDirectory(_defaultLogPath);
                         }
-                        File.Create(_defaultLogFile);
                         _loggerFile = _defaultLogFile;
                     }
                 }
@@ -88,10 +86,6 @@ namespace PMA.Utils.Logger
         {
             get
             {
-                if (_enumLogger == null)
-                {
-                    _enumLogger = EnumLogger.OFF;
-                }
                 return _enumLogger;
             }
             set
