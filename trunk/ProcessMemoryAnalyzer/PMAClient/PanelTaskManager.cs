@@ -31,17 +31,21 @@ namespace PMA.Client
         {
             InitializeComponent();
             sessionID = configManager.clientRuntimeInfo.sessionID;
-            proxy = configManager.GetConnectionChannel;
-            dataGridView_TaskManager.RowHeadersVisible = false;
-            dataGridView_TaskManager.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            if (configManager.clientRuntimeInfo.UserInfo.IsTaskManagerAdminUser)
+            if (sessionID != string.Empty)
             {
-                dataGridView_TaskManager.ContextMenuStrip = new ContextMenuStrip();
-                dataGridView_TaskManager.ContextMenuStrip.Items.Add("Kill Process");
-                dataGridView_TaskManager.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataGridView_TaskManager_RowHeaderMouseClick);
+                proxy = configManager.GetConnectionChannel;
+                dataGridView_TaskManager.RowHeadersVisible = false;
+                dataGridView_TaskManager.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-                dataGridView_TaskManager.ContextMenuStrip.Items[0].Click += new EventHandler(PanelTaskManager_Click);
+                if (configManager.clientRuntimeInfo.UserInfo.IsTaskManagerAdminUser)
+                {
+                    dataGridView_TaskManager.ContextMenuStrip = new ContextMenuStrip();
+                    dataGridView_TaskManager.ContextMenuStrip.Items.Add("Kill Process");
+                    dataGridView_TaskManager.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataGridView_TaskManager_RowHeaderMouseClick);
+
+                    dataGridView_TaskManager.ContextMenuStrip.Items[0].Click += new EventHandler(PanelTaskManager_Click);
+                }
             }
         }
 
@@ -99,8 +103,11 @@ namespace PMA.Client
 
         public void UpdateUI()
         {
-            BindGrid();
-            BindData();
+            if (sessionID != string.Empty)
+            {
+                BindGrid();
+                BindData();
+            }
         }
 
         private void BindData()

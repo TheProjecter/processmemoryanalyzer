@@ -67,8 +67,6 @@ namespace PMA.Client
             Login();
         }
 
-      
-
-        
+       
     }
 }

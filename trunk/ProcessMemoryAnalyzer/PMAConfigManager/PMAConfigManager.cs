@@ -203,9 +203,9 @@ namespace PMA.ConfigManager
         {
             if (Logger == null)
             {
-                if (File.Exists(Path.Combine(CurrentAppConfigDir, LoggerInfo.LOGGER_FILE)))
+                if (File.Exists(Path.Combine(CurrentAppConfigDir, LoggerInfo.LOGGER_CONFIG_FILE)))
                 {
-                    Logger = Logger.GetDeserializedInstance(File.ReadAllText(Path.Combine(CurrentAppConfigDir, LoggerInfo.LOGGER_FILE)));
+                    Logger = Logger.GetDeserializedInstance(File.ReadAllText(Path.Combine(CurrentAppConfigDir, LoggerInfo.LOGGER_CONFIG_FILE)));
                 }
                 else Logger = Logger.GetInstance();
                      
@@ -302,7 +302,7 @@ namespace PMA.ConfigManager
 
             File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMASystemAnalyzerInfo.PMA_INFO_FILE), SystemAnalyzerInfo.Serialize());
 
-            File.WriteAllText(Path.Combine(CurrentAppConfigDir, LoggerInfo.LOGGER_FILE), Logger.SerializedLoggerInstance());
+            File.WriteAllText(Path.Combine(CurrentAppConfigDir, LoggerInfo.LOGGER_CONFIG_FILE), Logger.SerializedLoggerInstance());
 
             File.WriteAllText(Path.Combine(CurrentAppConfigDir, PMAInfo.PMA_INFO_FILE), PMAInfoObj.Serialize());
 

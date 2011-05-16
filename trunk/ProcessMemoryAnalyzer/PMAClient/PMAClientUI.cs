@@ -125,6 +125,7 @@ namespace PMA.Client
             DisableLeftMenu();
             SetAccessibilityForUser();
             InitializeServerClock();
+            label_TaskManager.Focus();
             ShowPanel(ENUMPanel.PANEL_TASK_MANAGER);
         }
 
@@ -243,26 +244,35 @@ namespace PMA.Client
                     Button button = control as Button;
                     button.Enabled = false;
                 }
+                else if (control is DateTimePicker)
+                {
+                    DateTimePicker dtPicker = control as DateTimePicker;
+                    dtPicker.Enabled = false;
+                }
             }
         }
 
         private void label_SQL_Click(object sender, EventArgs e)
         {
+            label_SQL.Focus();
             ChangePanel(ENUMPanel.PANEL_SQL_CLIENT);
         }
 
         private void label_Services_Click(object sender, EventArgs e)
         {
+            label_Services.Focus();
             ChangePanel(ENUMPanel.PANEL_SERVICES_HANDLER);
         }
 
         private void label_Actions_Click(object sender, EventArgs e)
         {
+            label_Actions.Focus();
             ChangePanel(ENUMPanel.PANEL_ACTION_HANDLER);
         }
 
         private void label_TaskManager_Click(object sender, EventArgs e)
         {
+            label_TaskManager.Focus();
             ChangePanel(ENUMPanel.PANEL_TASK_MANAGER);
         }
 
@@ -300,10 +310,18 @@ namespace PMA.Client
         {
             if (configManager.GetConnectionChannel != null)
             {
+                ClearRuntimeInfo();
                 configManager.GetConnectionChannel.LogoutSession(configManager.clientRuntimeInfo.sessionID);
                 configManager.CloseConnectionChannel();
                 configManager.SaveConfiguration();
             }
+        }
+
+        private void ClearRuntimeInfo()
+        {
+            configManager.clientRuntimeInfo.sessionID = string.Empty;
+            configManager.clientRuntimeInfo.IsUserLoggedIn = false;
+            configManager.clientRuntimeInfo.UserInfo = null;
         }
 
        
