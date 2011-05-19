@@ -19,7 +19,6 @@ namespace PMA.Client
         ENUMPanel PANEL;
 
         PMAClientConfigManager configManager = PMAClientConfigManager.GetClientConfigurationInstance;
-
         PanelExecuteCommand panelExecuteCommand = null;
         PanelSQLClient panelSQLClient = null;
         PanelServicesHandler panelServiceHandler = null;
@@ -85,32 +84,33 @@ namespace PMA.Client
                     panelTaskManager.UpdateConfig();
                     break;
             }
-
         }
 
         private void ShowPanel(ENUMPanel enumPanel)
         {
             PANEL = enumPanel;
-            switch (enumPanel)
+            if (configManager.clientRuntimeInfo.sessionID != string.Empty)
             {
-                case ENUMPanel.PANEL_ACTION_HANDLER:
-                    HideAllControls();
-                    panelExecuteCommand.Show();
-                    break;
-                case ENUMPanel.PANEL_SERVICES_HANDLER:
-                    HideAllControls();
-                    panelServiceHandler.Show();
-                    break;
-                case ENUMPanel.PANEL_SQL_CLIENT:
-                    HideAllControls();
-                    panelSQLClient.Show();
-                    break;
-                case ENUMPanel.PANEL_TASK_MANAGER:
-                    HideAllControls();
-                    panelTaskManager.Show();
-                    break;
+                switch (enumPanel)
+                {
+                    case ENUMPanel.PANEL_ACTION_HANDLER:
+                        HideAllControls();
+                        panelExecuteCommand.Show();
+                        break;
+                    case ENUMPanel.PANEL_SERVICES_HANDLER:
+                        HideAllControls();
+                        panelServiceHandler.Show();
+                        break;
+                    case ENUMPanel.PANEL_SQL_CLIENT:
+                        HideAllControls();
+                        panelSQLClient.Show();
+                        break;
+                    case ENUMPanel.PANEL_TASK_MANAGER:
+                        HideAllControls();
+                        panelTaskManager.Show();
+                        break;
+                }
             }
-
         }
 
 
@@ -156,7 +156,6 @@ namespace PMA.Client
 
             panelTaskManager = new PanelTaskManager();
             panel_MainContainer.Controls.Add(panelTaskManager);
-
         }
 
       
@@ -170,15 +169,20 @@ namespace PMA.Client
             timer.Start();
         }
 
+        
         void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             dateTimePicker_ServerTime.Invoke(serverClock);
         }
 
+        
         private void GetDateTime()
         {
-            DateTime dateTime = proxy.GetServerDateTime(sessionID);
-            dateTimePicker_ServerTime.Value = dateTime;
+            if(!dateTimePicker_ServerTime.Focused)
+            {
+                DateTime dateTime = proxy.GetServerDateTime(sessionID);
+                dateTimePicker_ServerTime.Value = dateTime;
+            }
         }
 
 
@@ -332,11 +336,17 @@ namespace PMA.Client
 
         private void button_SetServerTime_Click(object sender, EventArgs e)
         {
+            DateTime dt = dateTimePicker_ServerTime.Value;
+            DialogResult dialogResult;
             if (sessionID != null)
             {
-                if (proxy.SetServerDateTime(dateTimePicker_ServerTime.Value, sessionID))
+                dialogResult = MessageBox.Show(this, "Datetime Change", "Are you sure you want to update datetime on server",MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
                 {
-                    MessageBox.Show(this,"Server time is setted succesfully");
+                    if (proxy.SetServerDateTime(dt, sessionID))
+                    {
+                        MessageBox.Show(this, "Server time is setted succesfully");
+                    }
                 }
             }
         }
