@@ -190,16 +190,17 @@ namespace PMA.Utils.Logger
         private void WriteFile(string message)
         {
             string file = _loggerInfo.LoggerFile;
-            if (Thread.CurrentThread.IsBackground)
-            {
-                if (Thread.CurrentThread.Name == null)
-                {
-                    file = file + "UnknownBackgroundThread" + ".txt";
-                }
-                else file = file + Thread.CurrentThread.Name + ".txt";
-            }
             lock (_lockObject)
             {
+                if (Thread.CurrentThread.IsBackground)
+                {
+                    if (Thread.CurrentThread.Name == null)
+                    {
+                        file = file + "UnknownBackgroundThread" + ".txt";
+                    }
+                    else file = file + Thread.CurrentThread.Name + ".txt";
+                }
+
                 if (!File.Exists(file))
                 {
                     try
