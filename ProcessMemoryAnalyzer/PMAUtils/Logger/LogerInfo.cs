@@ -15,9 +15,11 @@ namespace PMA.Utils.Logger
 
         private EnumLogger _enumLogger;
 
+        private static string _logFileName = DateTime.Now.ToShortDateString().Replace('/', '-') + "_" + DateTime.Now.ToLongTimeString().Replace(':', '-') + ".log";
+        
         private static string _defaultLogPath = AppDomain.CurrentDomain.BaseDirectory + "\\log";
 
-        private static string _defaultLogFile = _defaultLogPath + "\\" + DateTime.Now.ToShortDateString().Replace('/', '-') + "_" + DateTime.Now.ToLongTimeString().Replace(':', '-') + ".log";
+        private static string _defaultLogFile = _defaultLogPath + "\\" + _logFileName;
 
         //-------------------------------------------------------------------------------------
         /// <summary>
@@ -25,7 +27,7 @@ namespace PMA.Utils.Logger
         /// </summary>
         internal LoggerInfo()
         {
-            LoggerFile = _defaultLogFile;
+            SetDefaultFile();
             Level = EnumLogger.OFF;
         }
 
@@ -37,7 +39,7 @@ namespace PMA.Utils.Logger
         /// <param name="level">The level.</param>
         internal LoggerInfo(string logFilePath, EnumLogger level)
         {
-            _loggerFile = logFilePath;
+            _loggerFile = logFilePath + "\\" + _logFileName;
             Level = level;
         }
 
@@ -51,7 +53,7 @@ namespace PMA.Utils.Logger
         {
             get
             {
-                return _loggerFile;
+               return _loggerFile;
             }
             set
             {
@@ -63,11 +65,7 @@ namespace PMA.Utils.Logger
                     }
                     catch
                     {
-                        if(!Directory.Exists(_defaultLogPath))
-                        {
-                            Directory.CreateDirectory(_defaultLogPath);
-                        }
-                        _loggerFile = _defaultLogFile;
+                        SetDefaultFile();
                     }
                 }
                 else
@@ -75,6 +73,19 @@ namespace PMA.Utils.Logger
                     _loggerFile = value;
                 }
             }
+        }
+
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Sets the default file.
+        /// </summary>
+        private void SetDefaultFile()
+        {
+            if (!Directory.Exists(_defaultLogPath))
+            {
+                Directory.CreateDirectory(_defaultLogPath);
+            }
+            _loggerFile = _defaultLogFile;
         }
 
         //-------------------------------------------------------------------------------------

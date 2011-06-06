@@ -194,11 +194,11 @@ namespace PMA.Utils.Logger
             {
                 if (Thread.CurrentThread.IsBackground)
                 {
-                    if (Thread.CurrentThread.Name == null)
+                    if (Thread.CurrentThread.Name == null && Thread.CurrentThread.Name == string.Empty)
                     {
-                        file = file + "UnknownBackgroundThread" + ".txt";
+                        file = file + ".UnknownBackgroundThread" + ".txt";
                     }
-                    else file = file + Thread.CurrentThread.Name + ".txt";
+                    else file = file + "." + Thread.CurrentThread.Name + ".txt";
                 }
 
                 if (!File.Exists(file))
