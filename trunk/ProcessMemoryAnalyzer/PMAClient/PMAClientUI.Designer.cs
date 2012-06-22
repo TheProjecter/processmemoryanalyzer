@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PMAClientUI));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -35,14 +36,14 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel_LeftMenu = new System.Windows.Forms.TableLayoutPanel();
-            this.dateTimePicker_ServerTime = new System.Windows.Forms.DateTimePicker();
             this.label_Services = new System.Windows.Forms.Label();
             this.label_SQL = new System.Windows.Forms.Label();
             this.label_TaskManager = new System.Windows.Forms.Label();
             this.label_Actions = new System.Windows.Forms.Label();
-            this.panel_MainContainer = new System.Windows.Forms.Panel();
-            this.button_SetServerTime = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.dateTimePicker_ServerTime = new System.Windows.Forms.DateTimePicker();
+            this.button_SetServerTime = new System.Windows.Forms.Button();
+            this.panel_MainContainer = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel_LeftMenu.SuspendLayout();
@@ -66,33 +67,33 @@
             this.logoutToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.fileToolStripMenuItem.Text = "System";
             // 
             // loginToolStripMenuItem
             // 
             this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
-            this.loginToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loginToolStripMenuItem.Text = "Login";
             this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel1.Controls.Add(this.tableLayoutPanel_LeftMenu);
             this.panel1.Location = new System.Drawing.Point(13, 46);
             this.panel1.Name = "panel1";
@@ -118,16 +119,6 @@
             this.tableLayoutPanel_LeftMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel_LeftMenu.Size = new System.Drawing.Size(140, 454);
             this.tableLayoutPanel_LeftMenu.TabIndex = 0;
-            // 
-            // dateTimePicker_ServerTime
-            // 
-            this.dateTimePicker_ServerTime.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dateTimePicker_ServerTime.CustomFormat = "hh:mm tt";
-            this.dateTimePicker_ServerTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker_ServerTime.Location = new System.Drawing.Point(32, 15);
-            this.dateTimePicker_ServerTime.Name = "dateTimePicker_ServerTime";
-            this.dateTimePicker_ServerTime.Size = new System.Drawing.Size(79, 20);
-            this.dateTimePicker_ServerTime.TabIndex = 0;
             // 
             // label_Services
             // 
@@ -177,13 +168,24 @@
             this.label_Actions.Text = "Actions";
             this.label_Actions.Click += new System.EventHandler(this.label_Actions_Click);
             // 
-            // panel_MainContainer
+            // panel2
             // 
-            this.panel_MainContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel_MainContainer.Location = new System.Drawing.Point(181, 46);
-            this.panel_MainContainer.Name = "panel_MainContainer";
-            this.panel_MainContainer.Size = new System.Drawing.Size(852, 460);
-            this.panel_MainContainer.TabIndex = 2;
+            this.panel2.Controls.Add(this.dateTimePicker_ServerTime);
+            this.panel2.Controls.Add(this.button_SetServerTime);
+            this.panel2.Location = new System.Drawing.Point(3, 363);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(134, 88);
+            this.panel2.TabIndex = 4;
+            // 
+            // dateTimePicker_ServerTime
+            // 
+            this.dateTimePicker_ServerTime.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dateTimePicker_ServerTime.CustomFormat = "hh:mm tt";
+            this.dateTimePicker_ServerTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker_ServerTime.Location = new System.Drawing.Point(32, 15);
+            this.dateTimePicker_ServerTime.Name = "dateTimePicker_ServerTime";
+            this.dateTimePicker_ServerTime.Size = new System.Drawing.Size(79, 20);
+            this.dateTimePicker_ServerTime.TabIndex = 0;
             // 
             // button_SetServerTime
             // 
@@ -196,29 +198,29 @@
             this.button_SetServerTime.UseVisualStyleBackColor = true;
             this.button_SetServerTime.Click += new System.EventHandler(this.button_SetServerTime_Click);
             // 
-            // panel2
+            // panel_MainContainer
             // 
-            this.panel2.Controls.Add(this.dateTimePicker_ServerTime);
-            this.panel2.Controls.Add(this.button_SetServerTime);
-            this.panel2.Location = new System.Drawing.Point(3, 363);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(134, 88);
-            this.panel2.TabIndex = 4;
+            this.panel_MainContainer.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel_MainContainer.Location = new System.Drawing.Point(181, 46);
+            this.panel_MainContainer.Name = "panel_MainContainer";
+            this.panel_MainContainer.Size = new System.Drawing.Size(852, 460);
+            this.panel_MainContainer.TabIndex = 2;
             // 
             // PMAClientUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GrayText;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1047, 527);
             this.Controls.Add(this.panel_MainContainer);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "PMAClientUI";
             this.Text = "PMAClient";
-            this.Shown += new System.EventHandler(this.PMAClientUI_Shown);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PMAClientUI_FormClosing);
+            this.Shown += new System.EventHandler(this.PMAClientUI_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
