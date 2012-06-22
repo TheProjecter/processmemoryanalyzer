@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-16"?>
+<FTPInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProtectPassword>true</ProtectPassword>
+  <UserName>ftpuser</UserName>
+  <Password># .Vfwdbxsde</Password>
+  <FTPServer>ftp://202.54.213.231</FTPServer>
+  <FTPServerFolder>PerformanceReports</FTPServerFolder>
+  <Port>21</Port>
+  <TimeOut>100000</TimeOut>
+  <SSL>false</SSL>
+</FTPInfo>

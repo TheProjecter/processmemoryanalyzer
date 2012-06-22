@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{583C500D-04BA-410F-BD9C-6ADF55E2213F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PMASysAlertsUI</RootNamespace>
+    <AssemblyName>PMASysAlertsUI</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutBoxPMAAlerts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBoxPMAAlerts.Designer.cs">
+      <DependentUpon>AboutBoxPMAAlerts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENUMPanel.cs" />
+    <Compile Include="IUIConfigManager.cs" />
+    <Compile Include="PanelActionController.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelActionController.Designer.cs">
+      <DependentUpon>PanelActionController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelEventReporting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelEventReporting.Designer.cs">
+      <DependentUpon>PanelEventReporting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelMemoryAnalyzer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelMemoryAnalyzer.Designer.cs">
+      <DependentUpon>PanelMemoryAnalyzer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelFTPSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelFTPSettings.Designer.cs">
+      <DependentUpon>PanelFTPSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelHome.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelHome.Designer.cs">
+      <DependentUpon>PanelHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelPhyMemWatcher.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelPhyMemWatcher.Designer.cs">
+      <DependentUpon>PanelPhyMemWatcher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelServiceController.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelServiceController.Designer.cs">
+      <DependentUpon>PanelServiceController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelServiceWatcher.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelServiceWatcher.Designer.cs">
+      <DependentUpon>PanelServiceWatcher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelDatabaseWatcher.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelDatabaseWatcher.Designer.cs">
+      <DependentUpon>PanelDatabaseWatcher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelSMTPSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelSMTPSettings.Designer.cs">
+      <DependentUpon>PanelSMTPSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelLogger.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelLogger.Designer.cs">
+      <DependentUpon>PanelLogger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelSQLController.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelSQLController.Designer.cs">
+      <DependentUpon>PanelSQLController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelSystemInformation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelSystemInformation.Designer.cs">
+      <DependentUpon>PanelSystemInformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelUserControl.Designer.cs">
+      <DependentUpon>PanelUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PMASysAlertsUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PMASysAlertsUI.Designer.cs">
+      <DependentUpon>PMASysAlertsUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutBoxPMAAlerts.resx">
+      <DependentUpon>AboutBoxPMAAlerts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelActionController.resx">
+      <DependentUpon>PanelActionController.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelEventReporting.resx">
+      <DependentUpon>PanelEventReporting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelMemoryAnalyzer.resx">
+      <DependentUpon>PanelMemoryAnalyzer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelFTPSettings.resx">
+      <DependentUpon>PanelFTPSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelHome.resx">
+      <DependentUpon>PanelHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelPhyMemWatcher.resx">
+      <DependentUpon>PanelPhyMemWatcher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelServiceController.resx">
+      <DependentUpon>PanelServiceController.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelServiceWatcher.resx">
+      <DependentUpon>PanelServiceWatcher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelDatabaseWatcher.resx">
+      <DependentUpon>PanelDatabaseWatcher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelSMTPSettings.resx">
+      <DependentUpon>PanelSMTPSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelSQLController.resx">
+      <DependentUpon>PanelSQLController.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelSystemInformation.resx">
+      <DependentUpon>PanelSystemInformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelSubscriptionController.resx">
+      <DependentUpon>PanelSubscriptionController.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelLogger.resx">
+      <DependentUpon>PanelLogger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelUserControl.resx">
+      <DependentUpon>PanelUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PMASysAlertsUI.resx">
+      <DependentUpon>PMASysAlertsUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelDriveController.resx">
+      <DependentUpon>PanelDriveController.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PanelDriveController.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelDriveController.Designer.cs">
+      <DependentUpon>PanelDriveController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelSubscriptionController.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelSubscriptionController.Designer.cs">
+      <DependentUpon>PanelSubscriptionController.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PMAConfigManager\PMAConfigManager.csproj">
+      <Project>{954AA129-AB47-4E49-B739-174AC64B7770}</Project>
+      <Name>PMAConfigManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PMAInfoManager\PMAInfoManager.csproj">
+      <Project>{66628469-3255-430A-834D-EB192F32D6C3}</Project>
+      <Name>PMAInfoManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PMASystemAnalyzer\PMASystemAnalyzer.csproj">
+      <Project>{0F7EC0D7-D320-465F-B8F9-400D7E7C8E63}</Project>
+      <Name>PMASystemAnalyzer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PMAUtils\PMAUtils.csproj">
+      <Project>{3AD8D720-A6E4-4D4B-B94D-4E78BE843520}</Project>
+      <Name>PMAUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProcessMemoryAnalyzer\ProcessMemoryAnalyzer.csproj">
+      <Project>{B21E52A2-4719-4636-A389-65997F898C19}</Project>
+      <Name>ProcessMemoryAnalyzer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
