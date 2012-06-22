@@ -1,1 +1,0 @@
-﻿exec sp_helpdb
