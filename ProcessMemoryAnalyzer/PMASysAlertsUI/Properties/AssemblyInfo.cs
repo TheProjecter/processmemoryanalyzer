@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PMASysAlertsUI")]
-[assembly: AssemblyDescription("Process Memory Analyzer Alert UI and Service")]
+[assembly: AssemblyDescription("Process Memory Analyzer")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("CosmosTech")]
+[assembly: AssemblyCompany("LiveRoots")]
 [assembly: AssemblyProduct("PMASysAlertsUI")]
-[assembly: AssemblyCopyright("Copyright ©  2010 CosmosTech")]
-[assembly: AssemblyTrademark("Cosmos Technologies")]
+[assembly: AssemblyCopyright("Copyright ©  2012 LiveRoots")]
+[assembly: AssemblyTrademark("LiveRoots")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
